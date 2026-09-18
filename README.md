@@ -1083,14 +1083,18 @@ anywhere (no build step, no server-side rendering required).
 2. **02 — The Forest** — four product beats (Five-Nine, Hopeful, Charming,
    Mi Amor) revealed by scroll as the forest darkens. Each beat layers a
    botanical plane plus a faster near-leaf plane for real depth.
-3. **03 — The Shore** — the forest opens (forest → bright land), then a
-   sky-styled beach (bright sky, sand, ink-on-light typography), then the
-   water rises from the bottom of the screen to the top with an animated
-   wave crest — LAND–SHORE–WATER progress indicator.
-4. **04 — The Sea Bed** — after the submersion, the journey continues on
-   the sea bed with god rays, caustics, rising bubbles, a live depth meter
-   (0 → 42 m) and three depth stops (Zesty @10 m, Sophisticated @20 m,
-   Happy @30 m).
+3. **03 — The Shore** — the forest opens (forest → bright land), then the
+   bright sky/sand beach as the background layer with the transparent leaf
+   picture overlaid on the left side (the forest's edge carried into the
+   frame, no background of its own), then the water rises from the bottom
+   of the screen to the top with a clean, straight edge — LAND–SHORE–WATER
+   progress indicator.
+4. **04 — The Dive** — the ocean fills the whole screen (open-water
+   surface, no sky) with god rays, caustics, rising bubbles, a live depth
+   meter (0 → 42 m) and three depth stops (Zesty @10 m, Sophisticated
+   @20 m, Happy @30 m). The transparent sea-bed picture is overlaid as a
+   model layer at the bottom of the water and slowly drifts up past the
+   camera, thinning into the dark as the dive deepens.
 5. **05 — The Depths** — near-black Most Wanted reveal with a volumetric
    light beam and four floating product cards.
 6. **06 — The House** — warm ivory brand story ("Where love becomes
@@ -1127,8 +1131,9 @@ drawer (localStorage), wishlist, toasts, mobile menu, page transitions.
     from `MODEL2.png` (blurred far plane + side/bottom strips)
   - `leaf-near.webp` — keyed botanical cluster (near-leaf plane)
   - `beach.webp` — the sky-styled shore scene
-  - `forest-to-ocean.webp`, `ocean-surface.webp` (also used by the rising
-    water), `oceanbed.webp` (the sea bed), `main-idea.webp` (storyboard)
+  - `forest-to-ocean.webp`, `ocean-surface.webp` (the whole-screen ocean
+    water, also used by the rising water), `oceanbed.webp` (the transparent
+    sea-bed model overlay), `main-idea.webp` (storyboard)
 - `assets/img/bottles/` — the 8 signature bottles (generated on pure black,
   then black-keyed to transparent WebP via border flood-fill).
   `src/` keeps the original renders as masters.
@@ -1156,8 +1161,13 @@ handler in `checkout.html` to a real backend (or WooCommerce) to go live.
 Headless-Chromium test suite (1440×900 desktop, 390×844 mobile,
 reduced-motion, and no-JavaScript passes) confirms: zero JS errors,
 all images load, no horizontal overflow on any page, filters and cart
-flows work, the layered leaf planes render, the beach beat is bright with
-ink typography, the water fully rises from bottom to top by the end of
-the transition, the sea bed + depth meter + model reveals fire on scroll,
-JSON-LD product schema is emitted, and both fallback modes render every
-product.
+flows work, the layered leaf planes render, the leaf overlay sits on the
+left of the bright beach, the water edge is clean (no wave graphic) and
+fully rises from bottom to top by the end of
+the transition, the ocean fills the whole screen with the transparent
+sea-bed model overlaid at the bottom (warm rock tones with water visible
+through it), the depth meter + model reveals fire on scroll, the hero
+bottle holds its position under cursor movement (parallax is a subtle
+±14 px follow on a dedicated inner element — the CSS-centered anchor is
+never touched by GSAP), JSON-LD product schema is emitted, and both
+fallback modes render every product.

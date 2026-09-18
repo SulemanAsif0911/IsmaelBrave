@@ -63,10 +63,10 @@
       .to('.leaf--l', { yPercent: -13, xPercent: -2, ease: 'none' }, 0)
       .to('.leaf--r', { yPercent: -15, xPercent: 2, ease: 'none' }, 0)
       .to('.leaf--b', { yPercent: -18, ease: 'none' }, 0)
-      .to('.hero-bottle', { yPercent: -7, scale: 0.94, ease: 'none' }, 0)
+      .to('.hero-bottle-in', { yPercent: -7, scale: 0.94, ease: 'none' }, 0)
       .to('.hero-copy', { y: -60, autoAlpha: 0, ease: 'power1.in', duration: 0.28 }, 0.02)
       .to('.hero-foot', { autoAlpha: 0, duration: 0.18 }, 0.05)
-      .to('.hero-bottle', { autoAlpha: 0, ease: 'power1.in', duration: 0.3 }, 0.68)
+      .to('.hero-bottle-in', { autoAlpha: 0, ease: 'power1.in', duration: 0.3 }, 0.68)
       .to('.stagechip--hero', { autoAlpha: 0, duration: 0.2 }, 0.05)
       .to({}, { duration: 0.2 });
 
@@ -76,7 +76,7 @@
       .from('.hero-copy h1', { y: 54, autoAlpha: 0, duration: 1.3, ease: 'power3.out' }, '-=0.85')
       .from('.hero-copy .journeysub', { y: 34, autoAlpha: 0, duration: 1.1, ease: 'power3.out' }, '-=0.95')
       .from('.hero-copy p, .hero-copy .btn', { y: 26, autoAlpha: 0, duration: 1, stagger: 0.1, ease: 'power3.out' }, '-=0.8')
-      .from('.hero-bottle', { autoAlpha: 0, scale: 0.92, filter: 'blur(10px)', duration: 1.6, ease: 'power2.out' }, '-=1.4')
+      .from('.hero-bottle-in', { autoAlpha: 0, scale: 0.92, filter: 'blur(10px)', duration: 1.6, ease: 'power2.out' }, '-=1.4')
       .from('.leaf--far', { autoAlpha: 0, duration: 2 }, '-=1.9')
       .from(['.leaf--l', '.leaf--r', '.leaf--b'], { autoAlpha: 0, y: 40, duration: 1.5, stagger: 0.14, ease: 'power2.out' }, '-=1.7')
       .from('.hero-foot', { autoAlpha: 0, y: 16, duration: 1 }, '-=0.8')
@@ -85,14 +85,17 @@
     /* mouse parallax on hero */
     if (finePointer) {
       const qx = {}; const qy = {};
-      const planes = ['.hero-bg', '.hero-mid', '.leaf--far', '.hero-bottle', '.leaf--l', '.leaf--r', '.leaf--b'];
-      const px = [6, 14, 22, 20, 32, 36, 42];
-      const py = [4, 9, 14, 14, 19, 21, 26];
+      /* the bottle lives on its own inner element — parallax starts from 0,
+         follows the cursor subtly, and can never drift (the CSS-centered
+         anchor is never touched by GSAP) */
+      const planes = ['.hero-bg', '.hero-mid', '.leaf--far', '.hero-bottle-in', '.leaf--l', '.leaf--r', '.leaf--b'];
+      const px = [6, 14, 22, 10, 32, 36, 42];
+      const py = [4, 9, 14, 8, 19, 21, 26];
       planes.forEach((sel, i) => {
         qx[sel] = gsap.quickTo(sel, 'x', { duration: 0.9, ease: 'power2.out' });
         qy[sel] = gsap.quickTo(sel, 'y', { duration: 0.9, ease: 'power2.out' });
-        qx[sel].par = px[i] * (i === 3 ? -1 : 1);
-        qy[sel].par = py[i] * (i === 3 ? -1 : 1);
+        qx[sel].par = px[i];
+        qy[sel].par = py[i];
       });
       document.querySelector('#hero .stage').addEventListener('pointermove', e => {
         const rx = (e.clientX / window.innerWidth - 0.5) * 2;
@@ -162,6 +165,7 @@
       .to('.trans-a', { autoAlpha: 0, duration: 1.3, ease: 'power1.inOut' }, 1.55)
       .fromTo('.trans-beach', { autoAlpha: 0 }, { autoAlpha: 1, duration: 1.3, ease: 'power1.inOut' }, 1.55)
       .to('.trans-beach', { scale: 1.02, ease: 'none', duration: 5.4 }, 0)
+      .fromTo('.shore-leaf', { xPercent: 8 }, { xPercent: 2, ease: 'none', duration: 5.4 }, 0)
       .to('.trans-wash', { opacity: 0, duration: 1.2 }, 2.0)
       .to('.trans-vignette', { opacity: 0.22, duration: 1.2 }, 1.8)
       /* beat 3 — water rises from the bottom toward the top */
@@ -197,7 +201,9 @@
     oceanTl
       /* arrival just beneath the risen water — the veil dissolves into the sea bed */
       .fromTo('.ocean-veil', { opacity: 1 }, { opacity: 0, duration: 1.8, ease: 'power1.inOut' }, 0)
-      .to('.ocean-bed', { scale: 1.03, yPercent: -2, ease: 'none', duration: 9 }, 0)
+      /* whole-screen water pushes deeper; the sea-bed model rises past the camera and thins into the dark */
+      .to('.ocean-water', { scale: 1.14, ease: 'none', duration: 9 }, 0)
+      .fromTo('.ocean-bed-model', { yPercent: 7 }, { yPercent: -12, autoAlpha: 0.3, ease: 'none', duration: 9 }, 0)
       .to('.ocean-dark', { opacity: 0.78, ease: 'none', duration: 9 }, 0)
       .to('.rays', { opacity: 0.12, ease: 'none', duration: 6 }, 1.5)
       .to('.caustics', { opacity: 0, ease: 'none', duration: 5 }, 1)

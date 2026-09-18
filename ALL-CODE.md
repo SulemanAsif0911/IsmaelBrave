@@ -1,33 +1,46 @@
 # ISMAEEL MUHAMMAD — A JOURNEY OF SENSES
-## Complete source code (v2 — layered leaves · the shore · water rising · sea bed)
+## Complete source code (v3 — the shore perfected · whole-screen ocean · steady bottle)
 
 **Stack:** Vanilla HTML / CSS / JS + GSAP ScrollTrigger + Lenis (vendored) — no build step  
 **Catalog:** only the 8 journey models — all extra data removed
 
+**v3 changes**
+
+1. **The shore** — the sky/sand beach is the background; the transparent leaf
+   picture (no background) is overlaid on the left side, above it.
+2. **Clean water edge** — the cartoonish SVG wave is removed; the rising water
+   ends in a straight, calm line.
+3. **The ocean** — water fills the whole screen (open-water surface, no sky);
+   the transparent sea-bed picture is a model overlay at the bottom of the
+   water, drifting up past the camera as the dive deepens.
+4. **The bottle** — the landing perfume no longer slides down on cursor
+   movement: parallax is a subtle natural follow on a dedicated inner
+   element, and the CSS-centered anchor is never touched by GSAP.
+
 | # | File | Lines | Purpose |
 |---|------|-------|---------|
-| 1 | `index.html` | 581 | The cinematic journey — layered leaves, shore, water rise, sea bed |
-| 2 | `shop.html` | 114 | Editorial shop — the 8 journey models only |
-| 3 | `product.html` | 194 | Data-driven product detail page |
-| 4 | `about.html` | 182 | Editorial brand story (5 chapters) |
-| 5 | `contact.html` | 176 | Contact + FAQ / shipping / returns |
-| 6 | `checkout.html` | 220 | Checkout with order confirmation |
-| 7 | `assets/css/base.css` | 437 | Design system: tokens, nav, cart, cards, footer |
-| 8 | `assets/css/journey.css` | 527 | Cinematic styles: leaf planes, beach, water rise, sea bed |
-| 9 | `assets/css/pages.css` | 316 | Shop / product / about / contact / checkout styles |
-| 10 | `assets/js/data.js` | 181 | Product database — 8 journey models only |
-| 11 | `assets/js/nav.js` | 94 | Nav, veil, reveals, menu, page transitions |
-| 12 | `assets/js/cart.js` | 194 | Cart store, drawer, wishlist, toasts (localStorage) |
-| 13 | `assets/js/journey.js` | 329 | Scroll engine: leaf parallax, shore, water rise, sea bed, depth |
-| 14 | `assets/js/shop.js` | 97 | Shop filters + grid rendering |
-| 15 | `assets/js/product.js` | 170 | Product page rendering + JSON-LD |
-| 16 | `assets/img/ui/favicon.svg` | 4 | Favicon (IM monogram) |
+| 1 | `index.html` | 586 | The cinematic journey — layered leaves, shore with leaf overlay, clean water rise, whole-screen ocean with sea-bed model overlay |
+| 2 | `shop.html` | 115 | Editorial shop — the 8 journey models only |
+| 3 | `product.html` | 195 | Data-driven product detail page |
+| 4 | `about.html` | 183 | Editorial brand story (5 chapters) |
+| 5 | `contact.html` | 177 | Contact + FAQ / shipping / returns |
+| 6 | `checkout.html` | 221 | Checkout with order confirmation |
+| 7 | `assets/css/base.css` | 438 | Design system: tokens, nav, cart, cards, footer |
+| 8 | `assets/css/journey.css` | 539 | Cinematic styles: leaf planes, beach + leaf overlay, clean water edge, ocean water + sea-bed model |
+| 9 | `assets/css/pages.css` | 317 | Shop / product / about / contact / checkout styles |
+| 10 | `assets/js/data.js` | 182 | Product database — 8 journey models only |
+| 11 | `assets/js/nav.js` | 95 | Nav, veil, reveals, menu, page transitions |
+| 12 | `assets/js/cart.js` | 195 | Cart store, drawer, wishlist, toasts (localStorage) |
+| 13 | `assets/js/journey.js` | 336 | Scroll engine: leaf parallax, bottle mouse-follow fix, shore, water rise, ocean dive, depth |
+| 14 | `assets/js/shop.js` | 98 | Shop filters + grid rendering |
+| 15 | `assets/js/product.js` | 171 | Product page rendering + JSON-LD |
+| 16 | `assets/img/ui/favicon.svg` | 5 | Favicon (IM monogram) |
 
-**Total: 16 files, 3,816 lines.**
+**Total: 16 files, 3,853 lines.**
 
 ---
 
-## 📄 index.html  ·  (582 lines)
+## 📄 index.html  ·  (586 lines)
 
 ```html
 <!DOCTYPE html>
@@ -109,8 +122,10 @@
       <div class="leaf leaf--far" aria-hidden="true"><img src="assets/img/env/leaf-far.webp" alt=""></div>
 
       <a class="hero-bottle" href="product.html?p=five-nine" aria-label="Discover Five-Nine, our woody amber spicy eau de parfum">
-        <span class="halo" aria-hidden="true"></span>
-        <img src="assets/img/bottles/five-nine.webp" alt="Five-Nine — amber glass perfume bottle with gold cap">
+        <div class="hero-bottle-in">
+          <span class="halo" aria-hidden="true"></span>
+          <img src="assets/img/bottles/five-nine.webp" alt="Five-Nine — amber glass perfume bottle with gold cap">
+        </div>
       </a>
 
       <div class="leaf leaf--l" aria-hidden="true"><img src="assets/img/env/leaf-left.webp" alt=""></div>
@@ -248,6 +263,7 @@
     <div class="stage">
       <div class="layer trans-a"><img src="assets/img/env/forest-to-ocean.webp" alt="Forest dissolving into open bright landscape"></div>
       <div class="layer trans-beach"><img src="assets/img/env/beach.webp" alt="Bright sky and warm sand at the shore"></div>
+      <div class="shore-leaf" aria-hidden="true"><img src="assets/img/env/leaf-left.webp" alt=""></div>
       <div class="water-rise" aria-hidden="true">
         <div class="water-fill"><img src="assets/img/env/ocean-surface.webp" alt=""></div>
       </div>
@@ -280,11 +296,12 @@
        ================================================ -->
   <section class="scene" id="ocean" data-rail="04" aria-label="The dive">
     <div class="stage">
-      <div class="layer ocean-bed"><img src="assets/img/env/oceanbed.webp" alt="Deep dark underwater sea bed"></div>
-      <div class="ocean-veil" aria-hidden="true"></div>
+      <div class="layer ocean-water"><img src="assets/img/env/ocean-surface.webp" alt="Open ocean water filling the screen"></div>
+      <div class="ocean-dark" aria-hidden="true"></div>
+      <div class="ocean-bed-model" aria-hidden="true"><img src="assets/img/env/oceanbed.webp" alt=""></div>
       <div class="rays" aria-hidden="true"></div>
       <div class="caustics" aria-hidden="true"></div>
-      <div class="ocean-dark" aria-hidden="true"></div>
+      <div class="ocean-veil" aria-hidden="true"></div>
       <canvas class="p-canvas" aria-hidden="true"></canvas>
       <div class="vignette" aria-hidden="true"></div>
       <div class="stagechip"><b>04</b> The Sea Bed</div>
@@ -611,9 +628,8 @@
 </script>
 </body>
 </html>
-```
 
----
+```
 
 ## 📄 shop.html  ·  (115 lines)
 
@@ -732,9 +748,8 @@
 </script>
 </body>
 </html>
-```
 
----
+```
 
 ## 📄 product.html  ·  (195 lines)
 
@@ -933,9 +948,8 @@
 </script>
 </body>
 </html>
-```
 
----
+```
 
 ## 📄 about.html  ·  (183 lines)
 
@@ -1122,9 +1136,8 @@
 </script>
 </body>
 </html>
-```
 
----
+```
 
 ## 📄 contact.html  ·  (177 lines)
 
@@ -1305,9 +1318,8 @@
 </script>
 </body>
 </html>
-```
 
----
+```
 
 ## 📄 checkout.html  ·  (221 lines)
 
@@ -1532,9 +1544,8 @@
 </script>
 </body>
 </html>
-```
 
----
+```
 
 ## 📄 assets/css/base.css  ·  (438 lines)
 
@@ -1976,11 +1987,10 @@ body.cart-open{ overflow:hidden; }
   *,*::before,*::after{ animation-duration:.01ms !important; animation-iteration-count:1 !important; transition-duration:.01ms !important; }
   html{ scroll-behavior:auto; }
 }
+
 ```
 
----
-
-## 📄 assets/css/journey.css  ·  (528 lines)
+## 📄 assets/css/journey.css  ·  (539 lines)
 
 ```css
 /* ============================================================
@@ -2014,6 +2024,9 @@ html:not(.cinema) .stage{ position:relative; min-height:100vh; }
 .layer{ position:absolute; inset:-7%; will-change:transform; }
 .layer img{ width:100%; height:100%; object-fit:cover; }
 
+/* particle canvas — full stage, above the near leaves */
+.p-canvas{ position:absolute; inset:0; width:100%; height:100%; z-index:4; pointer-events:none; }
+
 .vignette{
   position:absolute; inset:0; pointer-events:none;
   background:
@@ -2023,7 +2036,7 @@ html:not(.cinema) .stage{ position:relative; min-height:100vh; }
 .grade{ position:absolute; inset:0; pointer-events:none; mix-blend-mode:multiply; }
 
 /* beat content (product moments) */
-html.cinema .beats{ position:absolute; inset:0; }
+html.cinema .beats{ position:absolute; inset:0; z-index:6; }
 html:not(.cinema) .beats{ display:block; padding:16vh 0; }
 .beat{ position:relative; height:100%; display:flex; align-items:center; }
 html.cinema .beat{ position:absolute; inset:0; opacity:0; visibility:hidden; }
@@ -2039,10 +2052,10 @@ html:not(.cinema) .beat{ min-height:78vh; margin-bottom:8vh; }
 /* ---------- layered leaves (hero) ---------- */
 .leaf{ position:absolute; pointer-events:none; will-change:transform; z-index:3; }
 .leaf img{ width:100%; height:100%; object-fit:cover; }
-.leaf--far{ inset:-7%; z-index:2; opacity:.9; }
-.leaf--l{ left:-6%; top:-6%; width:44%; height:112%; z-index:4; }
-.leaf--r{ right:-6%; top:-6%; width:44%; height:112%; z-index:4; }
-.leaf--b{ left:-6%; right:-6%; bottom:-9%; height:56%; z-index:4; }
+.leaf--far{ inset:-7%; z-index:1; opacity:.9; }
+.leaf--l{ left:-6%; top:-6%; width:44%; height:112%; z-index:3; }
+.leaf--r{ right:-6%; top:-6%; width:44%; height:112%; z-index:3; }
+.leaf--b{ left:-6%; right:-6%; bottom:-9%; height:56%; z-index:3; }
 .leaf--l img{ animation:swayA 10s ease-in-out infinite alternate; }
 .leaf--r img{ animation:swayB 12s ease-in-out infinite alternate; }
 .leaf--b img{ animation:swayC 9s ease-in-out infinite alternate; }
@@ -2077,17 +2090,17 @@ html:not(.cinema) .beat{ min-height:78vh; margin-bottom:8vh; }
 /* bottle in hero — sits inside the cutout of the model layers */
 .hero-bottle{
   position:absolute; top:50%; left:60%;
-  width:min(34vh,300px); height:74vh;
-  translate:-50% -52%;
-  will-change:transform;
+  width:min(34vh,300px); height:74vh; z-index:2;
+  translate:-50% -52%;   /* CSS centering only — GSAP never touches this element */
 }
-.hero-bottle img{
+.hero-bottle-in{ position:absolute; inset:0; will-change:transform; }
+.hero-bottle-in img{
   position:absolute; inset:0; width:100%; height:100%; object-fit:contain;
   filter:drop-shadow(0 30px 42px rgba(0,0,0,.62)) drop-shadow(0 0 60px rgba(201,168,106,.14));
   animation:bobble 9s ease-in-out infinite alternate;
 }
 @keyframes bobble{ from{ transform:translateY(-.8%) rotate(-.4deg);} to{ transform:translateY(.9%) rotate(.45deg);} }
-.hero-bottle .halo{
+.hero-bottle-in .halo{
   position:absolute; top:12%; left:50%; width:150%; aspect-ratio:1;
   transform:translateX(-50%);
   background:radial-gradient(circle, rgba(228,196,128,.16), rgba(228,196,128,.05) 42%, transparent 68%);
@@ -2212,6 +2225,13 @@ html:not(.cinema) .beat{ min-height:78vh; margin-bottom:8vh; }
 .trans-beach{ opacity:0; transform:scale(1.14); }
 .trans-beach img{ object-position:50% 45%; }
 
+/* the forest's edge — leaves (no background) overlaid on the shore */
+.shore-leaf{
+  position:absolute; left:-7%; top:-6%; width:46%; height:112%;
+  z-index:3; pointer-events:none; will-change:transform;
+}
+.shore-leaf img{ width:100%; height:100%; object-fit:cover; animation:swayA 13s ease-in-out infinite alternate; }
+
 /* water rising from the bottom toward the top */
 .water-rise{
   position:absolute; inset:0; z-index:5;
@@ -2222,14 +2242,6 @@ html:not(.cinema) .beat{ min-height:78vh; margin-bottom:8vh; }
   width:100%; height:100%; object-fit:cover; object-position:50% 100%;
   transform:scale(1.6); transform-origin:50% 100%;
 }
-.water-rise::before{
-  content:''; position:absolute; left:-50%; right:-50%; top:-21px; height:22px;
-  background:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='260' height='22' viewBox='0 0 260 22'%3E%3Cpath d='M0 11 Q32.5 -6 65 11 T130 11 T195 11 T260 11 V22 H0 Z' fill='%23064a63'/%3E%3C/svg%3E") repeat-x;
-  background-size:260px 22px;
-  animation:wave 5.5s linear infinite;
-  opacity:.92;
-}
-@keyframes wave{ to{ background-position-x:260px; } }
 .trans-wash{
   position:absolute; inset:0; pointer-events:none; opacity:0;
   background:linear-gradient(to bottom, rgba(160,190,200,.2), transparent 45%);
@@ -2263,18 +2275,27 @@ html:not(.cinema) .beat{ min-height:78vh; margin-bottom:8vh; }
    04 — THE OCEAN / THE DIVE
    ============================================================ */
 #ocean{ height:560vh; background:var(--ocean-1); }
-.ocean-surface{ transform:scale(1.16); }
-.ocean-surface img{ object-position:50% 88%; }
-.ocean-bed{ opacity:0; }
-.ocean-bed{ transform:scale(1.22); }
+/* the ocean fills the whole screen (under-surface water region only) */
+.ocean-water{ transform:scale(1.05); }
+.ocean-water img{ object-position:50% 100%; transform:scale(1.6); transform-origin:50% 100%; }
+
+/* the sea bed — transparent model overlaid on the water */
+.ocean-bed-model{
+  position:absolute; left:-6%; right:-6%; bottom:-4%; height:44vh;
+  z-index:3; pointer-events:none; will-change:transform;
+}
+.ocean-bed-model img{
+  width:100%; height:100%; object-fit:cover; object-position:50% 100%;
+  opacity:.95; filter:saturate(1.05);
+}
 .ocean-veil{
-  position:absolute; inset:0; z-index:2; pointer-events:none;
+  position:absolute; inset:0; z-index:4; pointer-events:none;
   background:linear-gradient(to bottom, #0a4a67 0%, #06344c 45%, #02121d 100%);
 }
 .ocean-dark{ position:absolute; inset:0; background:#010509; opacity:0; pointer-events:none; }
 
 .rays{
-  position:absolute; inset:-10% -20%; pointer-events:none; opacity:.85;
+  position:absolute; inset:-10% -20%; z-index:4; pointer-events:none; opacity:.85;
   background:
     linear-gradient(102deg, transparent 30%, rgba(173,224,240,.10) 38%, transparent 46%),
     linear-gradient(96deg, transparent 52%, rgba(173,224,240,.08) 58%, transparent 66%),
@@ -2285,7 +2306,7 @@ html:not(.cinema) .beat{ min-height:78vh; margin-bottom:8vh; }
 @keyframes raysway{ from{ transform:translateX(-2%) } to{ transform:translateX(2.5%) } }
 
 .caustics{
-  position:absolute; inset:0; pointer-events:none; opacity:.5; mix-blend-mode:screen;
+  position:absolute; inset:0; z-index:4; pointer-events:none; opacity:.5; mix-blend-mode:screen;
   background:
     radial-gradient(18% 12% at 30% 20%, rgba(160,220,240,.12), transparent 70%),
     radial-gradient(14% 10% at 72% 34%, rgba(160,220,240,.1), transparent 70%),
@@ -2510,9 +2531,8 @@ html:not(.cinema) .leaf--far{ opacity:.55; }
 html:not(.cinema) .depthmeter{ display:none; }
 html:not(.cinema) .beam{ opacity:.7; }
 html:not(.cinema) .mw-grid .pcard, html:not(.cinema) .mw-inner > *{ opacity:1; }
-```
 
----
+```
 
 ## 📄 assets/css/pages.css  ·  (317 lines)
 
@@ -2833,9 +2853,8 @@ html:not(.cinema) .mw-grid .pcard, html:not(.cinema) .mw-inner > *{ opacity:1; }
 .co-success p{ color:rgba(242,238,227,.65); }
 .co-success .ord{ font-size:11px; letter-spacing:.3em; color:var(--gold); margin:18px 0 30px; text-transform:uppercase; }
 @media (max-width:900px){ .checkout__grid{ grid-template-columns:1fr; } .summary{ position:static; } }
-```
 
----
+```
 
 ## 📄 assets/js/data.js  ·  (182 lines)
 
@@ -3021,9 +3040,8 @@ const CATS = [
 const bySlug = s => PRODUCTS.find(p => p.slug === s);
 const fmtPrice = n => '₨' + n.toLocaleString('en-PK');
 const productImg = p => IMG + (p.img || p.slug) + '.webp';
-```
 
----
+```
 
 ## 📄 assets/js/nav.js  ·  (95 lines)
 
@@ -3122,9 +3140,8 @@ const productImg = p => IMG + (p.img || p.slug) + '.webp';
     });
   });
 })();
-```
 
----
+```
 
 ## 📄 assets/js/cart.js  ·  (195 lines)
 
@@ -3323,11 +3340,10 @@ const productImg = p => IMG + (p.img || p.slug) + '.webp';
     window.addEventListener('keydown', e => { if (e.key === 'Escape') closeCart(); });
   });
 })();
+
 ```
 
----
-
-## 📄 assets/js/journey.js  ·  (330 lines)
+## 📄 assets/js/journey.js  ·  (336 lines)
 
 ```javascript
 /* ============================================================
@@ -3395,10 +3411,10 @@ const productImg = p => IMG + (p.img || p.slug) + '.webp';
       .to('.leaf--l', { yPercent: -13, xPercent: -2, ease: 'none' }, 0)
       .to('.leaf--r', { yPercent: -15, xPercent: 2, ease: 'none' }, 0)
       .to('.leaf--b', { yPercent: -18, ease: 'none' }, 0)
-      .to('.hero-bottle', { yPercent: -7, scale: 0.94, ease: 'none' }, 0)
+      .to('.hero-bottle-in', { yPercent: -7, scale: 0.94, ease: 'none' }, 0)
       .to('.hero-copy', { y: -60, autoAlpha: 0, ease: 'power1.in', duration: 0.28 }, 0.02)
       .to('.hero-foot', { autoAlpha: 0, duration: 0.18 }, 0.05)
-      .to('.hero-bottle', { autoAlpha: 0, ease: 'power1.in', duration: 0.3 }, 0.68)
+      .to('.hero-bottle-in', { autoAlpha: 0, ease: 'power1.in', duration: 0.3 }, 0.68)
       .to('.stagechip--hero', { autoAlpha: 0, duration: 0.2 }, 0.05)
       .to({}, { duration: 0.2 });
 
@@ -3408,7 +3424,7 @@ const productImg = p => IMG + (p.img || p.slug) + '.webp';
       .from('.hero-copy h1', { y: 54, autoAlpha: 0, duration: 1.3, ease: 'power3.out' }, '-=0.85')
       .from('.hero-copy .journeysub', { y: 34, autoAlpha: 0, duration: 1.1, ease: 'power3.out' }, '-=0.95')
       .from('.hero-copy p, .hero-copy .btn', { y: 26, autoAlpha: 0, duration: 1, stagger: 0.1, ease: 'power3.out' }, '-=0.8')
-      .from('.hero-bottle', { autoAlpha: 0, scale: 0.92, filter: 'blur(10px)', duration: 1.6, ease: 'power2.out' }, '-=1.4')
+      .from('.hero-bottle-in', { autoAlpha: 0, scale: 0.92, filter: 'blur(10px)', duration: 1.6, ease: 'power2.out' }, '-=1.4')
       .from('.leaf--far', { autoAlpha: 0, duration: 2 }, '-=1.9')
       .from(['.leaf--l', '.leaf--r', '.leaf--b'], { autoAlpha: 0, y: 40, duration: 1.5, stagger: 0.14, ease: 'power2.out' }, '-=1.7')
       .from('.hero-foot', { autoAlpha: 0, y: 16, duration: 1 }, '-=0.8')
@@ -3417,14 +3433,17 @@ const productImg = p => IMG + (p.img || p.slug) + '.webp';
     /* mouse parallax on hero */
     if (finePointer) {
       const qx = {}; const qy = {};
-      const planes = ['.hero-bg', '.hero-mid', '.leaf--far', '.hero-bottle', '.leaf--l', '.leaf--r', '.leaf--b'];
-      const px = [6, 14, 22, 20, 32, 36, 42];
-      const py = [4, 9, 14, 14, 19, 21, 26];
+      /* the bottle lives on its own inner element — parallax starts from 0,
+         follows the cursor subtly, and can never drift (the CSS-centered
+         anchor is never touched by GSAP) */
+      const planes = ['.hero-bg', '.hero-mid', '.leaf--far', '.hero-bottle-in', '.leaf--l', '.leaf--r', '.leaf--b'];
+      const px = [6, 14, 22, 10, 32, 36, 42];
+      const py = [4, 9, 14, 8, 19, 21, 26];
       planes.forEach((sel, i) => {
         qx[sel] = gsap.quickTo(sel, 'x', { duration: 0.9, ease: 'power2.out' });
         qy[sel] = gsap.quickTo(sel, 'y', { duration: 0.9, ease: 'power2.out' });
-        qx[sel].par = px[i] * (i === 3 ? -1 : 1);
-        qy[sel].par = py[i] * (i === 3 ? -1 : 1);
+        qx[sel].par = px[i];
+        qy[sel].par = py[i];
       });
       document.querySelector('#hero .stage').addEventListener('pointermove', e => {
         const rx = (e.clientX / window.innerWidth - 0.5) * 2;
@@ -3494,6 +3513,7 @@ const productImg = p => IMG + (p.img || p.slug) + '.webp';
       .to('.trans-a', { autoAlpha: 0, duration: 1.3, ease: 'power1.inOut' }, 1.55)
       .fromTo('.trans-beach', { autoAlpha: 0 }, { autoAlpha: 1, duration: 1.3, ease: 'power1.inOut' }, 1.55)
       .to('.trans-beach', { scale: 1.02, ease: 'none', duration: 5.4 }, 0)
+      .fromTo('.shore-leaf', { xPercent: 8 }, { xPercent: 2, ease: 'none', duration: 5.4 }, 0)
       .to('.trans-wash', { opacity: 0, duration: 1.2 }, 2.0)
       .to('.trans-vignette', { opacity: 0.22, duration: 1.2 }, 1.8)
       /* beat 3 — water rises from the bottom toward the top */
@@ -3529,7 +3549,9 @@ const productImg = p => IMG + (p.img || p.slug) + '.webp';
     oceanTl
       /* arrival just beneath the risen water — the veil dissolves into the sea bed */
       .fromTo('.ocean-veil', { opacity: 1 }, { opacity: 0, duration: 1.8, ease: 'power1.inOut' }, 0)
-      .to('.ocean-bed', { scale: 1.03, yPercent: -2, ease: 'none', duration: 9 }, 0)
+      /* whole-screen water pushes deeper; the sea-bed model rises past the camera and thins into the dark */
+      .to('.ocean-water', { scale: 1.14, ease: 'none', duration: 9 }, 0)
+      .fromTo('.ocean-bed-model', { yPercent: 7 }, { yPercent: -12, autoAlpha: 0.3, ease: 'none', duration: 9 }, 0)
       .to('.ocean-dark', { opacity: 0.78, ease: 'none', duration: 9 }, 0)
       .to('.rays', { opacity: 0.12, ease: 'none', duration: 6 }, 1.5)
       .to('.caustics', { opacity: 0, ease: 'none', duration: 5 }, 1)
@@ -3659,9 +3681,8 @@ const productImg = p => IMG + (p.img || p.slug) + '.webp';
     });
   }
 })();
-```
 
----
+```
 
 ## 📄 assets/js/shop.js  ·  (98 lines)
 
@@ -3763,9 +3784,8 @@ const productImg = p => IMG + (p.img || p.slug) + '.webp';
     render();
   });
 })();
-```
 
----
+```
 
 ## 📄 assets/js/product.js  ·  (171 lines)
 
@@ -3940,9 +3960,8 @@ const productImg = p => IMG + (p.img || p.slug) + '.webp';
     }
   });
 })();
-```
 
----
+```
 
 ## 📄 assets/img/ui/favicon.svg  ·  (5 lines)
 
@@ -3951,9 +3970,8 @@ const productImg = p => IMG + (p.img || p.slug) + '.webp';
   <rect width="64" height="64" rx="14" fill="#07130d"/>
   <text x="32" y="42" font-family="Georgia, serif" font-size="30" fill="#c9a86a" text-anchor="middle" letter-spacing="1">IM</text>
 </svg>
-```
 
----
+```
 
 ## ▶ How to run
 
