@@ -113,10 +113,29 @@
     });
 
     gsap.set(beats, { autoAlpha: 0 });
-    gsap.set('.forest-bg', { filter: 'brightness(0.82) saturate(1)' });
+    /* the forest background starts exactly where the awakening's ends —
+       same image, same scale, same offset, full brightness — then darkens
+       beat by beat as the journey goes deeper */
+    gsap.set('.forest-bg', { yPercent: 4 });
     forestTl.fromTo('.forest-bg',
-      { filter: 'brightness(0.82) saturate(1)' },
-      { scale: 1.14, filter: 'brightness(0.4) saturate(1.12)', ease: 'none', duration: 4 }, 0);
+      { filter: 'brightness(1) saturate(1)' },
+      { scale: 1.14, yPercent: -6, filter: 'brightness(0.4) saturate(1.12)', ease: 'none', duration: 4 }, 0);
+    /* the awakening's framing (mid model + leaf planes + fog) continues here,
+       already at its final hero positions, and dissolves upward as beat 1 begins */
+    if (document.querySelector('.forest-frame')) {
+      gsap.set('.ff-mid', { yPercent: -5, xPercent: -1.5, scale: 1.1 });
+      gsap.set('.ff-far', { yPercent: -8, scale: 1.1 });
+      gsap.set('.ff-l', { yPercent: -13, xPercent: -2 });
+      gsap.set('.ff-r', { yPercent: -15, xPercent: 2 });
+      gsap.set('.ff-b', { yPercent: -18 });
+      forestTl
+        .to('.forest-frame', { autoAlpha: 0, ease: 'power1.in', duration: 1.15 }, 0.2)
+        .to('.ff-mid', { yPercent: -13, ease: 'none', duration: 1.5 }, 0)
+        .to('.ff-far', { yPercent: -15, ease: 'none', duration: 1.5 }, 0)
+        .to('.ff-l', { yPercent: -23, xPercent: -4, ease: 'none', duration: 1.5 }, 0)
+        .to('.ff-r', { yPercent: -25, xPercent: 3, ease: 'none', duration: 1.5 }, 0)
+        .to('.ff-b', { yPercent: -29, ease: 'none', duration: 1.5 }, 0);
+    }
 
     const SEG = 1; // duration units per beat
     beats.forEach((beat, i) => {
@@ -158,20 +177,20 @@
     gsap.set('.water-rise', { yPercent: 103 });
 
     transTl
-      /* beat 1 — the forest opens (dark) */
-      .to('.trans-a', { scale: 1.02, xPercent: -6, ease: 'none', duration: 5.4 }, 0)
-      .to('.trans-wash', { opacity: 0.75, duration: 1.4, ease: 'power1.inOut' }, 0.9)
-      /* beat 2 — the shore: bright sky & sand */
-      .to('.trans-a', { autoAlpha: 0, duration: 1.3, ease: 'power1.inOut' }, 1.55)
-      .fromTo('.trans-beach', { autoAlpha: 0 }, { autoAlpha: 1, duration: 1.3, ease: 'power1.inOut' }, 1.55)
-      .to('.trans-beach', { scale: 1.02, ease: 'none', duration: 5.4 }, 0)
+      /* beat 1 — the last trees (no background) stand over the shore:
+         the beach is the base layer, the keyed trees are overlaid on it */
+      .to('.trans-beach', { scale: 1.07, ease: 'none', duration: 5.4 }, 0)
+      .to('.trans-a', { scale: 1.06, ease: 'none', duration: 5.4 }, 0)
       .fromTo('.shore-leaf', { xPercent: 8 }, { xPercent: 2, ease: 'none', duration: 5.4 }, 0)
+      .to('.trans-wash', { opacity: 0.45, duration: 1.4, ease: 'power1.inOut' }, 0.9)
+      /* beat 2 — the trees part and give way to the shore */
+      .to('.trans-a', { xPercent: -18, autoAlpha: 0, duration: 1.6, ease: 'power1.inOut' }, 1.55)
       .to('.trans-wash', { opacity: 0, duration: 1.2 }, 2.0)
       .to('.trans-vignette', { opacity: 0.22, duration: 1.2 }, 1.8)
       /* beat 3 — water rises from the bottom toward the top */
       .to('.trans-vignette', { opacity: 1, duration: 1.2 }, 3.3)
       .to('.water-rise', { yPercent: 0, duration: 2.05, ease: 'power2.in' }, 3.2)
-      .to('.trans-beach', { scale: 1.07, ease: 'none', duration: 2.05 }, 3.2)
+      .to('.trans-beach', { scale: 1.13, ease: 'none', duration: 2.05 }, 3.2)
       /* titles */
       .to(titles[0], { autoAlpha: 0, y: -44, duration: 0.75, ease: 'power1.in' }, 1.15)
       .to(titles[1], { autoAlpha: 1, y: 0, duration: 0.75, ease: 'power1.out' }, 1.95)
@@ -183,7 +202,7 @@
     transSteps.forEach((st, i) => {
       transTl.call(() => {
         transSteps.forEach((x, j) => x.classList.toggle('on', j <= i));
-        if (stepsWrap) stepsWrap.classList.toggle('i', i === 1);
+        if (stepsWrap) stepsWrap.classList.toggle('i', i === 2);
       }, [], [0.2, 1.95, 3.35][i]);
     });
 

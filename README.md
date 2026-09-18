@@ -1080,15 +1080,20 @@ anywhere (no build step, no server-side rendering required).
    model + a four-plane leaf system (blurred far foliage, left strip,
    right strip, bottom strip) each with its own scroll parallax, mouse
    depth and gentle sway. Fog, sun shaft, canvas dust, camera push-in.
-2. **02 — The Forest** — four product beats (Five-Nine, Hopeful, Charming,
-   Mi Amor) revealed by scroll as the forest darkens. Each beat layers a
-   botanical plane plus a faster near-leaf plane for real depth.
-3. **03 — The Shore** — the forest opens (forest → bright land), then the
-   bright sky/sand beach as the background layer with the transparent leaf
-   picture overlaid on the left side (the forest's edge carried into the
-   frame, no background of its own), then the water rises from the bottom
-   of the screen to the top with a clean, straight edge — LAND–SHORE–WATER
-   progress indicator.
+2. **02 — The Forest** — flows straight out of the awakening: the same
+   forest background at the same scale, offset and brightness, plus the
+   same framing (mid model, leaf planes, fog, sun shaft) carried across
+   the seam before dissolving into the first beat. Four product beats
+   (Five-Nine, Hopeful, Charming, Mi Amor) revealed by scroll as the
+   forest darkens. Each beat layers a botanical plane plus a faster
+   near-leaf plane for real depth.
+3. **03 — The Shore** — the bright sky/sand beach is the background layer
+   from the first frame; the trees picture ("Trees give way to the
+   horizon", its white backdrop keyed to transparency) is overlaid directly
+   on top of it, together with the leaf picture on the left side. As the
+   journey continues the trees part to the left and give way to the pure
+   shore, then the water rises from the bottom of the screen to the top
+   with a clean, straight edge — LAND–SHORE–WATER progress indicator.
 4. **04 — The Dive** — the ocean fills the whole screen (open-water
    surface, no sky) with god rays, caustics, rising bubbles, a live depth
    meter (0 → 42 m) and three depth stops (Zesty @10 m, Sophisticated
@@ -1131,9 +1136,12 @@ drawer (localStorage), wishlist, toasts, mobile menu, page transitions.
     from `MODEL2.png` (blurred far plane + side/bottom strips)
   - `leaf-near.webp` — keyed botanical cluster (near-leaf plane)
   - `beach.webp` — the sky-styled shore scene
-  - `forest-to-ocean.webp`, `ocean-surface.webp` (the whole-screen ocean
-    water, also used by the rising water), `oceanbed.webp` (the transparent
-    sea-bed model overlay), `main-idea.webp` (storyboard)
+  - `forest-to-ocean.webp` — the last trees of the forest, white backdrop
+    keyed to transparency (kept opaque in `src/` as the master), overlaid
+    on the shore
+  - `ocean-surface.webp` (the whole-screen ocean water, also used by the
+    rising water), `oceanbed.webp` (the transparent sea-bed model overlay),
+    `main-idea.webp` (storyboard)
 - `assets/img/bottles/` — the 8 signature bottles (generated on pure black,
   then black-keyed to transparent WebP via border flood-fill).
   `src/` keeps the original renders as masters.
@@ -1161,10 +1169,13 @@ handler in `checkout.html` to a real backend (or WooCommerce) to go live.
 Headless-Chromium test suite (1440×900 desktop, 390×844 mobile,
 reduced-motion, and no-JavaScript passes) confirms: zero JS errors,
 all images load, no horizontal overflow on any page, filters and cart
-flows work, the layered leaf planes render, the leaf overlay sits on the
-left of the bright beach, the water edge is clean (no wave graphic) and
-fully rises from bottom to top by the end of
-the transition, the ocean fills the whole screen with the transparent
+flows work, the layered leaf planes render, the keyed trees sit overlaid
+on the always-visible beach at "Trees give way to the horizon" and part
+before "The shore", the leaf overlay stays on the left, the water edge is
+clean (no wave graphic) and fully rises from bottom to top by the end of
+the transition, the awakening flows into the forest with the same background on both
+sides of the seam (average pixel difference 7.5/255 across the frame),
+the ocean fills the whole screen with the transparent
 sea-bed model overlaid at the bottom (warm rock tones with water visible
 through it), the depth meter + model reveals fire on scroll, the hero
 bottle holds its position under cursor movement (parallax is a subtle

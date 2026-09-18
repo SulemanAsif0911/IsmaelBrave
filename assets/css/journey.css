@@ -157,7 +157,13 @@ html:not(.cinema) .beat{ min-height:78vh; margin-bottom:8vh; }
    ============================================================ */
 #forest{ height:520vh; }
 #forest .stage{ background:var(--forest-1); }
-.forest-bg{ opacity:.92; }
+.forest-bg{ opacity:1; }
+
+/* the awakening's frame carried into the forest — identical at the seam,
+   then it dissolves as the first beat takes over */
+.forest-frame{ position:absolute; inset:0; pointer-events:none; }
+.forest-frame .layer{ will-change:transform; }
+html:not(.cinema) .forest-frame{ display:none; }
 
 .beat__botanical{
   position:absolute; inset:-8%; pointer-events:none; will-change:transform;
@@ -227,7 +233,7 @@ html:not(.cinema) .beat{ min-height:78vh; margin-bottom:8vh; }
 #transition{ height:420vh; background:#000; }
 .trans-a{ transform:scale(1.14); }
 .trans-a img{ object-position:34% 50%; }
-.trans-beach{ opacity:0; transform:scale(1.14); }
+.trans-beach{ transform:scale(1.14); }
 .trans-beach img{ object-position:50% 45%; }
 
 /* the forest's edge — leaves (no background) overlaid on the shore */
@@ -258,23 +264,23 @@ html:not(.cinema) .beat{ min-height:78vh; margin-bottom:8vh; }
 }
 .trans-copy .display{ text-shadow:0 2px 44px rgba(0,0,0,.45); }
 .trans-copy .label{ color:rgba(242,238,227,.62); margin-bottom:20px; }
-.trans-copy .tt-2{ color:var(--ink); }
-.trans-copy .tt-2 .label{ color:rgba(28,34,28,.62); }
-.trans-copy .tt-2 .display{ text-shadow:none; }
+.trans-copy .tt-1, .trans-copy .tt-2{ color:var(--ink); }
+.trans-copy .tt-1 .label, .trans-copy .tt-2 .label{ color:rgba(28,34,28,.62); }
+.trans-copy .tt-1 .display, .trans-copy .tt-2 .display{ text-shadow:none; }
 .trans-steps{ display:flex; gap:clamp(20px,4vw,60px); margin-top:44px; align-items:center; }
 .trans-steps span{
   font-size:10px; letter-spacing:.4em; text-transform:uppercase;
-  color:rgba(242,238,227,.72); position:relative; padding-bottom:12px;
+  color:rgba(26,32,26,.78); position:relative; padding-bottom:12px;
   transition:color .6s;
 }
-.trans-steps.i span{ color:rgba(26,32,26,.78); }
+.trans-steps.i span{ color:rgba(242,238,227,.72); }
 .trans-steps span::after{
   content:''; position:absolute; left:0; bottom:0; height:1px; width:100%;
   background:currentColor; opacity:.5; transform:scaleX(0); transform-origin:left;
   transition:transform .6s var(--ease);
 }
 .trans-steps span.on::after{ transform:none; }
-.trans-steps i{ width:44px; height:1px; background:rgba(242,238,227,.25); }
+.trans-steps i{ width:44px; height:1px; background:rgba(26,32,26,.25); }
 
 /* ============================================================
    04 — THE OCEAN / THE DIVE

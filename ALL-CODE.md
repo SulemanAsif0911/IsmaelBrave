@@ -1,46 +1,53 @@
 # ISMAEEL MUHAMMAD — A JOURNEY OF SENSES
-## Complete source code (v3 — the shore perfected · whole-screen ocean · steady bottle)
+## Complete source code (v3 — the shore perfected · whole-screen ocean · steady bottle · seamless awakening→forest)
 
 **Stack:** Vanilla HTML / CSS / JS + GSAP ScrollTrigger + Lenis (vendored) — no build step  
 **Catalog:** only the 8 journey models — all extra data removed
 
 **v3 changes**
 
-1. **The shore** — the sky/sand beach is the background; the transparent leaf
-   picture (no background) is overlaid on the left side, above it.
-2. **Clean water edge** — the cartoonish SVG wave is removed; the rising water
+1. **The shore** — the bright sky/sand beach is the background from the first
+   frame; the trees picture of "Trees give way to the horizon." (white
+   backdrop keyed to transparency) is overlaid directly on top of it, with
+   the leaf picture on the left. The trees then part away before
+   "The shore — Sky, sand and stillness."
+2. **Awakening → Forest** — the same forest background continues across the
+   seam at the same scale, offset and full brightness, and the awakening's
+   framing (mid model, leaf planes, fog, sun shaft) is carried into the
+   forest before dissolving into the first product beat.
+3. **Clean water edge** — the cartoonish SVG wave is removed; the rising water
    ends in a straight, calm line.
-3. **The ocean** — water fills the whole screen (open-water surface, no sky);
-   the transparent sea-bed picture is a model overlay at the bottom of the
-   water, drifting up past the camera as the dive deepens.
-4. **The bottle** — the landing perfume no longer slides down on cursor
+4. **The ocean** — water fills the whole screen; the transparent sea-bed
+   picture is a model overlay at the bottom of the water, drifting up past
+   the camera as the dive deepens.
+5. **The bottle** — the landing perfume no longer slides down on cursor
    movement: parallax is a subtle natural follow on a dedicated inner
    element, and the CSS-centered anchor is never touched by GSAP.
 
 | # | File | Lines | Purpose |
 |---|------|-------|---------|
-| 1 | `index.html` | 586 | The cinematic journey — layered leaves, shore with leaf overlay, clean water rise, whole-screen ocean with sea-bed model overlay |
+| 1 | `index.html` | 595 | The cinematic journey — seamless awakening→forest, trees overlaid on the shore, clean water rise, whole-screen ocean with sea-bed model overlay |
 | 2 | `shop.html` | 115 | Editorial shop — the 8 journey models only |
 | 3 | `product.html` | 195 | Data-driven product detail page |
 | 4 | `about.html` | 183 | Editorial brand story (5 chapters) |
 | 5 | `contact.html` | 177 | Contact + FAQ / shipping / returns |
 | 6 | `checkout.html` | 221 | Checkout with order confirmation |
 | 7 | `assets/css/base.css` | 438 | Design system: tokens, nav, cart, cards, footer |
-| 8 | `assets/css/journey.css` | 539 | Cinematic styles: leaf planes, beach + leaf overlay, clean water edge, ocean water + sea-bed model |
+| 8 | `assets/css/journey.css` | 545 | Cinematic styles: leaf planes, forest frame continuity, beach base + keyed trees overlay, clean water edge, ocean water + sea-bed model |
 | 9 | `assets/css/pages.css` | 317 | Shop / product / about / contact / checkout styles |
 | 10 | `assets/js/data.js` | 182 | Product database — 8 journey models only |
 | 11 | `assets/js/nav.js` | 95 | Nav, veil, reveals, menu, page transitions |
 | 12 | `assets/js/cart.js` | 195 | Cart store, drawer, wishlist, toasts (localStorage) |
-| 13 | `assets/js/journey.js` | 336 | Scroll engine: leaf parallax, bottle mouse-follow fix, shore, water rise, ocean dive, depth |
+| 13 | `assets/js/journey.js` | 355 | Scroll engine: hero→forest seam, bottle mouse-follow fix, shore composite, water rise, ocean dive, depth |
 | 14 | `assets/js/shop.js` | 98 | Shop filters + grid rendering |
 | 15 | `assets/js/product.js` | 171 | Product page rendering + JSON-LD |
 | 16 | `assets/img/ui/favicon.svg` | 5 | Favicon (IM monogram) |
 
-**Total: 16 files, 3,853 lines.**
+**Total: 16 files, 3,887 lines.**
 
 ---
 
-## 📄 index.html  ·  (586 lines)
+## 📄 index.html  ·  (595 lines)
 
 ```html
 <!DOCTYPE html>
@@ -155,6 +162,15 @@
   <section class="scene" id="forest" data-rail="02" aria-label="The forest collection">
     <div class="stage">
       <div class="layer forest-bg"><img src="assets/img/env/forest-bg.webp" alt="Deep forest environment"></div>
+      <div class="forest-frame" aria-hidden="true">
+        <div class="layer ff-mid"><img src="assets/img/env/model-mid.webp" alt=""></div>
+        <div class="leaf leaf--far ff-far"><img src="assets/img/env/leaf-far.webp" alt=""></div>
+        <div class="leaf leaf--l ff-l"><img src="assets/img/env/leaf-left.webp" alt=""></div>
+        <div class="leaf leaf--r ff-r"><img src="assets/img/env/leaf-right.webp" alt=""></div>
+        <div class="leaf leaf--b ff-b"><img src="assets/img/env/leaf-bottom.webp" alt=""></div>
+        <div class="fog"></div>
+        <div class="sunshaft"></div>
+      </div>
       <div class="vignette" aria-hidden="true"></div>
       <div class="stagechip stagechip--hero"><b>02</b> The Forest</div>
 
@@ -261,8 +277,8 @@
        ================================================ -->
   <section class="scene" id="transition" data-rail="03" aria-label="From forest to the shore, then under the water">
     <div class="stage">
-      <div class="layer trans-a"><img src="assets/img/env/forest-to-ocean.webp" alt="Forest dissolving into open bright landscape"></div>
       <div class="layer trans-beach"><img src="assets/img/env/beach.webp" alt="Bright sky and warm sand at the shore"></div>
+      <div class="layer trans-a"><img src="assets/img/env/forest-to-ocean.webp" alt="The last trees of the forest, open to the horizon"></div>
       <div class="shore-leaf" aria-hidden="true"><img src="assets/img/env/leaf-left.webp" alt=""></div>
       <div class="water-rise" aria-hidden="true">
         <div class="water-fill"><img src="assets/img/env/ocean-surface.webp" alt=""></div>
@@ -1990,7 +2006,7 @@ body.cart-open{ overflow:hidden; }
 
 ```
 
-## 📄 assets/css/journey.css  ·  (539 lines)
+## 📄 assets/css/journey.css  ·  (545 lines)
 
 ```css
 /* ============================================================
@@ -2152,7 +2168,13 @@ html:not(.cinema) .beat{ min-height:78vh; margin-bottom:8vh; }
    ============================================================ */
 #forest{ height:520vh; }
 #forest .stage{ background:var(--forest-1); }
-.forest-bg{ opacity:.92; }
+.forest-bg{ opacity:1; }
+
+/* the awakening's frame carried into the forest — identical at the seam,
+   then it dissolves as the first beat takes over */
+.forest-frame{ position:absolute; inset:0; pointer-events:none; }
+.forest-frame .layer{ will-change:transform; }
+html:not(.cinema) .forest-frame{ display:none; }
 
 .beat__botanical{
   position:absolute; inset:-8%; pointer-events:none; will-change:transform;
@@ -2222,7 +2244,7 @@ html:not(.cinema) .beat{ min-height:78vh; margin-bottom:8vh; }
 #transition{ height:420vh; background:#000; }
 .trans-a{ transform:scale(1.14); }
 .trans-a img{ object-position:34% 50%; }
-.trans-beach{ opacity:0; transform:scale(1.14); }
+.trans-beach{ transform:scale(1.14); }
 .trans-beach img{ object-position:50% 45%; }
 
 /* the forest's edge — leaves (no background) overlaid on the shore */
@@ -2253,23 +2275,23 @@ html:not(.cinema) .beat{ min-height:78vh; margin-bottom:8vh; }
 }
 .trans-copy .display{ text-shadow:0 2px 44px rgba(0,0,0,.45); }
 .trans-copy .label{ color:rgba(242,238,227,.62); margin-bottom:20px; }
-.trans-copy .tt-2{ color:var(--ink); }
-.trans-copy .tt-2 .label{ color:rgba(28,34,28,.62); }
-.trans-copy .tt-2 .display{ text-shadow:none; }
+.trans-copy .tt-1, .trans-copy .tt-2{ color:var(--ink); }
+.trans-copy .tt-1 .label, .trans-copy .tt-2 .label{ color:rgba(28,34,28,.62); }
+.trans-copy .tt-1 .display, .trans-copy .tt-2 .display{ text-shadow:none; }
 .trans-steps{ display:flex; gap:clamp(20px,4vw,60px); margin-top:44px; align-items:center; }
 .trans-steps span{
   font-size:10px; letter-spacing:.4em; text-transform:uppercase;
-  color:rgba(242,238,227,.72); position:relative; padding-bottom:12px;
+  color:rgba(26,32,26,.78); position:relative; padding-bottom:12px;
   transition:color .6s;
 }
-.trans-steps.i span{ color:rgba(26,32,26,.78); }
+.trans-steps.i span{ color:rgba(242,238,227,.72); }
 .trans-steps span::after{
   content:''; position:absolute; left:0; bottom:0; height:1px; width:100%;
   background:currentColor; opacity:.5; transform:scaleX(0); transform-origin:left;
   transition:transform .6s var(--ease);
 }
 .trans-steps span.on::after{ transform:none; }
-.trans-steps i{ width:44px; height:1px; background:rgba(242,238,227,.25); }
+.trans-steps i{ width:44px; height:1px; background:rgba(26,32,26,.25); }
 
 /* ============================================================
    04 — THE OCEAN / THE DIVE
@@ -3343,7 +3365,7 @@ const productImg = p => IMG + (p.img || p.slug) + '.webp';
 
 ```
 
-## 📄 assets/js/journey.js  ·  (336 lines)
+## 📄 assets/js/journey.js  ·  (355 lines)
 
 ```javascript
 /* ============================================================
@@ -3461,10 +3483,29 @@ const productImg = p => IMG + (p.img || p.slug) + '.webp';
     });
 
     gsap.set(beats, { autoAlpha: 0 });
-    gsap.set('.forest-bg', { filter: 'brightness(0.82) saturate(1)' });
+    /* the forest background starts exactly where the awakening's ends —
+       same image, same scale, same offset, full brightness — then darkens
+       beat by beat as the journey goes deeper */
+    gsap.set('.forest-bg', { yPercent: 4 });
     forestTl.fromTo('.forest-bg',
-      { filter: 'brightness(0.82) saturate(1)' },
-      { scale: 1.14, filter: 'brightness(0.4) saturate(1.12)', ease: 'none', duration: 4 }, 0);
+      { filter: 'brightness(1) saturate(1)' },
+      { scale: 1.14, yPercent: -6, filter: 'brightness(0.4) saturate(1.12)', ease: 'none', duration: 4 }, 0);
+    /* the awakening's framing (mid model + leaf planes + fog) continues here,
+       already at its final hero positions, and dissolves upward as beat 1 begins */
+    if (document.querySelector('.forest-frame')) {
+      gsap.set('.ff-mid', { yPercent: -5, xPercent: -1.5, scale: 1.1 });
+      gsap.set('.ff-far', { yPercent: -8, scale: 1.1 });
+      gsap.set('.ff-l', { yPercent: -13, xPercent: -2 });
+      gsap.set('.ff-r', { yPercent: -15, xPercent: 2 });
+      gsap.set('.ff-b', { yPercent: -18 });
+      forestTl
+        .to('.forest-frame', { autoAlpha: 0, ease: 'power1.in', duration: 1.15 }, 0.2)
+        .to('.ff-mid', { yPercent: -13, ease: 'none', duration: 1.5 }, 0)
+        .to('.ff-far', { yPercent: -15, ease: 'none', duration: 1.5 }, 0)
+        .to('.ff-l', { yPercent: -23, xPercent: -4, ease: 'none', duration: 1.5 }, 0)
+        .to('.ff-r', { yPercent: -25, xPercent: 3, ease: 'none', duration: 1.5 }, 0)
+        .to('.ff-b', { yPercent: -29, ease: 'none', duration: 1.5 }, 0);
+    }
 
     const SEG = 1; // duration units per beat
     beats.forEach((beat, i) => {
@@ -3506,20 +3547,20 @@ const productImg = p => IMG + (p.img || p.slug) + '.webp';
     gsap.set('.water-rise', { yPercent: 103 });
 
     transTl
-      /* beat 1 — the forest opens (dark) */
-      .to('.trans-a', { scale: 1.02, xPercent: -6, ease: 'none', duration: 5.4 }, 0)
-      .to('.trans-wash', { opacity: 0.75, duration: 1.4, ease: 'power1.inOut' }, 0.9)
-      /* beat 2 — the shore: bright sky & sand */
-      .to('.trans-a', { autoAlpha: 0, duration: 1.3, ease: 'power1.inOut' }, 1.55)
-      .fromTo('.trans-beach', { autoAlpha: 0 }, { autoAlpha: 1, duration: 1.3, ease: 'power1.inOut' }, 1.55)
-      .to('.trans-beach', { scale: 1.02, ease: 'none', duration: 5.4 }, 0)
+      /* beat 1 — the last trees (no background) stand over the shore:
+         the beach is the base layer, the keyed trees are overlaid on it */
+      .to('.trans-beach', { scale: 1.07, ease: 'none', duration: 5.4 }, 0)
+      .to('.trans-a', { scale: 1.06, ease: 'none', duration: 5.4 }, 0)
       .fromTo('.shore-leaf', { xPercent: 8 }, { xPercent: 2, ease: 'none', duration: 5.4 }, 0)
+      .to('.trans-wash', { opacity: 0.45, duration: 1.4, ease: 'power1.inOut' }, 0.9)
+      /* beat 2 — the trees part and give way to the shore */
+      .to('.trans-a', { xPercent: -18, autoAlpha: 0, duration: 1.6, ease: 'power1.inOut' }, 1.55)
       .to('.trans-wash', { opacity: 0, duration: 1.2 }, 2.0)
       .to('.trans-vignette', { opacity: 0.22, duration: 1.2 }, 1.8)
       /* beat 3 — water rises from the bottom toward the top */
       .to('.trans-vignette', { opacity: 1, duration: 1.2 }, 3.3)
       .to('.water-rise', { yPercent: 0, duration: 2.05, ease: 'power2.in' }, 3.2)
-      .to('.trans-beach', { scale: 1.07, ease: 'none', duration: 2.05 }, 3.2)
+      .to('.trans-beach', { scale: 1.13, ease: 'none', duration: 2.05 }, 3.2)
       /* titles */
       .to(titles[0], { autoAlpha: 0, y: -44, duration: 0.75, ease: 'power1.in' }, 1.15)
       .to(titles[1], { autoAlpha: 1, y: 0, duration: 0.75, ease: 'power1.out' }, 1.95)
@@ -3531,7 +3572,7 @@ const productImg = p => IMG + (p.img || p.slug) + '.webp';
     transSteps.forEach((st, i) => {
       transTl.call(() => {
         transSteps.forEach((x, j) => x.classList.toggle('on', j <= i));
-        if (stepsWrap) stepsWrap.classList.toggle('i', i === 1);
+        if (stepsWrap) stepsWrap.classList.toggle('i', i === 2);
       }, [], [0.2, 1.95, 3.35][i]);
     });
 
