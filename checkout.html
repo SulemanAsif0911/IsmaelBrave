@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Checkout | Ismaeel Muhammad</title>
+<meta name="description" content="Complete your order — Ismaeel Muhammad fragrance house. Cash on delivery, bank transfer and card payments.">
+<link rel="icon" href="assets/img/ui/favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="assets/css/base.css">
+<link rel="stylesheet" href="assets/css/pages.css">
+</head>
+<body data-page="checkout">
+
+<div class="veil" aria-hidden="true">
+  <div class="veil__word">Checkout</div>
+  <div class="veil__bar"><i></i></div>
+</div>
+
+<nav class="nav" aria-label="Main">
+  <a class="nav__logo" href="index.html">Ismaeel <em>Muhammad</em></a>
+  <ul class="nav__links">
+    <li><a href="index.html" data-nav="journey">Journey</a></li>
+    <li><a href="shop.html" data-nav="shop">Shop</a></li>
+    <li><a href="about.html" data-nav="about">About</a></li>
+    <li><a href="contact.html" data-nav="contact">Contact</a></li>
+  </ul>
+  <div class="nav__right">
+    <button class="cart-btn" id="cart-open" aria-label="Open cart">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4"><path d="M6 7h12l1.2 13H4.8L6 7Z"/><path d="M9 9V6a3 3 0 0 1 6 0v3"/></svg>
+      Cart <span class="cart-count" data-empty="1">0</span>
+    </button>
+    <button class="burger" aria-label="Menu"><span></span><span></span></button>
+  </div>
+</nav>
+
+<div class="mobile-menu">
+  <a href="index.html"><span>Journey</span><span class="no">01</span></a>
+  <a href="shop.html"><span>Shop</span><span class="no">02</span></a>
+  <a href="about.html"><span>About</span><span class="no">03</span></a>
+  <a href="contact.html"><span>Contact</span><span class="no">04</span></a>
+  <a href="checkout.html"><span>Checkout</span><span class="no">05</span></a>
+</div>
+
+<main class="checkout">
+  <div id="co-flow">
+    <div class="crumbs"><a href="shop.html">Shop</a><i>/</i><span>Checkout</span></div>
+    <span class="eyebrow">Secure Checkout</span>
+    <h1 class="display">Almost yours.</h1>
+
+    <div class="checkout__grid">
+      <form id="co-form" novalidate>
+        <div class="co-card">
+          <span class="label">01 — Contact</span>
+          <div class="f-2col">
+            <div class="f-row">
+              <label for="co-name">Full name</label>
+              <input id="co-name" type="text" required autocomplete="name">
+            </div>
+            <div class="f-row">
+              <label for="co-phone">Phone</label>
+              <input id="co-phone" type="tel" required autocomplete="tel" placeholder="03XX-XXXXXXX">
+            </div>
+          </div>
+          <div class="f-row">
+            <label for="co-email">Email</label>
+            <input id="co-email" type="email" required autocomplete="email">
+          </div>
+        </div>
+
+        <div class="co-card">
+          <span class="label">02 — Shipping address</span>
+          <div class="f-row">
+            <label for="co-addr">Street address</label>
+            <input id="co-addr" type="text" required autocomplete="street-address">
+          </div>
+          <div class="f-2col">
+            <div class="f-row">
+              <label for="co-city">City</label>
+              <input id="co-city" type="text" required autocomplete="address-level2">
+            </div>
+            <div class="f-row">
+              <label for="co-postal">Postal code (optional)</label>
+              <input id="co-postal" type="text" autocomplete="postal-code">
+            </div>
+          </div>
+        </div>
+
+        <div class="co-card">
+          <span class="label">03 — Payment</span>
+          <label class="pay-opt on">
+            <input type="radio" name="pay" value="cod" checked>
+            <span><b>Cash on Delivery</b><span>Pay the courier when your fragrance arrives — available across Pakistan.</span></span>
+          </label>
+          <label class="pay-opt">
+            <input type="radio" name="pay" value="bank">
+            <span><b>Bank Transfer</b><span>Details sent with your order confirmation.</span></span>
+          </label>
+          <label class="pay-opt">
+            <input type="radio" name="pay" value="card">
+            <span><b>Card</b><span>Debit / credit card at confirmation (demo).</span></span>
+          </label>
+        </div>
+
+        <button class="btn-solid gold" type="submit" style="width:100%">Place order</button>
+        <p style="font-size:10px;letter-spacing:.2em;text-transform:uppercase;color:rgba(242,238,227,.4);text-align:center;margin-top:16px">
+          Encrypted · 7-day returns · A human packs every order
+        </p>
+      </form>
+
+      <aside class="summary">
+        <span class="label">Order Summary</span>
+        <div id="co-items"></div>
+        <div class="cart__row"><span>Subtotal</span><b id="co-sub"></b></div>
+        <div class="cart__row"><span>Shipping</span><b id="co-ship"></b></div>
+        <div class="cart__row total"><span>Total</span><b id="co-tot"></b></div>
+      </aside>
+    </div>
+  </div>
+
+  <div id="co-done" hidden>
+    <div class="co-success">
+      <span class="eyebrow">Order Confirmed</span>
+      <h2 class="display">The journey is on its way.</h2>
+      <div class="ord" id="co-ref">Order IM-0000</div>
+      <p>Thank you. A confirmation is on its way to your inbox. Your fragrance will be dispatched within 1–2 working days.</p>
+      <a class="btn-solid gold" href="index.html" style="margin-top:30px">Back to the journey</a>
+    </div>
+  </div>
+</main>
+
+<footer class="footer">
+  <div class="footer__top">
+    <div class="footer__brand">
+      <div class="footer__word">Ismaeel<br>Muhammad <em>— a journey of senses</em></div>
+      <p class="footer__tag">Timeless fragrances inspired by nature, heritage and emotion. Crafted in Pakistan, worn everywhere.</p>
+    </div>
+    <div>
+      <h4>Shop</h4>
+      <ul>
+        <li><a href="shop.html">All Fragrances</a></li>
+        <li><a href="shop.html?cat=men">Men</a></li>
+        <li><a href="shop.html?cat=women">Women</a></li>
+        <li><a href="shop.html?cat=attars">Attars</a></li>
+      </ul>
+    </div>
+    <div>
+      <h4>House</h4>
+      <ul>
+        <li><a href="about.html">About</a></li>
+        <li><a href="index.html">The Journey</a></li>
+        <li><a href="contact.html">Contact</a></li>
+      </ul>
+    </div>
+    <div>
+      <h4>Support</h4>
+      <ul>
+        <li><a href="contact.html#faq">FAQ</a></li>
+        <li><a href="contact.html#faq">Shipping &amp; Returns</a></li>
+        <li><a href="contact.html">Contact</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer__bottom">
+    <span>© 2026 Ismaeel Muhammad — All rights reserved</span>
+    <span>Forest → Land → Ocean</span>
+  </div>
+</footer>
+
+<script src="assets/js/data.js"></script>
+<script src="assets/vendor/gsap.min.js"></script>
+<script src="assets/vendor/ScrollTrigger.min.js"></script>
+<script src="assets/js/nav.js"></script>
+<script src="assets/js/cart.js"></script>
+<script>
+  document.addEventListener('click', e => {
+    if (e.target.closest('#cart-open, .cart-btn') && window.IM) { e.preventDefault(); window.IM.openCart(); }
+  });
+
+  document.querySelectorAll('.pay-opt').forEach(opt => {
+    opt.addEventListener('click', () => {
+      document.querySelectorAll('.pay-opt').forEach(o => o.classList.remove('on'));
+      opt.classList.add('on');
+      opt.querySelector('input').checked = true;
+    });
+  });
+
+  function renderSummary() {
+    const items = window.IM.cart.items;
+    const box = document.getElementById('co-items');
+    if (items.length === 0) {
+      box.innerHTML = '<p style="color:rgba(242,238,227,.5);font-size:13.5px">Your cart is empty — <a href="shop.html" style="color:var(--gold)">choose a fragrance</a> first.</p>';
+    } else {
+      box.innerHTML = items.map(i => {
+        const p = bySlug(i.slug);
+        return `<div class="s-item">
+          <div class="th"><img src="${productImg(p)}" alt=""></div>
+          <div><div class="nm">${p.name}</div><div class="mt">${p.type} · ${i.size} × ${i.qty}</div></div>
+          <div class="pr">${fmtPrice(window.IM.cart.lineTotal(i))}</div>
+        </div>`;
+      }).join('');
+    }
+    document.getElementById('co-sub').textContent = fmtPrice(window.IM.cart.subtotal());
+    document.getElementById('co-ship').textContent = items.length === 0 ? '—' : (window.IM.cart.shipping() === 0 ? 'Free' : fmtPrice(window.IM.cart.shipping()));
+    document.getElementById('co-tot').textContent = fmtPrice(window.IM.cart.total());
+  }
+  renderSummary();
+
+  document.getElementById('co-form').addEventListener('submit', e => {
+    e.preventDefault();
+    const form = e.target;
+    if (!form.checkValidity()) { form.reportValidity(); return; }
+    if (window.IM.cart.items.length === 0) { window.IM.toast('Your cart is empty'); return; }
+    document.getElementById('co-ref').textContent = 'Order IM-' + Math.floor(1000 + Math.random() * 9000);
+    document.getElementById('co-flow').hidden = true;
+    document.getElementById('co-done').hidden = false;
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+    window.IM.cart.clear();
+  });
+</script>
+</body>
+</html>

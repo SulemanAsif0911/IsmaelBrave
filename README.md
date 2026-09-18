@@ -1054,3 +1054,97 @@ The homepage visual concept follows this sequence:
 **Visual Direction:** Premium / Cinematic / Natural / Minimal /
 Editorial\
 **Primary Environments:** Forest → Land → Ocean
+
+---
+
+# IMPLEMENTATION — What Was Built
+
+This repository now contains a working implementation of the concept above:
+a **static, dependency-light, cinematic scroll experience** built to run
+anywhere (no build step, no server-side rendering required).
+
+## Pages
+
+| File            | Purpose                                                                 |
+| --------------- | ----------------------------------------------------------------------- |
+| `index.html`    | The full cinematic journey — 7 scroll-driven scenes                    |
+| `shop.html`     | Dark editorial shop with category filters (`?cat=men\|women\|attars…`) |
+| `product.html`  | Data-driven product page (`?p=slug`) with notes, pyramid, reviews       |
+| `about.html`    | Editorial story — The Beginning / Passion / Craft / Brand / Future      |
+| `contact.html`  | Contact + FAQ / shipping / returns                                      |
+| `checkout.html` | Order form with COD / bank / card options and order confirmation        |
+
+## The journey (index.html)
+
+1. **01 — The Awakening** — layered forest hero (background + midground +
+   foreground model layers with a transparent window for the bottle), fog,
+   sun shaft, canvas dust particles, mouse parallax, scroll push-in.
+2. **02 — The Forest** — four product beats (Five-Nine, Hopeful, Charming,
+   Mi Amor) revealed by scroll as the forest darkens.
+3. **03 — The Transition** — forest → open land → water with a gradual
+   palette shift and a LAND–HORIZON–WATER progress indicator.
+4. **04 — The Ocean** — scroll-controlled dive with a live depth meter
+   (0 → 42 m), god rays, caustics, rising bubbles, and three depth stops
+   (Zesty @10 m, Sophisticated @20 m, Happy @30 m).
+5. **05 — The Depths** — near-black Most Wanted reveal with a volumetric
+   light beam and four floating product cards.
+6. **06 — The House** — warm ivory brand story ("Where love becomes
+   passion") with the original journey storyboard.
+7. **07 — Collections** — editorial portals (Men / Women / Attars /
+   Discovery Set / Deals) that link into the shop.
+
+Global: progress bar, scene rail (right side), film grain, slide-in cart
+drawer (localStorage), wishlist, toasts, mobile menu, page transitions.
+
+## Technology
+
+- **Vanilla HTML/CSS/JS** — no framework, no build step.
+- **GSAP + ScrollTrigger** (vendored locally in `assets/vendor/`) for the
+  scrubbed scroll timelines. Scenes use CSS `position: sticky` stages
+  (robust pinning without layout jitter).
+- **Lenis** (vendored) for smooth scrolling, integrated with the GSAP ticker.
+- **Canvas** particle systems (hero dust, ocean bubbles) that pause when
+  off-screen.
+- **Self-hosted fonts** — Cormorant Garamond (display) + Inter (UI),
+  in `assets/fonts/`.
+- **Progressive enhancement** — with JavaScript disabled or with
+  `prefers-reduced-motion`, the site degrades to a readable, stacked
+  document. All content remains accessible (semantic HTML, alt text,
+  keyboard-focusable products, aria labels).
+
+## Assets
+
+- `assets/img/env/` — the provided reference pictures, converted to WebP:
+  - `forest-bg.webp` — from `background Forest.png`
+  - `model-mid.webp` — from `MODEL1.png` (midground layer, transparent window)
+  - `model-fore.webp` — from `MODEL2.png` (foreground framing layer)
+  - `forest-to-ocean.webp`, `ocean-surface.webp`, `oceanbed.webp`,
+    `main-idea.webp` (storyboard, used in the brand story)
+- `assets/img/bottles/` — AI-generated product bottles (generated on pure
+  black, then black-keyed to transparent WebP via border flood-fill).
+  `src/` keeps the original renders as masters.
+- Product data (names, families, price ranges) follows the live store
+  (ismaeelmuhammad.pk) and lives in `assets/js/data.js`.
+
+## Running locally
+
+```bash
+python3 -m http.server 8000
+# open http://localhost:8000
+```
+
+Any static file server works. No environment variables, no database.
+
+## Cart & commerce (demo)
+
+Cart and wishlist persist in `localStorage`. Checkout renders the real
+cart contents and shows an order confirmation — wire the `PLACE ORDER`
+handler in `checkout.html` to a real backend (or WooCommerce) to go live.
+
+## Verified
+
+Headless-Chromium test suite (1440×900 desktop, 390×844 mobile,
+reduced-motion, and no-JavaScript passes) confirms: zero JS errors,
+all images load, no horizontal overflow on any page, filters and cart
+flows work, depth meter and scene reveals fire on scroll, JSON-LD
+product schema is emitted, and both fallback modes render every product.

@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Fragrances — Shop | Ismaeel Muhammad</title>
+<meta name="description" content="The full collection of Ismaeel Muhammad fragrances — Eau de Parfums, attars and discovery sets. Filter by men, women, attars and more.">
+<link rel="icon" href="assets/img/ui/favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="assets/css/base.css">
+<link rel="stylesheet" href="assets/css/pages.css">
+</head>
+<body data-page="shop">
+
+<div class="veil" aria-hidden="true">
+  <div class="veil__word">Fragrances</div>
+  <div class="veil__bar"><i></i></div>
+</div>
+
+<nav class="nav" aria-label="Main">
+  <a class="nav__logo" href="index.html">Ismaeel <em>Muhammad</em></a>
+  <ul class="nav__links">
+    <li><a href="index.html" data-nav="journey">Journey</a></li>
+    <li><a href="shop.html" data-nav="shop">Shop</a></li>
+    <li><a href="about.html" data-nav="about">About</a></li>
+    <li><a href="contact.html" data-nav="contact">Contact</a></li>
+  </ul>
+  <div class="nav__right">
+    <button class="cart-btn" id="cart-open" aria-label="Open cart">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4"><path d="M6 7h12l1.2 13H4.8L6 7Z"/><path d="M9 9V6a3 3 0 0 1 6 0v3"/></svg>
+      Cart <span class="cart-count" data-empty="1">0</span>
+    </button>
+    <button class="burger" aria-label="Menu"><span></span><span></span></button>
+  </div>
+</nav>
+
+<div class="mobile-menu">
+  <a href="index.html"><span>Journey</span><span class="no">01</span></a>
+  <a href="shop.html"><span>Shop</span><span class="no">02</span></a>
+  <a href="about.html"><span>About</span><span class="no">03</span></a>
+  <a href="contact.html"><span>Contact</span><span class="no">04</span></a>
+  <a href="checkout.html"><span>Checkout</span><span class="no">05</span></a>
+</div>
+
+<header class="pagehead">
+  <img class="pagehead__bg" src="assets/img/env/forest-to-ocean.webp" alt="" aria-hidden="true">
+  <div class="pagehead__inner">
+    <div class="crumbs"><a href="index.html">Journey</a><i>/</i><span>Fragrances</span></div>
+    <span class="eyebrow">The Collection</span>
+    <h1 class="display">Every scent from the journey.</h1>
+    <p class="sub body-l">From the forest floor to the deep ocean — the full house of Ismaeel Muhammad, in one place.</p>
+  </div>
+</header>
+
+<div class="shop-tools">
+  <div class="shop-tools__in">
+    <div class="filters" id="filters" role="tablist" aria-label="Filter fragrances"></div>
+    <div class="shop-count" id="shop-count"></div>
+  </div>
+</div>
+
+<main>
+  <div class="shop-grid" id="shop-grid"></div>
+</main>
+
+<footer class="footer">
+  <div class="footer__top">
+    <div class="footer__brand">
+      <div class="footer__word">Ismaeel<br>Muhammad <em>— a journey of senses</em></div>
+      <p class="footer__tag">Timeless fragrances inspired by nature, heritage and emotion. Crafted in Pakistan, worn everywhere.</p>
+    </div>
+    <div>
+      <h4>Shop</h4>
+      <ul>
+        <li><a href="shop.html">All Fragrances</a></li>
+        <li><a href="shop.html?cat=men">Men</a></li>
+        <li><a href="shop.html?cat=women">Women</a></li>
+        <li><a href="shop.html?cat=attars">Attars</a></li>
+      </ul>
+    </div>
+    <div>
+      <h4>House</h4>
+      <ul>
+        <li><a href="about.html">About</a></li>
+        <li><a href="index.html">The Journey</a></li>
+        <li><a href="contact.html">Contact</a></li>
+      </ul>
+    </div>
+    <div>
+      <h4>Support</h4>
+      <ul>
+        <li><a href="contact.html#faq">FAQ</a></li>
+        <li><a href="contact.html#faq">Shipping &amp; Returns</a></li>
+        <li><a href="checkout.html">Checkout</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer__bottom">
+    <span>© 2026 Ismaeel Muhammad — All rights reserved</span>
+    <span>Forest → Land → Ocean</span>
+  </div>
+</footer>
+
+<script src="assets/js/data.js"></script>
+<script src="assets/vendor/gsap.min.js"></script>
+<script src="assets/vendor/ScrollTrigger.min.js"></script>
+<script src="assets/js/nav.js"></script>
+<script src="assets/js/cart.js"></script>
+<script src="assets/js/shop.js"></script>
+<script>
+  document.addEventListener('click', e => {
+    if (e.target.closest('#cart-open, .cart-btn') && window.IM) { e.preventDefault(); window.IM.openCart(); }
+  });
+</script>
+</body>
+</html>

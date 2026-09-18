@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Fragrance | Ismaeel Muhammad</title>
+<meta name="description" content="Discover this fragrance from the Ismaeel Muhammad journey — notes, pyramid, longevity and reviews.">
+<link rel="icon" href="assets/img/ui/favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="assets/css/base.css">
+<link rel="stylesheet" href="assets/css/pages.css">
+</head>
+<body data-page="product">
+
+<div class="veil" aria-hidden="true">
+  <div class="veil__word">Ismaeel Muhammad</div>
+  <div class="veil__bar"><i></i></div>
+</div>
+
+<nav class="nav" aria-label="Main">
+  <a class="nav__logo" href="index.html">Ismaeel <em>Muhammad</em></a>
+  <ul class="nav__links">
+    <li><a href="index.html" data-nav="journey">Journey</a></li>
+    <li><a href="shop.html" data-nav="shop">Shop</a></li>
+    <li><a href="about.html" data-nav="about">About</a></li>
+    <li><a href="contact.html" data-nav="contact">Contact</a></li>
+  </ul>
+  <div class="nav__right">
+    <button class="cart-btn" id="cart-open" aria-label="Open cart">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4"><path d="M6 7h12l1.2 13H4.8L6 7Z"/><path d="M9 9V6a3 3 0 0 1 6 0v3"/></svg>
+      Cart <span class="cart-count" data-empty="1">0</span>
+    </button>
+    <button class="burger" aria-label="Menu"><span></span><span></span></button>
+  </div>
+</nav>
+
+<div class="mobile-menu">
+  <a href="index.html"><span>Journey</span><span class="no">01</span></a>
+  <a href="shop.html"><span>Shop</span><span class="no">02</span></a>
+  <a href="about.html"><span>About</span><span class="no">03</span></a>
+  <a href="contact.html"><span>Contact</span><span class="no">04</span></a>
+  <a href="checkout.html"><span>Checkout</span><span class="no">05</span></a>
+</div>
+
+<main id="pd-main">
+
+  <!-- hero -->
+  <section class="pd">
+    <div class="pd__visual">
+      <img class="env" id="pd-env" src="" alt="" aria-hidden="true">
+      <div class="envwash" aria-hidden="true"></div>
+      <span class="badge" id="pd-badge" hidden></span>
+      <div class="pd__bottle"><img id="pd-bottle" src="" alt=""></div>
+      <div class="scenechip" id="pd-scenechip"></div>
+    </div>
+
+    <div class="pd__info">
+      <div class="crumbs" id="pd-crumbs"></div>
+      <span class="pd__type" id="pd-type"></span>
+      <h1 class="display" id="pd-name"></h1>
+      <div class="pd__stars" id="pd-stars"></div>
+      <div class="pd__price"><span class="now" id="pd-price"></span></div>
+      <p class="pd__tag serif-i" id="pd-tag"></p>
+      <p class="pd__desc" id="pd-desc"></p>
+
+      <div class="sizes">
+        <span class="label">Size</span>
+        <div class="size-row" id="pd-sizes" role="radiogroup" aria-label="Choose size"></div>
+      </div>
+
+      <div class="pd__actions">
+        <button class="btn-solid gold" id="pd-add">Add to cart</button>
+        <button class="btn-solid" id="pd-buy">Buy now</button>
+        <button class="btn-solid" id="pd-wish" style="min-width:56px" aria-label="Save to wishlist">♡</button>
+      </div>
+
+      <div class="pd__meta" id="pd-meta"></div>
+    </div>
+  </section>
+
+  <!-- composition -->
+  <section class="pdsec pdsec--light" id="composition">
+    <div class="pdsec__head" data-reveal>
+      <span class="eyebrow">The Composition</span>
+      <h2 class="display">Built like a memory — top, heart, base.</h2>
+    </div>
+    <div class="notes3" id="pd-notes"></div>
+
+    <div class="pyramid" style="margin-top:clamp(56px,9vh,110px)" id="pd-pyramid" data-reveal></div>
+  </section>
+
+  <!-- performance -->
+  <section class="pdsec pdsec--light" id="performance">
+    <div class="pdsec__head" data-reveal>
+      <span class="eyebrow">On the Skin</span>
+      <h2 class="display">How it wears.</h2>
+    </div>
+    <div class="perf">
+      <div>
+        <div class="perf__row" data-reveal>
+          <div class="cap"><span>Longevity</span><b id="perf-long-label"></b></div>
+          <div class="bar"><i id="perf-long" style="--v:0"></i></div>
+        </div>
+        <div class="perf__row" data-reveal style="--d:.1s">
+          <div class="cap"><span>Projection</span><b id="perf-proj-label"></b></div>
+          <div class="bar"><i id="perf-proj" style="--v:0"></i></div>
+        </div>
+      </div>
+      <div data-reveal style="--d:.15s">
+        <div class="cap" style="font-size:10.5px;letter-spacing:.3em;text-transform:uppercase;margin-bottom:12px;color:rgba(7,11,8,.6)">When to wear it</div>
+        <p class="serif-i" id="pd-wear" style="font-size:clamp(19px,2vw,26px);line-height:1.5;color:#232d20"></p>
+      </div>
+    </div>
+  </section>
+
+  <!-- reviews -->
+  <section class="pdsec" id="reviews">
+    <div class="pdsec__head" data-reveal>
+      <span class="eyebrow">Worn &amp; Remembered</span>
+      <h2 class="display">What people say.</h2>
+    </div>
+    <div class="reviews" id="pd-reviews"></div>
+  </section>
+
+  <!-- related -->
+  <section class="pdsec" id="related">
+    <div class="pdsec__head" data-reveal>
+      <span class="eyebrow">Continue Exploring</span>
+      <h2 class="display">Related fragrances.</h2>
+    </div>
+    <div class="related-grid" id="pd-related"></div>
+  </section>
+
+  <!-- continue journey -->
+  <section class="continue" id="pd-continue">
+    <img class="env" id="pd-cont-env" src="" alt="" aria-hidden="true">
+    <div class="continue__in">
+      <span class="eyebrow">The journey continues</span>
+      <h2 class="display" id="pd-cont-title">Step back into <em>the forest.</em></h2>
+      <a class="btn-solid gold" id="pd-cont-link" href="index.html">Continue your journey</a>
+    </div>
+  </section>
+
+</main>
+
+<footer class="footer">
+  <div class="footer__top">
+    <div class="footer__brand">
+      <div class="footer__word">Ismaeel<br>Muhammad <em>— a journey of senses</em></div>
+      <p class="footer__tag">Timeless fragrances inspired by nature, heritage and emotion. Crafted in Pakistan, worn everywhere.</p>
+    </div>
+    <div>
+      <h4>Shop</h4>
+      <ul>
+        <li><a href="shop.html">All Fragrances</a></li>
+        <li><a href="shop.html?cat=men">Men</a></li>
+        <li><a href="shop.html?cat=women">Women</a></li>
+        <li><a href="shop.html?cat=attars">Attars</a></li>
+      </ul>
+    </div>
+    <div>
+      <h4>House</h4>
+      <ul>
+        <li><a href="about.html">About</a></li>
+        <li><a href="index.html">The Journey</a></li>
+        <li><a href="contact.html">Contact</a></li>
+      </ul>
+    </div>
+    <div>
+      <h4>Support</h4>
+      <ul>
+        <li><a href="contact.html#faq">FAQ</a></li>
+        <li><a href="contact.html#faq">Shipping &amp; Returns</a></li>
+        <li><a href="checkout.html">Checkout</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer__bottom">
+    <span>© 2026 Ismaeel Muhammad — All rights reserved</span>
+    <span>Forest → Land → Ocean</span>
+  </div>
+</footer>
+
+<script src="assets/js/data.js"></script>
+<script src="assets/vendor/gsap.min.js"></script>
+<script src="assets/vendor/ScrollTrigger.min.js"></script>
+<script src="assets/js/nav.js"></script>
+<script src="assets/js/cart.js"></script>
+<script src="assets/js/product.js"></script>
+<script>
+  document.addEventListener('click', e => {
+    if (e.target.closest('#cart-open, .cart-btn') && window.IM) { e.preventDefault(); window.IM.openCart(); }
+  });
+</script>
+</body>
+</html>

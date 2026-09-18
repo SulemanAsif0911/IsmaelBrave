@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Contact — Let's Talk | Ismaeel Muhammad</title>
+<meta name="description" content="Questions about your fragrance? Talk to the house of Ismaeel Muhammad — customer support, wholesale and press.">
+<link rel="icon" href="assets/img/ui/favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="assets/css/base.css">
+<link rel="stylesheet" href="assets/css/pages.css">
+</head>
+<body data-page="contact">
+
+<div class="veil" aria-hidden="true">
+  <div class="veil__word">Let's Talk</div>
+  <div class="veil__bar"><i></i></div>
+</div>
+
+<nav class="nav" aria-label="Main">
+  <a class="nav__logo" href="index.html">Ismaeel <em>Muhammad</em></a>
+  <ul class="nav__links">
+    <li><a href="index.html" data-nav="journey">Journey</a></li>
+    <li><a href="shop.html" data-nav="shop">Shop</a></li>
+    <li><a href="about.html" data-nav="about">About</a></li>
+    <li><a href="contact.html" data-nav="contact">Contact</a></li>
+  </ul>
+  <div class="nav__right">
+    <button class="cart-btn" id="cart-open" aria-label="Open cart">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4"><path d="M6 7h12l1.2 13H4.8L6 7Z"/><path d="M9 9V6a3 3 0 0 1 6 0v3"/></svg>
+      Cart <span class="cart-count" data-empty="1">0</span>
+    </button>
+    <button class="burger" aria-label="Menu"><span></span><span></span></button>
+  </div>
+</nav>
+
+<div class="mobile-menu">
+  <a href="index.html"><span>Journey</span><span class="no">01</span></a>
+  <a href="shop.html"><span>Shop</span><span class="no">02</span></a>
+  <a href="about.html"><span>About</span><span class="no">03</span></a>
+  <a href="contact.html"><span>Contact</span><span class="no">04</span></a>
+  <a href="checkout.html"><span>Checkout</span><span class="no">05</span></a>
+</div>
+
+<main class="contact">
+  <div class="contact__grid">
+    <div>
+      <div class="crumbs"><a href="index.html">Journey</a><i>/</i><span>Contact</span></div>
+      <span class="eyebrow">Contact</span>
+      <h1 class="display">Let's talk.</h1>
+      <p class="contact__lead">Questions about your fragrance, your order, or where to begin the journey — write to us. A human answers, usually within a day.</p>
+
+      <div class="contact__blocks">
+        <div class="cblock">
+          <span class="label">Email</span>
+          <div><a href="mailto:hello@ismaeelmuhammad.pk">hello@ismaeelmuhammad.pk</a></div>
+        </div>
+        <div class="cblock">
+          <span class="label">Customer Support</span>
+          <p>Monday – Saturday, 10:00 – 20:00 PKT<br>Response within 24 hours</p>
+        </div>
+        <div class="cblock">
+          <span class="label">Social</span>
+          <p><a href="#" rel="noopener">YouTube</a> · <a href="#" rel="noopener">Instagram</a> · <a href="#" rel="noopener">TikTok</a></p>
+        </div>
+        <div class="cblock">
+          <span class="label">Location</span>
+          <p>Pakistan — shipping nationwide<br>and worldwide</p>
+        </div>
+      </div>
+    </div>
+
+    <form class="cform" id="contact-form" novalidate>
+      <h3 class="display">Write to the house.</h3>
+      <div class="f-2col">
+        <div class="f-row">
+          <label for="cf-name">Your name</label>
+          <input id="cf-name" type="text" required autocomplete="name">
+        </div>
+        <div class="f-row">
+          <label for="cf-email">Email</label>
+          <input id="cf-email" type="email" required autocomplete="email">
+        </div>
+      </div>
+      <div class="f-row">
+        <label for="cf-subject">Subject</label>
+        <select id="cf-subject">
+          <option>A question about a fragrance</option>
+          <option>My order</option>
+          <option>Wholesale / retail</option>
+          <option>Press &amp; collaborations</option>
+          <option>Something else</option>
+        </select>
+      </div>
+      <div class="f-row">
+        <label for="cf-msg">Message</label>
+        <textarea id="cf-msg" required></textarea>
+      </div>
+      <button class="btn-solid gold" type="submit">Send message</button>
+      <div class="form-ok" id="form-ok">
+        <p class="display">Thank you.</p>
+        <p>Your message is on its way. We reply within one working day.</p>
+      </div>
+    </form>
+  </div>
+
+  <!-- FAQ -->
+  <section id="faq" style="max-width:860px;margin-top:clamp(60px,10vh,120px)">
+    <span class="eyebrow" data-reveal>Support</span>
+    <h2 class="display" data-reveal style="--d:.08s;margin:16px 0 30px">Questions, answered.</h2>
+    <div class="contact__blocks" data-reveal style="--d:.14s">
+      <div class="cblock"><span class="label">Shipping</span><p>Orders dispatch within 1–2 working days. Nationwide delivery in 2–5 days; free over ₨5,000. International shipping is calculated at checkout.</p></div>
+      <div class="cblock"><span class="label">Returns</span><p>Unopened bottles may be returned within 7 days of delivery. If a fragrance arrives damaged, send a photo and we replace it — no questions.</p></div>
+      <div class="cblock"><span class="label">Payment</span><p>Cash on delivery across Pakistan, bank transfer, and card payments at checkout.</p></div>
+      <div class="cblock"><span class="label">Which fragrance should I start with?</span><p>The Discovery Set — six scents from across the journey, and its price is redeemable against any full bottle.</p></div>
+      <div class="cblock"><span class="label">Privacy &amp; Terms</span><p>We keep only what we need to deliver your order, and never share it. Full privacy policy and terms are available on request at hello@ismaeelmuhammad.pk.</p></div>
+    </div>
+  </section>
+</main>
+
+<footer class="footer">
+  <div class="footer__top">
+    <div class="footer__brand">
+      <div class="footer__word">Ismaeel<br>Muhammad <em>— a journey of senses</em></div>
+      <p class="footer__tag">Timeless fragrances inspired by nature, heritage and emotion. Crafted in Pakistan, worn everywhere.</p>
+    </div>
+    <div>
+      <h4>Shop</h4>
+      <ul>
+        <li><a href="shop.html">All Fragrances</a></li>
+        <li><a href="shop.html?cat=men">Men</a></li>
+        <li><a href="shop.html?cat=women">Women</a></li>
+        <li><a href="shop.html?cat=attars">Attars</a></li>
+      </ul>
+    </div>
+    <div>
+      <h4>House</h4>
+      <ul>
+        <li><a href="about.html">About</a></li>
+        <li><a href="index.html">The Journey</a></li>
+        <li><a href="contact.html">Contact</a></li>
+      </ul>
+    </div>
+    <div>
+      <h4>Support</h4>
+      <ul>
+        <li><a href="contact.html#faq">FAQ</a></li>
+        <li><a href="contact.html#faq">Shipping &amp; Returns</a></li>
+        <li><a href="checkout.html">Checkout</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer__bottom">
+    <span>© 2026 Ismaeel Muhammad — All rights reserved</span>
+    <span>Forest → Land → Ocean</span>
+  </div>
+</footer>
+
+<script src="assets/js/data.js"></script>
+<script src="assets/vendor/gsap.min.js"></script>
+<script src="assets/vendor/ScrollTrigger.min.js"></script>
+<script src="assets/js/nav.js"></script>
+<script src="assets/js/cart.js"></script>
+<script>
+  document.addEventListener('click', e => {
+    if (e.target.closest('#cart-open, .cart-btn') && window.IM) { e.preventDefault(); window.IM.openCart(); }
+  });
+  const form = document.getElementById('contact-form');
+  form.addEventListener('submit', e => {
+    e.preventDefault();
+    if (!form.checkValidity()) { form.reportValidity(); return; }
+    form.querySelectorAll('.f-row, .btn-solid').forEach(el => el.style.display = 'none');
+    document.getElementById('form-ok').style.display = 'block';
+    if (window.IM) window.IM.toast('Message sent — thank you');
+  });
+</script>
+</body>
+</html>
