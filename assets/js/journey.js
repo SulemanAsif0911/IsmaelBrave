@@ -59,7 +59,10 @@
     heroTl
       .to('.hero-bg', { scale: 1.0, yPercent: 4, ease: 'none' }, 0)
       .to('.hero-mid', { yPercent: -5, xPercent: -1.5, ease: 'none' }, 0)
-      .to('.hero-fore', { yPercent: -11, xPercent: -3, scale: 1.18, ease: 'none' }, 0)
+      .to('.leaf--far', { yPercent: -8, scale: 1.1, ease: 'none' }, 0)
+      .to('.leaf--l', { yPercent: -13, xPercent: -2, ease: 'none' }, 0)
+      .to('.leaf--r', { yPercent: -15, xPercent: 2, ease: 'none' }, 0)
+      .to('.leaf--b', { yPercent: -18, ease: 'none' }, 0)
       .to('.hero-bottle', { yPercent: -7, scale: 0.94, ease: 'none' }, 0)
       .to('.hero-copy', { y: -60, autoAlpha: 0, ease: 'power1.in', duration: 0.28 }, 0.02)
       .to('.hero-foot', { autoAlpha: 0, duration: 0.18 }, 0.05)
@@ -74,17 +77,22 @@
       .from('.hero-copy .journeysub', { y: 34, autoAlpha: 0, duration: 1.1, ease: 'power3.out' }, '-=0.95')
       .from('.hero-copy p, .hero-copy .btn', { y: 26, autoAlpha: 0, duration: 1, stagger: 0.1, ease: 'power3.out' }, '-=0.8')
       .from('.hero-bottle', { autoAlpha: 0, scale: 0.92, filter: 'blur(10px)', duration: 1.6, ease: 'power2.out' }, '-=1.4')
+      .from('.leaf--far', { autoAlpha: 0, duration: 2 }, '-=1.9')
+      .from(['.leaf--l', '.leaf--r', '.leaf--b'], { autoAlpha: 0, y: 40, duration: 1.5, stagger: 0.14, ease: 'power2.out' }, '-=1.7')
       .from('.hero-foot', { autoAlpha: 0, y: 16, duration: 1 }, '-=0.8')
       .from('.nav', { y: -18, autoAlpha: 0, duration: 0.9 }, 0);
 
     /* mouse parallax on hero */
     if (finePointer) {
       const qx = {}; const qy = {};
-      ['.hero-bg', '.hero-mid', '.hero-fore', '.hero-bottle'].forEach((sel, i) => {
+      const planes = ['.hero-bg', '.hero-mid', '.leaf--far', '.hero-bottle', '.leaf--l', '.leaf--r', '.leaf--b'];
+      const px = [6, 14, 22, 20, 32, 36, 42];
+      const py = [4, 9, 14, 14, 19, 21, 26];
+      planes.forEach((sel, i) => {
         qx[sel] = gsap.quickTo(sel, 'x', { duration: 0.9, ease: 'power2.out' });
         qy[sel] = gsap.quickTo(sel, 'y', { duration: 0.9, ease: 'power2.out' });
-        qx[sel].par = [6, 14, 30, 20][i] * (i === 3 ? -1 : 1);
-        qy[sel].par = [4, 9, 20, 14][i] * (i === 3 ? -1 : 1);
+        qx[sel].par = px[i] * (i === 3 ? -1 : 1);
+        qy[sel].par = py[i] * (i === 3 ? -1 : 1);
       });
       document.querySelector('#hero .stage').addEventListener('pointermove', e => {
         const rx = (e.clientX / window.innerWidth - 0.5) * 2;
@@ -111,6 +119,7 @@
     beats.forEach((beat, i) => {
       const at = i * SEG;
       const bot = beat.querySelector('.beat__botanical');
+      const leaf = beat.querySelector('.bleaf');
       const fig = beat.querySelector('.beat__figure');
       const copy = beat.querySelector('.beat__copy');
       const fromX = i % 2 === 0 ? 9 : -9;
@@ -121,6 +130,7 @@
         forestTl.fromTo(beat, { autoAlpha: 0 }, { autoAlpha: 1, duration: 0.18, ease: 'power1.inOut' }, at + 0.02);
       }
       if (bot) forestTl.fromTo(bot, { xPercent: fromX }, { xPercent: fromX / 2.6, ease: 'none', duration: SEG }, at);
+      if (leaf) forestTl.fromTo(leaf, { xPercent: fromX * 1.9, yPercent: 4 }, { xPercent: fromX * 1.15, yPercent: -3, ease: 'none', duration: SEG }, at);
       if (fig) forestTl.fromTo(fig, { y: 90, scale: 0.9 }, { y: 0, scale: 1, ease: 'none', duration: SEG * 0.8 }, at);
       if (copy) forestTl.fromTo(copy, { y: 60 }, { y: -34, ease: 'none', duration: SEG }, at);
       if (i < beats.length - 1) {
@@ -136,29 +146,41 @@
     const transTl = gsap.timeline({
       scrollTrigger: { trigger: '#transition', start: 'top top', end: 'bottom bottom', scrub: 0.6 }
     });
-    const transTitles = gsap.utils.toArray('.trans-copy .display');
+    const titles = gsap.utils.toArray('.trans-copy .tt');
     const transSteps = gsap.utils.toArray('.trans-steps span');
+    const stepsWrap = document.querySelector('.trans-steps');
 
-    gsap.set(transTitles, { autoAlpha: 0, y: 40 });
-    gsap.set(transTitles[0], { autoAlpha: 1, y: 0 });
+    gsap.set(titles, { autoAlpha: 0, y: 44 });
+    gsap.set(titles[0], { autoAlpha: 1, y: 0 });
+    gsap.set('.water-rise', { yPercent: 103 });
 
     transTl
-      .to('.trans-a', { scale: 1.02, xPercent: -6, ease: 'none', duration: 5 }, 0)
-      .to('.trans-wash', { opacity: 0.85, duration: 1.6, ease: 'power1.inOut' }, 1.2)
-      .to('.trans-a', { autoAlpha: 0, duration: 1.6, ease: 'power1.inOut' }, 2.9)
-      .fromTo('.trans-b', { autoAlpha: 0 }, { autoAlpha: 1, duration: 1.6, ease: 'power1.inOut' }, 2.9)
-      .fromTo('.trans-b img', { objectPosition: '50% 12%' }, { objectPosition: '50% 34%', ease: 'none', duration: 5 }, 0)
-      .to('.trans-b', { scale: 1.02, ease: 'none', duration: 5 }, 0)
-      .to('.trans-wash', { opacity: 0.25, duration: 1.6 }, 3.4)
-      .to(transTitles[0], { autoAlpha: 0, y: -40, duration: 0.8 }, 1.05)
-      .to(transTitles[1], { autoAlpha: 1, y: 0, duration: 0.8 }, 1.9)
-      .to(transTitles[1], { autoAlpha: 0, y: -40, duration: 0.8 }, 3.0)
-      .to(transTitles[2], { autoAlpha: 1, y: 0, duration: 0.8 }, 3.9)
-      .to('.trans-copy', { autoAlpha: 0, duration: 0.7, ease: 'power1.in' }, 4.6)
-      .to({}, { duration: 0.3 });
+      /* beat 1 — the forest opens (dark) */
+      .to('.trans-a', { scale: 1.02, xPercent: -6, ease: 'none', duration: 5.4 }, 0)
+      .to('.trans-wash', { opacity: 0.75, duration: 1.4, ease: 'power1.inOut' }, 0.9)
+      /* beat 2 — the shore: bright sky & sand */
+      .to('.trans-a', { autoAlpha: 0, duration: 1.3, ease: 'power1.inOut' }, 1.55)
+      .fromTo('.trans-beach', { autoAlpha: 0 }, { autoAlpha: 1, duration: 1.3, ease: 'power1.inOut' }, 1.55)
+      .to('.trans-beach', { scale: 1.02, ease: 'none', duration: 5.4 }, 0)
+      .to('.trans-wash', { opacity: 0, duration: 1.2 }, 2.0)
+      .to('.trans-vignette', { opacity: 0.22, duration: 1.2 }, 1.8)
+      /* beat 3 — water rises from the bottom toward the top */
+      .to('.trans-vignette', { opacity: 1, duration: 1.2 }, 3.3)
+      .to('.water-rise', { yPercent: 0, duration: 2.05, ease: 'power2.in' }, 3.2)
+      .to('.trans-beach', { scale: 1.07, ease: 'none', duration: 2.05 }, 3.2)
+      /* titles */
+      .to(titles[0], { autoAlpha: 0, y: -44, duration: 0.75, ease: 'power1.in' }, 1.15)
+      .to(titles[1], { autoAlpha: 1, y: 0, duration: 0.75, ease: 'power1.out' }, 1.95)
+      .to(titles[1], { autoAlpha: 0, y: -44, duration: 0.75, ease: 'power1.in' }, 2.9)
+      .to(titles[2], { autoAlpha: 1, y: 0, duration: 0.75, ease: 'power1.out' }, 3.35)
+      .to('.trans-copy', { autoAlpha: 0, duration: 0.6, ease: 'power1.in' }, 4.85)
+      .to({}, { duration: 0.25 });
 
-    transSteps.forEach((s, i) => {
-      transTl.call(() => { transSteps.forEach((x, j) => x.classList.toggle('on', j <= i)); }, [], [0.2, 2.2, 3.9][i]);
+    transSteps.forEach((st, i) => {
+      transTl.call(() => {
+        transSteps.forEach((x, j) => x.classList.toggle('on', j <= i));
+        if (stepsWrap) stepsWrap.classList.toggle('i', i === 1);
+      }, [], [0.2, 1.95, 3.35][i]);
     });
 
     /* ============================================================
@@ -173,10 +195,8 @@
 
     gsap.set(obeats, { autoAlpha: 0 });
     oceanTl
-      .to('.ocean-surface img', { objectPosition: '50% 60%', ease: 'none', duration: 9 }, 0)
-      .to('.ocean-surface', { scale: 1.02, ease: 'none', duration: 9 }, 0)
-      .to('.ocean-surface', { autoAlpha: 0, duration: 1.4, ease: 'power1.inOut' }, 1.8)
-      .fromTo('.ocean-bed', { autoAlpha: 0 }, { autoAlpha: 1, duration: 2.2, ease: 'power1.inOut' }, 2.2)
+      /* arrival just beneath the risen water — the veil dissolves into the sea bed */
+      .fromTo('.ocean-veil', { opacity: 1 }, { opacity: 0, duration: 1.8, ease: 'power1.inOut' }, 0)
       .to('.ocean-bed', { scale: 1.03, yPercent: -2, ease: 'none', duration: 9 }, 0)
       .to('.ocean-dark', { opacity: 0.78, ease: 'none', duration: 9 }, 0)
       .to('.rays', { opacity: 0.12, ease: 'none', duration: 6 }, 1.5)

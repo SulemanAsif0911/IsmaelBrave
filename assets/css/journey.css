@@ -50,7 +50,21 @@ html:not(.cinema) .beat{ min-height:78vh; margin-bottom:8vh; }
 #hero{ height:280vh; z-index:5; }
 .hero-bg{ transform:scale(1.06); }
 .hero-mid{ transform:scale(1.1); }
-.hero-fore{ transform:scale(1.12); }
+
+/* ---------- layered leaves (hero) ---------- */
+.leaf{ position:absolute; pointer-events:none; will-change:transform; z-index:3; }
+.leaf img{ width:100%; height:100%; object-fit:cover; }
+.leaf--far{ inset:-7%; z-index:2; opacity:.9; }
+.leaf--l{ left:-6%; top:-6%; width:44%; height:112%; z-index:4; }
+.leaf--r{ right:-6%; top:-6%; width:44%; height:112%; z-index:4; }
+.leaf--b{ left:-6%; right:-6%; bottom:-9%; height:56%; z-index:4; }
+.leaf--l img{ animation:swayA 10s ease-in-out infinite alternate; }
+.leaf--r img{ animation:swayB 12s ease-in-out infinite alternate; }
+.leaf--b img{ animation:swayC 9s ease-in-out infinite alternate; }
+.leaf--far img{ animation:swayA 16s ease-in-out infinite alternate; }
+@keyframes swayA{ from{ transform:rotate(-.6deg) translateX(-.5%);} to{ transform:rotate(.8deg) translateX(.6%);} }
+@keyframes swayB{ from{ transform:rotate(.7deg) translateX(.5%);} to{ transform:rotate(-.8deg) translateX(-.6%);} }
+@keyframes swayC{ from{ transform:translateY(-.6%) rotate(-.4deg);} to{ transform:translateY(.7%) rotate(.5deg);} }
 
 .fog{
   position:absolute; inset:-12%; pointer-events:none;
@@ -130,6 +144,9 @@ html:not(.cinema) .beat{ min-height:78vh; margin-bottom:8vh; }
   .hero-copy{ top:auto; bottom:110px; transform:none; }
   .hero-copy p{ display:none; }
   .sunshaft{ left:30%; }
+  .leaf--l{ width:56%; opacity:.92; }
+  .leaf--r{ width:56%; opacity:.92; }
+  .leaf--b{ height:44%; }
 }
 
 /* ============================================================
@@ -144,6 +161,17 @@ html:not(.cinema) .beat{ min-height:78vh; margin-bottom:8vh; }
 }
 .beat__botanical img{ width:100%; height:100%; object-fit:cover; }
 .beat__botanical.flip img{ transform:scaleX(-1); }
+
+/* near leaf layer — faster than the botanical, in front of the bottle */
+.bleaf{ position:absolute; pointer-events:none; z-index:4; will-change:transform; }
+.bleaf img{ width:100%; height:100%; object-fit:cover; animation:swayC 9.5s ease-in-out infinite alternate; }
+.bleaf--b{ left:-9%; right:-9%; bottom:-11%; height:58%; }
+.bleaf--l{ left:-11%; top:-8%; width:46%; height:116%; }
+.bleaf--l img{ animation:swayA 10s ease-in-out infinite alternate; }
+.bleaf--r{ right:-11%; top:-8%; width:46%; height:116%; }
+.bleaf--r img{ animation:swayB 12s ease-in-out infinite alternate; }
+.bleaf--n{ left:-13%; top:-9%; width:62%; height:120%; }
+.bleaf--n img{ object-fit:contain; object-position:left center; animation:swayA 11s ease-in-out infinite alternate; }
 
 .beat__inner{
   position:relative; z-index:5; width:100%;
@@ -196,9 +224,27 @@ html:not(.cinema) .beat{ min-height:78vh; margin-bottom:8vh; }
 #transition{ height:420vh; background:#000; }
 .trans-a{ transform:scale(1.14); }
 .trans-a img{ object-position:34% 50%; }
-.trans-b{ opacity:0; }
-.trans-b{ transform:scale(1.18); }
-.trans-b img{ object-position:50% 22%; }
+.trans-beach{ opacity:0; transform:scale(1.14); }
+.trans-beach img{ object-position:50% 45%; }
+
+/* water rising from the bottom toward the top */
+.water-rise{
+  position:absolute; inset:0; z-index:5;
+  will-change:transform;
+}
+.water-fill{ position:absolute; inset:0; overflow:hidden; }
+.water-fill img{
+  width:100%; height:100%; object-fit:cover; object-position:50% 100%;
+  transform:scale(1.6); transform-origin:50% 100%;
+}
+.water-rise::before{
+  content:''; position:absolute; left:-50%; right:-50%; top:-21px; height:22px;
+  background:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='260' height='22' viewBox='0 0 260 22'%3E%3Cpath d='M0 11 Q32.5 -6 65 11 T130 11 T195 11 T260 11 V22 H0 Z' fill='%23064a63'/%3E%3C/svg%3E") repeat-x;
+  background-size:260px 22px;
+  animation:wave 5.5s linear infinite;
+  opacity:.92;
+}
+@keyframes wave{ to{ background-position-x:260px; } }
 .trans-wash{
   position:absolute; inset:0; pointer-events:none; opacity:0;
   background:linear-gradient(to bottom, rgba(160,190,200,.2), transparent 45%);
@@ -209,16 +255,20 @@ html:not(.cinema) .beat{ min-height:78vh; margin-bottom:8vh; }
   text-align:center; padding:0 var(--pad);
 }
 .trans-copy .display{ text-shadow:0 2px 44px rgba(0,0,0,.45); }
-.trans-copy .label{ color:rgba(20,26,20,.62); margin-bottom:20px; }
-html.cinema .trans-copy .label{ color:rgba(242,238,227,.62); }
+.trans-copy .label{ color:rgba(242,238,227,.62); margin-bottom:20px; }
+.trans-copy .tt-2{ color:var(--ink); }
+.trans-copy .tt-2 .label{ color:rgba(28,34,28,.62); }
+.trans-copy .tt-2 .display{ text-shadow:none; }
 .trans-steps{ display:flex; gap:clamp(20px,4vw,60px); margin-top:44px; align-items:center; }
 .trans-steps span{
   font-size:10px; letter-spacing:.4em; text-transform:uppercase;
   color:rgba(242,238,227,.72); position:relative; padding-bottom:12px;
+  transition:color .6s;
 }
+.trans-steps.i span{ color:rgba(26,32,26,.78); }
 .trans-steps span::after{
   content:''; position:absolute; left:0; bottom:0; height:1px; width:100%;
-  background:rgba(242,238,227,.4); transform:scaleX(0); transform-origin:left;
+  background:currentColor; opacity:.5; transform:scaleX(0); transform-origin:left;
   transition:transform .6s var(--ease);
 }
 .trans-steps span.on::after{ transform:none; }
@@ -232,6 +282,10 @@ html.cinema .trans-copy .label{ color:rgba(242,238,227,.62); }
 .ocean-surface img{ object-position:50% 88%; }
 .ocean-bed{ opacity:0; }
 .ocean-bed{ transform:scale(1.22); }
+.ocean-veil{
+  position:absolute; inset:0; z-index:2; pointer-events:none;
+  background:linear-gradient(to bottom, #0a4a67 0%, #06344c 45%, #02121d 100%);
+}
 .ocean-dark{ position:absolute; inset:0; background:#010509; opacity:0; pointer-events:none; }
 
 .rays{
@@ -452,9 +506,9 @@ html.cinema .trans-copy .label{ color:rgba(242,238,227,.62); }
 .stagechip{
   position:absolute; top:calc(var(--nav-h) + 16px); left:var(--pad); z-index:8;
   font-size:9.5px; letter-spacing:.42em; text-transform:uppercase;
-  color:rgba(242,238,227,.55);
+  color:rgba(255,255,255,.72); mix-blend-mode:difference;
 }
-.stagechip b{ color:var(--gold); font-weight:500; margin-right:12px; }
+.stagechip b{ font-weight:500; margin-right:12px; }
 @media (max-width:900px){ .stagechip{ top:calc(var(--nav-h) + 8px); } }
 
 /* discovery-set portal: contained bottle row on dark */
@@ -462,7 +516,12 @@ html.cinema .trans-copy .label{ color:rgba(242,238,227,.62); }
 .portal--set img{ opacity:.92; object-fit:contain; inset:12% 4%; width:92%; height:76%; }
 
 /* no-JS / reduced-motion cleanups */
-html:not(.cinema) .beat__botanical{ display:none; }
+html:not(.cinema) .beat__botanical,
+html:not(.cinema) .bleaf{ display:none; }
+html:not(.cinema) .water-rise{ display:none; }
+html:not(.cinema) .trans-beach{ opacity:1; }
+html:not(.cinema) .ocean-veil{ display:none; }
+html:not(.cinema) .leaf--far{ opacity:.55; }
 html:not(.cinema) .depthmeter{ display:none; }
 html:not(.cinema) .beam{ opacity:.7; }
 html:not(.cinema) .mw-grid .pcard, html:not(.cinema) .mw-inner > *{ opacity:1; }

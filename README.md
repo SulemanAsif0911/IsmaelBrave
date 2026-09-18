@@ -1076,16 +1076,21 @@ anywhere (no build step, no server-side rendering required).
 
 ## The journey (index.html)
 
-1. **01 — The Awakening** — layered forest hero (background + midground +
-   foreground model layers with a transparent window for the bottle), fog,
-   sun shaft, canvas dust particles, mouse parallax, scroll push-in.
+1. **01 — The Awakening** — layered forest hero: background + midground
+   model + a four-plane leaf system (blurred far foliage, left strip,
+   right strip, bottom strip) each with its own scroll parallax, mouse
+   depth and gentle sway. Fog, sun shaft, canvas dust, camera push-in.
 2. **02 — The Forest** — four product beats (Five-Nine, Hopeful, Charming,
-   Mi Amor) revealed by scroll as the forest darkens.
-3. **03 — The Transition** — forest → open land → water with a gradual
-   palette shift and a LAND–HORIZON–WATER progress indicator.
-4. **04 — The Ocean** — scroll-controlled dive with a live depth meter
-   (0 → 42 m), god rays, caustics, rising bubbles, and three depth stops
-   (Zesty @10 m, Sophisticated @20 m, Happy @30 m).
+   Mi Amor) revealed by scroll as the forest darkens. Each beat layers a
+   botanical plane plus a faster near-leaf plane for real depth.
+3. **03 — The Shore** — the forest opens (forest → bright land), then a
+   sky-styled beach (bright sky, sand, ink-on-light typography), then the
+   water rises from the bottom of the screen to the top with an animated
+   wave crest — LAND–SHORE–WATER progress indicator.
+4. **04 — The Sea Bed** — after the submersion, the journey continues on
+   the sea bed with god rays, caustics, rising bubbles, a live depth meter
+   (0 → 42 m) and three depth stops (Zesty @10 m, Sophisticated @20 m,
+   Happy @30 m).
 5. **05 — The Depths** — near-black Most Wanted reveal with a volumetric
    light beam and four floating product cards.
 6. **06 — The House** — warm ivory brand story ("Where love becomes
@@ -1114,17 +1119,22 @@ drawer (localStorage), wishlist, toasts, mobile menu, page transitions.
 
 ## Assets
 
-- `assets/img/env/` — the provided reference pictures, converted to WebP:
+- `assets/img/env/` — environments (WebP):
   - `forest-bg.webp` — from `background Forest.png`
   - `model-mid.webp` — from `MODEL1.png` (midground layer, transparent window)
   - `model-fore.webp` — from `MODEL2.png` (foreground framing layer)
-  - `forest-to-ocean.webp`, `ocean-surface.webp`, `oceanbed.webp`,
-    `main-idea.webp` (storyboard, used in the brand story)
-- `assets/img/bottles/` — AI-generated product bottles (generated on pure
-  black, then black-keyed to transparent WebP via border flood-fill).
+  - `leaf-far / leaf-left / leaf-right / leaf-bottom.webp` — leaf planes cut
+    from `MODEL2.png` (blurred far plane + side/bottom strips)
+  - `leaf-near.webp` — keyed botanical cluster (near-leaf plane)
+  - `beach.webp` — the sky-styled shore scene
+  - `forest-to-ocean.webp`, `ocean-surface.webp` (also used by the rising
+    water), `oceanbed.webp` (the sea bed), `main-idea.webp` (storyboard)
+- `assets/img/bottles/` — the 8 signature bottles (generated on pure black,
+  then black-keyed to transparent WebP via border flood-fill).
   `src/` keeps the original renders as masters.
-- Product data (names, families, price ranges) follows the live store
-  (ismaeelmuhammad.pk) and lives in `assets/js/data.js`.
+- Product data (`assets/js/data.js`) contains **only the 8 journey models**:
+  Five-Nine, Hopeful, Charming, Mi Amor, Zesty, Sophisticated, Happy and
+  King in the North — no extra catalog data.
 
 ## Running locally
 
@@ -1146,5 +1156,8 @@ handler in `checkout.html` to a real backend (or WooCommerce) to go live.
 Headless-Chromium test suite (1440×900 desktop, 390×844 mobile,
 reduced-motion, and no-JavaScript passes) confirms: zero JS errors,
 all images load, no horizontal overflow on any page, filters and cart
-flows work, depth meter and scene reveals fire on scroll, JSON-LD
-product schema is emitted, and both fallback modes render every product.
+flows work, the layered leaf planes render, the beach beat is bright with
+ink typography, the water fully rises from bottom to top by the end of
+the transition, the sea bed + depth meter + model reveals fire on scroll,
+JSON-LD product schema is emitted, and both fallback modes render every
+product.

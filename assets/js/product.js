@@ -4,13 +4,11 @@
 (function () {
   'use strict';
 
-  const ENV_TINT = { forest: '#0d1c12', ocean: '#07202e', deep: '#04121c', attar: '#191106', set: '#191106' };
+  const ENV_TINT = { forest: '#0d1c12', ocean: '#07202e', deep: '#04121c' };
   const SCENE = {
     forest: { hash: '#forest', label: 'the forest', env: 'forest', title: 'Step back into <em>the forest.</em>' },
     ocean:  { hash: '#ocean',  label: 'the ocean',  env: 'ocean',  title: 'Dive back into <em>the ocean.</em>' },
-    deep:   { hash: '#mostwanted', label: 'the depths', env: 'deep', title: 'Return to <em>the depths.</em>' },
-    attar:  { hash: '#collections', label: 'the collections', env: 'attar', title: 'Return to <em>the collections.</em>' },
-    set:    { hash: '#collections', label: 'the collections', env: 'set', title: 'Return to <em>the collections.</em>' }
+    deep:   { hash: '#mostwanted', label: 'the depths', env: 'deep', title: 'Return to <em>the depths.</em>' }
   };
 
   function starsOf(r) {
@@ -18,7 +16,7 @@
     return '★★★★★'.slice(0, full) + '☆☆☆☆☆'.slice(0, 5 - full);
   }
 
-  function catLabel(c) { return ({ men: 'Men', women: 'Women', attars: 'Attars', discovery: 'Discovery Set' })[c] || 'Fragrances'; }
+  function catLabel(c) { return ({ men: 'Men', women: 'Women' })[c] || 'Fragrances'; }
 
   document.addEventListener('DOMContentLoaded', () => {
     const params = new URLSearchParams(location.search);

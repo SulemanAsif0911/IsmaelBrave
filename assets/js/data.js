@@ -6,9 +6,7 @@
 const ENV = {
   forest: { label: 'The Forest', img: 'assets/img/env/forest-bg.webp', tint: '#0d1f14' },
   ocean:  { label: 'The Ocean',  img: 'assets/img/env/ocean-surface.webp', tint: '#063a52' },
-  deep:   { label: 'The Depths', img: 'assets/img/env/oceanbed.webp', tint: '#04121c' },
-  attar:  { label: 'The Atelier',img: 'assets/img/env/forest-to-ocean.webp', tint: '#1d1608' },
-  set:    { label: 'The Atelier',img: 'assets/img/env/forest-to-ocean.webp', tint: '#1d1608' }
+  deep:   { label: 'The Depths', img: 'assets/img/env/oceanbed.webp', tint: '#04121c' }
 };
 
 const IMG = 'assets/img/bottles/';
@@ -150,26 +148,7 @@ const PRODUCTS = [
       { name: 'Danish E.', stars: 4, text: 'Really enjoy it, projection is a beast for the first few hours.' }
     ]
   },
-  {
-    slug: 'delicious', name: 'DELICIOUS', type: 'Eau de Parfum',
-    cat: 'women', env: 'ocean',
-    family: 'GOURMAND · FLORAL · WARM',
-    tagline: 'Peach skin and warm sugar.',
-    desc: 'Delicious is the warmth of the shallows at sunset — peach and orange blossom over praline and jasmine, wrapped in vanilla and sandalwood. A scent that feels like being liked back.',
-    price: { '50 ML': 2200, '100 ML': 4000 },
-    rating: 4.8, reviewCount: 88,
-    notes: {
-      top:   ['Peach', 'Orange Blossom', 'Mandarin'],
-      heart: ['Praline', 'Jasmine', 'Cinnamon'],
-      base:  ['Vanilla', 'Sandalwood', 'Musk']
-    },
-    longevity: 7, projection: 3,
-    wear: 'Casual evenings, autumn walks, cozy nights.',
-    reviews: [
-      { name: 'Mahnoor J.', stars: 5, text: 'Sweet but grown-up. My friends keep trying to steal it.' }
-    ]
-  },
-  {
+    {
     slug: 'king-in-the-north', name: 'KING IN THE NORTH', type: 'Eau de Parfum',
     cat: 'men', env: 'deep', badge: 'MOST WANTED',
     family: 'ICY · SMOKY · OUD',
@@ -189,80 +168,14 @@ const PRODUCTS = [
       { name: 'Junaid Q.', stars: 5, text: 'Icy opening then a monster drydown. Sold out twice for a reason.' }
     ]
   },
-  {
-    slug: 'happy-attar', name: 'HAPPY', type: 'Attar Oil',
-    img: 'attar',
-    cat: 'attars', env: 'attar',
-    family: 'ROSE · OUD · TRADITIONAL',
-    tagline: 'A rose-and-oud attar in the classical tradition.',
-    desc: 'A traditional alcohol-free attar, aged slowly. Rose and saffron fold into deep oud and soft musk — a single drop on the wrist carries the whole day.',
-    price: { '6 ML': 500, '12 ML': 900 },
-    rating: 4.8, reviewCount: 64,
-    notes: { top: ['Saffron', 'Rose'], heart: ['Oud', 'Amber'], base: ['Musk', 'Sandalwood'] },
-    longevity: 12, projection: 3,
-    wear: 'Friday prayers, weddings, and quiet personal rituals.',
-    reviews: [{ name: 'Ibrahim S.', stars: 5, text: 'One drop lasts from morning to night. Beautiful classical rose-oud.' }]
-  },
-  {
-    slug: 'hopeful-attar', name: 'HOPEFUL', type: 'Attar Oil',
-    img: 'attar',
-    cat: 'attars', env: 'attar',
-    family: 'MUSK · AMBER · SOFT',
-    tagline: 'White musk and amber, warm as candlelight.',
-    desc: 'A soft, skin-close attar of white musk, amber and a whisper of vanilla. Hopeful is the scent of a calm house in the evening.',
-    price: { '6 ML': 650, '12 ML': 1100 },
-    rating: 4.9, reviewCount: 57,
-    notes: { top: ['Bergamot'], heart: ['White Musk', 'Amber'], base: ['Vanilla', 'Cedar'] },
-    longevity: 10, projection: 2,
-    wear: 'Everyday warmth — layer it over any Eau de Parfum.',
-    reviews: [{ name: 'Noor H.', stars: 5, text: 'Gentle and long lasting. Perfect for daily wear.' }]
-  },
-  {
-    slug: 'cheerful-attar', name: 'CHEERFUL', type: 'Attar Oil',
-    img: 'attar',
-    cat: 'attars', env: 'attar',
-    family: 'FLORAL · FRESH · LIGHT',
-    tagline: 'A bright floral attar for hot afternoons.',
-    desc: 'The lightest of our attars — jasmine, marigold and a clean musk base that stays fresh through the warmest part of the day.',
-    price: { '6 ML': 450, '12 ML': 750 },
-    rating: 4.7, reviewCount: 41,
-    notes: { top: ['Marigold', 'Bergamot'], heart: ['Jasmine', 'Lily'], base: ['Clean Musk'] },
-    longevity: 8, projection: 2,
-    wear: 'Summer days and layered with florals.',
-    reviews: [{ name: 'Sana P.', stars: 5, text: 'Fresh floral attar that does not feel heavy in heat. Lovely.' }]
-  },
-  {
-    slug: 'discovery-set', name: 'DISCOVERY SET', type: 'Sampler Set',
-    img: 'discovery',
-    cat: 'discovery', env: 'set', badge: 'START HERE',
-    family: 'SIX SCENTS · ONE JOURNEY',
-    tagline: 'Begin the journey before you commit to it.',
-    desc: 'Six 3 ml travel sprays drawn from across the journey — from the forest floor to the deep ocean — presented in a lined gift box. The full price is redeemable against any full-size bottle.',
-    price: { '6 × 3 ML': 1500, '12 × 3 ML': 2500 },
-    rating: 4.9, reviewCount: 152,
-    notes: { top: ['Six signatures'], heart: ['Forest to Ocean'], base: ['Your favourite'] },
-    longevity: 8, projection: 3,
-    wear: 'The starting point of your collection.',
-    reviews: [{ name: 'Ali Z.', stars: 5, text: 'The best way to find your scent. Gifted two already.' }]
-  }
-];
+        ];
 
 const CATS = [
   { id: 'all', label: 'ALL' },
   { id: 'men', label: 'MEN' },
-  { id: 'women', label: 'WOMEN' },
-  { id: 'attars', label: 'ATTARS' },
-  { id: 'discovery', label: 'DISCOVERY' },
-  { id: 'deals', label: 'DEALS' }
+  { id: 'women', label: 'WOMEN' }
 ];
 
 const bySlug = s => PRODUCTS.find(p => p.slug === s);
 const fmtPrice = n => '₨' + n.toLocaleString('en-PK');
 const productImg = p => IMG + (p.img || p.slug) + '.webp';
-
-/* Journey placement */
-const JOURNEY = {
-  forest: ['five-nine', 'hopeful', 'charming', 'mi-amor'],
-  ocean:  ['zesty', 'sophisticated', 'happy'],
-  mostWanted: ['king-in-the-north', 'five-nine', 'sophisticated', 'happy']
-};

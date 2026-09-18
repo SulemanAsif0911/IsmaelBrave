@@ -1,49 +1,33 @@
 # ISMAEEL MUHAMMAD — A JOURNEY OF SENSES
-## Complete source code
+## Complete source code (v2 — layered leaves · the shore · water rising · sea bed)
 
-Every file of the cinematic fragrance website, in full.
-
-**Project:** Ismaeel Muhammad — Immersive 3D/Scroll Fragrance Website  
 **Stack:** Vanilla HTML / CSS / JS + GSAP ScrollTrigger + Lenis (vendored) — no build step  
-**Deploy:** upload the folder (or `ismaeel-muhammad-site.zip`) to any static host
-
----
-
-## Table of contents
+**Catalog:** only the 8 journey models — all extra data removed
 
 | # | File | Lines | Purpose |
 |---|------|-------|---------|
-| 1 | `index.html` | 573 | The cinematic journey — 7 scroll-driven scenes |
-| 2 | `shop.html` | 115 | Dark editorial shop with category filters |
-| 3 | `product.html` | 195 | Data-driven product detail page |
-| 4 | `about.html` | 183 | Editorial brand story (5 chapters) |
-| 5 | `contact.html` | 177 | Contact + FAQ / shipping / returns |
-| 6 | `checkout.html` | 221 | Checkout with order confirmation |
+| 1 | `index.html` | 581 | The cinematic journey — layered leaves, shore, water rise, sea bed |
+| 2 | `shop.html` | 114 | Editorial shop — the 8 journey models only |
+| 3 | `product.html` | 194 | Data-driven product detail page |
+| 4 | `about.html` | 182 | Editorial brand story (5 chapters) |
+| 5 | `contact.html` | 176 | Contact + FAQ / shipping / returns |
+| 6 | `checkout.html` | 220 | Checkout with order confirmation |
 | 7 | `assets/css/base.css` | 437 | Design system: tokens, nav, cart, cards, footer |
-| 8 | `assets/css/journey.css` | 468 | The cinematic home experience styles |
+| 8 | `assets/css/journey.css` | 527 | Cinematic styles: leaf planes, beach, water rise, sea bed |
 | 9 | `assets/css/pages.css` | 316 | Shop / product / about / contact / checkout styles |
-| 10 | `assets/js/data.js` | 268 | Product database (13 products) + helpers |
+| 10 | `assets/js/data.js` | 181 | Product database — 8 journey models only |
 | 11 | `assets/js/nav.js` | 94 | Nav, veil, reveals, menu, page transitions |
 | 12 | `assets/js/cart.js` | 194 | Cart store, drawer, wishlist, toasts (localStorage) |
-| 13 | `assets/js/journey.js` | 309 | Scroll engine: scenes, timelines, particles, depth meter |
-| 14 | `assets/js/shop.js` | 100 | Shop filters + grid rendering |
-| 15 | `assets/js/product.js` | 172 | Product page rendering + JSON-LD |
+| 13 | `assets/js/journey.js` | 329 | Scroll engine: leaf parallax, shore, water rise, sea bed, depth |
+| 14 | `assets/js/shop.js` | 97 | Shop filters + grid rendering |
+| 15 | `assets/js/product.js` | 170 | Product page rendering + JSON-LD |
 | 16 | `assets/img/ui/favicon.svg` | 4 | Favicon (IM monogram) |
 
-**Total: 16 files, 3,826 lines of hand-written code.**
-
-Vendored third-party libraries (not inlined below, included in the repo/zip):
-
-- `assets/vendor/gsap.min.js` — GSAP 3.12.5
-- `assets/vendor/ScrollTrigger.min.js` — GSAP ScrollTrigger 3.12.5
-- `assets/vendor/lenis.min.js` — Lenis 1.1.13 smooth scroll
-- `assets/fonts/*.woff2` — Cormorant Garamond + Inter (self-hosted)
-- `assets/img/env/*.webp` — your reference pictures, optimized
-- `assets/img/bottles/*.webp` — product bottles (transparent)
+**Total: 16 files, 3,816 lines.**
 
 ---
 
-## 📄 index.html  ·  (574 lines)
+## 📄 index.html  ·  (582 lines)
 
 ```html
 <!DOCTYPE html>
@@ -52,7 +36,7 @@ Vendored third-party libraries (not inlined below, included in the repo/zip):
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Ismaeel Muhammad — A Journey of Senses</title>
-<meta name="description" content="More than a scent — a journey of senses. Scroll from forest to ocean and discover the fragrances of Ismaeel Muhammad: timeless Eau de Parfums and attars crafted in Pakistan.">
+<meta name="description" content="More than a scent — a journey of senses. Scroll from forest to shore to sea bed and discover the signature fragrances of Ismaeel Muhammad — Eau de Parfums crafted in Pakistan.">
 <meta property="og:title" content="Ismaeel Muhammad — A Journey of Senses">
 <meta property="og:description" content="You don't browse Ismaeel Muhammad. You enter it. A cinematic fragrance journey from the forest to the deep ocean.">
 <meta property="og:image" content="assets/img/env/forest-bg.webp">
@@ -103,8 +87,8 @@ Vendored third-party libraries (not inlined below, included in the repo/zip):
 <div class="rail" aria-hidden="true">
   <a class="rail__item active" data-rail="01" href="#hero"><span>The Awakening</span></a>
   <a class="rail__item" data-rail="02" href="#forest"><span>The Forest</span></a>
-  <a class="rail__item" data-rail="03" href="#transition"><span>The Transition</span></a>
-  <a class="rail__item" data-rail="04" href="#ocean"><span>The Ocean</span></a>
+  <a class="rail__item" data-rail="03" href="#transition"><span>The Shore</span></a>
+  <a class="rail__item" data-rail="04" href="#ocean"><span>The Sea Bed</span></a>
   <a class="rail__item" data-rail="05" href="#mostwanted"><span>The Depths</span></a>
   <a class="rail__item" data-rail="06" href="#story"><span>The House</span></a>
   <a class="rail__item" data-rail="07" href="#collections"><span>Collections</span></a>
@@ -122,12 +106,16 @@ Vendored third-party libraries (not inlined below, included in the repo/zip):
       <div class="sunshaft" aria-hidden="true"></div>
       <div class="layer hero-mid" aria-hidden="true"><img src="assets/img/env/model-mid.webp" alt=""></div>
 
+      <div class="leaf leaf--far" aria-hidden="true"><img src="assets/img/env/leaf-far.webp" alt=""></div>
+
       <a class="hero-bottle" href="product.html?p=five-nine" aria-label="Discover Five-Nine, our woody amber spicy eau de parfum">
         <span class="halo" aria-hidden="true"></span>
         <img src="assets/img/bottles/five-nine.webp" alt="Five-Nine — amber glass perfume bottle with gold cap">
       </a>
 
-      <div class="layer hero-fore" aria-hidden="true"><img src="assets/img/env/model-fore.webp" alt=""></div>
+      <div class="leaf leaf--l" aria-hidden="true"><img src="assets/img/env/leaf-left.webp" alt=""></div>
+      <div class="leaf leaf--r" aria-hidden="true"><img src="assets/img/env/leaf-right.webp" alt=""></div>
+      <div class="leaf leaf--b" aria-hidden="true"><img src="assets/img/env/leaf-bottom.webp" alt=""></div>
       <canvas class="p-canvas" aria-hidden="true"></canvas>
       <div class="vignette" aria-hidden="true"></div>
 
@@ -159,6 +147,7 @@ Vendored third-party libraries (not inlined below, included in the repo/zip):
 
         <article class="beat" data-product="five-nine">
           <div class="beat__botanical" aria-hidden="true"><img src="assets/img/env/model-fore.webp" alt=""></div>
+          <div class="bleaf bleaf--b" aria-hidden="true"><img src="assets/img/env/leaf-bottom.webp" alt=""></div>
           <div class="beat__inner">
             <div class="beat__copy">
               <span class="label">The Forest — <b>01 / 04</b></span>
@@ -181,6 +170,7 @@ Vendored third-party libraries (not inlined below, included in the repo/zip):
 
         <article class="beat" data-product="hopeful">
           <div class="beat__botanical flip" aria-hidden="true"><img src="assets/img/env/model-fore.webp" alt=""></div>
+          <div class="bleaf bleaf--l" aria-hidden="true"><img src="assets/img/env/leaf-left.webp" alt=""></div>
           <div class="beat__inner">
             <div class="beat__copy">
               <span class="label">The Forest — <b>02 / 04</b></span>
@@ -203,6 +193,7 @@ Vendored third-party libraries (not inlined below, included in the repo/zip):
 
         <article class="beat" data-product="charming">
           <div class="beat__botanical" aria-hidden="true"><img src="assets/img/env/model-mid.webp" alt=""></div>
+          <div class="bleaf bleaf--r" aria-hidden="true"><img src="assets/img/env/leaf-right.webp" alt=""></div>
           <div class="beat__inner">
             <div class="beat__copy">
               <span class="label">The Forest — <b>03 / 04</b></span>
@@ -225,6 +216,7 @@ Vendored third-party libraries (not inlined below, included in the repo/zip):
 
         <article class="beat" data-product="mi-amor">
           <div class="beat__botanical flip" aria-hidden="true"><img src="assets/img/env/model-mid.webp" alt=""></div>
+          <div class="bleaf bleaf--n" aria-hidden="true"><img src="assets/img/env/leaf-near.webp" alt=""></div>
           <div class="beat__inner">
             <div class="beat__copy">
               <span class="label">The Forest — <b>04 / 04</b></span>
@@ -252,29 +244,32 @@ Vendored third-party libraries (not inlined below, included in the repo/zip):
   <!-- ================================================
        SCENE 03 — TRANSITION / FOREST → OPEN LAND → WATER
        ================================================ -->
-  <section class="scene" id="transition" data-rail="03" aria-label="From forest to ocean">
+  <section class="scene" id="transition" data-rail="03" aria-label="From forest to the shore, then under the water">
     <div class="stage">
       <div class="layer trans-a"><img src="assets/img/env/forest-to-ocean.webp" alt="Forest dissolving into open bright landscape"></div>
-      <div class="layer trans-b"><img src="assets/img/env/ocean-surface.webp" alt="Ocean surface seen from the water"></div>
+      <div class="layer trans-beach"><img src="assets/img/env/beach.webp" alt="Bright sky and warm sand at the shore"></div>
+      <div class="water-rise" aria-hidden="true">
+        <div class="water-fill"><img src="assets/img/env/ocean-surface.webp" alt=""></div>
+      </div>
       <div class="trans-wash" aria-hidden="true"></div>
-      <div class="vignette" aria-hidden="true"></div>
-      <div class="stagechip"><b>03</b> The Transition</div>
+      <div class="vignette trans-vignette" aria-hidden="true"></div>
+      <div class="stagechip"><b>03</b> The Shore</div>
 
       <div class="trans-copy">
-        <div>
+        <div class="tt tt-1">
           <span class="label">The forest opens</span>
           <h2 class="display">Trees give way<br>to the horizon.</h2>
         </div>
-        <div>
-          <span class="label">Further</span>
-          <h2 class="display">Stone, sand<br>and pale light.</h2>
+        <div class="tt tt-2">
+          <span class="label">The shore</span>
+          <h2 class="display">Sky, sand<br>and stillness.</h2>
         </div>
-        <div>
+        <div class="tt tt-3">
           <span class="label">And then</span>
           <h2 class="display">Water.</h2>
         </div>
         <div class="trans-steps" aria-hidden="true">
-          <span class="on">Land</span><i></i><span>Horizon</span><i></i><span>Water</span>
+          <span class="on">Land</span><i></i><span>Shore</span><i></i><span>Water</span>
         </div>
       </div>
     </div>
@@ -285,17 +280,17 @@ Vendored third-party libraries (not inlined below, included in the repo/zip):
        ================================================ -->
   <section class="scene" id="ocean" data-rail="04" aria-label="The dive">
     <div class="stage">
-      <div class="layer ocean-surface"><img src="assets/img/env/ocean-surface.webp" alt="Ocean surface from below, sun rays"></div>
-      <div class="layer ocean-bed"><img src="assets/img/env/oceanbed.webp" alt="Deep dark underwater environment"></div>
+      <div class="layer ocean-bed"><img src="assets/img/env/oceanbed.webp" alt="Deep dark underwater sea bed"></div>
+      <div class="ocean-veil" aria-hidden="true"></div>
       <div class="rays" aria-hidden="true"></div>
       <div class="caustics" aria-hidden="true"></div>
       <div class="ocean-dark" aria-hidden="true"></div>
       <canvas class="p-canvas" aria-hidden="true"></canvas>
       <div class="vignette" aria-hidden="true"></div>
-      <div class="stagechip"><b>04</b> The Ocean</div>
+      <div class="stagechip"><b>04</b> The Sea Bed</div>
 
       <div class="ocean-head">
-        <h2 class="display">Beneath the surface</h2>
+        <h2 class="display">Down to the sea bed.</h2>
         <div class="sub">Deeper you go, rarer it becomes</div>
       </div>
 
@@ -468,8 +463,8 @@ Vendored third-party libraries (not inlined below, included in the repo/zip):
         <p>Today that passion has become a house. Every fragrance we release starts the same way it always did: with a memory of a place, a season, a feeling — and the patience to translate it into something you can wear.</p>
         <blockquote class="pull">Fragrance isn't simply worn. It is remembered.</blockquote>
         <div class="story__stats">
-          <div><b>35+</b><span>Fragrances</span></div>
-          <div><b>06</b><span>Attars</span></div>
+          <div><b>08</b><span>Signature scents</span></div>
+          <div><b>02</b><span>Worlds</span></div>
           <div><b>01</b><span>Journey</span></div>
         </div>
       </div>
@@ -512,31 +507,31 @@ Vendored third-party libraries (not inlined below, included in the repo/zip):
           <span class="go">Elegant &amp; radiant — explore <span class="arr">→</span></span>
         </div>
       </a>
-      <a class="portal" href="shop.html?cat=attars" data-reveal style="--d:.16s">
-        <img src="assets/img/env/forest-to-ocean.webp" alt="Warm landscape light">
-        <span class="veil2"></span>
-        <div class="pt">
-          <span class="label">Traditional &amp; Pure</span>
-          <h3 class="display">Attars</h3>
-          <span class="go">Oil perfumery — explore <span class="arr">→</span></span>
-        </div>
-      </a>
-      <a class="portal portal--set wide" href="product.html?p=discovery-set" data-reveal>
-        <img src="assets/img/bottles/discovery.webp" alt="Discovery set of six fragrance vials">
-        <span class="veil2"></span>
-        <div class="pt">
-          <span class="label">Begin Here</span>
-          <h3 class="display">Discovery Set</h3>
-          <span class="go">Explore the spectrum <span class="arr">→</span></span>
-        </div>
-      </a>
-      <a class="portal wide" href="shop.html?cat=deals" data-reveal style="--d:.08s">
+      <a class="portal" href="#mostwanted" data-reveal style="--d:.16s">
         <img src="assets/img/env/oceanbed.webp" alt="Deep water">
         <span class="veil2"></span>
         <div class="pt">
-          <span class="label">The Edit</span>
-          <h3 class="display">Deals</h3>
-          <span class="go">Value picks from the vault <span class="arr">→</span></span>
+          <span class="label">40 Metres Down</span>
+          <h3 class="display">Most Wanted</h3>
+          <span class="go">What people choose most <span class="arr">→</span></span>
+        </div>
+      </a>
+      <a class="portal wide" href="#hero" data-reveal>
+        <img src="assets/img/ui/storyboard.webp" alt="The forest to ocean storyboard">
+        <span class="veil2"></span>
+        <div class="pt">
+          <span class="label">Relive It</span>
+          <h3 class="display">The Journey</h3>
+          <span class="go">From the forest to the sea bed <span class="arr">→</span></span>
+        </div>
+      </a>
+      <a class="portal wide" href="shop.html" data-reveal style="--d:.08s">
+        <img src="assets/img/env/forest-to-ocean.webp" alt="Forest opening to light">
+        <span class="veil2"></span>
+        <div class="pt">
+          <span class="label">The Collection</span>
+          <h3 class="display">All Fragrances</h3>
+          <span class="go">Enter the shop <span class="arr">→</span></span>
         </div>
       </a>
     </div>
@@ -568,9 +563,6 @@ Vendored third-party libraries (not inlined below, included in the repo/zip):
         <li><a href="shop.html">All Fragrances</a></li>
         <li><a href="shop.html?cat=men">Men</a></li>
         <li><a href="shop.html?cat=women">Women</a></li>
-        <li><a href="shop.html?cat=attars">Attars</a></li>
-        <li><a href="product.html?p=discovery-set">Discovery Set</a></li>
-        <li><a href="shop.html?cat=deals">Deals</a></li>
       </ul>
     </div>
     <div>
@@ -623,7 +615,7 @@ Vendored third-party libraries (not inlined below, included in the repo/zip):
 
 ---
 
-## 📄 shop.html  ·  (116 lines)
+## 📄 shop.html  ·  (115 lines)
 
 ```html
 <!DOCTYPE html>
@@ -632,7 +624,7 @@ Vendored third-party libraries (not inlined below, included in the repo/zip):
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Fragrances — Shop | Ismaeel Muhammad</title>
-<meta name="description" content="The full collection of Ismaeel Muhammad fragrances — Eau de Parfums, attars and discovery sets. Filter by men, women, attars and more.">
+<meta name="description" content="The signature collection of Ismaeel Muhammad — eight Eau de Parfums from the forest to the sea bed. Filter by men and women.">
 <link rel="icon" href="assets/img/ui/favicon.svg" type="image/svg+xml">
 <link rel="stylesheet" href="assets/css/base.css">
 <link rel="stylesheet" href="assets/css/pages.css">
@@ -702,7 +694,6 @@ Vendored third-party libraries (not inlined below, included in the repo/zip):
         <li><a href="shop.html">All Fragrances</a></li>
         <li><a href="shop.html?cat=men">Men</a></li>
         <li><a href="shop.html?cat=women">Women</a></li>
-        <li><a href="shop.html?cat=attars">Attars</a></li>
       </ul>
     </div>
     <div>
@@ -745,7 +736,7 @@ Vendored third-party libraries (not inlined below, included in the repo/zip):
 
 ---
 
-## 📄 product.html  ·  (196 lines)
+## 📄 product.html  ·  (195 lines)
 
 ```html
 <!DOCTYPE html>
@@ -904,7 +895,6 @@ Vendored third-party libraries (not inlined below, included in the repo/zip):
         <li><a href="shop.html">All Fragrances</a></li>
         <li><a href="shop.html?cat=men">Men</a></li>
         <li><a href="shop.html?cat=women">Women</a></li>
-        <li><a href="shop.html?cat=attars">Attars</a></li>
       </ul>
     </div>
     <div>
@@ -947,7 +937,7 @@ Vendored third-party libraries (not inlined below, included in the repo/zip):
 
 ---
 
-## 📄 about.html  ·  (184 lines)
+## 📄 about.html  ·  (183 lines)
 
 ```html
 <!DOCTYPE html>
@@ -1011,11 +1001,11 @@ Vendored third-party libraries (not inlined below, included in the repo/zip):
       <div class="chapter__copy" data-reveal style="--d:.1s">
         <span class="eyebrow">The Beginning</span>
         <h3 class="display">A boy, a bazaar, a bottle.</h3>
-        <p>It started the way most obsessions do — by accident. A market stall, a modest attar, and the realisation that a few drops of oil could carry a memory further than a photograph ever could. That single bottle turned into a habit, the habit into study, and the study into years of learning what makes a fragrance feel like it belongs to someone.</p>
+        <p>It started the way most obsessions do — by accident. A market stall, a small bottle of oil perfume, and the realisation that a few drops could carry a memory further than a photograph ever could. That single bottle turned into a habit, the habit into study, and the study into years of learning what makes a fragrance feel like it belongs to someone.</p>
       </div>
     </div>
     <div class="chapter__media" data-reveal style="--d:.15s">
-      <img src="assets/img/bottles/attar.webp" alt="A traditional attar bottle" style="object-fit:contain;background:#0c0a06;padding:8%;object-position:center">
+      <img src="assets/img/bottles/five-nine.webp" alt="The first bottle — Five-Nine" style="object-fit:contain;background:#0c0a06;padding:10% 26%;object-position:center">
     </div>
   </section>
 
@@ -1061,7 +1051,7 @@ Vendored third-party libraries (not inlined below, included in the repo/zip):
       <div class="chapter__copy" data-reveal style="--d:.1s">
         <span class="eyebrow">The Brand</span>
         <h3 class="display">A house, not a store.</h3>
-        <p>Ismaeel Muhammad is built on a simple belief: in a market flooded with copies, honesty is a luxury. We keep the range tight, the quality stubborn, and the prices fair. From Eau de Parfums to traditional attars, every bottle is something we would — and do — wear ourselves.</p>
+        <p>Ismaeel Muhammad is built on a simple belief: in a market flooded with copies, honesty is a luxury. We keep the range tight, the quality stubborn, and the prices fair. From the forest openers to the depths of the ocean line, every bottle is something we would — and do — wear ourselves.</p>
       </div>
     </div>
   </section>
@@ -1095,7 +1085,6 @@ Vendored third-party libraries (not inlined below, included in the repo/zip):
         <li><a href="shop.html">All Fragrances</a></li>
         <li><a href="shop.html?cat=men">Men</a></li>
         <li><a href="shop.html?cat=women">Women</a></li>
-        <li><a href="shop.html?cat=attars">Attars</a></li>
       </ul>
     </div>
     <div>
@@ -1137,7 +1126,7 @@ Vendored third-party libraries (not inlined below, included in the repo/zip):
 
 ---
 
-## 📄 contact.html  ·  (178 lines)
+## 📄 contact.html  ·  (177 lines)
 
 ```html
 <!DOCTYPE html>
@@ -1253,7 +1242,7 @@ Vendored third-party libraries (not inlined below, included in the repo/zip):
       <div class="cblock"><span class="label">Shipping</span><p>Orders dispatch within 1–2 working days. Nationwide delivery in 2–5 days; free over ₨5,000. International shipping is calculated at checkout.</p></div>
       <div class="cblock"><span class="label">Returns</span><p>Unopened bottles may be returned within 7 days of delivery. If a fragrance arrives damaged, send a photo and we replace it — no questions.</p></div>
       <div class="cblock"><span class="label">Payment</span><p>Cash on delivery across Pakistan, bank transfer, and card payments at checkout.</p></div>
-      <div class="cblock"><span class="label">Which fragrance should I start with?</span><p>The Discovery Set — six scents from across the journey, and its price is redeemable against any full bottle.</p></div>
+      <div class="cblock"><span class="label">Which fragrance should I start with?</span><p>Start where the journey begins — Five-Nine, the forest at golden hour — or let the Most Wanted depths decide for you.</p></div>
       <div class="cblock"><span class="label">Privacy &amp; Terms</span><p>We keep only what we need to deliver your order, and never share it. Full privacy policy and terms are available on request at hello@ismaeelmuhammad.pk.</p></div>
     </div>
   </section>
@@ -1271,7 +1260,6 @@ Vendored third-party libraries (not inlined below, included in the repo/zip):
         <li><a href="shop.html">All Fragrances</a></li>
         <li><a href="shop.html?cat=men">Men</a></li>
         <li><a href="shop.html?cat=women">Women</a></li>
-        <li><a href="shop.html?cat=attars">Attars</a></li>
       </ul>
     </div>
     <div>
@@ -1321,7 +1309,7 @@ Vendored third-party libraries (not inlined below, included in the repo/zip):
 
 ---
 
-## 📄 checkout.html  ·  (222 lines)
+## 📄 checkout.html  ·  (221 lines)
 
 ```html
 <!DOCTYPE html>
@@ -1466,7 +1454,6 @@ Vendored third-party libraries (not inlined below, included in the repo/zip):
         <li><a href="shop.html">All Fragrances</a></li>
         <li><a href="shop.html?cat=men">Men</a></li>
         <li><a href="shop.html?cat=women">Women</a></li>
-        <li><a href="shop.html?cat=attars">Attars</a></li>
       </ul>
     </div>
     <div>
@@ -1993,7 +1980,7 @@ body.cart-open{ overflow:hidden; }
 
 ---
 
-## 📄 assets/css/journey.css  ·  (469 lines)
+## 📄 assets/css/journey.css  ·  (528 lines)
 
 ```css
 /* ============================================================
@@ -2048,7 +2035,21 @@ html:not(.cinema) .beat{ min-height:78vh; margin-bottom:8vh; }
 #hero{ height:280vh; z-index:5; }
 .hero-bg{ transform:scale(1.06); }
 .hero-mid{ transform:scale(1.1); }
-.hero-fore{ transform:scale(1.12); }
+
+/* ---------- layered leaves (hero) ---------- */
+.leaf{ position:absolute; pointer-events:none; will-change:transform; z-index:3; }
+.leaf img{ width:100%; height:100%; object-fit:cover; }
+.leaf--far{ inset:-7%; z-index:2; opacity:.9; }
+.leaf--l{ left:-6%; top:-6%; width:44%; height:112%; z-index:4; }
+.leaf--r{ right:-6%; top:-6%; width:44%; height:112%; z-index:4; }
+.leaf--b{ left:-6%; right:-6%; bottom:-9%; height:56%; z-index:4; }
+.leaf--l img{ animation:swayA 10s ease-in-out infinite alternate; }
+.leaf--r img{ animation:swayB 12s ease-in-out infinite alternate; }
+.leaf--b img{ animation:swayC 9s ease-in-out infinite alternate; }
+.leaf--far img{ animation:swayA 16s ease-in-out infinite alternate; }
+@keyframes swayA{ from{ transform:rotate(-.6deg) translateX(-.5%);} to{ transform:rotate(.8deg) translateX(.6%);} }
+@keyframes swayB{ from{ transform:rotate(.7deg) translateX(.5%);} to{ transform:rotate(-.8deg) translateX(-.6%);} }
+@keyframes swayC{ from{ transform:translateY(-.6%) rotate(-.4deg);} to{ transform:translateY(.7%) rotate(.5deg);} }
 
 .fog{
   position:absolute; inset:-12%; pointer-events:none;
@@ -2128,6 +2129,9 @@ html:not(.cinema) .beat{ min-height:78vh; margin-bottom:8vh; }
   .hero-copy{ top:auto; bottom:110px; transform:none; }
   .hero-copy p{ display:none; }
   .sunshaft{ left:30%; }
+  .leaf--l{ width:56%; opacity:.92; }
+  .leaf--r{ width:56%; opacity:.92; }
+  .leaf--b{ height:44%; }
 }
 
 /* ============================================================
@@ -2142,6 +2146,17 @@ html:not(.cinema) .beat{ min-height:78vh; margin-bottom:8vh; }
 }
 .beat__botanical img{ width:100%; height:100%; object-fit:cover; }
 .beat__botanical.flip img{ transform:scaleX(-1); }
+
+/* near leaf layer — faster than the botanical, in front of the bottle */
+.bleaf{ position:absolute; pointer-events:none; z-index:4; will-change:transform; }
+.bleaf img{ width:100%; height:100%; object-fit:cover; animation:swayC 9.5s ease-in-out infinite alternate; }
+.bleaf--b{ left:-9%; right:-9%; bottom:-11%; height:58%; }
+.bleaf--l{ left:-11%; top:-8%; width:46%; height:116%; }
+.bleaf--l img{ animation:swayA 10s ease-in-out infinite alternate; }
+.bleaf--r{ right:-11%; top:-8%; width:46%; height:116%; }
+.bleaf--r img{ animation:swayB 12s ease-in-out infinite alternate; }
+.bleaf--n{ left:-13%; top:-9%; width:62%; height:120%; }
+.bleaf--n img{ object-fit:contain; object-position:left center; animation:swayA 11s ease-in-out infinite alternate; }
 
 .beat__inner{
   position:relative; z-index:5; width:100%;
@@ -2194,9 +2209,27 @@ html:not(.cinema) .beat{ min-height:78vh; margin-bottom:8vh; }
 #transition{ height:420vh; background:#000; }
 .trans-a{ transform:scale(1.14); }
 .trans-a img{ object-position:34% 50%; }
-.trans-b{ opacity:0; }
-.trans-b{ transform:scale(1.18); }
-.trans-b img{ object-position:50% 22%; }
+.trans-beach{ opacity:0; transform:scale(1.14); }
+.trans-beach img{ object-position:50% 45%; }
+
+/* water rising from the bottom toward the top */
+.water-rise{
+  position:absolute; inset:0; z-index:5;
+  will-change:transform;
+}
+.water-fill{ position:absolute; inset:0; overflow:hidden; }
+.water-fill img{
+  width:100%; height:100%; object-fit:cover; object-position:50% 100%;
+  transform:scale(1.6); transform-origin:50% 100%;
+}
+.water-rise::before{
+  content:''; position:absolute; left:-50%; right:-50%; top:-21px; height:22px;
+  background:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='260' height='22' viewBox='0 0 260 22'%3E%3Cpath d='M0 11 Q32.5 -6 65 11 T130 11 T195 11 T260 11 V22 H0 Z' fill='%23064a63'/%3E%3C/svg%3E") repeat-x;
+  background-size:260px 22px;
+  animation:wave 5.5s linear infinite;
+  opacity:.92;
+}
+@keyframes wave{ to{ background-position-x:260px; } }
 .trans-wash{
   position:absolute; inset:0; pointer-events:none; opacity:0;
   background:linear-gradient(to bottom, rgba(160,190,200,.2), transparent 45%);
@@ -2207,16 +2240,20 @@ html:not(.cinema) .beat{ min-height:78vh; margin-bottom:8vh; }
   text-align:center; padding:0 var(--pad);
 }
 .trans-copy .display{ text-shadow:0 2px 44px rgba(0,0,0,.45); }
-.trans-copy .label{ color:rgba(20,26,20,.62); margin-bottom:20px; }
-html.cinema .trans-copy .label{ color:rgba(242,238,227,.62); }
+.trans-copy .label{ color:rgba(242,238,227,.62); margin-bottom:20px; }
+.trans-copy .tt-2{ color:var(--ink); }
+.trans-copy .tt-2 .label{ color:rgba(28,34,28,.62); }
+.trans-copy .tt-2 .display{ text-shadow:none; }
 .trans-steps{ display:flex; gap:clamp(20px,4vw,60px); margin-top:44px; align-items:center; }
 .trans-steps span{
   font-size:10px; letter-spacing:.4em; text-transform:uppercase;
   color:rgba(242,238,227,.72); position:relative; padding-bottom:12px;
+  transition:color .6s;
 }
+.trans-steps.i span{ color:rgba(26,32,26,.78); }
 .trans-steps span::after{
   content:''; position:absolute; left:0; bottom:0; height:1px; width:100%;
-  background:rgba(242,238,227,.4); transform:scaleX(0); transform-origin:left;
+  background:currentColor; opacity:.5; transform:scaleX(0); transform-origin:left;
   transition:transform .6s var(--ease);
 }
 .trans-steps span.on::after{ transform:none; }
@@ -2230,6 +2267,10 @@ html.cinema .trans-copy .label{ color:rgba(242,238,227,.62); }
 .ocean-surface img{ object-position:50% 88%; }
 .ocean-bed{ opacity:0; }
 .ocean-bed{ transform:scale(1.22); }
+.ocean-veil{
+  position:absolute; inset:0; z-index:2; pointer-events:none;
+  background:linear-gradient(to bottom, #0a4a67 0%, #06344c 45%, #02121d 100%);
+}
 .ocean-dark{ position:absolute; inset:0; background:#010509; opacity:0; pointer-events:none; }
 
 .rays{
@@ -2450,9 +2491,9 @@ html.cinema .trans-copy .label{ color:rgba(242,238,227,.62); }
 .stagechip{
   position:absolute; top:calc(var(--nav-h) + 16px); left:var(--pad); z-index:8;
   font-size:9.5px; letter-spacing:.42em; text-transform:uppercase;
-  color:rgba(242,238,227,.55);
+  color:rgba(255,255,255,.72); mix-blend-mode:difference;
 }
-.stagechip b{ color:var(--gold); font-weight:500; margin-right:12px; }
+.stagechip b{ font-weight:500; margin-right:12px; }
 @media (max-width:900px){ .stagechip{ top:calc(var(--nav-h) + 8px); } }
 
 /* discovery-set portal: contained bottle row on dark */
@@ -2460,7 +2501,12 @@ html.cinema .trans-copy .label{ color:rgba(242,238,227,.62); }
 .portal--set img{ opacity:.92; object-fit:contain; inset:12% 4%; width:92%; height:76%; }
 
 /* no-JS / reduced-motion cleanups */
-html:not(.cinema) .beat__botanical{ display:none; }
+html:not(.cinema) .beat__botanical,
+html:not(.cinema) .bleaf{ display:none; }
+html:not(.cinema) .water-rise{ display:none; }
+html:not(.cinema) .trans-beach{ opacity:1; }
+html:not(.cinema) .ocean-veil{ display:none; }
+html:not(.cinema) .leaf--far{ opacity:.55; }
 html:not(.cinema) .depthmeter{ display:none; }
 html:not(.cinema) .beam{ opacity:.7; }
 html:not(.cinema) .mw-grid .pcard, html:not(.cinema) .mw-inner > *{ opacity:1; }
@@ -2791,7 +2837,7 @@ html:not(.cinema) .mw-grid .pcard, html:not(.cinema) .mw-inner > *{ opacity:1; }
 
 ---
 
-## 📄 assets/js/data.js  ·  (269 lines)
+## 📄 assets/js/data.js  ·  (182 lines)
 
 ```javascript
 /* ============================================================
@@ -2802,9 +2848,7 @@ html:not(.cinema) .mw-grid .pcard, html:not(.cinema) .mw-inner > *{ opacity:1; }
 const ENV = {
   forest: { label: 'The Forest', img: 'assets/img/env/forest-bg.webp', tint: '#0d1f14' },
   ocean:  { label: 'The Ocean',  img: 'assets/img/env/ocean-surface.webp', tint: '#063a52' },
-  deep:   { label: 'The Depths', img: 'assets/img/env/oceanbed.webp', tint: '#04121c' },
-  attar:  { label: 'The Atelier',img: 'assets/img/env/forest-to-ocean.webp', tint: '#1d1608' },
-  set:    { label: 'The Atelier',img: 'assets/img/env/forest-to-ocean.webp', tint: '#1d1608' }
+  deep:   { label: 'The Depths', img: 'assets/img/env/oceanbed.webp', tint: '#04121c' }
 };
 
 const IMG = 'assets/img/bottles/';
@@ -2946,26 +2990,7 @@ const PRODUCTS = [
       { name: 'Danish E.', stars: 4, text: 'Really enjoy it, projection is a beast for the first few hours.' }
     ]
   },
-  {
-    slug: 'delicious', name: 'DELICIOUS', type: 'Eau de Parfum',
-    cat: 'women', env: 'ocean',
-    family: 'GOURMAND · FLORAL · WARM',
-    tagline: 'Peach skin and warm sugar.',
-    desc: 'Delicious is the warmth of the shallows at sunset — peach and orange blossom over praline and jasmine, wrapped in vanilla and sandalwood. A scent that feels like being liked back.',
-    price: { '50 ML': 2200, '100 ML': 4000 },
-    rating: 4.8, reviewCount: 88,
-    notes: {
-      top:   ['Peach', 'Orange Blossom', 'Mandarin'],
-      heart: ['Praline', 'Jasmine', 'Cinnamon'],
-      base:  ['Vanilla', 'Sandalwood', 'Musk']
-    },
-    longevity: 7, projection: 3,
-    wear: 'Casual evenings, autumn walks, cozy nights.',
-    reviews: [
-      { name: 'Mahnoor J.', stars: 5, text: 'Sweet but grown-up. My friends keep trying to steal it.' }
-    ]
-  },
-  {
+    {
     slug: 'king-in-the-north', name: 'KING IN THE NORTH', type: 'Eau de Parfum',
     cat: 'men', env: 'deep', badge: 'MOST WANTED',
     family: 'ICY · SMOKY · OUD',
@@ -2985,83 +3010,17 @@ const PRODUCTS = [
       { name: 'Junaid Q.', stars: 5, text: 'Icy opening then a monster drydown. Sold out twice for a reason.' }
     ]
   },
-  {
-    slug: 'happy-attar', name: 'HAPPY', type: 'Attar Oil',
-    img: 'attar',
-    cat: 'attars', env: 'attar',
-    family: 'ROSE · OUD · TRADITIONAL',
-    tagline: 'A rose-and-oud attar in the classical tradition.',
-    desc: 'A traditional alcohol-free attar, aged slowly. Rose and saffron fold into deep oud and soft musk — a single drop on the wrist carries the whole day.',
-    price: { '6 ML': 500, '12 ML': 900 },
-    rating: 4.8, reviewCount: 64,
-    notes: { top: ['Saffron', 'Rose'], heart: ['Oud', 'Amber'], base: ['Musk', 'Sandalwood'] },
-    longevity: 12, projection: 3,
-    wear: 'Friday prayers, weddings, and quiet personal rituals.',
-    reviews: [{ name: 'Ibrahim S.', stars: 5, text: 'One drop lasts from morning to night. Beautiful classical rose-oud.' }]
-  },
-  {
-    slug: 'hopeful-attar', name: 'HOPEFUL', type: 'Attar Oil',
-    img: 'attar',
-    cat: 'attars', env: 'attar',
-    family: 'MUSK · AMBER · SOFT',
-    tagline: 'White musk and amber, warm as candlelight.',
-    desc: 'A soft, skin-close attar of white musk, amber and a whisper of vanilla. Hopeful is the scent of a calm house in the evening.',
-    price: { '6 ML': 650, '12 ML': 1100 },
-    rating: 4.9, reviewCount: 57,
-    notes: { top: ['Bergamot'], heart: ['White Musk', 'Amber'], base: ['Vanilla', 'Cedar'] },
-    longevity: 10, projection: 2,
-    wear: 'Everyday warmth — layer it over any Eau de Parfum.',
-    reviews: [{ name: 'Noor H.', stars: 5, text: 'Gentle and long lasting. Perfect for daily wear.' }]
-  },
-  {
-    slug: 'cheerful-attar', name: 'CHEERFUL', type: 'Attar Oil',
-    img: 'attar',
-    cat: 'attars', env: 'attar',
-    family: 'FLORAL · FRESH · LIGHT',
-    tagline: 'A bright floral attar for hot afternoons.',
-    desc: 'The lightest of our attars — jasmine, marigold and a clean musk base that stays fresh through the warmest part of the day.',
-    price: { '6 ML': 450, '12 ML': 750 },
-    rating: 4.7, reviewCount: 41,
-    notes: { top: ['Marigold', 'Bergamot'], heart: ['Jasmine', 'Lily'], base: ['Clean Musk'] },
-    longevity: 8, projection: 2,
-    wear: 'Summer days and layered with florals.',
-    reviews: [{ name: 'Sana P.', stars: 5, text: 'Fresh floral attar that does not feel heavy in heat. Lovely.' }]
-  },
-  {
-    slug: 'discovery-set', name: 'DISCOVERY SET', type: 'Sampler Set',
-    img: 'discovery',
-    cat: 'discovery', env: 'set', badge: 'START HERE',
-    family: 'SIX SCENTS · ONE JOURNEY',
-    tagline: 'Begin the journey before you commit to it.',
-    desc: 'Six 3 ml travel sprays drawn from across the journey — from the forest floor to the deep ocean — presented in a lined gift box. The full price is redeemable against any full-size bottle.',
-    price: { '6 × 3 ML': 1500, '12 × 3 ML': 2500 },
-    rating: 4.9, reviewCount: 152,
-    notes: { top: ['Six signatures'], heart: ['Forest to Ocean'], base: ['Your favourite'] },
-    longevity: 8, projection: 3,
-    wear: 'The starting point of your collection.',
-    reviews: [{ name: 'Ali Z.', stars: 5, text: 'The best way to find your scent. Gifted two already.' }]
-  }
-];
+        ];
 
 const CATS = [
   { id: 'all', label: 'ALL' },
   { id: 'men', label: 'MEN' },
-  { id: 'women', label: 'WOMEN' },
-  { id: 'attars', label: 'ATTARS' },
-  { id: 'discovery', label: 'DISCOVERY' },
-  { id: 'deals', label: 'DEALS' }
+  { id: 'women', label: 'WOMEN' }
 ];
 
 const bySlug = s => PRODUCTS.find(p => p.slug === s);
 const fmtPrice = n => '₨' + n.toLocaleString('en-PK');
 const productImg = p => IMG + (p.img || p.slug) + '.webp';
-
-/* Journey placement */
-const JOURNEY = {
-  forest: ['five-nine', 'hopeful', 'charming', 'mi-amor'],
-  ocean:  ['zesty', 'sophisticated', 'happy'],
-  mostWanted: ['king-in-the-north', 'five-nine', 'sophisticated', 'happy']
-};
 ```
 
 ---
@@ -3368,7 +3327,7 @@ const JOURNEY = {
 
 ---
 
-## 📄 assets/js/journey.js  ·  (310 lines)
+## 📄 assets/js/journey.js  ·  (330 lines)
 
 ```javascript
 /* ============================================================
@@ -3432,7 +3391,10 @@ const JOURNEY = {
     heroTl
       .to('.hero-bg', { scale: 1.0, yPercent: 4, ease: 'none' }, 0)
       .to('.hero-mid', { yPercent: -5, xPercent: -1.5, ease: 'none' }, 0)
-      .to('.hero-fore', { yPercent: -11, xPercent: -3, scale: 1.18, ease: 'none' }, 0)
+      .to('.leaf--far', { yPercent: -8, scale: 1.1, ease: 'none' }, 0)
+      .to('.leaf--l', { yPercent: -13, xPercent: -2, ease: 'none' }, 0)
+      .to('.leaf--r', { yPercent: -15, xPercent: 2, ease: 'none' }, 0)
+      .to('.leaf--b', { yPercent: -18, ease: 'none' }, 0)
       .to('.hero-bottle', { yPercent: -7, scale: 0.94, ease: 'none' }, 0)
       .to('.hero-copy', { y: -60, autoAlpha: 0, ease: 'power1.in', duration: 0.28 }, 0.02)
       .to('.hero-foot', { autoAlpha: 0, duration: 0.18 }, 0.05)
@@ -3447,17 +3409,22 @@ const JOURNEY = {
       .from('.hero-copy .journeysub', { y: 34, autoAlpha: 0, duration: 1.1, ease: 'power3.out' }, '-=0.95')
       .from('.hero-copy p, .hero-copy .btn', { y: 26, autoAlpha: 0, duration: 1, stagger: 0.1, ease: 'power3.out' }, '-=0.8')
       .from('.hero-bottle', { autoAlpha: 0, scale: 0.92, filter: 'blur(10px)', duration: 1.6, ease: 'power2.out' }, '-=1.4')
+      .from('.leaf--far', { autoAlpha: 0, duration: 2 }, '-=1.9')
+      .from(['.leaf--l', '.leaf--r', '.leaf--b'], { autoAlpha: 0, y: 40, duration: 1.5, stagger: 0.14, ease: 'power2.out' }, '-=1.7')
       .from('.hero-foot', { autoAlpha: 0, y: 16, duration: 1 }, '-=0.8')
       .from('.nav', { y: -18, autoAlpha: 0, duration: 0.9 }, 0);
 
     /* mouse parallax on hero */
     if (finePointer) {
       const qx = {}; const qy = {};
-      ['.hero-bg', '.hero-mid', '.hero-fore', '.hero-bottle'].forEach((sel, i) => {
+      const planes = ['.hero-bg', '.hero-mid', '.leaf--far', '.hero-bottle', '.leaf--l', '.leaf--r', '.leaf--b'];
+      const px = [6, 14, 22, 20, 32, 36, 42];
+      const py = [4, 9, 14, 14, 19, 21, 26];
+      planes.forEach((sel, i) => {
         qx[sel] = gsap.quickTo(sel, 'x', { duration: 0.9, ease: 'power2.out' });
         qy[sel] = gsap.quickTo(sel, 'y', { duration: 0.9, ease: 'power2.out' });
-        qx[sel].par = [6, 14, 30, 20][i] * (i === 3 ? -1 : 1);
-        qy[sel].par = [4, 9, 20, 14][i] * (i === 3 ? -1 : 1);
+        qx[sel].par = px[i] * (i === 3 ? -1 : 1);
+        qy[sel].par = py[i] * (i === 3 ? -1 : 1);
       });
       document.querySelector('#hero .stage').addEventListener('pointermove', e => {
         const rx = (e.clientX / window.innerWidth - 0.5) * 2;
@@ -3484,6 +3451,7 @@ const JOURNEY = {
     beats.forEach((beat, i) => {
       const at = i * SEG;
       const bot = beat.querySelector('.beat__botanical');
+      const leaf = beat.querySelector('.bleaf');
       const fig = beat.querySelector('.beat__figure');
       const copy = beat.querySelector('.beat__copy');
       const fromX = i % 2 === 0 ? 9 : -9;
@@ -3494,6 +3462,7 @@ const JOURNEY = {
         forestTl.fromTo(beat, { autoAlpha: 0 }, { autoAlpha: 1, duration: 0.18, ease: 'power1.inOut' }, at + 0.02);
       }
       if (bot) forestTl.fromTo(bot, { xPercent: fromX }, { xPercent: fromX / 2.6, ease: 'none', duration: SEG }, at);
+      if (leaf) forestTl.fromTo(leaf, { xPercent: fromX * 1.9, yPercent: 4 }, { xPercent: fromX * 1.15, yPercent: -3, ease: 'none', duration: SEG }, at);
       if (fig) forestTl.fromTo(fig, { y: 90, scale: 0.9 }, { y: 0, scale: 1, ease: 'none', duration: SEG * 0.8 }, at);
       if (copy) forestTl.fromTo(copy, { y: 60 }, { y: -34, ease: 'none', duration: SEG }, at);
       if (i < beats.length - 1) {
@@ -3509,29 +3478,41 @@ const JOURNEY = {
     const transTl = gsap.timeline({
       scrollTrigger: { trigger: '#transition', start: 'top top', end: 'bottom bottom', scrub: 0.6 }
     });
-    const transTitles = gsap.utils.toArray('.trans-copy .display');
+    const titles = gsap.utils.toArray('.trans-copy .tt');
     const transSteps = gsap.utils.toArray('.trans-steps span');
+    const stepsWrap = document.querySelector('.trans-steps');
 
-    gsap.set(transTitles, { autoAlpha: 0, y: 40 });
-    gsap.set(transTitles[0], { autoAlpha: 1, y: 0 });
+    gsap.set(titles, { autoAlpha: 0, y: 44 });
+    gsap.set(titles[0], { autoAlpha: 1, y: 0 });
+    gsap.set('.water-rise', { yPercent: 103 });
 
     transTl
-      .to('.trans-a', { scale: 1.02, xPercent: -6, ease: 'none', duration: 5 }, 0)
-      .to('.trans-wash', { opacity: 0.85, duration: 1.6, ease: 'power1.inOut' }, 1.2)
-      .to('.trans-a', { autoAlpha: 0, duration: 1.6, ease: 'power1.inOut' }, 2.9)
-      .fromTo('.trans-b', { autoAlpha: 0 }, { autoAlpha: 1, duration: 1.6, ease: 'power1.inOut' }, 2.9)
-      .fromTo('.trans-b img', { objectPosition: '50% 12%' }, { objectPosition: '50% 34%', ease: 'none', duration: 5 }, 0)
-      .to('.trans-b', { scale: 1.02, ease: 'none', duration: 5 }, 0)
-      .to('.trans-wash', { opacity: 0.25, duration: 1.6 }, 3.4)
-      .to(transTitles[0], { autoAlpha: 0, y: -40, duration: 0.8 }, 1.05)
-      .to(transTitles[1], { autoAlpha: 1, y: 0, duration: 0.8 }, 1.9)
-      .to(transTitles[1], { autoAlpha: 0, y: -40, duration: 0.8 }, 3.0)
-      .to(transTitles[2], { autoAlpha: 1, y: 0, duration: 0.8 }, 3.9)
-      .to('.trans-copy', { autoAlpha: 0, duration: 0.7, ease: 'power1.in' }, 4.6)
-      .to({}, { duration: 0.3 });
+      /* beat 1 — the forest opens (dark) */
+      .to('.trans-a', { scale: 1.02, xPercent: -6, ease: 'none', duration: 5.4 }, 0)
+      .to('.trans-wash', { opacity: 0.75, duration: 1.4, ease: 'power1.inOut' }, 0.9)
+      /* beat 2 — the shore: bright sky & sand */
+      .to('.trans-a', { autoAlpha: 0, duration: 1.3, ease: 'power1.inOut' }, 1.55)
+      .fromTo('.trans-beach', { autoAlpha: 0 }, { autoAlpha: 1, duration: 1.3, ease: 'power1.inOut' }, 1.55)
+      .to('.trans-beach', { scale: 1.02, ease: 'none', duration: 5.4 }, 0)
+      .to('.trans-wash', { opacity: 0, duration: 1.2 }, 2.0)
+      .to('.trans-vignette', { opacity: 0.22, duration: 1.2 }, 1.8)
+      /* beat 3 — water rises from the bottom toward the top */
+      .to('.trans-vignette', { opacity: 1, duration: 1.2 }, 3.3)
+      .to('.water-rise', { yPercent: 0, duration: 2.05, ease: 'power2.in' }, 3.2)
+      .to('.trans-beach', { scale: 1.07, ease: 'none', duration: 2.05 }, 3.2)
+      /* titles */
+      .to(titles[0], { autoAlpha: 0, y: -44, duration: 0.75, ease: 'power1.in' }, 1.15)
+      .to(titles[1], { autoAlpha: 1, y: 0, duration: 0.75, ease: 'power1.out' }, 1.95)
+      .to(titles[1], { autoAlpha: 0, y: -44, duration: 0.75, ease: 'power1.in' }, 2.9)
+      .to(titles[2], { autoAlpha: 1, y: 0, duration: 0.75, ease: 'power1.out' }, 3.35)
+      .to('.trans-copy', { autoAlpha: 0, duration: 0.6, ease: 'power1.in' }, 4.85)
+      .to({}, { duration: 0.25 });
 
-    transSteps.forEach((s, i) => {
-      transTl.call(() => { transSteps.forEach((x, j) => x.classList.toggle('on', j <= i)); }, [], [0.2, 2.2, 3.9][i]);
+    transSteps.forEach((st, i) => {
+      transTl.call(() => {
+        transSteps.forEach((x, j) => x.classList.toggle('on', j <= i));
+        if (stepsWrap) stepsWrap.classList.toggle('i', i === 1);
+      }, [], [0.2, 1.95, 3.35][i]);
     });
 
     /* ============================================================
@@ -3546,10 +3527,8 @@ const JOURNEY = {
 
     gsap.set(obeats, { autoAlpha: 0 });
     oceanTl
-      .to('.ocean-surface img', { objectPosition: '50% 60%', ease: 'none', duration: 9 }, 0)
-      .to('.ocean-surface', { scale: 1.02, ease: 'none', duration: 9 }, 0)
-      .to('.ocean-surface', { autoAlpha: 0, duration: 1.4, ease: 'power1.inOut' }, 1.8)
-      .fromTo('.ocean-bed', { autoAlpha: 0 }, { autoAlpha: 1, duration: 2.2, ease: 'power1.inOut' }, 2.2)
+      /* arrival just beneath the risen water — the veil dissolves into the sea bed */
+      .fromTo('.ocean-veil', { opacity: 1 }, { opacity: 0, duration: 1.8, ease: 'power1.inOut' }, 0)
       .to('.ocean-bed', { scale: 1.03, yPercent: -2, ease: 'none', duration: 9 }, 0)
       .to('.ocean-dark', { opacity: 0.78, ease: 'none', duration: 9 }, 0)
       .to('.rays', { opacity: 0.12, ease: 'none', duration: 6 }, 1.5)
@@ -3684,7 +3663,7 @@ const JOURNEY = {
 
 ---
 
-## 📄 assets/js/shop.js  ·  (101 lines)
+## 📄 assets/js/shop.js  ·  (98 lines)
 
 ```javascript
 /* ============================================================
@@ -3693,13 +3672,10 @@ const JOURNEY = {
 (function () {
   'use strict';
 
-  const ENV_TINT = { forest: '#0d1c12', ocean: '#07202e', deep: '#04121c', attar: '#191106', set: '#191106' };
-
-  const deals = ['happy-attar', 'hopeful-attar', 'cheerful-attar', 'discovery-set', 'mi-amor', 'delicious'];
+  const ENV_TINT = { forest: '#0d1c12', ocean: '#07202e', deep: '#04121c' };
 
   function inCat(p, cat) {
     if (cat === 'all') return true;
-    if (cat === 'deals') return deals.includes(p.slug);
     return p.cat === cat;
   }
 
@@ -3791,7 +3767,7 @@ const JOURNEY = {
 
 ---
 
-## 📄 assets/js/product.js  ·  (173 lines)
+## 📄 assets/js/product.js  ·  (171 lines)
 
 ```javascript
 /* ============================================================
@@ -3800,13 +3776,11 @@ const JOURNEY = {
 (function () {
   'use strict';
 
-  const ENV_TINT = { forest: '#0d1c12', ocean: '#07202e', deep: '#04121c', attar: '#191106', set: '#191106' };
+  const ENV_TINT = { forest: '#0d1c12', ocean: '#07202e', deep: '#04121c' };
   const SCENE = {
     forest: { hash: '#forest', label: 'the forest', env: 'forest', title: 'Step back into <em>the forest.</em>' },
     ocean:  { hash: '#ocean',  label: 'the ocean',  env: 'ocean',  title: 'Dive back into <em>the ocean.</em>' },
-    deep:   { hash: '#mostwanted', label: 'the depths', env: 'deep', title: 'Return to <em>the depths.</em>' },
-    attar:  { hash: '#collections', label: 'the collections', env: 'attar', title: 'Return to <em>the collections.</em>' },
-    set:    { hash: '#collections', label: 'the collections', env: 'set', title: 'Return to <em>the collections.</em>' }
+    deep:   { hash: '#mostwanted', label: 'the depths', env: 'deep', title: 'Return to <em>the depths.</em>' }
   };
 
   function starsOf(r) {
@@ -3814,7 +3788,7 @@ const JOURNEY = {
     return '★★★★★'.slice(0, full) + '☆☆☆☆☆'.slice(0, 5 - full);
   }
 
-  function catLabel(c) { return ({ men: 'Men', women: 'Women', attars: 'Attars', discovery: 'Discovery Set' })[c] || 'Fragrances'; }
+  function catLabel(c) { return ({ men: 'Men', women: 'Women' })[c] || 'Fragrances'; }
 
   document.addEventListener('DOMContentLoaded', () => {
     const params = new URLSearchParams(location.search);
@@ -3984,7 +3958,5 @@ const JOURNEY = {
 ## ▶ How to run
 
 ```bash
-# any static server works, e.g.:
-python3 -m http.server 8000
-# open http://localhost:8000
+python3 -m http.server 8000   # open http://localhost:8000
 ```

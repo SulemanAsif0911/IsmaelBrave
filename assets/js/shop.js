@@ -4,13 +4,10 @@
 (function () {
   'use strict';
 
-  const ENV_TINT = { forest: '#0d1c12', ocean: '#07202e', deep: '#04121c', attar: '#191106', set: '#191106' };
-
-  const deals = ['happy-attar', 'hopeful-attar', 'cheerful-attar', 'discovery-set', 'mi-amor', 'delicious'];
+  const ENV_TINT = { forest: '#0d1c12', ocean: '#07202e', deep: '#04121c' };
 
   function inCat(p, cat) {
     if (cat === 'all') return true;
-    if (cat === 'deals') return deals.includes(p.slug);
     return p.cat === cat;
   }
 
