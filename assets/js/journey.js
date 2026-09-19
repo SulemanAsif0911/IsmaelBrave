@@ -72,6 +72,9 @@
       .fromTo('.hero-bottle-in', { autoAlpha: 1 }, { autoAlpha: 0, ease: 'power1.in', duration: 0.3, immediateRender: false }, 0.68)
       .fromTo('.stagechip--hero', { autoAlpha: 1 }, { autoAlpha: 0, duration: 0.2, immediateRender: false }, 0.05)
       .fromTo('#hero .p-canvas', { autoAlpha: 1 }, { autoAlpha: 0, duration: 0.15, immediateRender: false }, 0.85)
+      /* the forest's own first frame fades in over the scenery — the copy is
+         not parallaxed, so by the release the screen already IS the forest */
+      .fromTo('.forest-pre', { autoAlpha: 0 }, { autoAlpha: 1, duration: 0.18, immediateRender: false }, 0.8)
       .to({}, { duration: 0.2 });
 
     /* hero entrance — explicit fromTo ends, so the entrance always finishes
@@ -93,7 +96,7 @@
       /* the bottle lives on its own inner element — parallax starts from 0,
          follows the cursor subtly, and can never drift (the CSS-centered
          anchor is never touched by GSAP) */
-      const planes = ['.hero-bg', '.hero-mid', '.leaf--far', '.hero-bottle-in', '.leaf--l', '.leaf--r', '.leaf--n'];
+      const planes = ['#hero .stage > .hero-bg', '#hero .stage > .hero-mid', '#hero .stage > .leaf--far', '#hero .hero-bottle-in', '#hero .stage > .leaf--l', '#hero .stage > .leaf--r', '#hero .stage > .leaf--n'];
       const px = [6, 14, 22, 10, 32, 36, 34];
       const py = [4, 9, 14, 8, 19, 21, 24];
       planes.forEach((sel, i) => {
@@ -144,7 +147,9 @@
        pure cross-fade — the background is already on screen when the sticky
        stage releases */
     gsap.set('.shore-pre', { scale: 1.06 });
+    gsap.set('.stagechip--forest', { autoAlpha: 0 });
     forestTl
+      .to('.stagechip--forest', { autoAlpha: 1, duration: 0.3, ease: 'power1.out' }, 0.3)
       .to('.stagechip--forest', { autoAlpha: 0, duration: 0.3, ease: 'power1.in' }, 4.02)
       .to('.shore-pre', { autoAlpha: 1, scale: 1, duration: 0.68, ease: 'power1.inOut' }, 4.05)
       .to({}, { duration: 0.27 });

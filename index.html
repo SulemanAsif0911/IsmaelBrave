@@ -88,6 +88,25 @@
       <canvas class="p-canvas" aria-hidden="true"></canvas>
       <div class="vignette" aria-hidden="true"></div>
 
+      <!-- the forest, pre-loaded: fades in near the end of the awakening so
+           the handoff into the forest is a pure cross-fade onto an identical
+           frame — the same technique as the shore pre-load. This copy sits
+           above the mouse-parallaxed scenery and is not parallaxed itself,
+           so it always matches the forest's static frame exactly -->
+      <div class="forest-pre" aria-hidden="true">
+        <div class="layer forest-bg"><img src="assets/img/env/forest-bg.webp" alt=""></div>
+        <div class="forest-frame">
+          <div class="layer ff-mid"><img src="assets/img/env/model-mid.webp" alt=""></div>
+          <div class="leaf leaf--far ff-far"><img src="assets/img/env/model-fore.webp" alt=""></div>
+          <div class="leaf leaf--l ff-l"><img src="assets/img/env/leaf-right.webp" alt=""></div>
+          <div class="leaf leaf--r ff-r"><img src="assets/img/env/leaf-right.webp" alt=""></div>
+          <div class="leaf leaf--n ff-n"><img src="assets/img/env/leaf-near.webp" alt=""></div>
+          <div class="fog"></div>
+          <div class="sunshaft"></div>
+        </div>
+        <div class="vignette"></div>
+      </div>
+
       <div class="hero-copy">
         <span class="eyebrow">Ismaeel Muhammad — Eau de Parfum</span>
         <h1 class="display">More than<br>a scent.</h1>

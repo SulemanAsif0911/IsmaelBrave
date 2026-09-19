@@ -172,6 +172,17 @@ html:not(.cinema) .beat{ min-height:78vh; margin-bottom:8vh; }
 .forest-frame .layer{ will-change:transform; }
 html:not(.cinema) .forest-frame{ display:none; }
 
+/* the forest scene pre-loaded into the end of the awakening — it fades in
+   just before the sticky release, so the awakening → forest handoff is a
+   pure cross-fade onto the forest's own first frame. It carries the
+   forest's exact scenery (same classes, same sway, no mouse parallax),
+   so both sides of the release are the identical screen */
+.forest-pre{
+  position:absolute; inset:0; z-index:5; pointer-events:none;
+  opacity:0; will-change:opacity;
+}
+html:not(.cinema) .forest-pre{ display:none; }
+
 /* the shore scene pre-loaded into the end of the forest — it fades and
    zooms in over the last beat, so the forest → shore handoff shows the
    beach already in place (fade/zoom only, never a rise from the bottom) */

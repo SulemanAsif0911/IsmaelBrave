@@ -1,51 +1,54 @@
 # ISMAEEL MUHAMMAD — A JOURNEY OF SENSES
 
-## Complete source code (v6 — beat-model leaf planes only · no bottom-pop handoffs · shore pre-load cross-fade)
+## Complete source code (v7 — forest pre-load: no split at the awakening → forest handoff)
 
 
 **Stack:** Vanilla HTML / CSS / JS + GSAP ScrollTrigger + Lenis (vendored) — no build step  
 **Catalog:** only the 8 journey models — all extra data removed
 
-**v6 changes**
+**v7 changes**
 
-1. **Only the beat models' leaves are used anywhere** — the hero/forest far
-   plane is `model-fore` (Hopeful's botanical), the near cluster is
-   `leaf-near`, the right strip is `leaf-right` and the left strip is that
-   same image mirrored. `leaf-far` and `leaf-bottom` are retired; the
-   Five-Nine beat is botanical-only like Hopeful.
-2. **No background pops up from the bottom at either handoff.** The dust
-   canvas dissolves before the awakening→forest release, and the shore
-   scene itself fades + zooms in over the last forest beat (`.shore-pre`),
-   so the forest→shore release is a pure cross-fade onto an identical
-   frame. The shore's first title, chip and steps indicator fade in only
-   after the handoff.
+1. **No split at the awakening → forest handoff.** The hero's scenery
+   planes follow the cursor (mouse parallax up to ±36 px) while the
+   forest's copies are static, so the release used to show two halves
+   that didn't line up. The forest's own first frame is now pre-loaded
+   into the end of the awakening (`.forest-pre`) and fades in just
+   before the sticky release — both sides of the slide are the identical
+   screen (pixel-verified: 0.01/255 average difference with the cursor
+   off-centre).
+2. **Mouse parallax is scoped to the hero's own layers** (`#hero .stage >
+   …` direct-child selectors), so the pre-load copy and the forest's
+   frame never move with the cursor.
+3. **The forest's chip ("02 The Forest") fades in only after the
+   handoff**, like the shore's title/chip/steps — nothing is half-cut
+   sliding up.
 
 
 | # | File | Lines | Purpose |
 |---|------|-------|---------|
-| 1 | `index.html` | 584 | The cinematic journey — common awakening→forest background, beat-model leaf planes, shore pre-loaded at the forest exit, Mi Amor models over the shore, white shore type |
+| 1 | `index.html` | 603 | The cinematic journey — forest pre-loaded at the awakening exit (no split handoff), beat-model leaf planes, shore pre-loaded at the forest exit, Mi Amor models over the shore, white shore type |
 | 2 | `shop.html` | 114 | Editorial shop — the 8 journey models only |
 | 3 | `product.html` | 194 | Data-driven product detail page |
 | 4 | `about.html` | 182 | Editorial brand story (5 chapters) |
 | 5 | `contact.html` | 176 | Contact + FAQ / shipping / returns |
 | 6 | `checkout.html` | 220 | Checkout with order confirmation |
 | 7 | `assets/css/base.css` | 445 | Design system: tokens, Playfair display type, nav, cart, cards, footer |
-| 8 | `assets/css/journey.css` | 512 | Cinematic styles: beat-model leaf planes (far = model-fore, near = leaf-near cluster, left = mirrored leaf-right), shore pre-load, white shore type, ocean dive |
+| 8 | `assets/css/journey.css` | 523 | Cinematic styles: forest pre-load + shore pre-load (pure cross-fade handoffs), beat-model leaf planes, white shore type, ocean dive |
 | 9 | `assets/css/pages.css` | 316 | Shop / product / about / contact / checkout styles |
 | 10 | `assets/js/data.js` | 181 | Product database — 8 journey models only |
 | 11 | `assets/js/nav.js` | 94 | Nav, veil, reveals, menu, page transitions |
 | 12 | `assets/js/cart.js` | 194 | Cart store, drawer, wishlist, toasts (localStorage) |
-| 13 | `assets/js/journey.js` | 370 | Scroll engine: deterministic entrance+scrub (no disappearing content), common forest background, shore pre-load cross-fade (no bottom popups), shore scene, ocean dive |
+| 13 | `assets/js/journey.js` | 375 | Scroll engine: deterministic entrance+scrub, forest pre-load + shore pre-load cross-fades (no split, no bottom pops), parallax scoped to the hero, shore scene, ocean dive |
 | 14 | `assets/js/shop.js` | 97 | Shop filters + grid rendering |
 | 15 | `assets/js/product.js` | 170 | Product page rendering + JSON-LD |
 | 16 | `assets/img/ui/favicon.svg` | 4 | Favicon (IM monogram) |
 
-**Total: 16 files, 3853 lines.**
+**Total: 16 files, 3888 lines.**
 
 ---
 
 
-## 📄 index.html  ·  (584 lines)
+## 📄 index.html  ·  (603 lines)
 
 ```html
 <!DOCTYPE html>
@@ -137,6 +140,25 @@
       <div class="leaf leaf--n" aria-hidden="true"><img src="assets/img/env/leaf-near.webp" alt=""></div>
       <canvas class="p-canvas" aria-hidden="true"></canvas>
       <div class="vignette" aria-hidden="true"></div>
+
+      <!-- the forest, pre-loaded: fades in near the end of the awakening so
+           the handoff into the forest is a pure cross-fade onto an identical
+           frame — the same technique as the shore pre-load. This copy sits
+           above the mouse-parallaxed scenery and is not parallaxed itself,
+           so it always matches the forest's static frame exactly -->
+      <div class="forest-pre" aria-hidden="true">
+        <div class="layer forest-bg"><img src="assets/img/env/forest-bg.webp" alt=""></div>
+        <div class="forest-frame">
+          <div class="layer ff-mid"><img src="assets/img/env/model-mid.webp" alt=""></div>
+          <div class="leaf leaf--far ff-far"><img src="assets/img/env/model-fore.webp" alt=""></div>
+          <div class="leaf leaf--l ff-l"><img src="assets/img/env/leaf-right.webp" alt=""></div>
+          <div class="leaf leaf--r ff-r"><img src="assets/img/env/leaf-right.webp" alt=""></div>
+          <div class="leaf leaf--n ff-n"><img src="assets/img/env/leaf-near.webp" alt=""></div>
+          <div class="fog"></div>
+          <div class="sunshaft"></div>
+        </div>
+        <div class="vignette"></div>
+      </div>
 
       <div class="hero-copy">
         <span class="eyebrow">Ismaeel Muhammad — Eau de Parfum</span>
@@ -2002,7 +2024,7 @@ body.cart-open{ overflow:hidden; }
 ```
 
 
-## 📄 assets/css/journey.css  ·  (512 lines)
+## 📄 assets/css/journey.css  ·  (523 lines)
 
 ```css
 /* ============================================================
@@ -2178,6 +2200,17 @@ html:not(.cinema) .beat{ min-height:78vh; margin-bottom:8vh; }
 .forest-frame{ position:absolute; inset:0; pointer-events:none; }
 .forest-frame .layer{ will-change:transform; }
 html:not(.cinema) .forest-frame{ display:none; }
+
+/* the forest scene pre-loaded into the end of the awakening — it fades in
+   just before the sticky release, so the awakening → forest handoff is a
+   pure cross-fade onto the forest's own first frame. It carries the
+   forest's exact scenery (same classes, same sway, no mouse parallax),
+   so both sides of the release are the identical screen */
+.forest-pre{
+  position:absolute; inset:0; z-index:5; pointer-events:none;
+  opacity:0; will-change:opacity;
+}
+html:not(.cinema) .forest-pre{ display:none; }
 
 /* the shore scene pre-loaded into the end of the forest — it fades and
    zooms in over the last beat, so the forest → shore handoff shows the
@@ -3329,7 +3362,7 @@ const productImg = p => IMG + (p.img || p.slug) + '.webp';
 ```
 
 
-## 📄 assets/js/journey.js  ·  (370 lines)
+## 📄 assets/js/journey.js  ·  (375 lines)
 
 ```js
 /* ============================================================
@@ -3406,6 +3439,9 @@ const productImg = p => IMG + (p.img || p.slug) + '.webp';
       .fromTo('.hero-bottle-in', { autoAlpha: 1 }, { autoAlpha: 0, ease: 'power1.in', duration: 0.3, immediateRender: false }, 0.68)
       .fromTo('.stagechip--hero', { autoAlpha: 1 }, { autoAlpha: 0, duration: 0.2, immediateRender: false }, 0.05)
       .fromTo('#hero .p-canvas', { autoAlpha: 1 }, { autoAlpha: 0, duration: 0.15, immediateRender: false }, 0.85)
+      /* the forest's own first frame fades in over the scenery — the copy is
+         not parallaxed, so by the release the screen already IS the forest */
+      .fromTo('.forest-pre', { autoAlpha: 0 }, { autoAlpha: 1, duration: 0.18, immediateRender: false }, 0.8)
       .to({}, { duration: 0.2 });
 
     /* hero entrance — explicit fromTo ends, so the entrance always finishes
@@ -3427,7 +3463,7 @@ const productImg = p => IMG + (p.img || p.slug) + '.webp';
       /* the bottle lives on its own inner element — parallax starts from 0,
          follows the cursor subtly, and can never drift (the CSS-centered
          anchor is never touched by GSAP) */
-      const planes = ['.hero-bg', '.hero-mid', '.leaf--far', '.hero-bottle-in', '.leaf--l', '.leaf--r', '.leaf--n'];
+      const planes = ['#hero .stage > .hero-bg', '#hero .stage > .hero-mid', '#hero .stage > .leaf--far', '#hero .hero-bottle-in', '#hero .stage > .leaf--l', '#hero .stage > .leaf--r', '#hero .stage > .leaf--n'];
       const px = [6, 14, 22, 10, 32, 36, 34];
       const py = [4, 9, 14, 8, 19, 21, 24];
       planes.forEach((sel, i) => {
@@ -3478,7 +3514,9 @@ const productImg = p => IMG + (p.img || p.slug) + '.webp';
        pure cross-fade — the background is already on screen when the sticky
        stage releases */
     gsap.set('.shore-pre', { scale: 1.06 });
+    gsap.set('.stagechip--forest', { autoAlpha: 0 });
     forestTl
+      .to('.stagechip--forest', { autoAlpha: 1, duration: 0.3, ease: 'power1.out' }, 0.3)
       .to('.stagechip--forest', { autoAlpha: 0, duration: 0.3, ease: 'power1.in' }, 4.02)
       .to('.shore-pre', { autoAlpha: 1, scale: 1, duration: 0.68, ease: 'power1.inOut' }, 4.05)
       .to({}, { duration: 0.27 });
@@ -4006,11 +4044,13 @@ Scroll the journey: awakening → forest (4 beats) → shore → dive → sea be
 most wanted. The shop, product pages, cart, wishlist and checkout all work
 locally (cart persists in localStorage).
 
-**Verified:** 18/18 automated checks — scroll-to-top content restore, bottle
-layering under the cursor, Playfair 900 hero type, awakening→forest seam
-(avg diff < 14/255), beat-model-only leaf planes, canvas dissolve at the hero
-end, shore pre-load mid-fade/complete states, Mi Amor shore overlay with the
-water between it and the beach, white shore type, water z-order, scene rails,
-real collection thumbnails, mobile 390px no overflow, zero JS errors, zero
-failed requests — plus a frozen-animation A/B diff of the forest→shore
-handoff frames (avg 2.2/255).
+**Verified:** 22/22 automated checks — scroll-to-top content restore over the
+real wheel path, bottle layering under the cursor, Playfair 900 hero type,
+hero/forest models inventory, canvas dissolve, forest-pre fade states,
+**seam: awakening end == forest start under cursor parallax (0.01/255)**,
+**mid-slide = the same frame on both halves (no split)**, parallax scoping
+(hero planes move, pre/forest copies stay still), forest static bg + chip
+states, shore pre-load mid-fade/complete, Mi Amor shore overlay with water
+between it and the beach, white shore type, water z-order, scene rails, real
+collection thumbnails, mobile 390px no overflow, zero JS errors, zero failed
+requests.
