@@ -1,37 +1,29 @@
 # ISMAEEL MUHAMMAD — A JOURNEY OF SENSES
-## Complete source code (v4 — common background · Mi Amor shore models · bold Playfair type · real-site thumbnails)
+## Complete source code (v5 — leaf-left retired · Hopeful left model removed · white shore type)
 
 **Stack:** Vanilla HTML / CSS / JS + GSAP ScrollTrigger + Lenis (vendored) — no build step  
 **Catalog:** only the 8 journey models — all extra data removed
 
-**v4 changes**
+**v5 changes**
 
-1. **Common background** — the awakening and the forest share the very same
-   background image at the same scale, offset and brightness; only the
-   models (leaf planes, botanicals, bottles) change.
-2. **Perfume models on top** — the bottles ride above every model plane.
-3. **The shore in one scene** — Mi Amor's models (bushes + leaves) overlay
-   the top, the sea water pops up and rises in between, the beach is the
-   background. The separate "Water." beat is removed.
-4. **The story section ("Where love becomes passion") is gone** — six
-   scenes, and the collections portals now use the real product
-   thumbnails from ismaeelmuhammad.pk.
-5. **No more disappearing content** — the entrance and the scrub use
-   explicit fromTo values, so scrolling during the intro and returning to
-   the top always restores every model and text.
-6. **Bold, eye-catching typography** — Playfair Display 700/900 (+ italic)
-   with a metallic gold hero title, heavier eyebrows, labels and buttons.
+1. **`leaf-left.webp` is no longer used anywhere** — the hero and the forest
+   frame's left strip is `leaf-right` mirrored, so the layered foliage
+   framing stays intact on both sides.
+2. **The Hopeful beat no longer carries a model on the left.**
+3. **The shore titles are white** — bold white Playfair with a soft dark
+   shadow, readable over the foliage and the bright sky alike; the
+   Land–Shore–Water steps indicator matches.
 
 | # | File | Lines | Purpose |
 |---|------|-------|---------|
-| 1 | `index.html` | 576 | The cinematic journey — common awakening→forest background, Mi Amor models over the shore, real-site collection thumbnails |
+| 1 | `index.html` | 575 | The cinematic journey — common awakening→forest background, Mi Amor models over the shore, white shore type, real-site collection thumbnails |
 | 2 | `shop.html` | 115 | Editorial shop — the 8 journey models only |
 | 3 | `product.html` | 195 | Data-driven product detail page |
 | 4 | `about.html` | 183 | Editorial brand story (5 chapters) |
 | 5 | `contact.html` | 177 | Contact + FAQ / shipping / returns |
 | 6 | `checkout.html` | 221 | Checkout with order confirmation |
 | 7 | `assets/css/base.css` | 446 | Design system: tokens, Playfair display type, nav, cart, cards, footer |
-| 8 | `assets/css/journey.css` | 506 | Cinematic styles: leaf planes, forest frame continuity, shore scene (models top / water middle / beach base), ocean dive |
+| 8 | `assets/css/journey.css` | 505 | Cinematic styles: leaf planes (left = mirrored leaf-right), forest frame continuity, white shore type, ocean dive |
 | 9 | `assets/css/pages.css` | 317 | Shop / product / about / contact / checkout styles |
 | 10 | `assets/js/data.js` | 182 | Product database — 8 journey models only |
 | 11 | `assets/js/nav.js` | 95 | Nav, veil, reveals, menu, page transitions |
@@ -41,11 +33,11 @@
 | 15 | `assets/js/product.js` | 171 | Product page rendering + JSON-LD |
 | 16 | `assets/img/ui/favicon.svg` | 5 | Favicon (IM monogram) |
 
-**Total: 16 files, 3,837 lines.**
+**Total: 16 files, 3,835 lines.**
 
 ---
 
-## 📄 index.html  ·  (576 lines)
+## 📄 index.html  ·  (575 lines)
 
 ```html
 <!DOCTYPE html>
@@ -132,7 +124,7 @@
         </div>
       </a>
 
-      <div class="leaf leaf--l" aria-hidden="true"><img src="assets/img/env/leaf-left.webp" alt=""></div>
+      <div class="leaf leaf--l" aria-hidden="true"><img src="assets/img/env/leaf-right.webp" alt=""></div>
       <div class="leaf leaf--r" aria-hidden="true"><img src="assets/img/env/leaf-right.webp" alt=""></div>
       <div class="leaf leaf--b" aria-hidden="true"><img src="assets/img/env/leaf-bottom.webp" alt=""></div>
       <canvas class="p-canvas" aria-hidden="true"></canvas>
@@ -162,7 +154,7 @@
       <div class="forest-frame" aria-hidden="true">
         <div class="layer ff-mid"><img src="assets/img/env/model-mid.webp" alt=""></div>
         <div class="leaf leaf--far ff-far"><img src="assets/img/env/leaf-far.webp" alt=""></div>
-        <div class="leaf leaf--l ff-l"><img src="assets/img/env/leaf-left.webp" alt=""></div>
+        <div class="leaf leaf--l ff-l"><img src="assets/img/env/leaf-right.webp" alt=""></div>
         <div class="leaf leaf--r ff-r"><img src="assets/img/env/leaf-right.webp" alt=""></div>
         <div class="leaf leaf--b ff-b"><img src="assets/img/env/leaf-bottom.webp" alt=""></div>
         <div class="fog"></div>
@@ -198,7 +190,6 @@
 
         <article class="beat" data-product="hopeful">
           <div class="beat__botanical flip" aria-hidden="true"><img src="assets/img/env/model-fore.webp" alt=""></div>
-          <div class="bleaf bleaf--l" aria-hidden="true"><img src="assets/img/env/leaf-left.webp" alt=""></div>
           <div class="beat__inner">
             <div class="beat__copy">
               <span class="label">The Forest — <b>02 / 04</b></span>
@@ -1993,7 +1984,7 @@ body.cart-open{ overflow:hidden; }
 
 ```
 
-## 📄 assets/css/journey.css  ·  (506 lines)
+## 📄 assets/css/journey.css  ·  (505 lines)
 
 ```css
 /* ============================================================
@@ -2059,7 +2050,8 @@ html:not(.cinema) .beat{ min-height:78vh; margin-bottom:8vh; }
 .leaf--l{ left:-6%; top:-6%; width:44%; height:112%; z-index:3; }
 .leaf--r{ right:-6%; top:-6%; width:44%; height:112%; z-index:3; }
 .leaf--b{ left:-6%; right:-6%; bottom:-9%; height:56%; z-index:3; }
-.leaf--l img{ animation:swayA 10s ease-in-out infinite alternate; }
+.leaf--l img{ animation:swayAm 10s ease-in-out infinite alternate; }
+@keyframes swayAm{ from{ transform:scaleX(-1) rotate(-.6deg) translateX(-.5%);} to{ transform:scaleX(-1) rotate(.8deg) translateX(.6%);} }
 .leaf--r img{ animation:swayB 12s ease-in-out infinite alternate; }
 .leaf--b img{ animation:swayC 9s ease-in-out infinite alternate; }
 .leaf--far img{ animation:swayA 16s ease-in-out infinite alternate; }
@@ -2179,8 +2171,6 @@ html:not(.cinema) .forest-frame{ display:none; }
 .bleaf{ position:absolute; pointer-events:none; z-index:4; will-change:transform; }
 .bleaf img{ width:100%; height:100%; object-fit:cover; animation:swayC 9.5s ease-in-out infinite alternate; }
 .bleaf--b{ left:-9%; right:-9%; bottom:-11%; height:58%; }
-.bleaf--l{ left:-11%; top:-8%; width:46%; height:116%; }
-.bleaf--l img{ animation:swayA 10s ease-in-out infinite alternate; }
 .bleaf--r{ right:-11%; top:-8%; width:46%; height:116%; }
 .bleaf--r img{ animation:swayB 12s ease-in-out infinite alternate; }
 .bleaf--n{ left:-13%; top:-9%; width:62%; height:120%; }
@@ -2273,26 +2263,26 @@ html:not(.cinema) .forest-frame{ display:none; }
   display:flex; flex-direction:column; align-items:center; justify-content:center;
   text-align:center; padding:0 var(--pad);
 }
-.trans-copy .display{ font-size:clamp(42px,6.4vw,92px); font-weight:900; }
-.trans-copy .tt-1 .display, .trans-copy .tt-2 .display{ text-shadow:none; }
-.trans-copy .label{ color:rgba(242,238,227,.62); margin-bottom:20px; }
-.trans-copy .tt-1, .trans-copy .tt-2{ color:var(--ink); }
-.trans-copy .tt-1 .label, .trans-copy .tt-2 .label{ color:rgba(28,34,28,.62); }
-.trans-copy .tt-1 .display, .trans-copy .tt-2 .display{ text-shadow:none; }
+.trans-copy .display{
+  font-size:clamp(42px,6.4vw,92px); font-weight:900; color:#fff;
+  text-shadow:0 3px 34px rgba(0,0,0,.7), 0 1px 3px rgba(0,0,0,.5);
+}
+.trans-copy .label{ color:rgba(255,255,255,.88); margin-bottom:20px; text-shadow:0 2px 16px rgba(0,0,0,.6); }
 .trans-steps{ display:flex; gap:clamp(20px,4vw,60px); margin-top:44px; align-items:center; }
 .trans-steps span{
   font-size:10px; letter-spacing:.4em; text-transform:uppercase;
-  color:rgba(26,32,26,.78); position:relative; padding-bottom:12px;
+  color:rgba(255,255,255,.85); position:relative; padding-bottom:12px;
+  text-shadow:0 2px 14px rgba(0,0,0,.65);
   transition:color .6s;
 }
-.trans-steps.i span{ color:rgba(242,238,227,.72); }
+.trans-steps.i span{ color:#fff; }
 .trans-steps span::after{
   content:''; position:absolute; left:0; bottom:0; height:1px; width:100%;
   background:currentColor; opacity:.5; transform:scaleX(0); transform-origin:left;
   transition:transform .6s var(--ease);
 }
 .trans-steps span.on::after{ transform:none; }
-.trans-steps i{ width:44px; height:1px; background:rgba(26,32,26,.25); }
+.trans-steps i{ width:44px; height:1px; background:rgba(255,255,255,.32); }
 
 /* ============================================================
    04 — THE OCEAN / THE DIVE

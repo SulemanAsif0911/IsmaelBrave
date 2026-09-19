@@ -1086,14 +1086,17 @@ anywhere (no build step, no server-side rendering required).
    still — only the models (leaf planes, botanicals, bottles) change from
    beat to beat. Four product beats (Five-Nine, Hopeful, Charming,
    Mi Amor); the awakening's framing is carried across the seam and
-   dissolves into the first beat.
+   dissolves into the first beat. The Hopeful beat carries no model on
+   the left — its botanical window opens straight from the edge.
 3. **03 — The Shore** — one continuous scene in three layers:
    1. the Mi Amor models (bushes + leaves) as the overlay on top,
    2. the sea water that pops up and rises in between,
    3. the sky/sand beach as the background.
    Two title beats ("Trees give way to the horizon." → "The shore — Sky,
-   sand and stillness."); there is no separate "Water." beat — after the
-   shore the water rises straight out of the scene and the dive begins.
+   sand and stillness.") set in bold white Playfair with a soft dark
+   shadow, readable over both the foliage and the bright sky; there is no
+   separate "Water." beat — after the shore the water rises straight out
+   of the scene and the dive begins.
 4. **04 — The Dive** — the ocean fills the whole screen (open-water
    surface, no sky) with god rays, caustics, rising bubbles, a live depth
    meter (0 → 42 m) and three depth stops (Zesty @10 m, Sophisticated
@@ -1141,8 +1144,9 @@ drawer (localStorage), wishlist, toasts, mobile menu, page transitions.
     window; also the "bushes" half of the Mi Amor shore overlay)
   - `leaf-near.webp` — the "leaves" half of the Mi Amor shore overlay
   - `model-fore.webp` — from `MODEL2.png` (foreground framing layer)
-  - `leaf-far / leaf-left / leaf-right / leaf-bottom.webp` — leaf planes cut
-    from `MODEL2.png` (blurred far plane + side/bottom strips)
+  - `leaf-far / leaf-right / leaf-bottom.webp` — leaf planes cut from
+    `MODEL2.png` (blurred far plane + right/bottom strips; the left strip
+    is `leaf-right` mirrored, `leaf-left.webp` is no longer used)
   - `leaf-near.webp` — keyed botanical cluster (near-leaf plane)
   - `beach.webp` — the sky-styled shore scene
   - `forest-to-ocean.webp` — the trees of the forest edge, white backdrop
