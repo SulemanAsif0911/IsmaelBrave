@@ -1,0 +1,34 @@
+name: Fetch collection thumbnails from the live site
+on: workflow_dispatch
+permissions:
+  contents: write
+jobs:
+  fetch:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: arena/01a0b464-ismaelbrave
+      - name: Download thumbnails
+        run: |
+          mkdir -p assets/img/collections
+          base="https://ismaeelmuhammad.pk/wp-content/uploads"
+          declare -A imgs=(
+            [five-nine.jpg]="$base/2025/03/1000268225-430x538.jpg"
+            [king-in-the-north.jpg]="$base/2025/03/1000268229-430x538.jpg"
+            [charming.png]="$base/2025/01/1000147567-scaled-3-430x519.png"
+            [hopeful.jpg]="$base/2025/01/1000147565-1-430x522.jpg"
+            [delicious.jpg]="$base/2025/01/1000147567-430x519.jpg"
+            [discovery-set.png]="$base/2025/01/1000147570-700x830-5-430x510.png"
+          )
+          for name in "${!imgs[@]}"; do
+            curl -fsSL --retry 3 -A "Mozilla/5.0" "${imgs[$name]}" -o "assets/img/collections/$name" || echo "FAILED $name"
+          done
+          file assets/img/collections/* || true
+      - name: Commit
+        run: |
+          git config user.name "arena-bot"
+          git config user.email "arena@example.com"
+          git add assets/img/collections
+          git commit -m "Add real-site collection thumbnails" || echo "nothing to commit"
+          git push
