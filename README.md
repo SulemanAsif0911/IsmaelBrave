@@ -1137,18 +1137,21 @@ drawer (localStorage), wishlist, toasts, mobile menu, page transitions.
   Delicious, Discovery Set) used on the collection portals.
 - `assets/img/env/` — environments (WebP):
   - `forest-bg.webp` — from `background Forest.png`
-  - `model-mid.webp` — from `MODEL1.png` (midground layer, transparent window)
+  - `model-mid.webp` — from `MODEL1.png` (midground layer, transparent
+    window; also the "bushes" half of the Mi Amor shore overlay)
+  - `leaf-near.webp` — the "leaves" half of the Mi Amor shore overlay
   - `model-fore.webp` — from `MODEL2.png` (foreground framing layer)
   - `leaf-far / leaf-left / leaf-right / leaf-bottom.webp` — leaf planes cut
     from `MODEL2.png` (blurred far plane + side/bottom strips)
   - `leaf-near.webp` — keyed botanical cluster (near-leaf plane)
   - `beach.webp` — the sky-styled shore scene
-  - `forest-to-ocean.webp` — the last trees of the forest, white backdrop
-    keyed to transparency (kept opaque in `src/` as the master), overlaid
-    on the shore
+  - `forest-to-ocean.webp` — the trees of the forest edge, white backdrop
+    keyed to transparency (opaque master kept in `src/`); used on the shop
+    page head and the about page
   - `ocean-surface.webp` (the whole-screen ocean water, also used by the
-    rising water), `oceanbed.webp` (the transparent sea-bed model overlay),
-    `main-idea.webp` (storyboard)
+    rising water), `oceanbed.webp` (the transparent sea-bed model overlay)
+  - `main-idea.webp` — the original journey storyboard master (kept as an
+    asset; the former story section that showed it has been removed)
 - `assets/img/bottles/` — the 8 signature bottles (generated on pure black,
   then black-keyed to transparent WebP via border flood-fill).
   `src/` keeps the original renders as masters.
