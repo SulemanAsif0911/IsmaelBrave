@@ -60,11 +60,11 @@ html:not(.cinema) .beat{ min-height:78vh; margin-bottom:8vh; }
 .leaf--far{ inset:-7%; z-index:1; opacity:.9; }
 .leaf--l{ left:-6%; top:-6%; width:44%; height:112%; z-index:3; }
 .leaf--r{ right:-6%; top:-6%; width:44%; height:112%; z-index:3; }
-.leaf--b{ left:-6%; right:-6%; bottom:-9%; height:56%; z-index:3; }
+.leaf--n{ left:-13%; top:-9%; width:62%; height:120%; z-index:3; }
+.leaf--n img{ object-fit:contain; object-position:left center; animation:swayA 11s ease-in-out infinite alternate; }
 .leaf--l img{ animation:swayAm 10s ease-in-out infinite alternate; }
 @keyframes swayAm{ from{ transform:scaleX(-1) rotate(-.6deg) translateX(-.5%);} to{ transform:scaleX(-1) rotate(.8deg) translateX(.6%);} }
 .leaf--r img{ animation:swayB 12s ease-in-out infinite alternate; }
-.leaf--b img{ animation:swayC 9s ease-in-out infinite alternate; }
 .leaf--far img{ animation:swayA 16s ease-in-out infinite alternate; }
 @keyframes swayA{ from{ transform:rotate(-.6deg) translateX(-.5%);} to{ transform:rotate(.8deg) translateX(.6%);} }
 @keyframes swayB{ from{ transform:rotate(.7deg) translateX(.5%);} to{ transform:rotate(-.8deg) translateX(-.6%);} }
@@ -156,13 +156,13 @@ html:not(.cinema) .beat{ min-height:78vh; margin-bottom:8vh; }
   .sunshaft{ left:30%; }
   .leaf--l{ width:56%; opacity:.92; }
   .leaf--r{ width:56%; opacity:.92; }
-  .leaf--b{ height:44%; }
+  .leaf--n{ width:80%; }
 }
 
 /* ============================================================
    02 — THE FOREST / FOREST EXPERIENCE
    ============================================================ */
-#forest{ height:520vh; }
+#forest{ height:620vh; }
 #forest .stage{ background:var(--forest-1); }
 .forest-bg{ opacity:1; }
 
@@ -171,6 +171,15 @@ html:not(.cinema) .beat{ min-height:78vh; margin-bottom:8vh; }
 .forest-frame{ position:absolute; inset:0; pointer-events:none; }
 .forest-frame .layer{ will-change:transform; }
 html:not(.cinema) .forest-frame{ display:none; }
+
+/* the shore scene pre-loaded into the end of the forest — it fades and
+   zooms in over the last beat, so the forest → shore handoff shows the
+   beach already in place (fade/zoom only, never a rise from the bottom) */
+.shore-pre{
+  position:absolute; inset:0; z-index:7; pointer-events:none;
+  opacity:0; will-change:transform,opacity;
+}
+html:not(.cinema) .shore-pre{ display:none; }
 
 .beat__botanical{
   position:absolute; inset:-8%; pointer-events:none; will-change:transform;
@@ -181,7 +190,6 @@ html:not(.cinema) .forest-frame{ display:none; }
 /* near leaf layer — faster than the botanical, in front of the bottle */
 .bleaf{ position:absolute; pointer-events:none; z-index:4; will-change:transform; }
 .bleaf img{ width:100%; height:100%; object-fit:cover; animation:swayC 9.5s ease-in-out infinite alternate; }
-.bleaf--b{ left:-9%; right:-9%; bottom:-11%; height:58%; }
 .bleaf--r{ right:-11%; top:-8%; width:46%; height:116%; }
 .bleaf--r img{ animation:swayB 12s ease-in-out infinite alternate; }
 .bleaf--n{ left:-13%; top:-9%; width:62%; height:120%; }

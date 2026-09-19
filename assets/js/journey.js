@@ -65,12 +65,13 @@
       .fromTo('.leaf--far', { yPercent: 0, scale: 1 }, { yPercent: -8, scale: 1.1, ease: 'none', immediateRender: false }, 0)
       .fromTo('.leaf--l', { yPercent: 0, xPercent: 0 }, { yPercent: -13, xPercent: -2, ease: 'none', immediateRender: false }, 0)
       .fromTo('.leaf--r', { yPercent: 0, xPercent: 0 }, { yPercent: -15, xPercent: 2, ease: 'none', immediateRender: false }, 0)
-      .fromTo('.leaf--b', { yPercent: 0 }, { yPercent: -18, ease: 'none', immediateRender: false }, 0)
+      .fromTo('.leaf--n', { yPercent: 0 }, { yPercent: -18, ease: 'none', immediateRender: false }, 0)
       .fromTo('.hero-bottle-in', { yPercent: 0, scale: 1 }, { yPercent: -7, scale: 0.94, ease: 'none', immediateRender: false }, 0)
       .fromTo('.hero-copy', { y: 0, autoAlpha: 1 }, { y: -60, autoAlpha: 0, ease: 'power1.in', duration: 0.28, immediateRender: false }, 0.02)
       .fromTo('.hero-foot', { autoAlpha: 1 }, { autoAlpha: 0, duration: 0.18, immediateRender: false }, 0.05)
       .fromTo('.hero-bottle-in', { autoAlpha: 1 }, { autoAlpha: 0, ease: 'power1.in', duration: 0.3, immediateRender: false }, 0.68)
       .fromTo('.stagechip--hero', { autoAlpha: 1 }, { autoAlpha: 0, duration: 0.2, immediateRender: false }, 0.05)
+      .fromTo('#hero .p-canvas', { autoAlpha: 1 }, { autoAlpha: 0, duration: 0.15, immediateRender: false }, 0.85)
       .to({}, { duration: 0.2 });
 
     /* hero entrance — explicit fromTo ends, so the entrance always finishes
@@ -82,7 +83,7 @@
       .fromTo('.hero-copy p, .hero-copy .btn', { y: 26, autoAlpha: 0 }, { y: 0, autoAlpha: 1, duration: 1, stagger: 0.1, ease: 'power3.out' }, 0.6)
       .fromTo('.hero-bottle-in', { autoAlpha: 0, scale: 0.92, filter: 'blur(10px)' }, { autoAlpha: 1, scale: 1, filter: 'blur(0px)', duration: 1.6, ease: 'power2.out' }, 0.55)
       .fromTo('.leaf--far', { autoAlpha: 0 }, { autoAlpha: 0.9, duration: 2 }, 0.4)
-      .fromTo(['.leaf--l', '.leaf--r', '.leaf--b'], { autoAlpha: 0, y: 40 }, { autoAlpha: 1, y: 0, duration: 1.5, stagger: 0.14, ease: 'power2.out' }, 0.7)
+      .fromTo(['.leaf--l', '.leaf--r', '.leaf--n'], { autoAlpha: 0, y: 40 }, { autoAlpha: 1, y: 0, duration: 1.5, stagger: 0.14, ease: 'power2.out' }, 0.7)
       .fromTo('.hero-foot', { autoAlpha: 0, y: 16 }, { autoAlpha: 1, y: 0, duration: 1 }, 1.5)
       .fromTo('.nav', { y: -18, autoAlpha: 0 }, { y: 0, autoAlpha: 1, duration: 0.9 }, 0);
 
@@ -92,9 +93,9 @@
       /* the bottle lives on its own inner element — parallax starts from 0,
          follows the cursor subtly, and can never drift (the CSS-centered
          anchor is never touched by GSAP) */
-      const planes = ['.hero-bg', '.hero-mid', '.leaf--far', '.hero-bottle-in', '.leaf--l', '.leaf--r', '.leaf--b'];
-      const px = [6, 14, 22, 10, 32, 36, 42];
-      const py = [4, 9, 14, 8, 19, 21, 26];
+      const planes = ['.hero-bg', '.hero-mid', '.leaf--far', '.hero-bottle-in', '.leaf--l', '.leaf--r', '.leaf--n'];
+      const px = [6, 14, 22, 10, 32, 36, 34];
+      const py = [4, 9, 14, 8, 19, 21, 24];
       planes.forEach((sel, i) => {
         qx[sel] = gsap.quickTo(sel, 'x', { duration: 0.9, ease: 'power2.out' });
         qy[sel] = gsap.quickTo(sel, 'y', { duration: 0.9, ease: 'power2.out' });
@@ -128,15 +129,25 @@
       gsap.set('.ff-far', { yPercent: -8, scale: 1.1 });
       gsap.set('.ff-l', { yPercent: -13, xPercent: -2 });
       gsap.set('.ff-r', { yPercent: -15, xPercent: 2 });
-      gsap.set('.ff-b', { yPercent: -18 });
+      gsap.set('.ff-n', { yPercent: -18 });
       forestTl
         .to('.forest-frame', { autoAlpha: 0, ease: 'power1.in', duration: 1.15 }, 0.2)
         .to('.ff-mid', { yPercent: -13, ease: 'none', duration: 1.5 }, 0)
         .to('.ff-far', { yPercent: -15, ease: 'none', duration: 1.5 }, 0)
         .to('.ff-l', { yPercent: -23, xPercent: -4, ease: 'none', duration: 1.5 }, 0)
         .to('.ff-r', { yPercent: -25, xPercent: 3, ease: 'none', duration: 1.5 }, 0)
-        .to('.ff-b', { yPercent: -29, ease: 'none', duration: 1.5 }, 0);
+        .to('.ff-n', { yPercent: -29, ease: 'none', duration: 1.5 }, 0);
     }
+
+    /* the shore pre-load: after the last beat the beach scene fades and
+       zooms in over the forest, so the handoff into the shore section is a
+       pure cross-fade — the background is already on screen when the sticky
+       stage releases */
+    gsap.set('.shore-pre', { scale: 1.06 });
+    forestTl
+      .to('.stagechip--forest', { autoAlpha: 0, duration: 0.3, ease: 'power1.in' }, 4.02)
+      .to('.shore-pre', { autoAlpha: 1, scale: 1, duration: 0.68, ease: 'power1.inOut' }, 4.05)
+      .to({}, { duration: 0.27 });
 
     const SEG = 1; // duration units per beat
     beats.forEach((beat, i) => {
@@ -174,7 +185,8 @@
     const stepsWrap = document.querySelector('.trans-steps');
 
     gsap.set(titles, { autoAlpha: 0, y: 44 });
-    gsap.set(titles[0], { autoAlpha: 1, y: 0 });
+    gsap.set('#transition .stagechip', { autoAlpha: 0 });
+    gsap.set('.trans-steps', { autoAlpha: 0 });
     gsap.set('.water-rise', { yPercent: 103 });
 
     /* one continuous shore scene:
@@ -182,6 +194,10 @@
        2. the sea water rises in the middle
        1. the Mi Amor models (bushes + leaves) overlay everything on top */
     transTl
+      /* the first title + chip fade in only after the handoff is complete */
+      .to(titles[0], { autoAlpha: 1, y: 0, duration: 0.6, ease: 'power1.out' }, 0.15)
+      .to('#transition .stagechip', { autoAlpha: 1, duration: 0.4 }, 0.35)
+      .to('.trans-steps', { autoAlpha: 1, duration: 0.5 }, 0.3)
       .to('.trans-beach', { scale: 1.07, ease: 'none', duration: 5.45 }, 0)
       .fromTo('.shore-overlay', { xPercent: 6 }, { xPercent: 1, ease: 'none', duration: 5.45 }, 0)
       .to('.trans-wash', { opacity: 0.4, duration: 1.2, ease: 'power1.inOut' }, 0.8)

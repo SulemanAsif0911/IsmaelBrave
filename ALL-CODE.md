@@ -1,43 +1,51 @@
 # ISMAEEL MUHAMMAD — A JOURNEY OF SENSES
-## Complete source code (v5 — leaf-left retired · Hopeful left model removed · white shore type)
+
+## Complete source code (v6 — beat-model leaf planes only · no bottom-pop handoffs · shore pre-load cross-fade)
+
 
 **Stack:** Vanilla HTML / CSS / JS + GSAP ScrollTrigger + Lenis (vendored) — no build step  
 **Catalog:** only the 8 journey models — all extra data removed
 
-**v5 changes**
+**v6 changes**
 
-1. **`leaf-left.webp` is no longer used anywhere** — the hero and the forest
-   frame's left strip is `leaf-right` mirrored, so the layered foliage
-   framing stays intact on both sides.
-2. **The Hopeful beat no longer carries a model on the left.**
-3. **The shore titles are white** — bold white Playfair with a soft dark
-   shadow, readable over the foliage and the bright sky alike; the
-   Land–Shore–Water steps indicator matches.
+1. **Only the beat models' leaves are used anywhere** — the hero/forest far
+   plane is `model-fore` (Hopeful's botanical), the near cluster is
+   `leaf-near`, the right strip is `leaf-right` and the left strip is that
+   same image mirrored. `leaf-far` and `leaf-bottom` are retired; the
+   Five-Nine beat is botanical-only like Hopeful.
+2. **No background pops up from the bottom at either handoff.** The dust
+   canvas dissolves before the awakening→forest release, and the shore
+   scene itself fades + zooms in over the last forest beat (`.shore-pre`),
+   so the forest→shore release is a pure cross-fade onto an identical
+   frame. The shore's first title, chip and steps indicator fade in only
+   after the handoff.
+
 
 | # | File | Lines | Purpose |
 |---|------|-------|---------|
-| 1 | `index.html` | 575 | The cinematic journey — common awakening→forest background, Mi Amor models over the shore, white shore type, real-site collection thumbnails |
-| 2 | `shop.html` | 115 | Editorial shop — the 8 journey models only |
-| 3 | `product.html` | 195 | Data-driven product detail page |
-| 4 | `about.html` | 183 | Editorial brand story (5 chapters) |
-| 5 | `contact.html` | 177 | Contact + FAQ / shipping / returns |
-| 6 | `checkout.html` | 221 | Checkout with order confirmation |
-| 7 | `assets/css/base.css` | 446 | Design system: tokens, Playfair display type, nav, cart, cards, footer |
-| 8 | `assets/css/journey.css` | 505 | Cinematic styles: leaf planes (left = mirrored leaf-right), forest frame continuity, white shore type, ocean dive |
-| 9 | `assets/css/pages.css` | 317 | Shop / product / about / contact / checkout styles |
-| 10 | `assets/js/data.js` | 182 | Product database — 8 journey models only |
-| 11 | `assets/js/nav.js` | 95 | Nav, veil, reveals, menu, page transitions |
-| 12 | `assets/js/cart.js` | 195 | Cart store, drawer, wishlist, toasts (localStorage) |
-| 13 | `assets/js/journey.js` | 355 | Scroll engine: deterministic entrance+scrub (no disappearing content), common forest background, shore scene, ocean dive |
-| 14 | `assets/js/shop.js` | 98 | Shop filters + grid rendering |
-| 15 | `assets/js/product.js` | 171 | Product page rendering + JSON-LD |
-| 16 | `assets/img/ui/favicon.svg` | 5 | Favicon (IM monogram) |
+| 1 | `index.html` | 584 | The cinematic journey — common awakening→forest background, beat-model leaf planes, shore pre-loaded at the forest exit, Mi Amor models over the shore, white shore type |
+| 2 | `shop.html` | 114 | Editorial shop — the 8 journey models only |
+| 3 | `product.html` | 194 | Data-driven product detail page |
+| 4 | `about.html` | 182 | Editorial brand story (5 chapters) |
+| 5 | `contact.html` | 176 | Contact + FAQ / shipping / returns |
+| 6 | `checkout.html` | 220 | Checkout with order confirmation |
+| 7 | `assets/css/base.css` | 445 | Design system: tokens, Playfair display type, nav, cart, cards, footer |
+| 8 | `assets/css/journey.css` | 512 | Cinematic styles: beat-model leaf planes (far = model-fore, near = leaf-near cluster, left = mirrored leaf-right), shore pre-load, white shore type, ocean dive |
+| 9 | `assets/css/pages.css` | 316 | Shop / product / about / contact / checkout styles |
+| 10 | `assets/js/data.js` | 181 | Product database — 8 journey models only |
+| 11 | `assets/js/nav.js` | 94 | Nav, veil, reveals, menu, page transitions |
+| 12 | `assets/js/cart.js` | 194 | Cart store, drawer, wishlist, toasts (localStorage) |
+| 13 | `assets/js/journey.js` | 370 | Scroll engine: deterministic entrance+scrub (no disappearing content), common forest background, shore pre-load cross-fade (no bottom popups), shore scene, ocean dive |
+| 14 | `assets/js/shop.js` | 97 | Shop filters + grid rendering |
+| 15 | `assets/js/product.js` | 170 | Product page rendering + JSON-LD |
+| 16 | `assets/img/ui/favicon.svg` | 4 | Favicon (IM monogram) |
 
-**Total: 16 files, 3,835 lines.**
+**Total: 16 files, 3853 lines.**
 
 ---
 
-## 📄 index.html  ·  (575 lines)
+
+## 📄 index.html  ·  (584 lines)
 
 ```html
 <!DOCTYPE html>
@@ -115,7 +123,7 @@
       <div class="sunshaft" aria-hidden="true"></div>
       <div class="layer hero-mid" aria-hidden="true"><img src="assets/img/env/model-mid.webp" alt=""></div>
 
-      <div class="leaf leaf--far" aria-hidden="true"><img src="assets/img/env/leaf-far.webp" alt=""></div>
+      <div class="leaf leaf--far" aria-hidden="true"><img src="assets/img/env/model-fore.webp" alt=""></div>
 
       <a class="hero-bottle" href="product.html?p=five-nine" aria-label="Discover Five-Nine, our woody amber spicy eau de parfum">
         <div class="hero-bottle-in">
@@ -126,7 +134,7 @@
 
       <div class="leaf leaf--l" aria-hidden="true"><img src="assets/img/env/leaf-right.webp" alt=""></div>
       <div class="leaf leaf--r" aria-hidden="true"><img src="assets/img/env/leaf-right.webp" alt=""></div>
-      <div class="leaf leaf--b" aria-hidden="true"><img src="assets/img/env/leaf-bottom.webp" alt=""></div>
+      <div class="leaf leaf--n" aria-hidden="true"><img src="assets/img/env/leaf-near.webp" alt=""></div>
       <canvas class="p-canvas" aria-hidden="true"></canvas>
       <div class="vignette" aria-hidden="true"></div>
 
@@ -153,21 +161,20 @@
       <div class="layer forest-bg"><img src="assets/img/env/forest-bg.webp" alt="Deep forest environment"></div>
       <div class="forest-frame" aria-hidden="true">
         <div class="layer ff-mid"><img src="assets/img/env/model-mid.webp" alt=""></div>
-        <div class="leaf leaf--far ff-far"><img src="assets/img/env/leaf-far.webp" alt=""></div>
+        <div class="leaf leaf--far ff-far"><img src="assets/img/env/model-fore.webp" alt=""></div>
         <div class="leaf leaf--l ff-l"><img src="assets/img/env/leaf-right.webp" alt=""></div>
         <div class="leaf leaf--r ff-r"><img src="assets/img/env/leaf-right.webp" alt=""></div>
-        <div class="leaf leaf--b ff-b"><img src="assets/img/env/leaf-bottom.webp" alt=""></div>
+        <div class="leaf leaf--n ff-n"><img src="assets/img/env/leaf-near.webp" alt=""></div>
         <div class="fog"></div>
         <div class="sunshaft"></div>
       </div>
       <div class="vignette" aria-hidden="true"></div>
-      <div class="stagechip stagechip--hero"><b>02</b> The Forest</div>
+      <div class="stagechip stagechip--forest"><b>02</b> The Forest</div>
 
       <div class="beats">
 
         <article class="beat" data-product="five-nine">
           <div class="beat__botanical" aria-hidden="true"><img src="assets/img/env/model-fore.webp" alt=""></div>
-          <div class="bleaf bleaf--b" aria-hidden="true"><img src="assets/img/env/leaf-bottom.webp" alt=""></div>
           <div class="beat__inner">
             <div class="beat__copy">
               <span class="label">The Forest — <b>01 / 04</b></span>
@@ -256,6 +263,17 @@
           <div class="beat-idx" aria-hidden="true">Mi Amor — Floral · Warm · Musky</div>
         </article>
 
+      </div>
+
+      <!-- the shore, pre-loaded: fades + zooms in at the end of the forest so the
+           background never pops up from the bottom at the forest → shore handoff -->
+      <div class="shore-pre" aria-hidden="true">
+        <div class="layer trans-beach sp-beach"><img src="assets/img/env/beach.webp" alt=""></div>
+        <div class="shore-overlay sp-overlay">
+          <div class="bushes"><img src="assets/img/env/model-mid.webp" alt=""></div>
+          <div class="leaves"><img src="assets/img/env/leaf-near.webp" alt=""></div>
+        </div>
+        <div class="vignette"></div>
       </div>
     </div>
   </section>
@@ -614,10 +632,10 @@
 </script>
 </body>
 </html>
-
 ```
 
-## 📄 shop.html  ·  (115 lines)
+
+## 📄 shop.html  ·  (114 lines)
 
 ```html
 <!DOCTYPE html>
@@ -734,10 +752,10 @@
 </script>
 </body>
 </html>
-
 ```
 
-## 📄 product.html  ·  (195 lines)
+
+## 📄 product.html  ·  (194 lines)
 
 ```html
 <!DOCTYPE html>
@@ -934,10 +952,10 @@
 </script>
 </body>
 </html>
-
 ```
 
-## 📄 about.html  ·  (183 lines)
+
+## 📄 about.html  ·  (182 lines)
 
 ```html
 <!DOCTYPE html>
@@ -1122,10 +1140,10 @@
 </script>
 </body>
 </html>
-
 ```
 
-## 📄 contact.html  ·  (177 lines)
+
+## 📄 contact.html  ·  (176 lines)
 
 ```html
 <!DOCTYPE html>
@@ -1304,10 +1322,10 @@
 </script>
 </body>
 </html>
-
 ```
 
-## 📄 checkout.html  ·  (221 lines)
+
+## 📄 checkout.html  ·  (220 lines)
 
 ```html
 <!DOCTYPE html>
@@ -1530,10 +1548,10 @@
 </script>
 </body>
 </html>
-
 ```
 
-## 📄 assets/css/base.css  ·  (446 lines)
+
+## 📄 assets/css/base.css  ·  (445 lines)
 
 ```css
 /* ============================================================
@@ -1981,10 +1999,10 @@ body.cart-open{ overflow:hidden; }
   *,*::before,*::after{ animation-duration:.01ms !important; animation-iteration-count:1 !important; transition-duration:.01ms !important; }
   html{ scroll-behavior:auto; }
 }
-
 ```
 
-## 📄 assets/css/journey.css  ·  (505 lines)
+
+## 📄 assets/css/journey.css  ·  (512 lines)
 
 ```css
 /* ============================================================
@@ -2049,11 +2067,11 @@ html:not(.cinema) .beat{ min-height:78vh; margin-bottom:8vh; }
 .leaf--far{ inset:-7%; z-index:1; opacity:.9; }
 .leaf--l{ left:-6%; top:-6%; width:44%; height:112%; z-index:3; }
 .leaf--r{ right:-6%; top:-6%; width:44%; height:112%; z-index:3; }
-.leaf--b{ left:-6%; right:-6%; bottom:-9%; height:56%; z-index:3; }
+.leaf--n{ left:-13%; top:-9%; width:62%; height:120%; z-index:3; }
+.leaf--n img{ object-fit:contain; object-position:left center; animation:swayA 11s ease-in-out infinite alternate; }
 .leaf--l img{ animation:swayAm 10s ease-in-out infinite alternate; }
 @keyframes swayAm{ from{ transform:scaleX(-1) rotate(-.6deg) translateX(-.5%);} to{ transform:scaleX(-1) rotate(.8deg) translateX(.6%);} }
 .leaf--r img{ animation:swayB 12s ease-in-out infinite alternate; }
-.leaf--b img{ animation:swayC 9s ease-in-out infinite alternate; }
 .leaf--far img{ animation:swayA 16s ease-in-out infinite alternate; }
 @keyframes swayA{ from{ transform:rotate(-.6deg) translateX(-.5%);} to{ transform:rotate(.8deg) translateX(.6%);} }
 @keyframes swayB{ from{ transform:rotate(.7deg) translateX(.5%);} to{ transform:rotate(-.8deg) translateX(-.6%);} }
@@ -2145,13 +2163,13 @@ html:not(.cinema) .beat{ min-height:78vh; margin-bottom:8vh; }
   .sunshaft{ left:30%; }
   .leaf--l{ width:56%; opacity:.92; }
   .leaf--r{ width:56%; opacity:.92; }
-  .leaf--b{ height:44%; }
+  .leaf--n{ width:80%; }
 }
 
 /* ============================================================
    02 — THE FOREST / FOREST EXPERIENCE
    ============================================================ */
-#forest{ height:520vh; }
+#forest{ height:620vh; }
 #forest .stage{ background:var(--forest-1); }
 .forest-bg{ opacity:1; }
 
@@ -2160,6 +2178,15 @@ html:not(.cinema) .beat{ min-height:78vh; margin-bottom:8vh; }
 .forest-frame{ position:absolute; inset:0; pointer-events:none; }
 .forest-frame .layer{ will-change:transform; }
 html:not(.cinema) .forest-frame{ display:none; }
+
+/* the shore scene pre-loaded into the end of the forest — it fades and
+   zooms in over the last beat, so the forest → shore handoff shows the
+   beach already in place (fade/zoom only, never a rise from the bottom) */
+.shore-pre{
+  position:absolute; inset:0; z-index:7; pointer-events:none;
+  opacity:0; will-change:transform,opacity;
+}
+html:not(.cinema) .shore-pre{ display:none; }
 
 .beat__botanical{
   position:absolute; inset:-8%; pointer-events:none; will-change:transform;
@@ -2170,7 +2197,6 @@ html:not(.cinema) .forest-frame{ display:none; }
 /* near leaf layer — faster than the botanical, in front of the bottle */
 .bleaf{ position:absolute; pointer-events:none; z-index:4; will-change:transform; }
 .bleaf img{ width:100%; height:100%; object-fit:cover; animation:swayC 9.5s ease-in-out infinite alternate; }
-.bleaf--b{ left:-9%; right:-9%; bottom:-11%; height:58%; }
 .bleaf--r{ right:-11%; top:-8%; width:46%; height:116%; }
 .bleaf--r img{ animation:swayB 12s ease-in-out infinite alternate; }
 .bleaf--n{ left:-13%; top:-9%; width:62%; height:120%; }
@@ -2491,10 +2517,10 @@ html:not(.cinema) .leaf--far{ opacity:.55; }
 html:not(.cinema) .depthmeter{ display:none; }
 html:not(.cinema) .beam{ opacity:.7; }
 html:not(.cinema) .mw-grid .pcard, html:not(.cinema) .mw-inner > *{ opacity:1; }
-
 ```
 
-## 📄 assets/css/pages.css  ·  (317 lines)
+
+## 📄 assets/css/pages.css  ·  (316 lines)
 
 ```css
 /* ============================================================
@@ -2813,12 +2839,12 @@ html:not(.cinema) .mw-grid .pcard, html:not(.cinema) .mw-inner > *{ opacity:1; }
 .co-success p{ color:rgba(242,238,227,.65); }
 .co-success .ord{ font-size:11px; letter-spacing:.3em; color:var(--gold); margin:18px 0 30px; text-transform:uppercase; }
 @media (max-width:900px){ .checkout__grid{ grid-template-columns:1fr; } .summary{ position:static; } }
-
 ```
 
-## 📄 assets/js/data.js  ·  (182 lines)
 
-```javascript
+## 📄 assets/js/data.js  ·  (181 lines)
+
+```js
 /* ============================================================
    ISMAEEL MUHAMMAD — A JOURNEY OF SENSES
    Product database (names & price ranges follow the live store)
@@ -3000,12 +3026,12 @@ const CATS = [
 const bySlug = s => PRODUCTS.find(p => p.slug === s);
 const fmtPrice = n => '₨' + n.toLocaleString('en-PK');
 const productImg = p => IMG + (p.img || p.slug) + '.webp';
-
 ```
 
-## 📄 assets/js/nav.js  ·  (95 lines)
 
-```javascript
+## 📄 assets/js/nav.js  ·  (94 lines)
+
+```js
 /* ============================================================
    Shared: nav, veil, reveals, menu, transitions
    ============================================================ */
@@ -3100,12 +3126,12 @@ const productImg = p => IMG + (p.img || p.slug) + '.webp';
     });
   });
 })();
-
 ```
 
-## 📄 assets/js/cart.js  ·  (195 lines)
 
-```javascript
+## 📄 assets/js/cart.js  ·  (194 lines)
+
+```js
 /* ============================================================
    Cart — localStorage store + slide-in drawer + toast
    ============================================================ */
@@ -3300,12 +3326,12 @@ const productImg = p => IMG + (p.img || p.slug) + '.webp';
     window.addEventListener('keydown', e => { if (e.key === 'Escape') closeCart(); });
   });
 })();
-
 ```
 
-## 📄 assets/js/journey.js  ·  (355 lines)
 
-```javascript
+## 📄 assets/js/journey.js  ·  (370 lines)
+
+```js
 /* ============================================================
    THE JOURNEY — scroll-driven cinematic experience
    GSAP ScrollTrigger + Lenis + canvas particles
@@ -3373,12 +3399,13 @@ const productImg = p => IMG + (p.img || p.slug) + '.webp';
       .fromTo('.leaf--far', { yPercent: 0, scale: 1 }, { yPercent: -8, scale: 1.1, ease: 'none', immediateRender: false }, 0)
       .fromTo('.leaf--l', { yPercent: 0, xPercent: 0 }, { yPercent: -13, xPercent: -2, ease: 'none', immediateRender: false }, 0)
       .fromTo('.leaf--r', { yPercent: 0, xPercent: 0 }, { yPercent: -15, xPercent: 2, ease: 'none', immediateRender: false }, 0)
-      .fromTo('.leaf--b', { yPercent: 0 }, { yPercent: -18, ease: 'none', immediateRender: false }, 0)
+      .fromTo('.leaf--n', { yPercent: 0 }, { yPercent: -18, ease: 'none', immediateRender: false }, 0)
       .fromTo('.hero-bottle-in', { yPercent: 0, scale: 1 }, { yPercent: -7, scale: 0.94, ease: 'none', immediateRender: false }, 0)
       .fromTo('.hero-copy', { y: 0, autoAlpha: 1 }, { y: -60, autoAlpha: 0, ease: 'power1.in', duration: 0.28, immediateRender: false }, 0.02)
       .fromTo('.hero-foot', { autoAlpha: 1 }, { autoAlpha: 0, duration: 0.18, immediateRender: false }, 0.05)
       .fromTo('.hero-bottle-in', { autoAlpha: 1 }, { autoAlpha: 0, ease: 'power1.in', duration: 0.3, immediateRender: false }, 0.68)
       .fromTo('.stagechip--hero', { autoAlpha: 1 }, { autoAlpha: 0, duration: 0.2, immediateRender: false }, 0.05)
+      .fromTo('#hero .p-canvas', { autoAlpha: 1 }, { autoAlpha: 0, duration: 0.15, immediateRender: false }, 0.85)
       .to({}, { duration: 0.2 });
 
     /* hero entrance — explicit fromTo ends, so the entrance always finishes
@@ -3390,7 +3417,7 @@ const productImg = p => IMG + (p.img || p.slug) + '.webp';
       .fromTo('.hero-copy p, .hero-copy .btn', { y: 26, autoAlpha: 0 }, { y: 0, autoAlpha: 1, duration: 1, stagger: 0.1, ease: 'power3.out' }, 0.6)
       .fromTo('.hero-bottle-in', { autoAlpha: 0, scale: 0.92, filter: 'blur(10px)' }, { autoAlpha: 1, scale: 1, filter: 'blur(0px)', duration: 1.6, ease: 'power2.out' }, 0.55)
       .fromTo('.leaf--far', { autoAlpha: 0 }, { autoAlpha: 0.9, duration: 2 }, 0.4)
-      .fromTo(['.leaf--l', '.leaf--r', '.leaf--b'], { autoAlpha: 0, y: 40 }, { autoAlpha: 1, y: 0, duration: 1.5, stagger: 0.14, ease: 'power2.out' }, 0.7)
+      .fromTo(['.leaf--l', '.leaf--r', '.leaf--n'], { autoAlpha: 0, y: 40 }, { autoAlpha: 1, y: 0, duration: 1.5, stagger: 0.14, ease: 'power2.out' }, 0.7)
       .fromTo('.hero-foot', { autoAlpha: 0, y: 16 }, { autoAlpha: 1, y: 0, duration: 1 }, 1.5)
       .fromTo('.nav', { y: -18, autoAlpha: 0 }, { y: 0, autoAlpha: 1, duration: 0.9 }, 0);
 
@@ -3400,9 +3427,9 @@ const productImg = p => IMG + (p.img || p.slug) + '.webp';
       /* the bottle lives on its own inner element — parallax starts from 0,
          follows the cursor subtly, and can never drift (the CSS-centered
          anchor is never touched by GSAP) */
-      const planes = ['.hero-bg', '.hero-mid', '.leaf--far', '.hero-bottle-in', '.leaf--l', '.leaf--r', '.leaf--b'];
-      const px = [6, 14, 22, 10, 32, 36, 42];
-      const py = [4, 9, 14, 8, 19, 21, 26];
+      const planes = ['.hero-bg', '.hero-mid', '.leaf--far', '.hero-bottle-in', '.leaf--l', '.leaf--r', '.leaf--n'];
+      const px = [6, 14, 22, 10, 32, 36, 34];
+      const py = [4, 9, 14, 8, 19, 21, 24];
       planes.forEach((sel, i) => {
         qx[sel] = gsap.quickTo(sel, 'x', { duration: 0.9, ease: 'power2.out' });
         qy[sel] = gsap.quickTo(sel, 'y', { duration: 0.9, ease: 'power2.out' });
@@ -3436,15 +3463,25 @@ const productImg = p => IMG + (p.img || p.slug) + '.webp';
       gsap.set('.ff-far', { yPercent: -8, scale: 1.1 });
       gsap.set('.ff-l', { yPercent: -13, xPercent: -2 });
       gsap.set('.ff-r', { yPercent: -15, xPercent: 2 });
-      gsap.set('.ff-b', { yPercent: -18 });
+      gsap.set('.ff-n', { yPercent: -18 });
       forestTl
         .to('.forest-frame', { autoAlpha: 0, ease: 'power1.in', duration: 1.15 }, 0.2)
         .to('.ff-mid', { yPercent: -13, ease: 'none', duration: 1.5 }, 0)
         .to('.ff-far', { yPercent: -15, ease: 'none', duration: 1.5 }, 0)
         .to('.ff-l', { yPercent: -23, xPercent: -4, ease: 'none', duration: 1.5 }, 0)
         .to('.ff-r', { yPercent: -25, xPercent: 3, ease: 'none', duration: 1.5 }, 0)
-        .to('.ff-b', { yPercent: -29, ease: 'none', duration: 1.5 }, 0);
+        .to('.ff-n', { yPercent: -29, ease: 'none', duration: 1.5 }, 0);
     }
+
+    /* the shore pre-load: after the last beat the beach scene fades and
+       zooms in over the forest, so the handoff into the shore section is a
+       pure cross-fade — the background is already on screen when the sticky
+       stage releases */
+    gsap.set('.shore-pre', { scale: 1.06 });
+    forestTl
+      .to('.stagechip--forest', { autoAlpha: 0, duration: 0.3, ease: 'power1.in' }, 4.02)
+      .to('.shore-pre', { autoAlpha: 1, scale: 1, duration: 0.68, ease: 'power1.inOut' }, 4.05)
+      .to({}, { duration: 0.27 });
 
     const SEG = 1; // duration units per beat
     beats.forEach((beat, i) => {
@@ -3482,7 +3519,8 @@ const productImg = p => IMG + (p.img || p.slug) + '.webp';
     const stepsWrap = document.querySelector('.trans-steps');
 
     gsap.set(titles, { autoAlpha: 0, y: 44 });
-    gsap.set(titles[0], { autoAlpha: 1, y: 0 });
+    gsap.set('#transition .stagechip', { autoAlpha: 0 });
+    gsap.set('.trans-steps', { autoAlpha: 0 });
     gsap.set('.water-rise', { yPercent: 103 });
 
     /* one continuous shore scene:
@@ -3490,6 +3528,10 @@ const productImg = p => IMG + (p.img || p.slug) + '.webp';
        2. the sea water rises in the middle
        1. the Mi Amor models (bushes + leaves) overlay everything on top */
     transTl
+      /* the first title + chip fade in only after the handoff is complete */
+      .to(titles[0], { autoAlpha: 1, y: 0, duration: 0.6, ease: 'power1.out' }, 0.15)
+      .to('#transition .stagechip', { autoAlpha: 1, duration: 0.4 }, 0.35)
+      .to('.trans-steps', { autoAlpha: 1, duration: 0.5 }, 0.3)
       .to('.trans-beach', { scale: 1.07, ease: 'none', duration: 5.45 }, 0)
       .fromTo('.shore-overlay', { xPercent: 6 }, { xPercent: 1, ease: 'none', duration: 5.45 }, 0)
       .to('.trans-wash', { opacity: 0.4, duration: 1.2, ease: 'power1.inOut' }, 0.8)
@@ -3660,12 +3702,12 @@ const productImg = p => IMG + (p.img || p.slug) + '.webp';
     });
   }
 })();
-
 ```
 
-## 📄 assets/js/shop.js  ·  (98 lines)
 
-```javascript
+## 📄 assets/js/shop.js  ·  (97 lines)
+
+```js
 /* ============================================================
    Shop — filterable editorial grid
    ============================================================ */
@@ -3763,12 +3805,12 @@ const productImg = p => IMG + (p.img || p.slug) + '.webp';
     render();
   });
 })();
-
 ```
 
-## 📄 assets/js/product.js  ·  (171 lines)
 
-```javascript
+## 📄 assets/js/product.js  ·  (170 lines)
+
+```js
 /* ============================================================
    Product detail — data-driven from ?p=slug
    ============================================================ */
@@ -3939,21 +3981,36 @@ const productImg = p => IMG + (p.img || p.slug) + '.webp';
     }
   });
 })();
-
 ```
 
-## 📄 assets/img/ui/favicon.svg  ·  (5 lines)
 
-```xml
+## 📄 assets/img/ui/favicon.svg  ·  (4 lines)
+
+```svg
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
   <rect width="64" height="64" rx="14" fill="#07130d"/>
   <text x="32" y="42" font-family="Georgia, serif" font-size="30" fill="#c9a86a" text-anchor="middle" letter-spacing="1">IM</text>
 </svg>
-
 ```
+
 
 ## ▶ How to run
 
+Everything is static — open `index.html` directly, or serve the folder:
+
 ```bash
-python3 -m http.server 8000   # open http://localhost:8000
+python3 -m http.server 8000
 ```
+
+Scroll the journey: awakening → forest (4 beats) → shore → dive → sea bed →
+most wanted. The shop, product pages, cart, wishlist and checkout all work
+locally (cart persists in localStorage).
+
+**Verified:** 18/18 automated checks — scroll-to-top content restore, bottle
+layering under the cursor, Playfair 900 hero type, awakening→forest seam
+(avg diff < 14/255), beat-model-only leaf planes, canvas dissolve at the hero
+end, shore pre-load mid-fade/complete states, Mi Amor shore overlay with the
+water between it and the beach, white shore type, water z-order, scene rails,
+real collection thumbnails, mobile 390px no overflow, zero JS errors, zero
+failed requests — plus a frozen-animation A/B diff of the forest→shore
+handoff frames (avg 2.2/255).

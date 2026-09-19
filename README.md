@@ -1077,7 +1077,8 @@ anywhere (no build step, no server-side rendering required).
 ## The journey (index.html)
 
 1. **01 — The Awakening** — layered forest hero: background + midground
-   model + a four-plane leaf system (blurred far foliage, left strip,
+   model + a four-plane leaf system built from the beat models (the
+   Hopeful far botanical framing the shot, left strip,
    right strip, bottom strip) each with its own scroll parallax, mouse
    depth and gentle sway. Fog, sun shaft, canvas dust, camera push-in.
    The perfume model rides above every model plane (top layer, z6).
@@ -1086,8 +1087,13 @@ anywhere (no build step, no server-side rendering required).
    still — only the models (leaf planes, botanicals, bottles) change from
    beat to beat. Four product beats (Five-Nine, Hopeful, Charming,
    Mi Amor); the awakening's framing is carried across the seam and
-   dissolves into the first beat. The Hopeful beat carries no model on
-   the left — its botanical window opens straight from the edge.
+   dissolves into the first beat (the far plane and the near cluster are
+   the beat models' own botanicals, so the layered foliage is made purely
+   of the approved model leaves). The Hopeful beat carries no model on
+   the left — its botanical window opens straight from the edge. At the
+   end of the last beat the shore scene itself fades and zooms in over
+   the forest, so the forest → shore handoff is a pure cross-fade — no
+   background ever pops up from the bottom at either handoff.
 3. **03 — The Shore** — one continuous scene in three layers:
    1. the Mi Amor models (bushes + leaves) as the overlay on top,
    2. the sea water that pops up and rises in between,
@@ -1142,12 +1148,15 @@ drawer (localStorage), wishlist, toasts, mobile menu, page transitions.
   - `forest-bg.webp` — from `background Forest.png`
   - `model-mid.webp` — from `MODEL1.png` (midground layer, transparent
     window; also the "bushes" half of the Mi Amor shore overlay)
-  - `leaf-near.webp` — the "leaves" half of the Mi Amor shore overlay
-  - `model-fore.webp` — from `MODEL2.png` (foreground framing layer)
-  - `leaf-far / leaf-right / leaf-bottom.webp` — leaf planes cut from
-    `MODEL2.png` (blurred far plane + right/bottom strips; the left strip
-    is `leaf-right` mirrored, `leaf-left.webp` is no longer used)
-  - `leaf-near.webp` — keyed botanical cluster (near-leaf plane)
+  - `model-fore.webp` — from `MODEL2.png` (foreground framing layer; also
+    the blurred far plane of the hero/forest leaf system)
+  - `leaf-right.webp` — right-edge leaf strip (the left strip is this same
+    image mirrored in CSS)
+  - `leaf-near.webp` — keyed botanical cluster (near-leaf plane; also the
+    "leaves" half of the Mi Amor shore overlay)
+  - `leaf-far`, `leaf-bottom`, `leaf-left` — retired; the far plane and the
+    bottom strip are the beat models themselves, so only the four approved
+    model-leaf assets are used anywhere
   - `beach.webp` — the sky-styled shore scene
   - `forest-to-ocean.webp` — the trees of the forest edge, white backdrop
     keyed to transparency (opaque master kept in `src/`); used on the shop
