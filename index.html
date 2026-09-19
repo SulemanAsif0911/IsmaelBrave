@@ -58,8 +58,7 @@
   <a class="rail__item" data-rail="03" href="#transition"><span>The Shore</span></a>
   <a class="rail__item" data-rail="04" href="#ocean"><span>The Sea Bed</span></a>
   <a class="rail__item" data-rail="05" href="#mostwanted"><span>The Depths</span></a>
-  <a class="rail__item" data-rail="06" href="#story"><span>The House</span></a>
-  <a class="rail__item" data-rail="07" href="#collections"><span>Collections</span></a>
+  <a class="rail__item" data-rail="06" href="#collections"><span>Collections</span></a>
 </div>
 
 <main class="journey">
@@ -99,7 +98,7 @@
 
       <div class="hero-foot">
         <div class="scrollcue"><span class="line"></span> Scroll to enter</div>
-        <div>01 / 07</div>
+        <div>01 / 06</div>
       </div>
     </div>
   </section>
@@ -226,12 +225,14 @@
   <section class="scene" id="transition" data-rail="03" aria-label="From forest to the shore, then under the water">
     <div class="stage">
       <div class="layer trans-beach"><img src="assets/img/env/beach.webp" alt="Bright sky and warm sand at the shore"></div>
-      <div class="layer trans-a"><img src="assets/img/env/forest-to-ocean.webp" alt="The last trees of the forest, open to the horizon"></div>
-      <div class="shore-leaf" aria-hidden="true"><img src="assets/img/env/leaf-left.webp" alt=""></div>
       <div class="water-rise" aria-hidden="true">
         <div class="water-fill"><img src="assets/img/env/ocean-surface.webp" alt=""></div>
       </div>
       <div class="trans-wash" aria-hidden="true"></div>
+      <div class="shore-overlay" aria-hidden="true">
+        <div class="bushes"><img src="assets/img/env/model-mid.webp" alt=""></div>
+        <div class="leaves"><img src="assets/img/env/leaf-near.webp" alt=""></div>
+      </div>
       <div class="vignette trans-vignette" aria-hidden="true"></div>
       <div class="stagechip"><b>03</b> The Shore</div>
 
@@ -243,10 +244,6 @@
         <div class="tt tt-2">
           <span class="label">The shore</span>
           <h2 class="display">Sky, sand<br>and stillness.</h2>
-        </div>
-        <div class="tt tt-3">
-          <span class="label">And then</span>
-          <h2 class="display">Water.</h2>
         </div>
         <div class="trans-steps" aria-hidden="true">
           <span class="on">Land</span><i></i><span>Shore</span><i></i><span>Water</span>
@@ -435,32 +432,7 @@
   <!-- ================================================
        SCENE 06 — BRAND STORY
        ================================================ -->
-  <section class="story" id="story" data-rail="06" aria-label="The house">
-    <div class="story__grid">
-      <div class="story__copy" data-reveal>
-        <span class="eyebrow">The House</span>
-        <h2 class="display">Where love becomes <em>passion.</em></h2>
-        <p>Ismaeel Muhammad did not begin as a brand. It began as a fixation — years spent studying fragrances, reviewing them, breaking them apart note by note, and sharing that obsession with an audience that grew into a community.</p>
-        <p>Today that passion has become a house. Every fragrance we release starts the same way it always did: with a memory of a place, a season, a feeling — and the patience to translate it into something you can wear.</p>
-        <blockquote class="pull">Fragrance isn't simply worn. It is remembered.</blockquote>
-        <div class="story__stats">
-          <div><b>08</b><span>Signature scents</span></div>
-          <div><b>02</b><span>Worlds</span></div>
-          <div><b>01</b><span>Journey</span></div>
-        </div>
-      </div>
-      <figure class="story__figure" data-reveal style="--d:.15s">
-        <span class="stamp" aria-hidden="true">A Journey<br>of Senses</span>
-        <div class="frame"><img src="assets/img/ui/storyboard.webp" alt="The original storyboard of the journey — from forest to ocean"></div>
-        <figcaption><span>The journey, storyboarded</span><span>Forest → Ocean</span></figcaption>
-      </figure>
-    </div>
-  </section>
-
-  <!-- ================================================
-       SCENE 07 — COLLECTIONS
-       ================================================ -->
-  <section class="collections" id="collections" data-rail="07" aria-label="Collections">
+  <section class="collections" id="collections" data-rail="06" aria-label="Collections">
     <div class="collections__head" data-reveal>
       <div>
         <span class="eyebrow">Explore</span>
@@ -471,7 +443,7 @@
 
     <div class="portal-grid">
       <a class="portal" href="shop.html?cat=men" data-reveal>
-        <img src="assets/img/env/forest-bg.webp" alt="Forest environment">
+        <img src="assets/img/collections/five-nine.jpg" alt="Five-Nine — For Men, from ismaeelmuhammad.pk">
         <span class="veil2"></span>
         <div class="pt">
           <span class="label">For Men</span>
@@ -480,7 +452,7 @@
         </div>
       </a>
       <a class="portal" href="shop.html?cat=women" data-reveal style="--d:.08s">
-        <img src="assets/img/env/ocean-surface.webp" alt="Ocean light">
+        <img src="assets/img/collections/delicious.jpg" alt="Delicious — For Women, from ismaeelmuhammad.pk">
         <span class="veil2"></span>
         <div class="pt">
           <span class="label">For Women</span>
@@ -489,7 +461,7 @@
         </div>
       </a>
       <a class="portal" href="#mostwanted" data-reveal style="--d:.16s">
-        <img src="assets/img/env/oceanbed.webp" alt="Deep water">
+        <img src="assets/img/collections/king-in-the-north.jpg" alt="King in the North — Most Wanted, from ismaeelmuhammad.pk">
         <span class="veil2"></span>
         <div class="pt">
           <span class="label">40 Metres Down</span>
@@ -497,17 +469,26 @@
           <span class="go">What people choose most <span class="arr">→</span></span>
         </div>
       </a>
-      <a class="portal wide" href="#hero" data-reveal>
-        <img src="assets/img/ui/storyboard.webp" alt="The forest to ocean storyboard">
+      <a class="portal" href="shop.html?cat=attars" data-reveal>
+        <img src="assets/img/collections/hopeful.jpg" alt="Hopeful attar — from ismaeelmuhammad.pk">
         <span class="veil2"></span>
         <div class="pt">
-          <span class="label">Relive It</span>
-          <h3 class="display">The Journey</h3>
-          <span class="go">From the forest to the sea bed <span class="arr">→</span></span>
+          <span class="label">Concentrated</span>
+          <h3 class="display">Attars</h3>
+          <span class="go">The old-world essence <span class="arr">→</span></span>
         </div>
       </a>
-      <a class="portal wide" href="shop.html" data-reveal style="--d:.08s">
-        <img src="assets/img/env/forest-to-ocean.webp" alt="Forest opening to light">
+      <a class="portal wide" href="shop.html?cat=discovery" data-reveal style="--d:.08s">
+        <img src="assets/img/collections/discovery-set.png" alt="The Discovery Set — from ismaeelmuhammad.pk">
+        <span class="veil2"></span>
+        <div class="pt">
+          <span class="label">Try Them All</span>
+          <h3 class="display">Discovery Set</h3>
+          <span class="go">The journey in one box <span class="arr">→</span></span>
+        </div>
+      </a>
+      <a class="portal wide" href="shop.html" data-reveal>
+        <img src="assets/img/collections/charming.png" alt="Charming — All Fragrances, from ismaeelmuhammad.pk">
         <span class="veil2"></span>
         <div class="pt">
           <span class="label">The Collection</span>
@@ -551,7 +532,7 @@
       <ul>
         <li><a href="about.html">About</a></li>
         <li><a href="about.html#story">Our Story</a></li>
-        <li><a href="index.html#story">The Journey</a></li>
+        <li><a href="index.html#hero">The Journey</a></li>
         <li><a href="contact.html">Contact</a></li>
       </ul>
     </div>

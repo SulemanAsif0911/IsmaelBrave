@@ -1,53 +1,51 @@
 # ISMAEEL MUHAMMAD — A JOURNEY OF SENSES
-## Complete source code (v3 — the shore perfected · whole-screen ocean · steady bottle · seamless awakening→forest)
+## Complete source code (v4 — common background · Mi Amor shore models · bold Playfair type · real-site thumbnails)
 
 **Stack:** Vanilla HTML / CSS / JS + GSAP ScrollTrigger + Lenis (vendored) — no build step  
 **Catalog:** only the 8 journey models — all extra data removed
 
-**v3 changes**
+**v4 changes**
 
-1. **The shore** — the bright sky/sand beach is the background from the first
-   frame; the trees picture of "Trees give way to the horizon." (white
-   backdrop keyed to transparency) is overlaid directly on top of it, with
-   the leaf picture on the left. The trees then part away before
-   "The shore — Sky, sand and stillness."
-2. **Awakening → Forest** — the same forest background continues across the
-   seam at the same scale, offset and full brightness, and the awakening's
-   framing (mid model, leaf planes, fog, sun shaft) is carried into the
-   forest before dissolving into the first product beat.
-3. **Clean water edge** — the cartoonish SVG wave is removed; the rising water
-   ends in a straight, calm line.
-4. **The ocean** — water fills the whole screen; the transparent sea-bed
-   picture is a model overlay at the bottom of the water, drifting up past
-   the camera as the dive deepens.
-5. **The bottle** — the landing perfume no longer slides down on cursor
-   movement: parallax is a subtle natural follow on a dedicated inner
-   element, and the CSS-centered anchor is never touched by GSAP.
+1. **Common background** — the awakening and the forest share the very same
+   background image at the same scale, offset and brightness; only the
+   models (leaf planes, botanicals, bottles) change.
+2. **Perfume models on top** — the bottles ride above every model plane.
+3. **The shore in one scene** — Mi Amor's models (bushes + leaves) overlay
+   the top, the sea water pops up and rises in between, the beach is the
+   background. The separate "Water." beat is removed.
+4. **The story section ("Where love becomes passion") is gone** — six
+   scenes, and the collections portals now use the real product
+   thumbnails from ismaeelmuhammad.pk.
+5. **No more disappearing content** — the entrance and the scrub use
+   explicit fromTo values, so scrolling during the intro and returning to
+   the top always restores every model and text.
+6. **Bold, eye-catching typography** — Playfair Display 700/900 (+ italic)
+   with a metallic gold hero title, heavier eyebrows, labels and buttons.
 
 | # | File | Lines | Purpose |
 |---|------|-------|---------|
-| 1 | `index.html` | 595 | The cinematic journey — seamless awakening→forest, trees overlaid on the shore, clean water rise, whole-screen ocean with sea-bed model overlay |
+| 1 | `index.html` | 576 | The cinematic journey — common awakening→forest background, Mi Amor models over the shore, real-site collection thumbnails |
 | 2 | `shop.html` | 115 | Editorial shop — the 8 journey models only |
 | 3 | `product.html` | 195 | Data-driven product detail page |
 | 4 | `about.html` | 183 | Editorial brand story (5 chapters) |
 | 5 | `contact.html` | 177 | Contact + FAQ / shipping / returns |
 | 6 | `checkout.html` | 221 | Checkout with order confirmation |
-| 7 | `assets/css/base.css` | 438 | Design system: tokens, nav, cart, cards, footer |
-| 8 | `assets/css/journey.css` | 545 | Cinematic styles: leaf planes, forest frame continuity, beach base + keyed trees overlay, clean water edge, ocean water + sea-bed model |
+| 7 | `assets/css/base.css` | 446 | Design system: tokens, Playfair display type, nav, cart, cards, footer |
+| 8 | `assets/css/journey.css` | 506 | Cinematic styles: leaf planes, forest frame continuity, shore scene (models top / water middle / beach base), ocean dive |
 | 9 | `assets/css/pages.css` | 317 | Shop / product / about / contact / checkout styles |
 | 10 | `assets/js/data.js` | 182 | Product database — 8 journey models only |
 | 11 | `assets/js/nav.js` | 95 | Nav, veil, reveals, menu, page transitions |
 | 12 | `assets/js/cart.js` | 195 | Cart store, drawer, wishlist, toasts (localStorage) |
-| 13 | `assets/js/journey.js` | 355 | Scroll engine: hero→forest seam, bottle mouse-follow fix, shore composite, water rise, ocean dive, depth |
+| 13 | `assets/js/journey.js` | 355 | Scroll engine: deterministic entrance+scrub (no disappearing content), common forest background, shore scene, ocean dive |
 | 14 | `assets/js/shop.js` | 98 | Shop filters + grid rendering |
 | 15 | `assets/js/product.js` | 171 | Product page rendering + JSON-LD |
 | 16 | `assets/img/ui/favicon.svg` | 5 | Favicon (IM monogram) |
 
-**Total: 16 files, 3,887 lines.**
+**Total: 16 files, 3,837 lines.**
 
 ---
 
-## 📄 index.html  ·  (595 lines)
+## 📄 index.html  ·  (576 lines)
 
 ```html
 <!DOCTYPE html>
@@ -110,8 +108,7 @@
   <a class="rail__item" data-rail="03" href="#transition"><span>The Shore</span></a>
   <a class="rail__item" data-rail="04" href="#ocean"><span>The Sea Bed</span></a>
   <a class="rail__item" data-rail="05" href="#mostwanted"><span>The Depths</span></a>
-  <a class="rail__item" data-rail="06" href="#story"><span>The House</span></a>
-  <a class="rail__item" data-rail="07" href="#collections"><span>Collections</span></a>
+  <a class="rail__item" data-rail="06" href="#collections"><span>Collections</span></a>
 </div>
 
 <main class="journey">
@@ -151,7 +148,7 @@
 
       <div class="hero-foot">
         <div class="scrollcue"><span class="line"></span> Scroll to enter</div>
-        <div>01 / 07</div>
+        <div>01 / 06</div>
       </div>
     </div>
   </section>
@@ -278,12 +275,14 @@
   <section class="scene" id="transition" data-rail="03" aria-label="From forest to the shore, then under the water">
     <div class="stage">
       <div class="layer trans-beach"><img src="assets/img/env/beach.webp" alt="Bright sky and warm sand at the shore"></div>
-      <div class="layer trans-a"><img src="assets/img/env/forest-to-ocean.webp" alt="The last trees of the forest, open to the horizon"></div>
-      <div class="shore-leaf" aria-hidden="true"><img src="assets/img/env/leaf-left.webp" alt=""></div>
       <div class="water-rise" aria-hidden="true">
         <div class="water-fill"><img src="assets/img/env/ocean-surface.webp" alt=""></div>
       </div>
       <div class="trans-wash" aria-hidden="true"></div>
+      <div class="shore-overlay" aria-hidden="true">
+        <div class="bushes"><img src="assets/img/env/model-mid.webp" alt=""></div>
+        <div class="leaves"><img src="assets/img/env/leaf-near.webp" alt=""></div>
+      </div>
       <div class="vignette trans-vignette" aria-hidden="true"></div>
       <div class="stagechip"><b>03</b> The Shore</div>
 
@@ -295,10 +294,6 @@
         <div class="tt tt-2">
           <span class="label">The shore</span>
           <h2 class="display">Sky, sand<br>and stillness.</h2>
-        </div>
-        <div class="tt tt-3">
-          <span class="label">And then</span>
-          <h2 class="display">Water.</h2>
         </div>
         <div class="trans-steps" aria-hidden="true">
           <span class="on">Land</span><i></i><span>Shore</span><i></i><span>Water</span>
@@ -487,32 +482,7 @@
   <!-- ================================================
        SCENE 06 — BRAND STORY
        ================================================ -->
-  <section class="story" id="story" data-rail="06" aria-label="The house">
-    <div class="story__grid">
-      <div class="story__copy" data-reveal>
-        <span class="eyebrow">The House</span>
-        <h2 class="display">Where love becomes <em>passion.</em></h2>
-        <p>Ismaeel Muhammad did not begin as a brand. It began as a fixation — years spent studying fragrances, reviewing them, breaking them apart note by note, and sharing that obsession with an audience that grew into a community.</p>
-        <p>Today that passion has become a house. Every fragrance we release starts the same way it always did: with a memory of a place, a season, a feeling — and the patience to translate it into something you can wear.</p>
-        <blockquote class="pull">Fragrance isn't simply worn. It is remembered.</blockquote>
-        <div class="story__stats">
-          <div><b>08</b><span>Signature scents</span></div>
-          <div><b>02</b><span>Worlds</span></div>
-          <div><b>01</b><span>Journey</span></div>
-        </div>
-      </div>
-      <figure class="story__figure" data-reveal style="--d:.15s">
-        <span class="stamp" aria-hidden="true">A Journey<br>of Senses</span>
-        <div class="frame"><img src="assets/img/ui/storyboard.webp" alt="The original storyboard of the journey — from forest to ocean"></div>
-        <figcaption><span>The journey, storyboarded</span><span>Forest → Ocean</span></figcaption>
-      </figure>
-    </div>
-  </section>
-
-  <!-- ================================================
-       SCENE 07 — COLLECTIONS
-       ================================================ -->
-  <section class="collections" id="collections" data-rail="07" aria-label="Collections">
+  <section class="collections" id="collections" data-rail="06" aria-label="Collections">
     <div class="collections__head" data-reveal>
       <div>
         <span class="eyebrow">Explore</span>
@@ -523,7 +493,7 @@
 
     <div class="portal-grid">
       <a class="portal" href="shop.html?cat=men" data-reveal>
-        <img src="assets/img/env/forest-bg.webp" alt="Forest environment">
+        <img src="assets/img/collections/five-nine.jpg" alt="Five-Nine — For Men, from ismaeelmuhammad.pk">
         <span class="veil2"></span>
         <div class="pt">
           <span class="label">For Men</span>
@@ -532,7 +502,7 @@
         </div>
       </a>
       <a class="portal" href="shop.html?cat=women" data-reveal style="--d:.08s">
-        <img src="assets/img/env/ocean-surface.webp" alt="Ocean light">
+        <img src="assets/img/collections/delicious.jpg" alt="Delicious — For Women, from ismaeelmuhammad.pk">
         <span class="veil2"></span>
         <div class="pt">
           <span class="label">For Women</span>
@@ -541,7 +511,7 @@
         </div>
       </a>
       <a class="portal" href="#mostwanted" data-reveal style="--d:.16s">
-        <img src="assets/img/env/oceanbed.webp" alt="Deep water">
+        <img src="assets/img/collections/king-in-the-north.jpg" alt="King in the North — Most Wanted, from ismaeelmuhammad.pk">
         <span class="veil2"></span>
         <div class="pt">
           <span class="label">40 Metres Down</span>
@@ -549,17 +519,26 @@
           <span class="go">What people choose most <span class="arr">→</span></span>
         </div>
       </a>
-      <a class="portal wide" href="#hero" data-reveal>
-        <img src="assets/img/ui/storyboard.webp" alt="The forest to ocean storyboard">
+      <a class="portal" href="shop.html?cat=attars" data-reveal>
+        <img src="assets/img/collections/hopeful.jpg" alt="Hopeful attar — from ismaeelmuhammad.pk">
         <span class="veil2"></span>
         <div class="pt">
-          <span class="label">Relive It</span>
-          <h3 class="display">The Journey</h3>
-          <span class="go">From the forest to the sea bed <span class="arr">→</span></span>
+          <span class="label">Concentrated</span>
+          <h3 class="display">Attars</h3>
+          <span class="go">The old-world essence <span class="arr">→</span></span>
         </div>
       </a>
-      <a class="portal wide" href="shop.html" data-reveal style="--d:.08s">
-        <img src="assets/img/env/forest-to-ocean.webp" alt="Forest opening to light">
+      <a class="portal wide" href="shop.html?cat=discovery" data-reveal style="--d:.08s">
+        <img src="assets/img/collections/discovery-set.png" alt="The Discovery Set — from ismaeelmuhammad.pk">
+        <span class="veil2"></span>
+        <div class="pt">
+          <span class="label">Try Them All</span>
+          <h3 class="display">Discovery Set</h3>
+          <span class="go">The journey in one box <span class="arr">→</span></span>
+        </div>
+      </a>
+      <a class="portal wide" href="shop.html" data-reveal>
+        <img src="assets/img/collections/charming.png" alt="Charming — All Fragrances, from ismaeelmuhammad.pk">
         <span class="veil2"></span>
         <div class="pt">
           <span class="label">The Collection</span>
@@ -603,7 +582,7 @@
       <ul>
         <li><a href="about.html">About</a></li>
         <li><a href="about.html#story">Our Story</a></li>
-        <li><a href="index.html#story">The Journey</a></li>
+        <li><a href="index.html#hero">The Journey</a></li>
         <li><a href="contact.html">Contact</a></li>
       </ul>
     </div>
@@ -1563,13 +1542,16 @@
 
 ```
 
-## 📄 assets/css/base.css  ·  (438 lines)
+## 📄 assets/css/base.css  ·  (446 lines)
 
 ```css
 /* ============================================================
    ISMAEEL MUHAMMAD — base design system
    ============================================================ */
 
+@font-face { font-family:'Playfair Display'; src:url('../fonts/playfair-display-latin-700-normal.woff2') format('woff2'); font-weight:700; font-style:normal; font-display:swap; }
+@font-face { font-family:'Playfair Display'; src:url('../fonts/playfair-display-latin-900-normal.woff2') format('woff2'); font-weight:900; font-style:normal; font-display:swap; }
+@font-face { font-family:'Playfair Display'; src:url('../fonts/playfair-display-latin-700-italic.woff2') format('woff2'); font-weight:700; font-style:italic; font-display:swap; }
 @font-face { font-family:'Cormorant Garamond'; src:url('../fonts/cormorant-garamond-latin-300-normal.woff2') format('woff2'); font-weight:300; font-style:normal; font-display:swap; }
 @font-face { font-family:'Cormorant Garamond'; src:url('../fonts/cormorant-garamond-latin-400-normal.woff2') format('woff2'); font-weight:400; font-style:normal; font-display:swap; }
 @font-face { font-family:'Cormorant Garamond'; src:url('../fonts/cormorant-garamond-latin-500-normal.woff2') format('woff2'); font-weight:500; font-style:normal; font-display:swap; }
@@ -1634,16 +1616,21 @@ input,textarea,select{ font-family:inherit; font-size:inherit; }
 
 /* ---------- typography ---------- */
 .display{
-  font-family:var(--serif); font-weight:300;
-  line-height:1.04; letter-spacing:.01em;
+  font-family:'Playfair Display', var(--serif); font-weight:700;
+  line-height:1.02; letter-spacing:-.012em;
   text-wrap:balance;
 }
-h1.display{ font-size:clamp(44px,8.2vw,124px); }
-h2.display{ font-size:clamp(34px,5.4vw,76px); }
-h3.display{ font-size:clamp(26px,3.2vw,44px); }
+.display em{ font-style:italic; }
+h1.display{ font-size:clamp(52px,9vw,148px); font-weight:900; letter-spacing:-.02em; }
+h2.display{ font-size:clamp(36px,5.8vw,84px); }
+h3.display{ font-size:clamp(28px,3.6vw,50px); }
 .eyebrow{
-  font-family:var(--sans); font-size:11px; font-weight:500;
+  font-family:var(--sans); font-size:11px; font-weight:600;
   letter-spacing:.42em; text-transform:uppercase; color:var(--gold);
+}
+.eyebrow::before{
+  content:''; display:inline-block; width:26px; height:1px;
+  background:var(--gold); margin-right:14px; vertical-align:middle; opacity:.8;
 }
 .label{
   font-size:11px; font-weight:500; letter-spacing:.34em; text-transform:uppercase;
@@ -1660,7 +1647,7 @@ h3.display{ font-size:clamp(26px,3.2vw,44px); }
 /* ---------- buttons ---------- */
 .btn{
   position:relative; display:inline-flex; align-items:center; gap:14px;
-  font-size:11px; font-weight:500; letter-spacing:.34em; text-transform:uppercase;
+  font-size:11px; font-weight:600; letter-spacing:.34em; text-transform:uppercase;
   color:var(--paper); padding:6px 2px;
   transition:color .45s var(--ease);
 }
@@ -2006,7 +1993,7 @@ body.cart-open{ overflow:hidden; }
 
 ```
 
-## 📄 assets/css/journey.css  ·  (545 lines)
+## 📄 assets/css/journey.css  ·  (506 lines)
 
 ```css
 /* ============================================================
@@ -2106,7 +2093,7 @@ html:not(.cinema) .beat{ min-height:78vh; margin-bottom:8vh; }
 /* bottle in hero — sits inside the cutout of the model layers */
 .hero-bottle{
   position:absolute; top:50%; left:60%;
-  width:min(34vh,300px); height:74vh; z-index:2;
+  width:min(34vh,300px); height:74vh; z-index:6;
   translate:-50% -52%;   /* CSS centering only — GSAP never touches this element */
 }
 .hero-bottle-in{ position:absolute; inset:0; will-change:transform; }
@@ -2128,10 +2115,16 @@ html:not(.cinema) .beat{ min-height:78vh; margin-bottom:8vh; }
   max-width:600px; z-index:6;
 }
 .hero-copy .eyebrow{ display:block; margin-bottom:26px; }
-.hero-copy h1{ margin-bottom:8px; }
+.hero-copy h1{
+  margin-bottom:10px;
+  background:linear-gradient(104deg,#f6eeda 8%,#d9bc7d 34%,#f9f1de 50%,#c8a15c 72%,#efdfb8 96%);
+  -webkit-background-clip:text; background-clip:text; color:transparent;
+  filter:drop-shadow(0 6px 34px rgba(0,0,0,.45));
+}
 .hero-copy .journeysub{
   font-family:var(--serif); font-style:italic; font-weight:400;
-  font-size:clamp(22px,3vw,40px); color:var(--gold);
+  font-family:'Playfair Display', var(--serif); font-style:italic; font-weight:700;
+  font-size:clamp(24px,3.4vw,46px); color:var(--gold);
   margin-bottom:26px; letter-spacing:.04em;
 }
 .hero-copy p{ max-width:42ch; }
@@ -2202,6 +2195,7 @@ html:not(.cinema) .forest-frame{ display:none; }
 .beat__copy .label{ color:rgba(242,238,227,.55); display:block; margin-bottom:22px; }
 .beat__copy .label b{ color:var(--gold); font-weight:500; }
 .beat__copy h3{ margin-bottom:12px; }
+.beat__copy .display{ font-size:clamp(38px,4.8vw,68px); font-weight:900; }
 .beat__family{ font-size:10.5px; letter-spacing:.34em; color:var(--gold); margin-bottom:18px; }
 .beat__tag{ font-family:var(--serif); font-style:italic; font-size:19px; color:rgba(242,238,227,.75); margin-bottom:26px; }
 .beat__meta{ display:flex; gap:26px; align-items:center; margin-top:30px; }
@@ -2242,21 +2236,27 @@ html:not(.cinema) .forest-frame{ display:none; }
    03 — TRANSITION / FOREST → OPEN LAND → WATER
    ============================================================ */
 #transition{ height:420vh; background:#000; }
-.trans-a{ transform:scale(1.14); }
-.trans-a img{ object-position:34% 50%; }
 .trans-beach{ transform:scale(1.14); }
 .trans-beach img{ object-position:50% 45%; }
 
-/* the forest's edge — leaves (no background) overlaid on the shore */
-.shore-leaf{
-  position:absolute; left:-7%; top:-6%; width:46%; height:112%;
-  z-index:3; pointer-events:none; will-change:transform;
+/* the Mi Amor models — bushes + leaves — overlaid on top of the whole shore
+   scene; the sea water rises in between them and the beach */
+.shore-overlay{
+  position:absolute; inset:0; z-index:3; pointer-events:none; will-change:transform;
 }
-.shore-leaf img{ width:100%; height:100%; object-fit:cover; animation:swayA 13s ease-in-out infinite alternate; }
+.shore-overlay .bushes{ position:absolute; inset:-7%; }
+.shore-overlay .bushes img{
+  width:100%; height:100%; object-fit:cover; object-position:38% 50%;
+}
+.shore-overlay .leaves{ position:absolute; left:-13%; top:-9%; width:62%; height:120%; }
+.shore-overlay .leaves img{
+  width:100%; height:100%; object-fit:contain; object-position:left center;
+  animation:swayA 11s ease-in-out infinite alternate;
+}
 
 /* water rising from the bottom toward the top */
 .water-rise{
-  position:absolute; inset:0; z-index:5;
+  position:absolute; inset:0; z-index:2;
   will-change:transform;
 }
 .water-fill{ position:absolute; inset:0; overflow:hidden; }
@@ -2273,7 +2273,8 @@ html:not(.cinema) .forest-frame{ display:none; }
   display:flex; flex-direction:column; align-items:center; justify-content:center;
   text-align:center; padding:0 var(--pad);
 }
-.trans-copy .display{ text-shadow:0 2px 44px rgba(0,0,0,.45); }
+.trans-copy .display{ font-size:clamp(42px,6.4vw,92px); font-weight:900; }
+.trans-copy .tt-1 .display, .trans-copy .tt-2 .display{ text-shadow:none; }
 .trans-copy .label{ color:rgba(242,238,227,.62); margin-bottom:20px; }
 .trans-copy .tt-1, .trans-copy .tt-2{ color:var(--ink); }
 .trans-copy .tt-1 .label, .trans-copy .tt-2 .label{ color:rgba(28,34,28,.62); }
@@ -2363,7 +2364,7 @@ html:not(.cinema) .forest-frame{ display:none; }
 .ocean-head{
   position:absolute; top:16vh; left:0; right:0; text-align:center; z-index:7;
 }
-.ocean-head .display{ font-size:clamp(28px,4.4vw,58px); }
+.ocean-head .display{ font-size:clamp(34px,5vw,74px); font-weight:900; }
 .ocean-head .sub{
   margin-top:14px; font-size:10.5px; letter-spacing:.4em; text-transform:uppercase;
   color:rgba(214,236,244,.66);
@@ -2415,60 +2416,7 @@ html:not(.cinema) .forest-frame{ display:none; }
 @media (max-width:900px){ .mw-grid{ grid-template-columns:repeat(2,1fr); } }
 
 /* ============================================================
-   06 — BRAND STORY (ivory editorial)
-   ============================================================ */
-.story{
-  background:var(--paper); color:var(--ink);
-  padding:clamp(90px,13vh,170px) 0 clamp(70px,10vh,130px);
-}
-.story__grid{
-  display:grid; grid-template-columns:1.05fr .95fr; gap:clamp(36px,6vw,100px);
-  align-items:center; padding-inline:var(--pad);
-}
-.story__copy .eyebrow{ color:#8a6d3a; }
-.story__copy h2{ margin:26px 0 30px; }
-.story__copy h2 em{ font-style:italic; color:#8a6d3a; }
-.story__copy p{ color:rgba(7,11,8,.72); max-width:52ch; }
-.story__copy p + p{ margin-top:18px; }
-.pull{
-  font-family:var(--serif); font-style:italic; font-weight:400;
-  font-size:clamp(21px,2.4vw,30px); line-height:1.35; color:#232d20;
-  border-left:2px solid var(--gold); padding-left:26px; margin:34px 0 8px;
-  max-width:30ch;
-}
-.story__stats{
-  display:flex; gap:clamp(26px,4vw,60px); margin-top:44px; padding-top:34px;
-  border-top:1px solid var(--line-dark);
-}
-.story__stats b{ display:block; font-family:var(--serif); font-weight:500; font-size:clamp(30px,3.4vw,46px); line-height:1; }
-.story__stats span{ font-size:9.5px; letter-spacing:.3em; text-transform:uppercase; color:rgba(7,11,8,.5); margin-top:8px; display:block; }
-
-.story__figure{ position:relative; }
-.story__figure .frame{
-  position:relative; overflow:hidden;
-  box-shadow:0 40px 90px -30px rgba(7,11,8,.35);
-}
-.story__figure img{ width:100%; aspect-ratio:4/5.1; object-fit:cover; transform:scale(1.06); }
-.story__figure figcaption{
-  margin-top:16px; font-size:10px; letter-spacing:.28em; text-transform:uppercase;
-  color:rgba(7,11,8,.45); display:flex; justify-content:space-between; gap:10px;
-}
-.story__figure .stamp{
-  position:absolute; z-index:2; right:-26px; top:-26px;
-  width:110px; height:110px; border-radius:50%;
-  border:1px solid rgba(138,109,58,.5);
-  display:flex; align-items:center; justify-content:center; text-align:center;
-  font-size:8.5px; letter-spacing:.3em; text-transform:uppercase; color:#8a6d3a;
-  background:rgba(242,238,227,.9); backdrop-filter:blur(3px);
-  transform:rotate(12deg);
-}
-@media (max-width:900px){
-  .story__grid{ grid-template-columns:1fr; }
-  .story__figure .stamp{ right:8px; top:-34px; }
-}
-
-/* ============================================================
-   07 — COLLECTIONS
+   06 — COLLECTIONS
    ============================================================ */
 .collections{ background:var(--charcoal); padding:clamp(90px,12vh,160px) 0 clamp(80px,10vh,120px); }
 .collections__head{ padding-inline:var(--pad); margin-bottom:clamp(40px,6vh,70px); display:flex; justify-content:space-between; align-items:flex-end; gap:20px; flex-wrap:wrap; }
@@ -2484,9 +2432,9 @@ html:not(.cinema) .forest-frame{ display:none; }
 }
 .portal.wide{ grid-column:span 3; aspect-ratio:16/9.6; }
 .portal img{
-  position:absolute; inset:0; width:100%; height:100%; object-fit:cover;
-  opacity:.6; filter:saturate(.85);
-  transform:scale(1.05);
+  position:absolute; inset:0; width:100%; height:100%; object-fit:cover; object-position:50% 30%;
+  opacity:.88; filter:saturate(1.02);
+  transform:scale(1.03);
   transition:transform 1.1s var(--ease), opacity .7s, filter .7s;
 }
 .portal .veil2{
@@ -2497,7 +2445,7 @@ html:not(.cinema) .forest-frame{ display:none; }
   position:absolute; left:22px; right:22px; bottom:20px; z-index:2; color:var(--paper);
 }
 .portal .pt .label{ color:var(--gold); display:block; margin-bottom:10px; font-size:9.5px; }
-.portal .pt h3{ font-size:clamp(22px,2.6vw,34px); letter-spacing:.1em; }
+.portal .pt h3{ font-size:clamp(26px,3vw,42px); font-weight:900; letter-spacing:.02em; }
 .portal .pt .go{
   display:inline-flex; align-items:center; gap:10px; margin-top:12px;
   font-size:10px; letter-spacing:.3em; text-transform:uppercase; color:rgba(242,238,227,.75);
@@ -3426,31 +3374,35 @@ const productImg = p => IMG + (p.img || p.slug) + '.webp';
     const heroTl = gsap.timeline({
       scrollTrigger: { trigger: '#hero', start: 'top top', end: 'bottom bottom', scrub: 0.5 }
     });
+    /* every tween the entrance also touches uses explicit fromTo values,
+       so a scroll during the entrance can never lock in half-animated
+       start states (the "content gone when scrolling back to top" bug) */
     heroTl
-      .to('.hero-bg', { scale: 1.0, yPercent: 4, ease: 'none' }, 0)
-      .to('.hero-mid', { yPercent: -5, xPercent: -1.5, ease: 'none' }, 0)
-      .to('.leaf--far', { yPercent: -8, scale: 1.1, ease: 'none' }, 0)
-      .to('.leaf--l', { yPercent: -13, xPercent: -2, ease: 'none' }, 0)
-      .to('.leaf--r', { yPercent: -15, xPercent: 2, ease: 'none' }, 0)
-      .to('.leaf--b', { yPercent: -18, ease: 'none' }, 0)
-      .to('.hero-bottle-in', { yPercent: -7, scale: 0.94, ease: 'none' }, 0)
-      .to('.hero-copy', { y: -60, autoAlpha: 0, ease: 'power1.in', duration: 0.28 }, 0.02)
-      .to('.hero-foot', { autoAlpha: 0, duration: 0.18 }, 0.05)
-      .to('.hero-bottle-in', { autoAlpha: 0, ease: 'power1.in', duration: 0.3 }, 0.68)
-      .to('.stagechip--hero', { autoAlpha: 0, duration: 0.2 }, 0.05)
+      .fromTo('.hero-bg', { scale: 1.06, yPercent: 0 }, { scale: 1.0, yPercent: 4, ease: 'none', immediateRender: false }, 0)
+      .fromTo('.hero-mid', { yPercent: 0, xPercent: 0 }, { yPercent: -5, xPercent: -1.5, ease: 'none', immediateRender: false }, 0)
+      .fromTo('.leaf--far', { yPercent: 0, scale: 1 }, { yPercent: -8, scale: 1.1, ease: 'none', immediateRender: false }, 0)
+      .fromTo('.leaf--l', { yPercent: 0, xPercent: 0 }, { yPercent: -13, xPercent: -2, ease: 'none', immediateRender: false }, 0)
+      .fromTo('.leaf--r', { yPercent: 0, xPercent: 0 }, { yPercent: -15, xPercent: 2, ease: 'none', immediateRender: false }, 0)
+      .fromTo('.leaf--b', { yPercent: 0 }, { yPercent: -18, ease: 'none', immediateRender: false }, 0)
+      .fromTo('.hero-bottle-in', { yPercent: 0, scale: 1 }, { yPercent: -7, scale: 0.94, ease: 'none', immediateRender: false }, 0)
+      .fromTo('.hero-copy', { y: 0, autoAlpha: 1 }, { y: -60, autoAlpha: 0, ease: 'power1.in', duration: 0.28, immediateRender: false }, 0.02)
+      .fromTo('.hero-foot', { autoAlpha: 1 }, { autoAlpha: 0, duration: 0.18, immediateRender: false }, 0.05)
+      .fromTo('.hero-bottle-in', { autoAlpha: 1 }, { autoAlpha: 0, ease: 'power1.in', duration: 0.3, immediateRender: false }, 0.68)
+      .fromTo('.stagechip--hero', { autoAlpha: 1 }, { autoAlpha: 0, duration: 0.2, immediateRender: false }, 0.05)
       .to({}, { duration: 0.2 });
 
-    /* hero entrance */
+    /* hero entrance — explicit fromTo ends, so the entrance always finishes
+       at the exact final values even if the user scrolls mid-intro */
     gsap.timeline({ delay: 1.15 })
-      .from('.hero-copy .eyebrow', { y: 26, autoAlpha: 0, duration: 1.1, ease: 'power3.out' })
-      .from('.hero-copy h1', { y: 54, autoAlpha: 0, duration: 1.3, ease: 'power3.out' }, '-=0.85')
-      .from('.hero-copy .journeysub', { y: 34, autoAlpha: 0, duration: 1.1, ease: 'power3.out' }, '-=0.95')
-      .from('.hero-copy p, .hero-copy .btn', { y: 26, autoAlpha: 0, duration: 1, stagger: 0.1, ease: 'power3.out' }, '-=0.8')
-      .from('.hero-bottle-in', { autoAlpha: 0, scale: 0.92, filter: 'blur(10px)', duration: 1.6, ease: 'power2.out' }, '-=1.4')
-      .from('.leaf--far', { autoAlpha: 0, duration: 2 }, '-=1.9')
-      .from(['.leaf--l', '.leaf--r', '.leaf--b'], { autoAlpha: 0, y: 40, duration: 1.5, stagger: 0.14, ease: 'power2.out' }, '-=1.7')
-      .from('.hero-foot', { autoAlpha: 0, y: 16, duration: 1 }, '-=0.8')
-      .from('.nav', { y: -18, autoAlpha: 0, duration: 0.9 }, 0);
+      .fromTo('.hero-copy .eyebrow', { y: 26, autoAlpha: 0 }, { y: 0, autoAlpha: 1, duration: 1.1, ease: 'power3.out' }, 0)
+      .fromTo('.hero-copy h1', { y: 54, autoAlpha: 0 }, { y: 0, autoAlpha: 1, duration: 1.3, ease: 'power3.out' }, 0.25)
+      .fromTo('.hero-copy .journeysub', { y: 34, autoAlpha: 0 }, { y: 0, autoAlpha: 1, duration: 1.1, ease: 'power3.out' }, 0.4)
+      .fromTo('.hero-copy p, .hero-copy .btn', { y: 26, autoAlpha: 0 }, { y: 0, autoAlpha: 1, duration: 1, stagger: 0.1, ease: 'power3.out' }, 0.6)
+      .fromTo('.hero-bottle-in', { autoAlpha: 0, scale: 0.92, filter: 'blur(10px)' }, { autoAlpha: 1, scale: 1, filter: 'blur(0px)', duration: 1.6, ease: 'power2.out' }, 0.55)
+      .fromTo('.leaf--far', { autoAlpha: 0 }, { autoAlpha: 0.9, duration: 2 }, 0.4)
+      .fromTo(['.leaf--l', '.leaf--r', '.leaf--b'], { autoAlpha: 0, y: 40 }, { autoAlpha: 1, y: 0, duration: 1.5, stagger: 0.14, ease: 'power2.out' }, 0.7)
+      .fromTo('.hero-foot', { autoAlpha: 0, y: 16 }, { autoAlpha: 1, y: 0, duration: 1 }, 1.5)
+      .fromTo('.nav', { y: -18, autoAlpha: 0 }, { y: 0, autoAlpha: 1, duration: 0.9 }, 0);
 
     /* mouse parallax on hero */
     if (finePointer) {
@@ -3483,13 +3435,10 @@ const productImg = p => IMG + (p.img || p.slug) + '.webp';
     });
 
     gsap.set(beats, { autoAlpha: 0 });
-    /* the forest background starts exactly where the awakening's ends —
-       same image, same scale, same offset, full brightness — then darkens
-       beat by beat as the journey goes deeper */
+    /* the background is COMMON with the awakening — the very same image at
+       the very same scale, offset and brightness, held still for the whole
+       forest. Only the models (leaf planes, botanicals, bottles) change */
     gsap.set('.forest-bg', { yPercent: 4 });
-    forestTl.fromTo('.forest-bg',
-      { filter: 'brightness(1) saturate(1)' },
-      { scale: 1.14, yPercent: -6, filter: 'brightness(0.4) saturate(1.12)', ease: 'none', duration: 4 }, 0);
     /* the awakening's framing (mid model + leaf planes + fog) continues here,
        already at its final hero positions, and dissolves upward as beat 1 begins */
     if (document.querySelector('.forest-frame')) {
@@ -3546,34 +3495,33 @@ const productImg = p => IMG + (p.img || p.slug) + '.webp';
     gsap.set(titles[0], { autoAlpha: 1, y: 0 });
     gsap.set('.water-rise', { yPercent: 103 });
 
+    /* one continuous shore scene:
+       3. the beach (sky & sand) is the base layer
+       2. the sea water rises in the middle
+       1. the Mi Amor models (bushes + leaves) overlay everything on top */
     transTl
-      /* beat 1 — the last trees (no background) stand over the shore:
-         the beach is the base layer, the keyed trees are overlaid on it */
-      .to('.trans-beach', { scale: 1.07, ease: 'none', duration: 5.4 }, 0)
-      .to('.trans-a', { scale: 1.06, ease: 'none', duration: 5.4 }, 0)
-      .fromTo('.shore-leaf', { xPercent: 8 }, { xPercent: 2, ease: 'none', duration: 5.4 }, 0)
-      .to('.trans-wash', { opacity: 0.45, duration: 1.4, ease: 'power1.inOut' }, 0.9)
-      /* beat 2 — the trees part and give way to the shore */
-      .to('.trans-a', { xPercent: -18, autoAlpha: 0, duration: 1.6, ease: 'power1.inOut' }, 1.55)
-      .to('.trans-wash', { opacity: 0, duration: 1.2 }, 2.0)
+      .to('.trans-beach', { scale: 1.07, ease: 'none', duration: 5.45 }, 0)
+      .fromTo('.shore-overlay', { xPercent: 6 }, { xPercent: 1, ease: 'none', duration: 5.45 }, 0)
+      .to('.trans-wash', { opacity: 0.4, duration: 1.2, ease: 'power1.inOut' }, 0.8)
+      .to('.trans-wash', { opacity: 0, duration: 1.2 }, 2.1)
       .to('.trans-vignette', { opacity: 0.22, duration: 1.2 }, 1.8)
-      /* beat 3 — water rises from the bottom toward the top */
+      /* the water pops up in between the leaves and the beach — no voice-over,
+         the ocean itself takes the screen and the dive begins */
       .to('.trans-vignette', { opacity: 1, duration: 1.2 }, 3.3)
-      .to('.water-rise', { yPercent: 0, duration: 2.05, ease: 'power2.in' }, 3.2)
-      .to('.trans-beach', { scale: 1.13, ease: 'none', duration: 2.05 }, 3.2)
-      /* titles */
-      .to(titles[0], { autoAlpha: 0, y: -44, duration: 0.75, ease: 'power1.in' }, 1.15)
-      .to(titles[1], { autoAlpha: 1, y: 0, duration: 0.75, ease: 'power1.out' }, 1.95)
-      .to(titles[1], { autoAlpha: 0, y: -44, duration: 0.75, ease: 'power1.in' }, 2.9)
-      .to(titles[2], { autoAlpha: 1, y: 0, duration: 0.75, ease: 'power1.out' }, 3.35)
-      .to('.trans-copy', { autoAlpha: 0, duration: 0.6, ease: 'power1.in' }, 4.85)
+      .to('.water-rise', { yPercent: 0, duration: 2.05, ease: 'power2.in' }, 3.4)
+      .to('.trans-beach', { scale: 1.13, ease: 'none', duration: 2.05 }, 3.4)
+      /* titles — two beats: the trees give way, then the shore */
+      .to(titles[0], { autoAlpha: 0, y: -44, duration: 0.75, ease: 'power1.in' }, 1.35)
+      .to(titles[1], { autoAlpha: 1, y: 0, duration: 0.75, ease: 'power1.out' }, 1.85)
+      .to(titles[1], { autoAlpha: 0, y: -44, duration: 0.65, ease: 'power1.in' }, 2.95)
+      .to('.trans-copy', { autoAlpha: 0, duration: 0.6, ease: 'power1.in' }, 5.0)
       .to({}, { duration: 0.25 });
 
     transSteps.forEach((st, i) => {
       transTl.call(() => {
         transSteps.forEach((x, j) => x.classList.toggle('on', j <= i));
         if (stepsWrap) stepsWrap.classList.toggle('i', i === 2);
-      }, [], [0.2, 1.95, 3.35][i]);
+      }, [], [0.2, 1.85, 3.4][i]);
     });
 
     /* ============================================================

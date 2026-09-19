@@ -56,31 +56,35 @@
     const heroTl = gsap.timeline({
       scrollTrigger: { trigger: '#hero', start: 'top top', end: 'bottom bottom', scrub: 0.5 }
     });
+    /* every tween the entrance also touches uses explicit fromTo values,
+       so a scroll during the entrance can never lock in half-animated
+       start states (the "content gone when scrolling back to top" bug) */
     heroTl
-      .to('.hero-bg', { scale: 1.0, yPercent: 4, ease: 'none' }, 0)
-      .to('.hero-mid', { yPercent: -5, xPercent: -1.5, ease: 'none' }, 0)
-      .to('.leaf--far', { yPercent: -8, scale: 1.1, ease: 'none' }, 0)
-      .to('.leaf--l', { yPercent: -13, xPercent: -2, ease: 'none' }, 0)
-      .to('.leaf--r', { yPercent: -15, xPercent: 2, ease: 'none' }, 0)
-      .to('.leaf--b', { yPercent: -18, ease: 'none' }, 0)
-      .to('.hero-bottle-in', { yPercent: -7, scale: 0.94, ease: 'none' }, 0)
-      .to('.hero-copy', { y: -60, autoAlpha: 0, ease: 'power1.in', duration: 0.28 }, 0.02)
-      .to('.hero-foot', { autoAlpha: 0, duration: 0.18 }, 0.05)
-      .to('.hero-bottle-in', { autoAlpha: 0, ease: 'power1.in', duration: 0.3 }, 0.68)
-      .to('.stagechip--hero', { autoAlpha: 0, duration: 0.2 }, 0.05)
+      .fromTo('.hero-bg', { scale: 1.06, yPercent: 0 }, { scale: 1.0, yPercent: 4, ease: 'none', immediateRender: false }, 0)
+      .fromTo('.hero-mid', { yPercent: 0, xPercent: 0 }, { yPercent: -5, xPercent: -1.5, ease: 'none', immediateRender: false }, 0)
+      .fromTo('.leaf--far', { yPercent: 0, scale: 1 }, { yPercent: -8, scale: 1.1, ease: 'none', immediateRender: false }, 0)
+      .fromTo('.leaf--l', { yPercent: 0, xPercent: 0 }, { yPercent: -13, xPercent: -2, ease: 'none', immediateRender: false }, 0)
+      .fromTo('.leaf--r', { yPercent: 0, xPercent: 0 }, { yPercent: -15, xPercent: 2, ease: 'none', immediateRender: false }, 0)
+      .fromTo('.leaf--b', { yPercent: 0 }, { yPercent: -18, ease: 'none', immediateRender: false }, 0)
+      .fromTo('.hero-bottle-in', { yPercent: 0, scale: 1 }, { yPercent: -7, scale: 0.94, ease: 'none', immediateRender: false }, 0)
+      .fromTo('.hero-copy', { y: 0, autoAlpha: 1 }, { y: -60, autoAlpha: 0, ease: 'power1.in', duration: 0.28, immediateRender: false }, 0.02)
+      .fromTo('.hero-foot', { autoAlpha: 1 }, { autoAlpha: 0, duration: 0.18, immediateRender: false }, 0.05)
+      .fromTo('.hero-bottle-in', { autoAlpha: 1 }, { autoAlpha: 0, ease: 'power1.in', duration: 0.3, immediateRender: false }, 0.68)
+      .fromTo('.stagechip--hero', { autoAlpha: 1 }, { autoAlpha: 0, duration: 0.2, immediateRender: false }, 0.05)
       .to({}, { duration: 0.2 });
 
-    /* hero entrance */
+    /* hero entrance — explicit fromTo ends, so the entrance always finishes
+       at the exact final values even if the user scrolls mid-intro */
     gsap.timeline({ delay: 1.15 })
-      .from('.hero-copy .eyebrow', { y: 26, autoAlpha: 0, duration: 1.1, ease: 'power3.out' })
-      .from('.hero-copy h1', { y: 54, autoAlpha: 0, duration: 1.3, ease: 'power3.out' }, '-=0.85')
-      .from('.hero-copy .journeysub', { y: 34, autoAlpha: 0, duration: 1.1, ease: 'power3.out' }, '-=0.95')
-      .from('.hero-copy p, .hero-copy .btn', { y: 26, autoAlpha: 0, duration: 1, stagger: 0.1, ease: 'power3.out' }, '-=0.8')
-      .from('.hero-bottle-in', { autoAlpha: 0, scale: 0.92, filter: 'blur(10px)', duration: 1.6, ease: 'power2.out' }, '-=1.4')
-      .from('.leaf--far', { autoAlpha: 0, duration: 2 }, '-=1.9')
-      .from(['.leaf--l', '.leaf--r', '.leaf--b'], { autoAlpha: 0, y: 40, duration: 1.5, stagger: 0.14, ease: 'power2.out' }, '-=1.7')
-      .from('.hero-foot', { autoAlpha: 0, y: 16, duration: 1 }, '-=0.8')
-      .from('.nav', { y: -18, autoAlpha: 0, duration: 0.9 }, 0);
+      .fromTo('.hero-copy .eyebrow', { y: 26, autoAlpha: 0 }, { y: 0, autoAlpha: 1, duration: 1.1, ease: 'power3.out' }, 0)
+      .fromTo('.hero-copy h1', { y: 54, autoAlpha: 0 }, { y: 0, autoAlpha: 1, duration: 1.3, ease: 'power3.out' }, 0.25)
+      .fromTo('.hero-copy .journeysub', { y: 34, autoAlpha: 0 }, { y: 0, autoAlpha: 1, duration: 1.1, ease: 'power3.out' }, 0.4)
+      .fromTo('.hero-copy p, .hero-copy .btn', { y: 26, autoAlpha: 0 }, { y: 0, autoAlpha: 1, duration: 1, stagger: 0.1, ease: 'power3.out' }, 0.6)
+      .fromTo('.hero-bottle-in', { autoAlpha: 0, scale: 0.92, filter: 'blur(10px)' }, { autoAlpha: 1, scale: 1, filter: 'blur(0px)', duration: 1.6, ease: 'power2.out' }, 0.55)
+      .fromTo('.leaf--far', { autoAlpha: 0 }, { autoAlpha: 0.9, duration: 2 }, 0.4)
+      .fromTo(['.leaf--l', '.leaf--r', '.leaf--b'], { autoAlpha: 0, y: 40 }, { autoAlpha: 1, y: 0, duration: 1.5, stagger: 0.14, ease: 'power2.out' }, 0.7)
+      .fromTo('.hero-foot', { autoAlpha: 0, y: 16 }, { autoAlpha: 1, y: 0, duration: 1 }, 1.5)
+      .fromTo('.nav', { y: -18, autoAlpha: 0 }, { y: 0, autoAlpha: 1, duration: 0.9 }, 0);
 
     /* mouse parallax on hero */
     if (finePointer) {
@@ -113,13 +117,10 @@
     });
 
     gsap.set(beats, { autoAlpha: 0 });
-    /* the forest background starts exactly where the awakening's ends —
-       same image, same scale, same offset, full brightness — then darkens
-       beat by beat as the journey goes deeper */
+    /* the background is COMMON with the awakening — the very same image at
+       the very same scale, offset and brightness, held still for the whole
+       forest. Only the models (leaf planes, botanicals, bottles) change */
     gsap.set('.forest-bg', { yPercent: 4 });
-    forestTl.fromTo('.forest-bg',
-      { filter: 'brightness(1) saturate(1)' },
-      { scale: 1.14, yPercent: -6, filter: 'brightness(0.4) saturate(1.12)', ease: 'none', duration: 4 }, 0);
     /* the awakening's framing (mid model + leaf planes + fog) continues here,
        already at its final hero positions, and dissolves upward as beat 1 begins */
     if (document.querySelector('.forest-frame')) {
@@ -176,34 +177,33 @@
     gsap.set(titles[0], { autoAlpha: 1, y: 0 });
     gsap.set('.water-rise', { yPercent: 103 });
 
+    /* one continuous shore scene:
+       3. the beach (sky & sand) is the base layer
+       2. the sea water rises in the middle
+       1. the Mi Amor models (bushes + leaves) overlay everything on top */
     transTl
-      /* beat 1 — the last trees (no background) stand over the shore:
-         the beach is the base layer, the keyed trees are overlaid on it */
-      .to('.trans-beach', { scale: 1.07, ease: 'none', duration: 5.4 }, 0)
-      .to('.trans-a', { scale: 1.06, ease: 'none', duration: 5.4 }, 0)
-      .fromTo('.shore-leaf', { xPercent: 8 }, { xPercent: 2, ease: 'none', duration: 5.4 }, 0)
-      .to('.trans-wash', { opacity: 0.45, duration: 1.4, ease: 'power1.inOut' }, 0.9)
-      /* beat 2 — the trees part and give way to the shore */
-      .to('.trans-a', { xPercent: -18, autoAlpha: 0, duration: 1.6, ease: 'power1.inOut' }, 1.55)
-      .to('.trans-wash', { opacity: 0, duration: 1.2 }, 2.0)
+      .to('.trans-beach', { scale: 1.07, ease: 'none', duration: 5.45 }, 0)
+      .fromTo('.shore-overlay', { xPercent: 6 }, { xPercent: 1, ease: 'none', duration: 5.45 }, 0)
+      .to('.trans-wash', { opacity: 0.4, duration: 1.2, ease: 'power1.inOut' }, 0.8)
+      .to('.trans-wash', { opacity: 0, duration: 1.2 }, 2.1)
       .to('.trans-vignette', { opacity: 0.22, duration: 1.2 }, 1.8)
-      /* beat 3 — water rises from the bottom toward the top */
+      /* the water pops up in between the leaves and the beach — no voice-over,
+         the ocean itself takes the screen and the dive begins */
       .to('.trans-vignette', { opacity: 1, duration: 1.2 }, 3.3)
-      .to('.water-rise', { yPercent: 0, duration: 2.05, ease: 'power2.in' }, 3.2)
-      .to('.trans-beach', { scale: 1.13, ease: 'none', duration: 2.05 }, 3.2)
-      /* titles */
-      .to(titles[0], { autoAlpha: 0, y: -44, duration: 0.75, ease: 'power1.in' }, 1.15)
-      .to(titles[1], { autoAlpha: 1, y: 0, duration: 0.75, ease: 'power1.out' }, 1.95)
-      .to(titles[1], { autoAlpha: 0, y: -44, duration: 0.75, ease: 'power1.in' }, 2.9)
-      .to(titles[2], { autoAlpha: 1, y: 0, duration: 0.75, ease: 'power1.out' }, 3.35)
-      .to('.trans-copy', { autoAlpha: 0, duration: 0.6, ease: 'power1.in' }, 4.85)
+      .to('.water-rise', { yPercent: 0, duration: 2.05, ease: 'power2.in' }, 3.4)
+      .to('.trans-beach', { scale: 1.13, ease: 'none', duration: 2.05 }, 3.4)
+      /* titles — two beats: the trees give way, then the shore */
+      .to(titles[0], { autoAlpha: 0, y: -44, duration: 0.75, ease: 'power1.in' }, 1.35)
+      .to(titles[1], { autoAlpha: 1, y: 0, duration: 0.75, ease: 'power1.out' }, 1.85)
+      .to(titles[1], { autoAlpha: 0, y: -44, duration: 0.65, ease: 'power1.in' }, 2.95)
+      .to('.trans-copy', { autoAlpha: 0, duration: 0.6, ease: 'power1.in' }, 5.0)
       .to({}, { duration: 0.25 });
 
     transSteps.forEach((st, i) => {
       transTl.call(() => {
         transSteps.forEach((x, j) => x.classList.toggle('on', j <= i));
         if (stepsWrap) stepsWrap.classList.toggle('i', i === 2);
-      }, [], [0.2, 1.95, 3.35][i]);
+      }, [], [0.2, 1.85, 3.4][i]);
     });
 
     /* ============================================================

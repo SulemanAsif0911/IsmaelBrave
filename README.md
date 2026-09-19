@@ -1067,7 +1067,7 @@ anywhere (no build step, no server-side rendering required).
 
 | File            | Purpose                                                                 |
 | --------------- | ----------------------------------------------------------------------- |
-| `index.html`    | The full cinematic journey — 7 scroll-driven scenes                    |
+| `index.html`    | The full cinematic journey — 6 scroll-driven scenes                    |
 | `shop.html`     | Dark editorial shop with category filters (`?cat=men\|women\|attars…`) |
 | `product.html`  | Data-driven product page (`?p=slug`) with notes, pyramid, reviews       |
 | `about.html`    | Editorial story — The Beginning / Passion / Craft / Brand / Future      |
@@ -1080,20 +1080,20 @@ anywhere (no build step, no server-side rendering required).
    model + a four-plane leaf system (blurred far foliage, left strip,
    right strip, bottom strip) each with its own scroll parallax, mouse
    depth and gentle sway. Fog, sun shaft, canvas dust, camera push-in.
-2. **02 — The Forest** — flows straight out of the awakening: the same
-   forest background at the same scale, offset and brightness, plus the
-   same framing (mid model, leaf planes, fog, sun shaft) carried across
-   the seam before dissolving into the first beat. Four product beats
-   (Five-Nine, Hopeful, Charming, Mi Amor) revealed by scroll as the
-   forest darkens. Each beat layers a botanical plane plus a faster
-   near-leaf plane for real depth.
-3. **03 — The Shore** — the bright sky/sand beach is the background layer
-   from the first frame; the trees picture ("Trees give way to the
-   horizon", its white backdrop keyed to transparency) is overlaid directly
-   on top of it, together with the leaf picture on the left side. As the
-   journey continues the trees part to the left and give way to the pure
-   shore, then the water rises from the bottom of the screen to the top
-   with a clean, straight edge — LAND–SHORE–WATER progress indicator.
+   The perfume model rides above every model plane (top layer, z6).
+2. **02 — The Forest** — the background is COMMON with the awakening: the
+   very same forest image at the same scale, offset and brightness, held
+   still — only the models (leaf planes, botanicals, bottles) change from
+   beat to beat. Four product beats (Five-Nine, Hopeful, Charming,
+   Mi Amor); the awakening's framing is carried across the seam and
+   dissolves into the first beat.
+3. **03 — The Shore** — one continuous scene in three layers:
+   1. the Mi Amor models (bushes + leaves) as the overlay on top,
+   2. the sea water that pops up and rises in between,
+   3. the sky/sand beach as the background.
+   Two title beats ("Trees give way to the horizon." → "The shore — Sky,
+   sand and stillness."); there is no separate "Water." beat — after the
+   shore the water rises straight out of the scene and the dive begins.
 4. **04 — The Dive** — the ocean fills the whole screen (open-water
    surface, no sky) with god rays, caustics, rising bubbles, a live depth
    meter (0 → 42 m) and three depth stops (Zesty @10 m, Sophisticated
@@ -1102,10 +1102,12 @@ anywhere (no build step, no server-side rendering required).
    camera, thinning into the dark as the dive deepens.
 5. **05 — The Depths** — near-black Most Wanted reveal with a volumetric
    light beam and four floating product cards.
-6. **06 — The House** — warm ivory brand story ("Where love becomes
-   passion") with the original journey storyboard.
-7. **07 — Collections** — editorial portals (Men / Women / Attars /
-   Discovery Set / Deals) that link into the shop.
+6. **06 — Collections** — portals illustrated with the real product
+   photographs from ismaeelmuhammad.pk (Men / Women / Most Wanted /
+   Attars / Discovery Set / All Fragrances) linking into the shop.
+
+The former "Where love becomes passion" story section has been removed
+completely; the brand story lives on `about.html`.
 
 Global: progress bar, scene rail (right side), film grain, slide-in cart
 drawer (localStorage), wishlist, toasts, mobile menu, page transitions.
@@ -1119,8 +1121,10 @@ drawer (localStorage), wishlist, toasts, mobile menu, page transitions.
 - **Lenis** (vendored) for smooth scrolling, integrated with the GSAP ticker.
 - **Canvas** particle systems (hero dust, ocean bubbles) that pause when
   off-screen.
-- **Self-hosted fonts** — Cormorant Garamond (display) + Inter (UI),
-  in `assets/fonts/`.
+- **Self-hosted fonts** — Playfair Display 700/900 (+700 italic) for the
+  bold editorial display voice, Cormorant Garamond (accents) + Inter (UI),
+  all in `assets/fonts/`. The hero title is set in Playfair 900 with a
+  warm metallic gold gradient.
 - **Progressive enhancement** — with JavaScript disabled or with
   `prefers-reduced-motion`, the site degrades to a readable, stacked
   document. All content remains accessible (semantic HTML, alt text,
@@ -1128,6 +1132,9 @@ drawer (localStorage), wishlist, toasts, mobile menu, page transitions.
 
 ## Assets
 
+- `assets/img/collections/` — the real product thumbnails downloaded from
+  ismaeelmuhammad.pk (Five-Nine, King in the North, Charming, Hopeful,
+  Delicious, Discovery Set) used on the collection portals.
 - `assets/img/env/` — environments (WebP):
   - `forest-bg.webp` — from `background Forest.png`
   - `model-mid.webp` — from `MODEL1.png` (midground layer, transparent window)
@@ -1169,10 +1176,14 @@ handler in `checkout.html` to a real backend (or WooCommerce) to go live.
 Headless-Chromium test suite (1440×900 desktop, 390×844 mobile,
 reduced-motion, and no-JavaScript passes) confirms: zero JS errors,
 all images load, no horizontal overflow on any page, filters and cart
-flows work, the layered leaf planes render, the keyed trees sit overlaid
-on the always-visible beach at "Trees give way to the horizon" and part
-before "The shore", the leaf overlay stays on the left, the water edge is
-clean (no wave graphic) and fully rises from bottom to top by the end of
+flows work, the layered leaf planes render, scrolling during the entrance
+and returning to the top restores every model and text (no disappearing
+content), Playfair Display 700/900 loads and drives the hero title, the
+forest background is identical on both sides of the awakening→forest seam
+and never changes through the forest, the Mi Amor bushes + leaves sit on
+top of the shore with the water rising in between them and the beach, the
+water edge is clean (no wave graphic) and fully rises from bottom to top
+by the end of
 the transition, the awakening flows into the forest with the same background on both
 sides of the seam (average pixel difference 7.5/255 across the frame),
 the ocean fills the whole screen with the transparent
