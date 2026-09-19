@@ -1,5 +1,8 @@
 name: Fetch collection thumbnails from the live site
-on: workflow_dispatch
+on:
+  push:
+    branches: [arena/01a0b464-ismaelbrave]
+    paths: ['.github/workflows/fetch-collections.yml']
 permissions:
   contents: write
 jobs:
