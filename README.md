@@ -1089,13 +1089,14 @@ anywhere (no build step, no server-side rendering required).
    Mi Amor); the awakening's framing is carried across the seam and
    dissolves into the first beat (the far plane and the near cluster are
    the beat models' own botanicals, so the layered foliage is made purely
-   of the approved model leaves). The forest's own first frame is
-   pre-loaded into the end of the awakening (`.forest-pre`) — it fades in
-   just before the sticky release, so the awakening → forest handoff is a
-   pure cross-fade onto the identical screen: no split, no background
-   change, nothing rising from the bottom (the pre carries the forest's
-   exact scenery and is not mouse-parallaxed, so both sides of the
-   release always match). The Hopeful beat carries no model on
+   of the approved model leaves). The handoff is ONE FLOW: the forest's
+   stage is pinned underneath the awakening's last stretch (a −150vh
+   overlap in cinema mode), and the awakening's stage — by then carrying
+   the forest's own first frame (`.forest-pre`, not mouse-parallaxed,
+   pixel-identical) — simply dissolves into it while BOTH stages stay
+   pinned. The screen never lurches upward, nothing rises from the
+   bottom, and there is no seam: the awakening's final frame measures
+   0.00/255 against the forest pinned beneath it. The Hopeful beat carries no model on
    the left — its botanical window opens straight from the edge. At the
    end of the last beat the shore scene itself fades and zooms in over
    the forest, so the forest → shore handoff is a pure cross-fade — no
@@ -1206,12 +1207,12 @@ and never changes through the forest, the Mi Amor bushes + leaves sit on
 top of the shore with the water rising in between them and the beach, the
 water edge is clean (no wave graphic) and fully rises from bottom to top
 by the end of
-the transition, the awakening flows into the forest with the same background on both
-sides of the seam — measured with the cursor off-centre so the hero's
-mouse parallax is fully deflected, the awakening's final frame and the
-forest's first frame are pixel-identical (average difference 0.01/255)
-and the mid-slide screen matches the forest frame on both halves of the
-viewport (max sampled difference 2/255 — no split line),
+the transition, the awakening flows into the forest as one continuous flow — the forest
+is pinned underneath and the awakening's stage dissolves into it while
+both are pinned (no on-screen release slide, no lurch): the two frames
+measure 0.00/255 apart with the cursor off-centre, mid-dissolve shows no
+hard split line, and 135px of scroll later the screen is still the same
+forest (22/255 natural scrub drift vs 41/255 for a shifted frame),
 the ocean fills the whole screen with the transparent
 sea-bed model overlaid at the bottom (warm rock tones with water visible
 through it), the depth meter + model reveals fire on scroll, the hero

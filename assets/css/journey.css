@@ -50,7 +50,7 @@ html:not(.cinema) .beat{ min-height:78vh; margin-bottom:8vh; }
 /* ============================================================
    01 — HERO / THE SCENT AWAKENS
    ============================================================ */
-#hero{ height:280vh; z-index:5; }
+#hero{ height:330vh; z-index:5; }
 .hero-bg{ transform:scale(1.06); }
 .hero-mid{ transform:scale(1.1); }
 
@@ -163,6 +163,12 @@ html:not(.cinema) .beat{ min-height:78vh; margin-bottom:8vh; }
    02 — THE FOREST / FOREST EXPERIENCE
    ============================================================ */
 #forest{ height:620vh; }
+/* one-flow handoff: the forest is pinned under the awakening's last 150vh —
+   its stage is already stuck (static) when the awakening's scrub ends, and
+   the awakening's stage dissolves out on top of it (fade only, see
+   journey.js). The screen never lurches upward and no background ever
+   rises from the bottom at the seam */
+html.cinema #forest{ margin-top:-150vh; }
 #forest .stage{ background:var(--forest-1); }
 .forest-bg{ opacity:1; }
 

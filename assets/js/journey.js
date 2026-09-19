@@ -54,7 +54,7 @@
        01 — HERO
        ============================================================ */
     const heroTl = gsap.timeline({
-      scrollTrigger: { trigger: '#hero', start: 'top top', end: 'bottom bottom', scrub: 0.5 }
+      scrollTrigger: { trigger: '#hero', start: 'top top', end: () => window.innerHeight * 1.8, scrub: 0.5 }
     });
     /* every tween the entrance also touches uses explicit fromTo values,
        so a scroll during the entrance can never lock in half-animated
@@ -74,8 +74,24 @@
       .fromTo('#hero .p-canvas', { autoAlpha: 1 }, { autoAlpha: 0, duration: 0.15, immediateRender: false }, 0.85)
       /* the forest's own first frame fades in over the scenery — the copy is
          not parallaxed, so by the release the screen already IS the forest */
-      .fromTo('.forest-pre', { autoAlpha: 0 }, { autoAlpha: 1, duration: 0.18, immediateRender: false }, 0.8)
+      .fromTo('.forest-pre', { autoAlpha: 0 }, { autoAlpha: 1, duration: 0.12, immediateRender: false }, 0.88)
       .to({}, { duration: 0.2 });
+
+    /* the handoff into the forest — ONE FLOW, no lurch: the forest's stage is
+       already pinned (static) underneath, and the awakening's stage — which by
+       now carries the forest's own first frame — simply dissolves into it
+       while BOTH are still pinned. The release slide happens afterwards,
+       when this stage is already invisible: the screen never jumps up and
+       nothing ever rises from the bottom */
+    gsap.fromTo('#hero .stage', { autoAlpha: 1 }, {
+      autoAlpha: 0, ease: 'none', immediateRender: false,
+      scrollTrigger: {
+        trigger: '#hero',
+        start: () => window.innerHeight * 1.8,
+        end: () => window.innerHeight * 2.25,
+        scrub: 0.4
+      }
+    });
 
     /* hero entrance — explicit fromTo ends, so the entrance always finishes
        at the exact final values even if the user scrolls mid-intro */

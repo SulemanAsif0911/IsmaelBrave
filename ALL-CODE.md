@@ -1,49 +1,51 @@
 # ISMAEEL MUHAMMAD — A JOURNEY OF SENSES
 
-## Complete source code (v7 — forest pre-load: no split at the awakening → forest handoff)
+## Complete source code (v8 — one flow: the awakening dissolves into the pinned forest, no lurch, no split)
 
 
 **Stack:** Vanilla HTML / CSS / JS + GSAP ScrollTrigger + Lenis (vendored) — no build step  
 **Catalog:** only the 8 journey models — all extra data removed
 
-**v7 changes**
+**v8 changes**
 
-1. **No split at the awakening → forest handoff.** The hero's scenery
-   planes follow the cursor (mouse parallax up to ±36 px) while the
-   forest's copies are static, so the release used to show two halves
-   that didn't line up. The forest's own first frame is now pre-loaded
-   into the end of the awakening (`.forest-pre`) and fades in just
-   before the sticky release — both sides of the slide are the identical
-   screen (pixel-verified: 0.01/255 average difference with the cursor
-   off-centre).
-2. **Mouse parallax is scoped to the hero's own layers** (`#hero .stage >
-   …` direct-child selectors), so the pre-load copy and the forest's
-   frame never move with the cursor.
-3. **The forest's chip ("02 The Forest") fades in only after the
-   handoff**, like the shore's title/chip/steps — nothing is half-cut
-   sliding up.
+1. **The awakening → forest handoff is one continuous flow.** The forest's
+   stage is pinned underneath the awakening's last stretch (a −150vh
+   overlap in cinema mode), so it is already static on screen when the
+   awakening's scrub ends. The awakening's stage — by then carrying the
+   forest's own first frame — dissolves into it while BOTH stages are
+   still pinned. The screen never lurches upward and nothing ever rises
+   from the bottom: the release slide happens afterwards, when the
+   awakening's stage is already invisible.
+2. **The hero holds its pin 50vh longer** (330vh section) so the dissolve
+   completes while it is still pinned; the hero scrub itself keeps its
+   exact original 180vh pacing (pixel-locked end).
+3. **Pixel-verified:** the awakening's final frame vs the forest pinned
+   beneath it — 0.00/255 average difference with the cursor off-centre;
+   mid-dissolve has no hard split line; 135px of scroll later the screen
+   is still the same forest (22/255 natural drift vs 41/255 for a
+   shifted frame).
 
 
 | # | File | Lines | Purpose |
 |---|------|-------|---------|
-| 1 | `index.html` | 603 | The cinematic journey — forest pre-loaded at the awakening exit (no split handoff), beat-model leaf planes, shore pre-loaded at the forest exit, Mi Amor models over the shore, white shore type |
+| 1 | `index.html` | 603 | The cinematic journey — one-flow handoffs (forest pinned under the awakening, shore pre-loaded at the forest exit), beat-model leaf planes, Mi Amor models over the shore, white shore type |
 | 2 | `shop.html` | 114 | Editorial shop — the 8 journey models only |
 | 3 | `product.html` | 194 | Data-driven product detail page |
 | 4 | `about.html` | 182 | Editorial brand story (5 chapters) |
 | 5 | `contact.html` | 176 | Contact + FAQ / shipping / returns |
 | 6 | `checkout.html` | 220 | Checkout with order confirmation |
 | 7 | `assets/css/base.css` | 445 | Design system: tokens, Playfair display type, nav, cart, cards, footer |
-| 8 | `assets/css/journey.css` | 523 | Cinematic styles: forest pre-load + shore pre-load (pure cross-fade handoffs), beat-model leaf planes, white shore type, ocean dive |
+| 8 | `assets/css/journey.css` | 529 | Cinematic styles: one-flow handoffs (forest overlap + shore pre-load), beat-model leaf planes, white shore type, ocean dive |
 | 9 | `assets/css/pages.css` | 316 | Shop / product / about / contact / checkout styles |
 | 10 | `assets/js/data.js` | 181 | Product database — 8 journey models only |
 | 11 | `assets/js/nav.js` | 94 | Nav, veil, reveals, menu, page transitions |
 | 12 | `assets/js/cart.js` | 194 | Cart store, drawer, wishlist, toasts (localStorage) |
-| 13 | `assets/js/journey.js` | 375 | Scroll engine: deterministic entrance+scrub, forest pre-load + shore pre-load cross-fades (no split, no bottom pops), parallax scoped to the hero, shore scene, ocean dive |
+| 13 | `assets/js/journey.js` | 391 | Scroll engine: deterministic entrance+scrub, the awakening dissolves into the pinned forest (no lurch, no split), shore pre-load cross-fade, parallax scoped to the hero, ocean dive |
 | 14 | `assets/js/shop.js` | 97 | Shop filters + grid rendering |
 | 15 | `assets/js/product.js` | 170 | Product page rendering + JSON-LD |
 | 16 | `assets/img/ui/favicon.svg` | 4 | Favicon (IM monogram) |
 
-**Total: 16 files, 3888 lines.**
+**Total: 16 files, 3910 lines.**
 
 ---
 
@@ -2024,7 +2026,7 @@ body.cart-open{ overflow:hidden; }
 ```
 
 
-## 📄 assets/css/journey.css  ·  (523 lines)
+## 📄 assets/css/journey.css  ·  (529 lines)
 
 ```css
 /* ============================================================
@@ -2079,7 +2081,7 @@ html:not(.cinema) .beat{ min-height:78vh; margin-bottom:8vh; }
 /* ============================================================
    01 — HERO / THE SCENT AWAKENS
    ============================================================ */
-#hero{ height:280vh; z-index:5; }
+#hero{ height:330vh; z-index:5; }
 .hero-bg{ transform:scale(1.06); }
 .hero-mid{ transform:scale(1.1); }
 
@@ -2192,6 +2194,12 @@ html:not(.cinema) .beat{ min-height:78vh; margin-bottom:8vh; }
    02 — THE FOREST / FOREST EXPERIENCE
    ============================================================ */
 #forest{ height:620vh; }
+/* one-flow handoff: the forest is pinned under the awakening's last 150vh —
+   its stage is already stuck (static) when the awakening's scrub ends, and
+   the awakening's stage dissolves out on top of it (fade only, see
+   journey.js). The screen never lurches upward and no background ever
+   rises from the bottom at the seam */
+html.cinema #forest{ margin-top:-150vh; }
 #forest .stage{ background:var(--forest-1); }
 .forest-bg{ opacity:1; }
 
@@ -3362,7 +3370,7 @@ const productImg = p => IMG + (p.img || p.slug) + '.webp';
 ```
 
 
-## 📄 assets/js/journey.js  ·  (375 lines)
+## 📄 assets/js/journey.js  ·  (391 lines)
 
 ```js
 /* ============================================================
@@ -3421,7 +3429,7 @@ const productImg = p => IMG + (p.img || p.slug) + '.webp';
        01 — HERO
        ============================================================ */
     const heroTl = gsap.timeline({
-      scrollTrigger: { trigger: '#hero', start: 'top top', end: 'bottom bottom', scrub: 0.5 }
+      scrollTrigger: { trigger: '#hero', start: 'top top', end: () => window.innerHeight * 1.8, scrub: 0.5 }
     });
     /* every tween the entrance also touches uses explicit fromTo values,
        so a scroll during the entrance can never lock in half-animated
@@ -3441,8 +3449,24 @@ const productImg = p => IMG + (p.img || p.slug) + '.webp';
       .fromTo('#hero .p-canvas', { autoAlpha: 1 }, { autoAlpha: 0, duration: 0.15, immediateRender: false }, 0.85)
       /* the forest's own first frame fades in over the scenery — the copy is
          not parallaxed, so by the release the screen already IS the forest */
-      .fromTo('.forest-pre', { autoAlpha: 0 }, { autoAlpha: 1, duration: 0.18, immediateRender: false }, 0.8)
+      .fromTo('.forest-pre', { autoAlpha: 0 }, { autoAlpha: 1, duration: 0.12, immediateRender: false }, 0.88)
       .to({}, { duration: 0.2 });
+
+    /* the handoff into the forest — ONE FLOW, no lurch: the forest's stage is
+       already pinned (static) underneath, and the awakening's stage — which by
+       now carries the forest's own first frame — simply dissolves into it
+       while BOTH are still pinned. The release slide happens afterwards,
+       when this stage is already invisible: the screen never jumps up and
+       nothing ever rises from the bottom */
+    gsap.fromTo('#hero .stage', { autoAlpha: 1 }, {
+      autoAlpha: 0, ease: 'none', immediateRender: false,
+      scrollTrigger: {
+        trigger: '#hero',
+        start: () => window.innerHeight * 1.8,
+        end: () => window.innerHeight * 2.25,
+        scrub: 0.4
+      }
+    });
 
     /* hero entrance — explicit fromTo ends, so the entrance always finishes
        at the exact final values even if the user scrolls mid-intro */
@@ -4044,13 +4068,14 @@ Scroll the journey: awakening → forest (4 beats) → shore → dive → sea be
 most wanted. The shop, product pages, cart, wishlist and checkout all work
 locally (cart persists in localStorage).
 
-**Verified:** 22/22 automated checks — scroll-to-top content restore over the
-real wheel path, bottle layering under the cursor, Playfair 900 hero type,
-hero/forest models inventory, canvas dissolve, forest-pre fade states,
-**seam: awakening end == forest start under cursor parallax (0.01/255)**,
-**mid-slide = the same frame on both halves (no split)**, parallax scoping
-(hero planes move, pre/forest copies stay still), forest static bg + chip
-states, shore pre-load mid-fade/complete, Mi Amor shore overlay with water
-between it and the beach, white shore type, water z-order, scene rails, real
-collection thumbnails, mobile 390px no overflow, zero JS errors, zero failed
-requests.
+**Verified:** 24/24 automated checks — scroll-to-top content restore, bottle
+layering under the cursor, Playfair 900 hero type, parallax scoping (hero
+planes move, pre/forest copies stay still), forest-pre fade states, **seam:
+awakening end == the forest pinned beneath (0.00/255, cursor off-centre)**,
+**dissolve: both stages pinned mid-handoff with no hard split line**,
+**dissolve complete: hero stage gone, whole frame clean**, **no lurch: the
+screen is the same flow 135px later (not a shifted copy)**, hero/forest model
+inventory, canvas dissolve, forest static bg + chip states, shore pre-load
+mid-fade/complete, Mi Amor shore overlay with water between it and the beach,
+white shore type, water z-order, scene rails, real collection thumbnails,
+mobile 390px no overflow, zero JS errors, zero failed requests.
