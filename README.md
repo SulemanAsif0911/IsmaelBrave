@@ -1115,7 +1115,11 @@ anywhere (no build step, no server-side rendering required).
    stage (showing the shore pre-load) dissolves into it while both are
    pinned — no lurch, nothing rising from the bottom. The dive handoff
    repeats the pattern once more (the ocean pins under the shore's last
-   stretch, the fully-risen water dissolves into the live ocean).
+   stretch, the fully-risen water dissolves into the live ocean). The
+   overlapping sections carry no background of their own — a background
+   on an overlapping section would paint a flat band over the pinned
+   scene beneath it (the transition's old black background did exactly
+   that over the ocean); their stages' own layers are fully opaque.
 4. **04 — The Dive** — the ocean fills the whole screen (open-water
    surface, no sky) with god rays, caustics, rising bubbles, a live depth
    meter (0 → 42 m) and three depth stops (Zesty @10 m, Sophisticated

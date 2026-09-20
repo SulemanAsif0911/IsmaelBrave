@@ -270,7 +270,11 @@ html:not(.cinema) .shore-pre{ display:none; }
 /* ============================================================
    03 — TRANSITION / FOREST → OPEN LAND → WATER
    ============================================================ */
-#transition{ height:470vh; background:#000; z-index:3; }
+/* NO background on the section: it sits at z3 above the pinned ocean for
+   its last stretch — a section background there would paint a black band
+   over the live ocean during the dive handoff. The stage's own layers
+   (beach photo, water, overlay) are fully opaque, so nothing is lost */
+#transition{ height:470vh; z-index:3; }
 .trans-beach{ transform:scale(1.14); }
 .trans-beach img{ object-position:50% 45%; }
 

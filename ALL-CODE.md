@@ -1,33 +1,24 @@
 # ISMAEEL MUHAMMAD — A JOURNEY OF SENSES
 
-## Complete source code (v9 — one flow everywhere: forest→shore and shore→dive dissolves; mobile model cut-outs hidden; no bottom bleed)
+## Complete source code (v10 — dive-handoff fix: no section background may paint over a pinned scene)
 
 
 **Stack:** Vanilla HTML / CSS / JS + GSAP ScrollTrigger + Lenis (vendored) — no build step  
 **Catalog:** only the 8 journey models — all extra data removed
 
-**v9 changes**
+**v10 changes**
 
-1. **Every remaining pinned handoff is now a one-flow dissolve.** The
-   shore's stage pins underneath the forest's last stretch (−150vh
-   overlap) and the forest's stage — showing the shore pre-load —
-   dissolves into it while both are pinned; the ocean's stage pins
-   underneath the shore's last stretch and the fully-risen water
-   dissolves into the live ocean. No lurch, no split, no background
-   ever rising from the bottom — the release slides happen only after
-   the outgoing stage is already invisible.
-2. **Scrub pacing is pixel-locked** (forest +520vh, transition +320vh)
-   so the pin-hold extensions never change the story's speed.
-3. **Mobile:** the desktop model cut-outs (leaf planes, model windows,
-   beat botanicals, the shore's bushes overlay) are hidden on ≤900px —
-   they crop awkwardly on a narrow screen; the journey plays clean on
-   the full-bleed scenes with the bottles.
-4. **Mobile bottom-bar fix:** the sticky stages use the large viewport
-   height (no 100svh), so the next section's background can never bleed
-   in as a coloured bar at the bottom of the screen.
-5. **Verified 30/30:** all three handoffs pass the one-flow checks
-   (both pinned mid-dissolve, no hard split line, outgoing stage gone,
-   no shifted frame 135px later).
+1. **Dive-handoff black band fixed.** The transition section carried
+   `background:#000` and, at z-index 3, that black box painted OVER the
+   pinned ocean for the last stretch of its overlap — half the screen
+   went flat black with a hard edge before the ocean appeared. The
+   overlapping sections now carry no background of their own; the
+   stages' own layers are fully opaque, so nothing is lost and nothing
+   can bleed over the scene beneath.
+2. **New audit guard:** a band detector (flat, uniformly dark rows — the
+   signature of a section background painting over a scene) runs on
+   every handoff window. 31/31 checks pass; the dive frames are pure
+   water top to bottom (0% near-black, was 50%).
 
 
 | # | File | Lines | Purpose |
@@ -39,7 +30,7 @@
 | 5 | `contact.html` | 176 | Contact + FAQ / shipping / returns |
 | 6 | `checkout.html` | 220 | Checkout with order confirmation |
 | 7 | `assets/css/base.css` | 445 | Design system: tokens, Playfair display type, nav, cart, cards, footer |
-| 8 | `assets/css/journey.css` | 540 | Cinematic styles: one-flow handoff overlaps + pin holds, beat-model leaf planes, mobile model cut-outs hidden, white shore type, ocean dive |
+| 8 | `assets/css/journey.css` | 544 | Cinematic styles: one-flow handoff overlaps + pin holds, overlapping sections carry no background (no band over the pinned scene beneath), beat-model leaf planes, mobile model cut-outs hidden, white shore type, ocean dive |
 | 9 | `assets/css/pages.css` | 316 | Shop / product / about / contact / checkout styles |
 | 10 | `assets/js/data.js` | 181 | Product database — 8 journey models only |
 | 11 | `assets/js/nav.js` | 94 | Nav, veil, reveals, menu, page transitions |
@@ -49,7 +40,7 @@
 | 15 | `assets/js/product.js` | 170 | Product page rendering + JSON-LD |
 | 16 | `assets/img/ui/favicon.svg` | 4 | Favicon (IM monogram) |
 
-**Total: 16 files, 3949 lines.**
+**Total: 16 files, 3953 lines.**
 
 ---
 
@@ -2030,7 +2021,7 @@ body.cart-open{ overflow:hidden; }
 ```
 
 
-## 📄 assets/css/journey.css  ·  (540 lines)
+## 📄 assets/css/journey.css  ·  (544 lines)
 
 ```css
 /* ============================================================
@@ -2305,7 +2296,11 @@ html:not(.cinema) .shore-pre{ display:none; }
 /* ============================================================
    03 — TRANSITION / FOREST → OPEN LAND → WATER
    ============================================================ */
-#transition{ height:470vh; background:#000; z-index:3; }
+/* NO background on the section: it sits at z3 above the pinned ocean for
+   its last stretch — a section background there would paint a black band
+   over the live ocean during the dive handoff. The stage's own layers
+   (beach photo, water, overlay) are fully opaque, so nothing is lost */
+#transition{ height:470vh; z-index:3; }
 .trans-beach{ transform:scale(1.14); }
 .trans-beach img{ object-position:50% 45%; }
 
@@ -4111,14 +4106,9 @@ Scroll the journey: awakening → forest (4 beats) → shore → dive → sea be
 most wanted. The shop, product pages, cart, wishlist and checkout all work
 locally (cart persists in localStorage).
 
-**Verified:** 30/30 automated checks — scroll-to-top content restore, bottle
-layering under the cursor, Playfair 900 hero type, parallax scoping,
-forest-pre fade states, seam 0.00/255 (cursor off-centre), the awakening
-dissolve (both pinned, no split, no lurch), hero/forest model inventory,
-canvas dissolve, forest static bg + chip states, shore pre-load states, Mi
-Amor shore overlay with water between it and the beach, white shore type,
-water z-order, **one-flow forest→shore** (mid-dissolve no split / stage gone
-/ no lurch 18.2 vs 53.8), **one-flow shore→dive** (mid-dissolve no split /
-stage gone / open water clean), no leaf-left, scene rails, real collection
-thumbnails, zero JS errors, zero failed requests, mobile 390px no overflow +
-model cut-outs hidden.
+**Verified:** 31/31 automated checks — everything from v9 (scroll-to-top
+restore, bottle layering, Playfair 900, parallax scoping, seam 0.00/255,
+the three one-flow handoff suites, model inventories, shore/water order,
+rails, thumbnails, mobile) **plus the band detector**: no flat dark band on
+any handoff window, and the dive's overlap tail paints nothing over the
+live ocean.
