@@ -1109,13 +1109,20 @@ anywhere (no build step, no server-side rendering required).
    sand and stillness.") set in bold white Playfair with a soft dark
    shadow, readable over both the foliage and the bright sky; there is no
    separate "Water." beat — after the shore the water rises straight out
-   of the scene and the dive begins.
+   of the scene and the dive begins. The handoff into the shore is the
+   same one-flow dissolve as the awakening → forest one: the shore's
+   stage is pinned underneath the forest's last stretch and the forest's
+   stage (showing the shore pre-load) dissolves into it while both are
+   pinned — no lurch, nothing rising from the bottom. The dive handoff
+   repeats the pattern once more (the ocean pins under the shore's last
+   stretch, the fully-risen water dissolves into the live ocean).
 4. **04 — The Dive** — the ocean fills the whole screen (open-water
    surface, no sky) with god rays, caustics, rising bubbles, a live depth
    meter (0 → 42 m) and three depth stops (Zesty @10 m, Sophisticated
    @20 m, Happy @30 m). The transparent sea-bed picture is overlaid as a
    model layer at the bottom of the water and slowly drifts up past the
-   camera, thinning into the dark as the dive deepens.
+   camera, thinning into the dark as the dive deepens. Its opening is a
+   one-flow dissolve from the fully-risen water (see scene 03).
 5. **05 — The Depths** — near-black Most Wanted reveal with a volumetric
    light beam and four floating product cards.
 6. **06 — Collections** — portals illustrated with the real product
@@ -1196,6 +1203,13 @@ handler in `checkout.html` to a real backend (or WooCommerce) to go live.
 
 ## Verified
 
+On mobile (≤900px) the desktop model cut-outs (leaf planes, model
+windows, beat botanicals, the shore's bushes overlay) are hidden — they
+crop awkwardly on a narrow screen; the journey plays clean on the
+full-bleed scenes with the bottles. The sticky stages use the large
+viewport height so the next section's background can never bleed in as a
+bar at the bottom of the screen.
+
 Headless-Chromium test suite (1440×900 desktop, 390×844 mobile,
 reduced-motion, and no-JavaScript passes) confirms: zero JS errors,
 all images load, no horizontal overflow on any page, filters and cart
@@ -1212,7 +1226,11 @@ is pinned underneath and the awakening's stage dissolves into it while
 both are pinned (no on-screen release slide, no lurch): the two frames
 measure 0.00/255 apart with the cursor off-centre, mid-dissolve shows no
 hard split line, and 135px of scroll later the screen is still the same
-forest (22/255 natural scrub drift vs 41/255 for a shifted frame),
+forest (22/255 natural scrub drift vs 41/255 for a shifted frame) — the
+forest→shore and shore→dive handoffs get the same one-flow treatment and
+pass the same checks (no split mid-dissolve, outgoing stage fully gone,
+no shifted frame), the awkward model cut-outs are hidden on mobile and
+the 390px layout has no overflow,
 the ocean fills the whole screen with the transparent
 sea-bed model overlaid at the bottom (warm rock tones with water visible
 through it), the depth meter + model reveals fire on scroll, the hero

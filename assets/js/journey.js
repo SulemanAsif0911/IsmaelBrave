@@ -93,6 +93,34 @@
       }
     });
 
+    /* one-flow handoff into the shore: the transition's stage is pinned
+       under the forest's last stretch (already static when the forest's
+       scrub ends), and the forest's stage — showing the shore pre-load —
+       dissolves into it while BOTH are pinned. Its release slide happens
+       afterwards, when the stage is already invisible */
+    const topOf = sel => { const el = document.querySelector(sel); return el.getBoundingClientRect().top + window.scrollY; };
+    gsap.fromTo('#forest .stage', { autoAlpha: 1 }, {
+      autoAlpha: 0, ease: 'none', immediateRender: false,
+      scrollTrigger: {
+        trigger: '#forest',
+        start: () => topOf('#forest') + window.innerHeight * 5.2,
+        end: () => topOf('#forest') + window.innerHeight * 5.65,
+        scrub: 0.4
+      }
+    });
+    /* one-flow handoff into the dive: the ocean's stage is pinned under the
+       transition's last stretch; the transition's stage (the fully risen
+       water) dissolves into the live ocean beneath it */
+    gsap.fromTo('#transition .stage', { autoAlpha: 1 }, {
+      autoAlpha: 0, ease: 'none', immediateRender: false,
+      scrollTrigger: {
+        trigger: '#transition',
+        start: () => topOf('#transition') + window.innerHeight * 3.2,
+        end: () => topOf('#transition') + window.innerHeight * 3.65,
+        scrub: 0.4
+      }
+    });
+
     /* hero entrance — explicit fromTo ends, so the entrance always finishes
        at the exact final values even if the user scrolls mid-intro */
     gsap.timeline({ delay: 1.15 })
@@ -133,7 +161,7 @@
        ============================================================ */
     const beats = gsap.utils.toArray('#forest .beat');
     const forestTl = gsap.timeline({
-      scrollTrigger: { trigger: '#forest', start: 'top top', end: 'bottom bottom', scrub: 0.6 }
+      scrollTrigger: { trigger: '#forest', start: 'top top', end: () => '+=' + window.innerHeight * 5.2, scrub: 0.6 }
     });
 
     gsap.set(beats, { autoAlpha: 0 });
@@ -199,7 +227,7 @@
        03 — TRANSITION (forest → land → water)
        ============================================================ */
     const transTl = gsap.timeline({
-      scrollTrigger: { trigger: '#transition', start: 'top top', end: 'bottom bottom', scrub: 0.6 }
+      scrollTrigger: { trigger: '#transition', start: 'top top', end: () => '+=' + window.innerHeight * 3.2, scrub: 0.6 }
     });
     const titles = gsap.utils.toArray('.trans-copy .tt');
     const transSteps = gsap.utils.toArray('.trans-steps span');

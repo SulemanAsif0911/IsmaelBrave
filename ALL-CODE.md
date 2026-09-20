@@ -1,51 +1,55 @@
 # ISMAEEL MUHAMMAD — A JOURNEY OF SENSES
 
-## Complete source code (v8 — one flow: the awakening dissolves into the pinned forest, no lurch, no split)
+## Complete source code (v9 — one flow everywhere: forest→shore and shore→dive dissolves; mobile model cut-outs hidden; no bottom bleed)
 
 
 **Stack:** Vanilla HTML / CSS / JS + GSAP ScrollTrigger + Lenis (vendored) — no build step  
 **Catalog:** only the 8 journey models — all extra data removed
 
-**v8 changes**
+**v9 changes**
 
-1. **The awakening → forest handoff is one continuous flow.** The forest's
-   stage is pinned underneath the awakening's last stretch (a −150vh
-   overlap in cinema mode), so it is already static on screen when the
-   awakening's scrub ends. The awakening's stage — by then carrying the
-   forest's own first frame — dissolves into it while BOTH stages are
-   still pinned. The screen never lurches upward and nothing ever rises
-   from the bottom: the release slide happens afterwards, when the
-   awakening's stage is already invisible.
-2. **The hero holds its pin 50vh longer** (330vh section) so the dissolve
-   completes while it is still pinned; the hero scrub itself keeps its
-   exact original 180vh pacing (pixel-locked end).
-3. **Pixel-verified:** the awakening's final frame vs the forest pinned
-   beneath it — 0.00/255 average difference with the cursor off-centre;
-   mid-dissolve has no hard split line; 135px of scroll later the screen
-   is still the same forest (22/255 natural drift vs 41/255 for a
-   shifted frame).
+1. **Every remaining pinned handoff is now a one-flow dissolve.** The
+   shore's stage pins underneath the forest's last stretch (−150vh
+   overlap) and the forest's stage — showing the shore pre-load —
+   dissolves into it while both are pinned; the ocean's stage pins
+   underneath the shore's last stretch and the fully-risen water
+   dissolves into the live ocean. No lurch, no split, no background
+   ever rising from the bottom — the release slides happen only after
+   the outgoing stage is already invisible.
+2. **Scrub pacing is pixel-locked** (forest +520vh, transition +320vh)
+   so the pin-hold extensions never change the story's speed.
+3. **Mobile:** the desktop model cut-outs (leaf planes, model windows,
+   beat botanicals, the shore's bushes overlay) are hidden on ≤900px —
+   they crop awkwardly on a narrow screen; the journey plays clean on
+   the full-bleed scenes with the bottles.
+4. **Mobile bottom-bar fix:** the sticky stages use the large viewport
+   height (no 100svh), so the next section's background can never bleed
+   in as a coloured bar at the bottom of the screen.
+5. **Verified 30/30:** all three handoffs pass the one-flow checks
+   (both pinned mid-dissolve, no hard split line, outgoing stage gone,
+   no shifted frame 135px later).
 
 
 | # | File | Lines | Purpose |
 |---|------|-------|---------|
-| 1 | `index.html` | 603 | The cinematic journey — one-flow handoffs (forest pinned under the awakening, shore pre-loaded at the forest exit), beat-model leaf planes, Mi Amor models over the shore, white shore type |
+| 1 | `index.html` | 603 | The cinematic journey — one-flow dissolves at every pinned handoff (awakening→forest→shore→dive), beat-model leaf planes, white shore type |
 | 2 | `shop.html` | 114 | Editorial shop — the 8 journey models only |
 | 3 | `product.html` | 194 | Data-driven product detail page |
 | 4 | `about.html` | 182 | Editorial brand story (5 chapters) |
 | 5 | `contact.html` | 176 | Contact + FAQ / shipping / returns |
 | 6 | `checkout.html` | 220 | Checkout with order confirmation |
 | 7 | `assets/css/base.css` | 445 | Design system: tokens, Playfair display type, nav, cart, cards, footer |
-| 8 | `assets/css/journey.css` | 529 | Cinematic styles: one-flow handoffs (forest overlap + shore pre-load), beat-model leaf planes, white shore type, ocean dive |
+| 8 | `assets/css/journey.css` | 540 | Cinematic styles: one-flow handoff overlaps + pin holds, beat-model leaf planes, mobile model cut-outs hidden, white shore type, ocean dive |
 | 9 | `assets/css/pages.css` | 316 | Shop / product / about / contact / checkout styles |
 | 10 | `assets/js/data.js` | 181 | Product database — 8 journey models only |
 | 11 | `assets/js/nav.js` | 94 | Nav, veil, reveals, menu, page transitions |
 | 12 | `assets/js/cart.js` | 194 | Cart store, drawer, wishlist, toasts (localStorage) |
-| 13 | `assets/js/journey.js` | 391 | Scroll engine: deterministic entrance+scrub, the awakening dissolves into the pinned forest (no lurch, no split), shore pre-load cross-fade, parallax scoped to the hero, ocean dive |
+| 13 | `assets/js/journey.js` | 419 | Scroll engine: deterministic entrance+scrub, one-flow stage dissolves at all three handoffs (each next scene pins underneath while the current stage fades out — no lurch, no split, nothing rising from the bottom), ocean dive |
 | 14 | `assets/js/shop.js` | 97 | Shop filters + grid rendering |
 | 15 | `assets/js/product.js` | 170 | Product page rendering + JSON-LD |
 | 16 | `assets/img/ui/favicon.svg` | 4 | Favicon (IM monogram) |
 
-**Total: 16 files, 3910 lines.**
+**Total: 16 files, 3949 lines.**
 
 ---
 
@@ -2026,7 +2030,7 @@ body.cart-open{ overflow:hidden; }
 ```
 
 
-## 📄 assets/css/journey.css  ·  (529 lines)
+## 📄 assets/css/journey.css  ·  (540 lines)
 
 ```css
 /* ============================================================
@@ -2050,7 +2054,8 @@ body.cart-open{ overflow:hidden; }
 .scene{ position:relative; }
 .stage{
   position:sticky; top:0;
-  height:100vh; height:100svh;
+  height:100vh; /* the large viewport height — no gap for the next
+                   section's background to bleed through on mobile */
   overflow:hidden; overflow:clip;
 }
 /* fallback: no JS / reduced motion → readable stacked document */
@@ -2185,21 +2190,29 @@ html:not(.cinema) .beat{ min-height:78vh; margin-bottom:8vh; }
   .hero-copy{ top:auto; bottom:110px; transform:none; }
   .hero-copy p{ display:none; }
   .sunshaft{ left:30%; }
-  .leaf--l{ width:56%; opacity:.92; }
-  .leaf--r{ width:56%; opacity:.92; }
-  .leaf--n{ width:80%; }
+}
+
+/* mobile: the desktop model cut-outs crop awkwardly on a narrow screen —
+   the journey plays clean without them. Bottles and full-bleed scenes
+   (forest, beach, water, sea bed) stay; only the cut-out planes go */
+@media (max-width:900px){
+  .hero-mid, .leaf--far, .leaf--l, .leaf--r, .leaf--n,
+  .forest-frame, .forest-pre, .shore-overlay,
+  .beat__botanical, .bleaf{ display:none; }
 }
 
 /* ============================================================
    02 — THE FOREST / FOREST EXPERIENCE
    ============================================================ */
-#forest{ height:620vh; }
+#forest{ height:670vh; z-index:4; }
 /* one-flow handoff: the forest is pinned under the awakening's last 150vh —
    its stage is already stuck (static) when the awakening's scrub ends, and
    the awakening's stage dissolves out on top of it (fade only, see
    journey.js). The screen never lurches upward and no background ever
    rises from the bottom at the seam */
 html.cinema #forest{ margin-top:-150vh; }
+html.cinema #transition{ margin-top:-150vh; }
+html.cinema #ocean{ margin-top:-150vh; }
 #forest .stage{ background:var(--forest-1); }
 .forest-bg{ opacity:1; }
 
@@ -2292,7 +2305,7 @@ html:not(.cinema) .shore-pre{ display:none; }
 /* ============================================================
    03 — TRANSITION / FOREST → OPEN LAND → WATER
    ============================================================ */
-#transition{ height:420vh; background:#000; }
+#transition{ height:470vh; background:#000; z-index:3; }
 .trans-beach{ transform:scale(1.14); }
 .trans-beach img{ object-position:50% 45%; }
 
@@ -2354,6 +2367,8 @@ html:not(.cinema) .shore-pre{ display:none; }
 /* ============================================================
    04 — THE OCEAN / THE DIVE
    ============================================================ */
+/* the ocean is pinned under the transition's last stretch — the dive
+   handoff is the same one-flow dissolve (see journey.js) */
 #ocean{ height:560vh; background:var(--ocean-1); }
 /* the ocean fills the whole screen (under-surface water region only) */
 .ocean-water{ transform:scale(1.05); }
@@ -3370,7 +3385,7 @@ const productImg = p => IMG + (p.img || p.slug) + '.webp';
 ```
 
 
-## 📄 assets/js/journey.js  ·  (391 lines)
+## 📄 assets/js/journey.js  ·  (419 lines)
 
 ```js
 /* ============================================================
@@ -3468,6 +3483,34 @@ const productImg = p => IMG + (p.img || p.slug) + '.webp';
       }
     });
 
+    /* one-flow handoff into the shore: the transition's stage is pinned
+       under the forest's last stretch (already static when the forest's
+       scrub ends), and the forest's stage — showing the shore pre-load —
+       dissolves into it while BOTH are pinned. Its release slide happens
+       afterwards, when the stage is already invisible */
+    const topOf = sel => { const el = document.querySelector(sel); return el.getBoundingClientRect().top + window.scrollY; };
+    gsap.fromTo('#forest .stage', { autoAlpha: 1 }, {
+      autoAlpha: 0, ease: 'none', immediateRender: false,
+      scrollTrigger: {
+        trigger: '#forest',
+        start: () => topOf('#forest') + window.innerHeight * 5.2,
+        end: () => topOf('#forest') + window.innerHeight * 5.65,
+        scrub: 0.4
+      }
+    });
+    /* one-flow handoff into the dive: the ocean's stage is pinned under the
+       transition's last stretch; the transition's stage (the fully risen
+       water) dissolves into the live ocean beneath it */
+    gsap.fromTo('#transition .stage', { autoAlpha: 1 }, {
+      autoAlpha: 0, ease: 'none', immediateRender: false,
+      scrollTrigger: {
+        trigger: '#transition',
+        start: () => topOf('#transition') + window.innerHeight * 3.2,
+        end: () => topOf('#transition') + window.innerHeight * 3.65,
+        scrub: 0.4
+      }
+    });
+
     /* hero entrance — explicit fromTo ends, so the entrance always finishes
        at the exact final values even if the user scrolls mid-intro */
     gsap.timeline({ delay: 1.15 })
@@ -3508,7 +3551,7 @@ const productImg = p => IMG + (p.img || p.slug) + '.webp';
        ============================================================ */
     const beats = gsap.utils.toArray('#forest .beat');
     const forestTl = gsap.timeline({
-      scrollTrigger: { trigger: '#forest', start: 'top top', end: 'bottom bottom', scrub: 0.6 }
+      scrollTrigger: { trigger: '#forest', start: 'top top', end: () => '+=' + window.innerHeight * 5.2, scrub: 0.6 }
     });
 
     gsap.set(beats, { autoAlpha: 0 });
@@ -3574,7 +3617,7 @@ const productImg = p => IMG + (p.img || p.slug) + '.webp';
        03 — TRANSITION (forest → land → water)
        ============================================================ */
     const transTl = gsap.timeline({
-      scrollTrigger: { trigger: '#transition', start: 'top top', end: 'bottom bottom', scrub: 0.6 }
+      scrollTrigger: { trigger: '#transition', start: 'top top', end: () => '+=' + window.innerHeight * 3.2, scrub: 0.6 }
     });
     const titles = gsap.utils.toArray('.trans-copy .tt');
     const transSteps = gsap.utils.toArray('.trans-steps span');
@@ -4068,14 +4111,14 @@ Scroll the journey: awakening → forest (4 beats) → shore → dive → sea be
 most wanted. The shop, product pages, cart, wishlist and checkout all work
 locally (cart persists in localStorage).
 
-**Verified:** 24/24 automated checks — scroll-to-top content restore, bottle
-layering under the cursor, Playfair 900 hero type, parallax scoping (hero
-planes move, pre/forest copies stay still), forest-pre fade states, **seam:
-awakening end == the forest pinned beneath (0.00/255, cursor off-centre)**,
-**dissolve: both stages pinned mid-handoff with no hard split line**,
-**dissolve complete: hero stage gone, whole frame clean**, **no lurch: the
-screen is the same flow 135px later (not a shifted copy)**, hero/forest model
-inventory, canvas dissolve, forest static bg + chip states, shore pre-load
-mid-fade/complete, Mi Amor shore overlay with water between it and the beach,
-white shore type, water z-order, scene rails, real collection thumbnails,
-mobile 390px no overflow, zero JS errors, zero failed requests.
+**Verified:** 30/30 automated checks — scroll-to-top content restore, bottle
+layering under the cursor, Playfair 900 hero type, parallax scoping,
+forest-pre fade states, seam 0.00/255 (cursor off-centre), the awakening
+dissolve (both pinned, no split, no lurch), hero/forest model inventory,
+canvas dissolve, forest static bg + chip states, shore pre-load states, Mi
+Amor shore overlay with water between it and the beach, white shore type,
+water z-order, **one-flow forest→shore** (mid-dissolve no split / stage gone
+/ no lurch 18.2 vs 53.8), **one-flow shore→dive** (mid-dissolve no split /
+stage gone / open water clean), no leaf-left, scene rails, real collection
+thumbnails, zero JS errors, zero failed requests, mobile 390px no overflow +
+model cut-outs hidden.

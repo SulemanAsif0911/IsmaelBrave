@@ -19,7 +19,8 @@
 .scene{ position:relative; }
 .stage{
   position:sticky; top:0;
-  height:100vh; height:100svh;
+  height:100vh; /* the large viewport height — no gap for the next
+                   section's background to bleed through on mobile */
   overflow:hidden; overflow:clip;
 }
 /* fallback: no JS / reduced motion → readable stacked document */
@@ -154,21 +155,29 @@ html:not(.cinema) .beat{ min-height:78vh; margin-bottom:8vh; }
   .hero-copy{ top:auto; bottom:110px; transform:none; }
   .hero-copy p{ display:none; }
   .sunshaft{ left:30%; }
-  .leaf--l{ width:56%; opacity:.92; }
-  .leaf--r{ width:56%; opacity:.92; }
-  .leaf--n{ width:80%; }
+}
+
+/* mobile: the desktop model cut-outs crop awkwardly on a narrow screen —
+   the journey plays clean without them. Bottles and full-bleed scenes
+   (forest, beach, water, sea bed) stay; only the cut-out planes go */
+@media (max-width:900px){
+  .hero-mid, .leaf--far, .leaf--l, .leaf--r, .leaf--n,
+  .forest-frame, .forest-pre, .shore-overlay,
+  .beat__botanical, .bleaf{ display:none; }
 }
 
 /* ============================================================
    02 — THE FOREST / FOREST EXPERIENCE
    ============================================================ */
-#forest{ height:620vh; }
+#forest{ height:670vh; z-index:4; }
 /* one-flow handoff: the forest is pinned under the awakening's last 150vh —
    its stage is already stuck (static) when the awakening's scrub ends, and
    the awakening's stage dissolves out on top of it (fade only, see
    journey.js). The screen never lurches upward and no background ever
    rises from the bottom at the seam */
 html.cinema #forest{ margin-top:-150vh; }
+html.cinema #transition{ margin-top:-150vh; }
+html.cinema #ocean{ margin-top:-150vh; }
 #forest .stage{ background:var(--forest-1); }
 .forest-bg{ opacity:1; }
 
@@ -261,7 +270,7 @@ html:not(.cinema) .shore-pre{ display:none; }
 /* ============================================================
    03 — TRANSITION / FOREST → OPEN LAND → WATER
    ============================================================ */
-#transition{ height:420vh; background:#000; }
+#transition{ height:470vh; background:#000; z-index:3; }
 .trans-beach{ transform:scale(1.14); }
 .trans-beach img{ object-position:50% 45%; }
 
@@ -323,6 +332,8 @@ html:not(.cinema) .shore-pre{ display:none; }
 /* ============================================================
    04 — THE OCEAN / THE DIVE
    ============================================================ */
+/* the ocean is pinned under the transition's last stretch — the dive
+   handoff is the same one-flow dissolve (see journey.js) */
 #ocean{ height:560vh; background:var(--ocean-1); }
 /* the ocean fills the whole screen (under-surface water region only) */
 .ocean-water{ transform:scale(1.05); }
