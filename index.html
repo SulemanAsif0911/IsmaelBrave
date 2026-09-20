@@ -10,7 +10,6 @@
 <meta property="og:image" content="assets/img/env/forest-bg.webp">
 <link rel="icon" href="assets/img/ui/favicon.svg" type="image/svg+xml">
 <link rel="preload" as="image" href="assets/img/env/forest-bg.webp">
-<link rel="preload" as="image" href="assets/img/bottles/five-nine.webp">
 <link rel="stylesheet" href="assets/css/base.css">
 <link rel="stylesheet" href="assets/css/journey.css">
 <script type="application/ld+json">
@@ -28,7 +27,7 @@
 <div class="grain" aria-hidden="true"></div>
 
 <nav class="nav" aria-label="Main">
-  <a class="nav__logo" href="index.html">Ismaeel <em>Muhammad</em></a>
+  <a class="nav__logo" href="index.html"><svg class="nav__mark" viewBox="0 0 64 64" aria-hidden="true"><circle cx="32" cy="32" r="27.5" fill="none" stroke="currentColor" opacity=".4"/><circle cx="32" cy="32" r="20.5" fill="none" stroke="#6fae87" opacity=".6"/><text x="32" y="39.5" text-anchor="middle">MI</text></svg>Ismaeel <em>Muhammad</em></a>
   <ul class="nav__links">
     <li><a href="index.html" data-nav="journey">Journey</a></li>
     <li><a href="shop.html" data-nav="shop">Shop</a></li>
@@ -75,10 +74,48 @@
 
       <div class="leaf leaf--far" aria-hidden="true"><img src="assets/img/env/model-fore.webp" alt=""></div>
 
-      <a class="hero-bottle" href="product.html?p=five-nine" aria-label="Discover Five-Nine, our woody amber spicy eau de parfum">
-        <div class="hero-bottle-in">
+      <!-- the house crest — the Muhammad Ismael monogram seal replaces the
+           bottle in the opening. Built as inline SVG on the brand's own
+           Playfair Display so it stays razor-sharp at any zoom and inherits
+           the maroon & green theme -->
+      <a class="hero-emblem" href="about.html" aria-label="Ismaeel Muhammad — the house of fragrance">
+        <div class="hero-emblem-in">
           <span class="halo" aria-hidden="true"></span>
-          <img src="assets/img/bottles/five-nine.webp" alt="Five-Nine — amber glass perfume bottle with gold cap">
+          <svg class="emblem" viewBox="0 0 360 360" role="img" aria-label="Ismaeel Muhammad crest">
+            <defs>
+              <path id="ringTop" d="M 50 180 A 130 130 0 0 1 310 180"/>
+              <path id="ringBot" d="M 56 180 A 124 124 0 0 0 304 180"/>
+              <linearGradient id="miGrad" x1="0" y1="0" x2="0" y2="1">
+                <stop offset="0" stop-color="#f6efe0"/>
+                <stop offset=".55" stop-color="#e9cdd3"/>
+                <stop offset="1" stop-color="#c47887"/>
+              </linearGradient>
+            </defs>
+            <circle cx="180" cy="180" r="177" fill="none" stroke="rgba(243,238,227,.38)" stroke-width="1.2"/>
+            <circle cx="180" cy="180" r="170" fill="none" stroke="rgba(243,238,227,.16)" stroke-width=".7"/>
+            <circle cx="180" cy="180" r="102" fill="none" stroke="rgba(243,238,227,.26)" stroke-width=".8"/>
+            <text class="emblem__ring"><textPath href="#ringTop" startOffset="50%" text-anchor="middle">MUHAMMAD&#160;ISMAEL</textPath></text>
+            <text class="emblem__ring"><textPath href="#ringBot" startOffset="50%" text-anchor="middle">EAU&#160;DE&#160;PARFUM</textPath></text>
+            <path d="M180 64l7.5 8.5-7.5 8.5-7.5-8.5z" fill="#c47887"/>
+            <g fill="none" stroke="#8fbf9f" stroke-width="1.4" stroke-linecap="round" opacity=".92">
+              <path d="M143 292c-21-8-35-23-41-43"/>
+              <path d="M217 292c21-8 35-23 41-43"/>
+            </g>
+            <g fill="#8fbf9f" opacity=".92">
+              <ellipse cx="134" cy="288" rx="5" ry="1.7" transform="rotate(-64 134 288)"/>
+              <ellipse cx="125" cy="281" rx="5" ry="1.7" transform="rotate(-54 125 281)"/>
+              <ellipse cx="116" cy="272" rx="5" ry="1.7" transform="rotate(-44 116 272)"/>
+              <ellipse cx="109" cy="262" rx="5" ry="1.7" transform="rotate(-34 109 262)"/>
+              <ellipse cx="104" cy="253" rx="5" ry="1.7" transform="rotate(-24 104 253)"/>
+              <ellipse cx="226" cy="288" rx="5" ry="1.7" transform="rotate(64 226 288)"/>
+              <ellipse cx="235" cy="281" rx="5" ry="1.7" transform="rotate(54 235 281)"/>
+              <ellipse cx="244" cy="272" rx="5" ry="1.7" transform="rotate(44 244 272)"/>
+              <ellipse cx="251" cy="262" rx="5" ry="1.7" transform="rotate(34 251 262)"/>
+              <ellipse cx="256" cy="253" rx="5" ry="1.7" transform="rotate(24 256 253)"/>
+            </g>
+            <path d="M160 238h40" stroke="rgba(143,191,159,.75)" stroke-width="1"/>
+            <text class="emblem__mi" x="180" y="220" text-anchor="middle">MI</text>
+          </svg>
         </div>
       </a>
 
@@ -140,98 +177,46 @@
       <div class="vignette" aria-hidden="true"></div>
       <div class="stagechip stagechip--forest"><b>02</b> The Forest</div>
 
-      <div class="beats">
+      <!-- the forest fragrance selector — racing-game style: the model planes
+           (the same cut-outs the Hopeful beat used) fill the right of the
+           screen, the description card sits on the left, and the arrows /
+           arrow-keys / dots / swipe (or simply scrolling) cycle the fragrances -->
+      <div class="picker picker--forest" aria-label="Choose a forest fragrance">
+        <div class="pk-models" aria-hidden="true">
+          <div class="pk-model is-on"><img src="assets/img/env/model-fore.webp" alt=""></div>
+          <div class="pk-model"><img class="flip" src="assets/img/env/model-fore.webp" alt=""></div>
+          <div class="pk-model"><img src="assets/img/env/model-mid.webp" alt=""></div>
+          <div class="pk-model"><img class="flip" src="assets/img/env/model-mid.webp" alt=""></div>
+        </div>
 
-        <article class="beat" data-product="five-nine">
-          <div class="beat__botanical" aria-hidden="true"><img src="assets/img/env/model-fore.webp" alt=""></div>
-          <div class="beat__inner">
-            <div class="beat__copy">
-              <span class="label">The Forest — <b>01 / 04</b></span>
-              <h3 class="display">Five-Nine</h3>
-              <div class="beat__family">Woody · Amber · Spicy</div>
-              <p class="beat__tag">The forest at golden hour — resin, cedar and warm spice.</p>
-              <div class="beat__meta">
-                <a class="btn" href="product.html?p=five-nine">Discover <span class="arr">→</span></a>
-                <span class="beat__price">from ₨2,600</span>
+        <aside class="pk-card">
+          <span class="label">The Forest — <b class="pk-count">01 / 04</b></span>
+          <h3 class="display pk-name">Five-Nine</h3>
+          <div class="pk-family">Woody · Amber · Spicy</div>
+          <p class="pk-tag">The forest at golden hour — resin, cedar and warm spice.</p>
+          <div class="pk-row">
+            <img class="pk-bottle" src="assets/img/bottles/five-nine.webp" alt="Five-Nine perfume bottle">
+            <div class="pk-meta">
+              <span class="pk-price">from ₨2,600</span>
+              <div class="pk-cta">
+                <a class="btn pk-link" href="product.html?p=five-nine">Discover <span class="arr">→</span></a>
                 <button class="chip-btn" data-add="five-nine">Add to cart</button>
               </div>
             </div>
-            <a class="beat__figure" href="product.html?p=five-nine">
-              <span class="halo" aria-hidden="true"></span>
-              <img src="assets/img/bottles/five-nine.webp" alt="Five-Nine perfume bottle">
-            </a>
           </div>
-          <div class="beat-idx" aria-hidden="true">Five-Nine — Woody · Amber · Spicy</div>
-        </article>
+        </aside>
 
-        <article class="beat" data-product="hopeful">
-          <div class="beat__botanical flip" aria-hidden="true"><img src="assets/img/env/model-fore.webp" alt=""></div>
-          <div class="beat__inner">
-            <div class="beat__copy">
-              <span class="label">The Forest — <b>02 / 04</b></span>
-              <h3 class="display">Hopeful</h3>
-              <div class="beat__family">Green · Aromatic · Fresh</div>
-              <p class="beat__tag">First light through wet leaves — quiet, green, alive.</p>
-              <div class="beat__meta">
-                <a class="btn" href="product.html?p=hopeful">Discover <span class="arr">→</span></a>
-                <span class="beat__price">from ₨2,500</span>
-                <button class="chip-btn" data-add="hopeful">Add to cart</button>
-              </div>
-            </div>
-            <a class="beat__figure" href="product.html?p=hopeful">
-              <span class="halo" aria-hidden="true"></span>
-              <img src="assets/img/bottles/hopeful.webp" alt="Hopeful perfume bottle">
-            </a>
+        <div class="pk-nav">
+          <button class="pk-arrow pk-arrow--prev" aria-label="Previous fragrance"><svg viewBox="0 0 24 24"><path d="M15 5l-7 7 7 7" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+          <div class="pk-dots">
+            <button class="on" data-go="0" aria-label="Five-Nine"></button>
+            <button data-go="1" aria-label="Hopeful"></button>
+            <button data-go="2" aria-label="Charming"></button>
+            <button data-go="3" aria-label="Mi Amor"></button>
           </div>
-          <div class="beat-idx" aria-hidden="true">Hopeful — Green · Aromatic · Fresh</div>
-        </article>
-
-        <article class="beat" data-product="charming">
-          <div class="beat__botanical" aria-hidden="true"><img src="assets/img/env/model-mid.webp" alt=""></div>
-          <div class="bleaf bleaf--r" aria-hidden="true"><img src="assets/img/env/leaf-right.webp" alt=""></div>
-          <div class="beat__inner">
-            <div class="beat__copy">
-              <span class="label">The Forest — <b>03 / 04</b></span>
-              <h3 class="display">Charming</h3>
-              <div class="beat__family">Woody · Smoky · Citrus</div>
-              <p class="beat__tag">Charcoal, cypress and a flash of grapefruit.</p>
-              <div class="beat__meta">
-                <a class="btn" href="product.html?p=charming">Discover <span class="arr">→</span></a>
-                <span class="beat__price">from ₨3,000</span>
-                <button class="chip-btn" data-add="charming">Add to cart</button>
-              </div>
-            </div>
-            <a class="beat__figure" href="product.html?p=charming">
-              <span class="halo" aria-hidden="true"></span>
-              <img src="assets/img/bottles/charming.webp" alt="Charming perfume bottle">
-            </a>
-          </div>
-          <div class="beat-idx" aria-hidden="true">Charming — Woody · Smoky · Citrus</div>
-        </article>
-
-        <article class="beat" data-product="mi-amor">
-          <div class="beat__botanical flip" aria-hidden="true"><img src="assets/img/env/model-mid.webp" alt=""></div>
-          <div class="bleaf bleaf--n" aria-hidden="true"><img src="assets/img/env/leaf-near.webp" alt=""></div>
-          <div class="beat__inner">
-            <div class="beat__copy">
-              <span class="label">The Forest — <b>04 / 04</b></span>
-              <h3 class="display">Mi Amor</h3>
-              <div class="beat__family">Floral · Warm · Musky</div>
-              <p class="beat__tag">A rose picked at midnight, wrapped in musk.</p>
-              <div class="beat__meta">
-                <a class="btn" href="product.html?p=mi-amor">Discover <span class="arr">→</span></a>
-                <span class="beat__price">from ₨2,000</span>
-                <button class="chip-btn" data-add="mi-amor">Add to cart</button>
-              </div>
-            </div>
-            <a class="beat__figure" href="product.html?p=mi-amor">
-              <span class="halo" aria-hidden="true"></span>
-              <img src="assets/img/bottles/mi-amor.webp" alt="Mi Amor perfume bottle">
-            </a>
-          </div>
-          <div class="beat-idx" aria-hidden="true">Mi Amor — Floral · Warm · Musky</div>
-        </article>
-
+          <button class="pk-arrow pk-arrow--next" aria-label="Next fragrance"><svg viewBox="0 0 24 24"><path d="M9 5l7 7-7 7" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+        </div>
+        <div class="pk-hint"><span>←</span> choose your scent <span>→</span></div>
       </div>
 
       <!-- the shore, pre-loaded: fades + zooms in at the end of the forest so the
@@ -269,13 +254,45 @@
           <span class="label">The forest opens</span>
           <h2 class="display">Trees give way<br>to the horizon.</h2>
         </div>
-        <div class="tt tt-2">
-          <span class="label">The shore</span>
-          <h2 class="display">Sky, sand<br>and stillness.</h2>
-        </div>
         <div class="trans-steps" aria-hidden="true">
           <span class="on">Land</span><i></i><span>Shore</span><i></i><span>Water</span>
         </div>
+      </div>
+
+      <!-- the shore fragrance selector — same picker as the forest, played on
+           the beach: model planes right, description left, arrows to cycle -->
+      <div class="picker picker--shore" aria-label="Choose a shore fragrance">
+        <div class="pk-models" aria-hidden="true">
+          <div class="pk-model is-on"><img src="assets/img/env/model-fore.webp" alt=""></div>
+          <div class="pk-model"><img class="flip" src="assets/img/env/model-mid.webp" alt=""></div>
+        </div>
+
+        <aside class="pk-card">
+          <span class="label">The Shore — <b class="pk-count">01 / 02</b></span>
+          <h3 class="display pk-name">Zesty</h3>
+          <div class="pk-family">Citrus · Aquatic · Fresh</div>
+          <p class="pk-tag">Salt on skin, sun on water.</p>
+          <div class="pk-row">
+            <img class="pk-bottle" src="assets/img/bottles/zesty.webp" alt="Zesty perfume bottle">
+            <div class="pk-meta">
+              <span class="pk-price">from ₨2,200</span>
+              <div class="pk-cta">
+                <a class="btn pk-link" href="product.html?p=zesty">Discover <span class="arr">→</span></a>
+                <button class="chip-btn" data-add="zesty">Add to cart</button>
+              </div>
+            </div>
+          </div>
+        </aside>
+
+        <div class="pk-nav">
+          <button class="pk-arrow pk-arrow--prev" aria-label="Previous fragrance"><svg viewBox="0 0 24 24"><path d="M15 5l-7 7 7 7" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+          <div class="pk-dots">
+            <button class="on" data-go="0" aria-label="Zesty"></button>
+            <button data-go="1" aria-label="Happy"></button>
+          </div>
+          <button class="pk-arrow pk-arrow--next" aria-label="Next fragrance"><svg viewBox="0 0 24 24"><path d="M9 5l7 7-7 7" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+        </div>
+        <div class="pk-hint"><span>←</span> choose your scent <span>→</span></div>
       </div>
     </div>
   </section>
@@ -311,68 +328,40 @@
         </div>
       </div>
 
-      <div class="beats">
+      <!-- the sea-bed fragrance selector — the deepest picks, chosen between
+           the light rays. Same picker: models right, description left -->
+      <div class="picker picker--ocean" aria-label="Choose a deep fragrance">
+        <div class="pk-models" aria-hidden="true">
+          <div class="pk-model is-on"><img src="assets/img/env/model-mid.webp" alt=""></div>
+          <div class="pk-model"><img class="flip" src="assets/img/env/model-fore.webp" alt=""></div>
+        </div>
 
-        <article class="beat" data-product="zesty">
-          <div class="beat__inner">
-            <div class="beat__copy">
-              <span class="label">10 metres — <b>the light zone</b></span>
-              <h3 class="display">Zesty</h3>
-              <div class="beat__family">Citrus · Aquatic · Fresh</div>
-              <p class="beat__tag">Salt on skin, sun on water.</p>
-              <div class="beat__meta">
-                <a class="btn" href="product.html?p=zesty">Discover <span class="arr">→</span></a>
-                <span class="beat__price">from ₨2,200</span>
-                <button class="chip-btn" data-add="zesty">Add to cart</button>
-              </div>
-            </div>
-            <a class="beat__figure" href="product.html?p=zesty">
-              <span class="halo" aria-hidden="true"></span>
-              <img src="assets/img/bottles/zesty.webp" alt="Zesty perfume bottle floating underwater">
-            </a>
-          </div>
-        </article>
-
-        <article class="beat" data-product="sophisticated">
-          <div class="beat__inner">
-            <div class="beat__copy">
-              <span class="label">20 metres — <b>the blue zone</b></span>
-              <h3 class="display">Sophisticated</h3>
-              <div class="beat__family">Amber · Leather · Woody</div>
-              <p class="beat__tag">Depth, quietly worn.</p>
-              <div class="beat__meta">
-                <a class="btn" href="product.html?p=sophisticated">Discover <span class="arr">→</span></a>
-                <span class="beat__price">from ₨2,800</span>
+        <aside class="pk-card">
+          <span class="label">The Sea Bed — <b class="pk-count">01 / 02</b></span>
+          <h3 class="display pk-name">Sophisticated</h3>
+          <div class="pk-family">Amber · Leather · Woody</div>
+          <p class="pk-tag">Depth, quietly worn.</p>
+          <div class="pk-row">
+            <img class="pk-bottle" src="assets/img/bottles/sophisticated.webp" alt="Sophisticated perfume bottle">
+            <div class="pk-meta">
+              <span class="pk-price">from ₨2,800</span>
+              <div class="pk-cta">
+                <a class="btn pk-link" href="product.html?p=sophisticated">Discover <span class="arr">→</span></a>
                 <button class="chip-btn" data-add="sophisticated">Add to cart</button>
               </div>
             </div>
-            <a class="beat__figure" href="product.html?p=sophisticated">
-              <span class="halo" aria-hidden="true"></span>
-              <img src="assets/img/bottles/sophisticated.webp" alt="Sophisticated perfume bottle in deep blue water">
-            </a>
           </div>
-        </article>
+        </aside>
 
-        <article class="beat" data-product="happy">
-          <div class="beat__inner">
-            <div class="beat__copy">
-              <span class="label">30 metres — <b>the dark zone</b></span>
-              <h3 class="display">Happy</h3>
-              <div class="beat__family">Fruity · Fresh · Sweet</div>
-              <p class="beat__tag">Sunlight through blue water.</p>
-              <div class="beat__meta">
-                <a class="btn" href="product.html?p=happy">Discover <span class="arr">→</span></a>
-                <span class="beat__price">from ₨2,200</span>
-                <button class="chip-btn" data-add="happy">Add to cart</button>
-              </div>
-            </div>
-            <a class="beat__figure" href="product.html?p=happy">
-              <span class="halo" aria-hidden="true"></span>
-              <img src="assets/img/bottles/happy.webp" alt="Happy perfume bottle in dark water">
-            </a>
+        <div class="pk-nav">
+          <button class="pk-arrow pk-arrow--prev" aria-label="Previous fragrance"><svg viewBox="0 0 24 24"><path d="M15 5l-7 7 7 7" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+          <div class="pk-dots">
+            <button class="on" data-go="0" aria-label="Sophisticated"></button>
+            <button data-go="1" aria-label="King in the North"></button>
           </div>
-        </article>
-
+          <button class="pk-arrow pk-arrow--next" aria-label="Next fragrance"><svg viewBox="0 0 24 24"><path d="M9 5l7 7-7 7" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+        </div>
+        <div class="pk-hint"><span>←</span> choose your scent <span>→</span></div>
       </div>
     </div>
   </section>
@@ -532,7 +521,7 @@
     <div class="waterecho" aria-hidden="true"></div>
     <span class="eyebrow" data-reveal>The journey continues</span>
     <h2 class="display" data-reveal style="--d:.1s">You don't browse Ismaeel Muhammad.<br>You <em>enter</em> it.</h2>
-    <a class="btn-solid gold" href="shop.html" data-reveal style="--d:.2s">Shop the collection</a>
+    <a class="btn-solid maroon" href="shop.html" data-reveal style="--d:.2s">Shop the collection</a>
   </section>
 
 </main>

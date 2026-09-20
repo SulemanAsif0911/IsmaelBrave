@@ -78,7 +78,7 @@
           <div class="cart__row"><span>Subtotal</span><b class="c-sub">₨0</b></div>
           <div class="cart__row"><span>Shipping</span><b class="c-ship">—</b></div>
           <div class="cart__row total"><span>Total</span><b class="c-tot">₨0</b></div>
-          <a class="btn-solid gold" href="checkout.html">Checkout</a>
+          <a class="btn-solid maroon" href="checkout.html">Checkout</a>
           <div class="cart__note">Free shipping on orders over ₨5,000 · Ships across Pakistan</div>
         </div>
       </aside>

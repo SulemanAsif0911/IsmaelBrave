@@ -42,7 +42,7 @@
     const page = document.body.dataset.page;
     if (page) {
       document.querySelectorAll('.nav__links a, .mobile-menu a').forEach(a => {
-        if (a.dataset.nav === page) a.style.color = 'var(--gold)';
+        if (a.dataset.nav === page) a.style.color = 'var(--maroon-2)';
       });
     }
 
