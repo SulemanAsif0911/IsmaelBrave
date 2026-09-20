@@ -65,10 +65,10 @@ Introduce the brand and establish the immersive visual language.
 -   Moss-covered foreground.
 -   Floating particles.
 -   The Muhammad Ismael crest — a circular seal with the MI monogram in
-    Playfair Display 900, ring lettering ("MUHAMMAD ISMAEL / EAU DE
-    PARFUM"), a maroon diamond and green laurel sprigs — positioned
-    prominently where the bottle used to stand (v11, per the client's
-    requirement).
+    Bodoni Moda 900, ring lettering ("MUHAMMAD ISMAEL / EAU DE
+    PARFUM"), a gold diamond and sage laurel sprigs — positioned
+    prominently where the bottle used to stand (per the client's
+    requirement; swap in the official logo file when it lands).
 -   Subtle crest float animation.
 -   Layered foreground leaves for depth.
 
@@ -598,7 +598,7 @@ Possible choices:
 
 -   Cormorant Garamond
 -   DM Serif Display
--   Playfair Display
+-   Bodoni Moda  ← shipped (the classic fashion didone)
 
 ### Interface / Body
 
@@ -1089,35 +1089,39 @@ anywhere (no build step, no server-side rendering required).
 2. **02 — The Forest (fragrance picker)** — the background is COMMON with
    the awakening: the very same forest image at the same scale, offset and
    brightness, held still. The four forest fragrances (Five-Nine, Hopeful,
-   Charming, Mi Amor) now play as a racing-game style SELECTOR: the model
-   cut-out planes (the same images the Hopeful beat used, full-bleed with
-   mirrored variants) stand on the right of the screen while the
-   description card (name, family, tagline, bottle, price, Discover +
-   Add-to-cart) sits on the left. The fragrance changes via the on-screen
-   arrows, the ←/→ arrow keys, the dots, a swipe on touch — or simply
-   scrolling, which auto-advances through the roster (scroll position is
-   the single source of truth; the arrows smooth-scroll to the target
-   slot, so manual and scroll input can never fight). The handoff into
-   the forest is ONE FLOW: the forest's stage is pinned underneath the
-   awakening's last stretch (a −150vh overlap in cinema mode), and the
-   awakening's stage — by then carrying the forest's own first frame
-   (`.forest-pre`, not mouse-parallaxed, pixel-identical) — simply
-   dissolves into it while BOTH stages stay pinned; the awakening's
-   framing then dissolves into the picker. At the end of the picker the
-   beach scene itself fades and zooms in over the forest ("the background
-   zooms out to the beach"), so the forest → shore handoff is a pure
-   cross-fade — no background ever pops up from the bottom.
+   Charming, Mi Amor) play as a racing-game style SELECTOR, fully
+   SCROLL-INDEPENDENT: the showcase panel on the LEFT frames the model
+   layer (the same cut-outs the Hopeful beat used) with the perfume
+   bottle displayed INSIDE the layer's foliage window (mapped exactly
+   through the object-fit cover math, mirrored for flipped variants);
+   the description card (name, family, tagline, price, Discover +
+   Add-to-cart) sits on the RIGHT; and the arrows live in the brown
+   selection bar at the bottom (with the dots and the ←/→ key hint).
+   The fragrance changes ONLY via the arrows, the ←/→ arrow keys, the
+   dots, or a swipe — scrolling never changes it, and a manual selection
+   persists as you scroll away and back. The handoff into the forest is
+   ONE FLOW: the forest's stage is pinned underneath the awakening's
+   last stretch (a −150vh overlap in cinema mode), and the awakening's
+   stage — by then carrying the forest's own first frame (`.forest-pre`,
+   not mouse-parallaxed, pixel-identical) — simply dissolves into it
+   while BOTH stages stay pinned; the awakening's framing then dissolves
+   into the picker. At the end of the picker THE FOREST ZOOMS OUT (per
+   the reference video in `vids/`): the whole forest world shrinks toward
+   the camera's pull-back and dissolves as it recedes, while the beach —
+   pre-loaded behind the world — occurs around it, settling to the exact
+   frame the shore section opens with.
 3. **03 — The Shore (fragrance picker)** — one continuous scene in three
    layers:
    1. the Mi Amor models (bushes + leaves) as the overlay on top,
    2. the sea water that pops up and rises in between,
    3. the sky/sand beach as the background.
    One arrival title ("Trees give way to the horizon.") in bold white
-   Playfair, then the same racing-game selector plays on the beach with
+   Bodoni, then the same racing-game selector plays on the beach with
    the shore fragrances (Zesty, Happy): the bushes dim behind the picker
-   and return for the water rise. After the picker the water rises
-   straight out of the scene (no separate "Water." beat) and the dive
-   begins. The handoff into the shore is the same one-flow dissolve as
+   and return for the water rise. After the picker the water overlays
+   the beach from the bottom in a steady linear climb (per the reference
+   video — the water line measured at 784 → 300 → 0px through the rise,
+   bright sky still on top) and the dive begins. The handoff into the shore is the same one-flow dissolve as
    the awakening → forest one, and the dive handoff repeats the pattern
    once more (the ocean pins under the shore's last stretch, the
    fully-risen water dissolves into the live ocean). The overlapping
@@ -1129,9 +1133,10 @@ anywhere (no build step, no server-side rendering required).
    screen (open-water surface, no sky) with god rays, caustics, rising
    bubbles and a live depth meter (0 → 42 m). After the "Down to the sea
    bed" arrival, the same selector returns underwater with the deep
-   fragrances (Sophisticated, King in the North) — the model cut-outs
-   carry an aquatic grade (desaturated, blue-tinted) so they sit in the
-   water, and the card scrim goes deep-sea navy. The transparent sea-bed
+   fragrances (Sophisticated, King in the North) — the showcase panel
+   and its perfume carry an aquatic grade so they sit in the water, the
+   card scrim goes deep-sea navy, and the depth meter steps aside while
+   the description card is on stage. The transparent sea-bed
    picture is overlaid as a model layer at the bottom of the water and
    slowly drifts up past the camera, thinning into the dark as the dive
    deepens. Its opening is a one-flow dissolve from the fully-risen water
@@ -1157,9 +1162,10 @@ drawer (localStorage), wishlist, toasts, mobile menu, page transitions.
 - **Lenis** (vendored) for smooth scrolling, integrated with the GSAP ticker.
 - **Canvas** particle systems (hero dust, ocean bubbles) that pause when
   off-screen.
-- **Self-hosted fonts** — Playfair Display 700/900 (+700 italic) for the
+- **Self-hosted fonts** — Bodoni Moda 400/700/900 (+ italics), the classic
+  high-contrast fashion didone, for the
   bold editorial display voice, Cormorant Garamond (accents) + Inter (UI),
-  all in `assets/fonts/`. The hero title is set in Playfair 900 with a
+  all in `assets/fonts/`. The hero title is set in Bodoni Moda 900 with a
   warm metallic gold gradient.
 - **Progressive enhancement** — with JavaScript disabled or with
   `prefers-reduced-motion`, the site degrades to a readable, stacked
@@ -1216,36 +1222,37 @@ handler in `checkout.html` to a real backend (or WooCommerce) to go live.
 
 ## Verified
 
-Headless-Chromium test suite (55 checks, 1440×900 desktop + 390×844
-mobile) confirms for v11: zero JS errors, the Muhammad Ismael crest
-(ring text, laurels, MI monogram in Playfair 900) renders in the opening
-where the bottle used to, and the maroon & green theme is live
-(eyebrows/nav wordmark/footer headings green `#93c3a4`, prices and
-badges maroon `#c47887`, maroon selection, green→maroon progress bar,
-maroon cart pill, crest favicon + nav mark).
+Headless-Chromium test suite (59 checks, 1440×900 desktop + 390×844
+mobile) confirms for v12: zero JS errors; the maroon & green theme is
+fully REVERTED (gold `#c9a86a` tokens restored, gold eyebrows / prices /
+selection / progress bar, no maroon tokens left) and the display face is
+now **Bodoni Moda** (700/900 loaded, drives the hero title and the crest
+monogram; the old Playfair faces are gone from the font set).
 
-The three racing-game fragrance pickers work exactly as specified —
-model cut-outs (the same planes the Hopeful beat used) fill the screen
-with the description card on the left, and the fragrance changes via
-the on-screen arrows, the ←/→ arrow keys, the dots, a swipe on touch,
-or simply scrolling (scroll position is the single source of truth, so
-manual and scroll input can never fight). Verified end-to-end: forest
-(Five-Nine → Hopeful → Charming → Mi Amor with 01/04 counter and active
-dot), shore (Zesty → Happy), sea bed (Sophisticated → King in the
-North), plus ArrowLeft reversal, dot jumps, and scroll auto-advance.
-The shore bushes dim behind the shore picker and return for the water
-rise; the rise still fills the open frame with water under the Mi Amor
-bushes + leaves (the required sandwich), and the dive dissolves into
-pure blue ocean (85% blue-dominant, zero flat dark bands at any point
-in the handoff — the v10 band detector runs on every handoff window).
+The crest still opens the journey. The three fragrance pickers are now
+SCROLL-INDEPENDENT with the client's layout: the model showcase (with
+the perfume bottle displayed inside the foliage window — mapped through
+exact cover math, mirrored for flipped planes) on the LEFT, the
+description card on the RIGHT, and the arrows in the brown selection bar
+at the bottom with the dots. Verified end-to-end: scrolling deep through
+a picker's span never changes the fragrance, a manual selection persists
+across scrolling away and back, arrows / arrow-keys / dots all swap the
+model AND the bottle (Five-Nine → Hopeful → Charming → Mi Amor; Zesty →
+Happy; Sophisticated → King in the North, with counters and active
+dots), and the perfume renders at full size in every scene (162×315px on
+desktop, 167px tall on mobile) — the "perfumes not displayed" report is
+fixed.
 
-All three scene handoffs remain ONE FLOW (awakening→forest, forest→
-shore, shore→dive: next scene pinned underneath, outgoing stage
-dissolves while both are pinned, 135px of scroll past each release
-leaves the screen essentially unchanged — 13–16/255 drift vs 28–55/255
-for a shifted frame — no lurch, nothing rises from the bottom). On
-mobile (≤900px) the hero leaf planes, forest frame and shore bushes
-overlay are still hidden, but the picker model cut-outs STAY (they are
-the content) behind a scrimmed bottom-sheet card with the arrows in
-reach; no horizontal overflow at 390px. Shop, product, and all other
-pages load error-free with the new theme applied.
+The forest → beach transition now matches the reference video: the whole
+forest world zooms out and dissolves as it recedes while the beach
+occurs around it (frame luminance measured 70 → 123 → 233 through the
+zoom, 100% bright at the end, no dark bands). The beach → ocean
+transition overlays the water from the bottom in a steady linear climb
+(water line measured at 784 → 300 → 0px, bright sky on top throughout,
+full coverage at the end) before the one-flow dissolve into the ocean
+(85% blue-dominant, zero flat dark bands). All three scene handoffs
+remain ONE FLOW (13–16/255 drift across the release vs 28–55/255 for a
+shifted frame — no lurch, nothing rises from the bottom). On mobile the
+showcase, card and brown bar all fit with no overflow, and the perfume
+displays. Shop, product, and all other pages load error-free with the
+gold theme.

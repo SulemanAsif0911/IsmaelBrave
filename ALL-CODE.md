@@ -1,75 +1,68 @@
 # ISMAEEL MUHAMMAD — A JOURNEY OF SENSES
 
-## Complete source code (v11 — maroon & green theme, crest opening, racing-game fragrance pickers)
+## Complete source code (v12 — theme reverted to gold, Bodoni Moda, scroll-independent pickers with the showcase layout, forest zoom-out per the reference vids)
 
 
 **Stack:** Vanilla HTML / CSS / JS + GSAP ScrollTrigger + Lenis (vendored) — no build step  
 **Catalog:** only the 8 journey models — all extra data removed
 
-**v11 changes**
+**v12 changes**
 
-1. **Maroon & green theme (client requirement).** The accent system was
-   rebuilt: `--maroon #7d2f3f` / `--maroon-2 #c47887` carry the old gold
-   roles (prices, badges, CTA hover, cart pill, selection) and
-   `--green #2e5c44` / `--green-2 #93c3a4` are the second voice
-   (eyebrows, nav wordmark accent, footer headings, focus rings). The
-   progress bar draws green → maroon, the hero headline ramps
-   ivory → maroon-rose, Most Wanted glows on a maroon-black ground, and
-   the light pages use deep maroon accents. The favicon and the nav
-   carry the crest mark.
-2. **The opening now shows the Muhammad Ismael crest instead of the
-   bottle.** An inline-SVG seal — double ring, ring lettering
-   ("MUHAMMAD ISMAEL · EAU DE PARFUM") on textPaths, the MI monogram in
-   Playfair Display 900 with an ivory→maroon gradient, a maroon diamond
-   and green laurel sprigs. Razor-sharp at any zoom, theme-aware, and
-   it floats exactly where the bottle stood (same parallax rules — it
-   never drifts on cursor move).
-3. **Racing-game fragrance selectors in all three scenes.** Forest
-   (Five-Nine, Hopeful, Charming, Mi Amor), Shore (Zesty, Happy) and
-   Sea Bed (Sophisticated, King in the North) each play a selector:
-   the model cut-out planes (the same images the Hopeful beat used,
-   with mirrored variants) stand on the right of the screen, the
-   description card (name, family, tagline, bottle, price, Discover +
-   Add to cart) sits on the left, and big arrows + dots + a key hint
-   ride the bottom. Change the fragrance with the arrows, the ←/→
-   arrow keys, the dots, a swipe on touch — or simply scroll, which
-   auto-advances the roster. Scroll position is the single source of
-   truth (the arrows smooth-scroll to the target slot), so manual and
-   scroll input can never fight. The swap is a racing-game sweep: the
-   outgoing model exits one side, the next enters from the other, the
-   card crossfades. In the sea the models carry an aquatic grade; on
-   the shore the bushes dim behind the picker and return for the water
-   rise (the bushes > water > beach sandwich is untouched).
-4. Everything else stands: one-flow handoffs at every scene change,
-   no section background over a pinned scene, water rising bottom→top,
-   the depth meter, most-wanted reveal, collections, shop, cart. 55/55
+1. **Theme reverted.** The maroon & green experiment is fully rolled
+   back to the original gold design system (`--gold #c9a86a` everywhere:
+   eyebrows, prices, badges, selection, progress bar, cart pill, Most
+   Wanted, light-page accents).
+2. **Classy new display face: Bodoni Moda** — the high-contrast fashion
+   didone — vendored (400/700/900 + italics) and driving every headline,
+   product name and the crest monogram. The Playfair faces are retired.
+3. **The pickers are SCROLL-INDEPENDENT and follow the client's layout:**
+   the model showcase on the LEFT (a framed panel showing the model layer
+   with the PERFUME BOTTLE displayed inside the layer's foliage window —
+   placed through exact object-fit cover math, mirrored for flipped
+   planes), the description card on the RIGHT, and the arrows in the
+   BROWN selection bar at the bottom (with dots + key hint). Arrows /
+   ←/→ keys / dots / swipe are the only way to change the fragrance;
+   scrolling never does, and selections persist.
+4. **"The perfumes are not being displayed" — fixed.** The v11 picker
+   showed the model layers full-bleed, but those layers are foliage
+   frames with a transparent centre, so no perfume was visible. The
+   bottle now sits inside each layer's window at full size in every
+   scene and swaps with the racing-game sweep.
+5. **Transitions per the reference videos (`vids/`):** the forest →
+   beach handoff is a true ZOOM-OUT — the whole forest world shrinks
+   toward the camera's pull-back and dissolves while the beach occurs
+   around it (pre-loaded behind the world) — and the beach → ocean
+   handoff overlays the water from the bottom in a steady linear climb,
+   bright sky on top, before the one-flow dissolve under the surface.
+6. Everything else stands: one-flow handoffs, no section background
+   over a pinned scene, most-wanted, collections, shop, cart. 59/59
    audit checks pass.
 
 
 | # | File | Lines | Purpose |
 |---|------|-------|---------|
-| 1 | `index.html` | 592 | The cinematic journey — crest opening, racing-game fragrance pickers in forest / shore / sea bed, one-flow dissolves at every pinned handoff |
+| 1 | `index.html` | 606 | The cinematic journey — crest opening, scroll-independent fragrance pickers (showcase left with the perfume in the foliage window, description right, brown selection bar), forest zoom-out to the beach, water overlay from the bottom |
 | 2 | `shop.html` | 114 | Editorial shop — the 8 journey models only |
 | 3 | `product.html` | 194 | Data-driven product detail page |
 | 4 | `about.html` | 182 | Editorial brand story (5 chapters) |
 | 5 | `contact.html` | 176 | Contact + FAQ / shipping / returns |
 | 6 | `checkout.html` | 220 | Checkout with order confirmation |
-| 7 | `assets/css/base.css` | 459 | Design system: maroon & green tokens, Playfair display type, nav with crest mark, cart, cards, footer |
-| 8 | `assets/css/journey.css` | 592 | Cinematic styles: crest emblem, fragrance picker (models right / card left / arrows + dots + hint), one-flow handoff overlaps, overlapping sections carry no background, aquatic picker grade, mobile bottom-sheet picker card |
-| 9 | `assets/css/pages.css` | 316 | Shop / product / about / contact / checkout styles (maroon accents on light surfaces) |
+| 7 | `assets/css/base.css` | 453 | Design system: gold tokens restored, Bodoni Moda display type, nav with crest mark, cart, cards, footer |
+| 8 | `assets/css/journey.css` | 611 | Cinematic styles: crest emblem, picker layout (showcase / card / brown bar), forest-world zoom-out + beach-pre, one-flow handoff overlaps, mobile stacked picker |
+| 9 | `assets/css/pages.css` | 316 | Shop / product / about / contact / checkout styles |
 | 10 | `assets/js/data.js` | 181 | Product database — 8 journey models only |
 | 11 | `assets/js/nav.js` | 94 | Nav, veil, reveals, menu, page transitions |
 | 12 | `assets/js/cart.js` | 194 | Cart store, drawer, wishlist, toasts (localStorage) |
-| 13 | `assets/js/journey.js` | 523 | Scroll engine + picker engine: deterministic entrance+scrub, one-flow stage dissolves at all three handoffs, racing-game selector (arrows / keys / dots / swipe / scroll — scroll position is the single source of truth) |
+| 13 | `assets/js/journey.js` | 561 | Scroll engine + picker engine: one-flow stage dissolves, forest zoom-out, linear water rise, scroll-independent selector with exact bottle-in-window placement |
 | 14 | `assets/js/shop.js` | 97 | Shop filters + grid rendering |
 | 15 | `assets/js/product.js` | 170 | Product page rendering + JSON-LD |
-| 16 | `assets/img/ui/favicon.svg` | 6 | Favicon — the MI crest in maroon & green |
+| 16 | `assets/img/ui/favicon.svg` | 4 | Favicon — IM monogram in gold |
 
-**Total: 16 files, 4110 lines.**
+**Total: 16 files, 4173 lines.**
 
 ---
 
-## 📄 index.html  ·  (592 lines)
+## 📄 index.html  ·  (606 lines)
 
 ```html
 <!DOCTYPE html>
@@ -101,7 +94,7 @@
 <div class="grain" aria-hidden="true"></div>
 
 <nav class="nav" aria-label="Main">
-  <a class="nav__logo" href="index.html"><svg class="nav__mark" viewBox="0 0 64 64" aria-hidden="true"><circle cx="32" cy="32" r="27.5" fill="none" stroke="currentColor" opacity=".4"/><circle cx="32" cy="32" r="20.5" fill="none" stroke="#6fae87" opacity=".6"/><text x="32" y="39.5" text-anchor="middle">MI</text></svg>Ismaeel <em>Muhammad</em></a>
+  <a class="nav__logo" href="index.html"><svg class="nav__mark" viewBox="0 0 64 64" aria-hidden="true"><circle cx="32" cy="32" r="27.5" fill="none" stroke="currentColor" opacity=".4"/><circle cx="32" cy="32" r="20.5" fill="none" stroke="#c9a86a" opacity=".55"/><text x="32" y="39.5" text-anchor="middle">MI</text></svg>Ismaeel <em>Muhammad</em></a>
   <ul class="nav__links">
     <li><a href="index.html" data-nav="journey">Journey</a></li>
     <li><a href="shop.html" data-nav="shop">Shop</a></li>
@@ -148,10 +141,10 @@
 
       <div class="leaf leaf--far" aria-hidden="true"><img src="assets/img/env/model-fore.webp" alt=""></div>
 
-      <!-- the house crest — the Muhammad Ismael monogram seal replaces the
-           bottle in the opening. Built as inline SVG on the brand's own
-           Playfair Display so it stays razor-sharp at any zoom and inherits
-           the maroon & green theme -->
+      <!-- the house crest — the Muhammad Ismael monogram seal in the opening.
+           Inline SVG on the house display face: razor-sharp at any zoom and
+           tinted with the gold theme (swap for the official logo file when
+           it lands in the repo) -->
       <a class="hero-emblem" href="about.html" aria-label="Ismaeel Muhammad — the house of fragrance">
         <div class="hero-emblem-in">
           <span class="halo" aria-hidden="true"></span>
@@ -161,8 +154,8 @@
               <path id="ringBot" d="M 56 180 A 124 124 0 0 0 304 180"/>
               <linearGradient id="miGrad" x1="0" y1="0" x2="0" y2="1">
                 <stop offset="0" stop-color="#f6efe0"/>
-                <stop offset=".55" stop-color="#e9cdd3"/>
-                <stop offset="1" stop-color="#c47887"/>
+                <stop offset=".55" stop-color="#e9dcb8"/>
+                <stop offset="1" stop-color="#c9a86a"/>
               </linearGradient>
             </defs>
             <circle cx="180" cy="180" r="177" fill="none" stroke="rgba(243,238,227,.38)" stroke-width="1.2"/>
@@ -170,7 +163,7 @@
             <circle cx="180" cy="180" r="102" fill="none" stroke="rgba(243,238,227,.26)" stroke-width=".8"/>
             <text class="emblem__ring"><textPath href="#ringTop" startOffset="50%" text-anchor="middle">MUHAMMAD&#160;ISMAEL</textPath></text>
             <text class="emblem__ring"><textPath href="#ringBot" startOffset="50%" text-anchor="middle">EAU&#160;DE&#160;PARFUM</textPath></text>
-            <path d="M180 64l7.5 8.5-7.5 8.5-7.5-8.5z" fill="#c47887"/>
+            <path d="M180 64l7.5 8.5-7.5 8.5-7.5-8.5z" fill="#c9a86a"/>
             <g fill="none" stroke="#8fbf9f" stroke-width="1.4" stroke-linecap="round" opacity=".92">
               <path d="M143 292c-21-8-35-23-41-43"/>
               <path d="M217 292c21-8 35-23 41-43"/>
@@ -187,7 +180,7 @@
               <ellipse cx="251" cy="262" rx="5" ry="1.7" transform="rotate(34 251 262)"/>
               <ellipse cx="256" cy="253" rx="5" ry="1.7" transform="rotate(24 256 253)"/>
             </g>
-            <path d="M160 238h40" stroke="rgba(143,191,159,.75)" stroke-width="1"/>
+            <path d="M160 238h40" stroke="rgba(201,168,106,.75)" stroke-width="1"/>
             <text class="emblem__mi" x="180" y="220" text-anchor="middle">MI</text>
           </svg>
         </div>
@@ -238,6 +231,11 @@
        ================================================ -->
   <section class="scene" id="forest" data-rail="02" aria-label="The forest collection">
     <div class="stage">
+      <!-- the beach, pre-loaded BEHIND the forest world: at the end of the
+           forest the whole forest zooms out (the camera pulls back, per the
+           reference vid) and the beach occurs around it -->
+      <div class="beach-pre" aria-hidden="true"><img src="assets/img/env/beach.webp" alt=""></div>
+      <div class="forest-world">
       <div class="layer forest-bg"><img src="assets/img/env/forest-bg.webp" alt="Deep forest environment"></div>
       <div class="forest-frame" aria-hidden="true">
         <div class="layer ff-mid"><img src="assets/img/env/model-mid.webp" alt=""></div>
@@ -249,18 +247,28 @@
         <div class="sunshaft"></div>
       </div>
       <div class="vignette" aria-hidden="true"></div>
+      </div>
       <div class="stagechip stagechip--forest"><b>02</b> The Forest</div>
 
       <!-- the forest fragrance selector — racing-game style: the model planes
            (the same cut-outs the Hopeful beat used) fill the right of the
            screen, the description card sits on the left, and the arrows /
            arrow-keys / dots / swipe (or simply scrolling) cycle the fragrances -->
+            <!-- the fragrance selector — racing-game style, fully scroll-independent:
+           the model showcase (with the perfume held in the foliage window) sits
+           on the LEFT, the description on the RIGHT, and the arrows live in the
+           brown selection bar at the bottom. Arrows / arrow-keys / dots / swipe
+           change the fragrance — scrolling never does -->
       <div class="picker picker--forest" aria-label="Choose a forest fragrance">
-        <div class="pk-models" aria-hidden="true">
-          <div class="pk-model is-on"><img src="assets/img/env/model-fore.webp" alt=""></div>
-          <div class="pk-model"><img class="flip" src="assets/img/env/model-fore.webp" alt=""></div>
-          <div class="pk-model"><img src="assets/img/env/model-mid.webp" alt=""></div>
-          <div class="pk-model"><img class="flip" src="assets/img/env/model-mid.webp" alt=""></div>
+        <div class="pk-show">
+          <div class="pk-models" aria-hidden="true">
+          <div class="pk-model is-on" data-bx="58" data-by="51"><img src="assets/img/env/model-fore.webp" alt=""></div>
+          <div class="pk-model" data-bx="58" data-by="51"><img class="flip" src="assets/img/env/model-fore.webp" alt=""></div>
+          <div class="pk-model" data-bx="59" data-by="43"><img src="assets/img/env/model-mid.webp" alt=""></div>
+          <div class="pk-model" data-bx="59" data-by="43"><img class="flip" src="assets/img/env/model-mid.webp" alt=""></div>
+          </div>
+          <img class="pk-bottlefig" src="assets/img/bottles/five-nine.webp" alt="Five-Nine perfume bottle held in the foliage">
+          <span class="pk-show-frame" aria-hidden="true"></span>
         </div>
 
         <aside class="pk-card">
@@ -268,19 +276,16 @@
           <h3 class="display pk-name">Five-Nine</h3>
           <div class="pk-family">Woody · Amber · Spicy</div>
           <p class="pk-tag">The forest at golden hour — resin, cedar and warm spice.</p>
-          <div class="pk-row">
-            <img class="pk-bottle" src="assets/img/bottles/five-nine.webp" alt="Five-Nine perfume bottle">
-            <div class="pk-meta">
-              <span class="pk-price">from ₨2,600</span>
-              <div class="pk-cta">
-                <a class="btn pk-link" href="product.html?p=five-nine">Discover <span class="arr">→</span></a>
-                <button class="chip-btn" data-add="five-nine">Add to cart</button>
-              </div>
+          <div class="pk-meta">
+            <span class="pk-price">from ₨2,600</span>
+            <div class="pk-cta">
+              <a class="btn pk-link" href="product.html?p=five-nine">Discover <span class="arr">→</span></a>
+              <button class="chip-btn" data-add="five-nine">Add to cart</button>
             </div>
           </div>
         </aside>
 
-        <div class="pk-nav">
+        <div class="pk-bar" role="group" aria-label="Fragrance selection">
           <button class="pk-arrow pk-arrow--prev" aria-label="Previous fragrance"><svg viewBox="0 0 24 24"><path d="M15 5l-7 7 7 7" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
           <div class="pk-dots">
             <button class="on" data-go="0" aria-label="Five-Nine"></button>
@@ -293,17 +298,7 @@
         <div class="pk-hint"><span>←</span> choose your scent <span>→</span></div>
       </div>
 
-      <!-- the shore, pre-loaded: fades + zooms in at the end of the forest so the
-           background never pops up from the bottom at the forest → shore handoff -->
-      <div class="shore-pre" aria-hidden="true">
-        <div class="layer trans-beach sp-beach"><img src="assets/img/env/beach.webp" alt=""></div>
-        <div class="shore-overlay sp-overlay">
-          <div class="bushes"><img src="assets/img/env/model-mid.webp" alt=""></div>
-          <div class="leaves"><img src="assets/img/env/leaf-near.webp" alt=""></div>
-        </div>
-        <div class="vignette"></div>
-      </div>
-    </div>
+          </div>
   </section>
 
   <!-- ================================================
@@ -335,10 +330,19 @@
 
       <!-- the shore fragrance selector — same picker as the forest, played on
            the beach: model planes right, description left, arrows to cycle -->
+            <!-- the fragrance selector — racing-game style, fully scroll-independent:
+           the model showcase (with the perfume held in the foliage window) sits
+           on the LEFT, the description on the RIGHT, and the arrows live in the
+           brown selection bar at the bottom. Arrows / arrow-keys / dots / swipe
+           change the fragrance — scrolling never does -->
       <div class="picker picker--shore" aria-label="Choose a shore fragrance">
-        <div class="pk-models" aria-hidden="true">
-          <div class="pk-model is-on"><img src="assets/img/env/model-fore.webp" alt=""></div>
-          <div class="pk-model"><img class="flip" src="assets/img/env/model-mid.webp" alt=""></div>
+        <div class="pk-show">
+          <div class="pk-models" aria-hidden="true">
+          <div class="pk-model is-on" data-bx="58" data-by="51"><img src="assets/img/env/model-fore.webp" alt=""></div>
+          <div class="pk-model" data-bx="59" data-by="43"><img class="flip" src="assets/img/env/model-mid.webp" alt=""></div>
+          </div>
+          <img class="pk-bottlefig" src="assets/img/bottles/zesty.webp" alt="Zesty perfume bottle held in the foliage">
+          <span class="pk-show-frame" aria-hidden="true"></span>
         </div>
 
         <aside class="pk-card">
@@ -346,19 +350,16 @@
           <h3 class="display pk-name">Zesty</h3>
           <div class="pk-family">Citrus · Aquatic · Fresh</div>
           <p class="pk-tag">Salt on skin, sun on water.</p>
-          <div class="pk-row">
-            <img class="pk-bottle" src="assets/img/bottles/zesty.webp" alt="Zesty perfume bottle">
-            <div class="pk-meta">
-              <span class="pk-price">from ₨2,200</span>
-              <div class="pk-cta">
-                <a class="btn pk-link" href="product.html?p=zesty">Discover <span class="arr">→</span></a>
-                <button class="chip-btn" data-add="zesty">Add to cart</button>
-              </div>
+          <div class="pk-meta">
+            <span class="pk-price">from ₨2,200</span>
+            <div class="pk-cta">
+              <a class="btn pk-link" href="product.html?p=zesty">Discover <span class="arr">→</span></a>
+              <button class="chip-btn" data-add="zesty">Add to cart</button>
             </div>
           </div>
         </aside>
 
-        <div class="pk-nav">
+        <div class="pk-bar" role="group" aria-label="Fragrance selection">
           <button class="pk-arrow pk-arrow--prev" aria-label="Previous fragrance"><svg viewBox="0 0 24 24"><path d="M15 5l-7 7 7 7" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
           <div class="pk-dots">
             <button class="on" data-go="0" aria-label="Zesty"></button>
@@ -404,10 +405,19 @@
 
       <!-- the sea-bed fragrance selector — the deepest picks, chosen between
            the light rays. Same picker: models right, description left -->
-      <div class="picker picker--ocean" aria-label="Choose a deep fragrance">
-        <div class="pk-models" aria-hidden="true">
-          <div class="pk-model is-on"><img src="assets/img/env/model-mid.webp" alt=""></div>
-          <div class="pk-model"><img class="flip" src="assets/img/env/model-fore.webp" alt=""></div>
+            <!-- the fragrance selector — racing-game style, fully scroll-independent:
+           the model showcase (with the perfume held in the foliage window) sits
+           on the LEFT, the description on the RIGHT, and the arrows live in the
+           brown selection bar at the bottom. Arrows / arrow-keys / dots / swipe
+           change the fragrance — scrolling never does -->
+      <div class="picker picker--ocean" aria-label="Choose a sea bed fragrance">
+        <div class="pk-show">
+          <div class="pk-models" aria-hidden="true">
+          <div class="pk-model is-on" data-bx="59" data-by="43"><img src="assets/img/env/model-mid.webp" alt=""></div>
+          <div class="pk-model" data-bx="58" data-by="51"><img class="flip" src="assets/img/env/model-fore.webp" alt=""></div>
+          </div>
+          <img class="pk-bottlefig" src="assets/img/bottles/sophisticated.webp" alt="Sophisticated perfume bottle held in the foliage">
+          <span class="pk-show-frame" aria-hidden="true"></span>
         </div>
 
         <aside class="pk-card">
@@ -415,19 +425,16 @@
           <h3 class="display pk-name">Sophisticated</h3>
           <div class="pk-family">Amber · Leather · Woody</div>
           <p class="pk-tag">Depth, quietly worn.</p>
-          <div class="pk-row">
-            <img class="pk-bottle" src="assets/img/bottles/sophisticated.webp" alt="Sophisticated perfume bottle">
-            <div class="pk-meta">
-              <span class="pk-price">from ₨2,800</span>
-              <div class="pk-cta">
-                <a class="btn pk-link" href="product.html?p=sophisticated">Discover <span class="arr">→</span></a>
-                <button class="chip-btn" data-add="sophisticated">Add to cart</button>
-              </div>
+          <div class="pk-meta">
+            <span class="pk-price">from ₨2,800</span>
+            <div class="pk-cta">
+              <a class="btn pk-link" href="product.html?p=sophisticated">Discover <span class="arr">→</span></a>
+              <button class="chip-btn" data-add="sophisticated">Add to cart</button>
             </div>
           </div>
         </aside>
 
-        <div class="pk-nav">
+        <div class="pk-bar" role="group" aria-label="Fragrance selection">
           <button class="pk-arrow pk-arrow--prev" aria-label="Previous fragrance"><svg viewBox="0 0 24 24"><path d="M15 5l-7 7 7 7" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
           <div class="pk-dots">
             <button class="on" data-go="0" aria-label="Sophisticated"></button>
@@ -595,7 +602,7 @@
     <div class="waterecho" aria-hidden="true"></div>
     <span class="eyebrow" data-reveal>The journey continues</span>
     <h2 class="display" data-reveal style="--d:.1s">You don't browse Ismaeel Muhammad.<br>You <em>enter</em> it.</h2>
-    <a class="btn-solid maroon" href="shop.html" data-reveal style="--d:.2s">Shop the collection</a>
+    <a class="btn-solid gold" href="shop.html" data-reveal style="--d:.2s">Shop the collection</a>
   </section>
 
 </main>
@@ -692,7 +699,7 @@
 </div>
 
 <nav class="nav" aria-label="Main">
-  <a class="nav__logo" href="index.html"><svg class="nav__mark" viewBox="0 0 64 64" aria-hidden="true"><circle cx="32" cy="32" r="27.5" fill="none" stroke="currentColor" opacity=".4"/><circle cx="32" cy="32" r="20.5" fill="none" stroke="#6fae87" opacity=".6"/><text x="32" y="39.5" text-anchor="middle">MI</text></svg>Ismaeel <em>Muhammad</em></a>
+  <a class="nav__logo" href="index.html"><svg class="nav__mark" viewBox="0 0 64 64" aria-hidden="true"><circle cx="32" cy="32" r="27.5" fill="none" stroke="currentColor" opacity=".4"/><circle cx="32" cy="32" r="20.5" fill="none" stroke="#c9a86a" opacity=".55"/><text x="32" y="39.5" text-anchor="middle">MI</text></svg>Ismaeel <em>Muhammad</em></a>
   <ul class="nav__links">
     <li><a href="index.html" data-nav="journey">Journey</a></li>
     <li><a href="shop.html" data-nav="shop">Shop</a></li>
@@ -815,7 +822,7 @@
 </div>
 
 <nav class="nav" aria-label="Main">
-  <a class="nav__logo" href="index.html"><svg class="nav__mark" viewBox="0 0 64 64" aria-hidden="true"><circle cx="32" cy="32" r="27.5" fill="none" stroke="currentColor" opacity=".4"/><circle cx="32" cy="32" r="20.5" fill="none" stroke="#6fae87" opacity=".6"/><text x="32" y="39.5" text-anchor="middle">MI</text></svg>Ismaeel <em>Muhammad</em></a>
+  <a class="nav__logo" href="index.html"><svg class="nav__mark" viewBox="0 0 64 64" aria-hidden="true"><circle cx="32" cy="32" r="27.5" fill="none" stroke="currentColor" opacity=".4"/><circle cx="32" cy="32" r="20.5" fill="none" stroke="#c9a86a" opacity=".55"/><text x="32" y="39.5" text-anchor="middle">MI</text></svg>Ismaeel <em>Muhammad</em></a>
   <ul class="nav__links">
     <li><a href="index.html" data-nav="journey">Journey</a></li>
     <li><a href="shop.html" data-nav="shop">Shop</a></li>
@@ -866,7 +873,7 @@
       </div>
 
       <div class="pd__actions">
-        <button class="btn-solid maroon" id="pd-add">Add to cart</button>
+        <button class="btn-solid gold" id="pd-add">Add to cart</button>
         <button class="btn-solid" id="pd-buy">Buy now</button>
         <button class="btn-solid" id="pd-wish" style="min-width:56px" aria-label="Save to wishlist">♡</button>
       </div>
@@ -934,7 +941,7 @@
     <div class="continue__in">
       <span class="eyebrow">The journey continues</span>
       <h2 class="display" id="pd-cont-title">Step back into <em>the forest.</em></h2>
-      <a class="btn-solid maroon" id="pd-cont-link" href="index.html">Continue your journey</a>
+      <a class="btn-solid gold" id="pd-cont-link" href="index.html">Continue your journey</a>
     </div>
   </section>
 
@@ -1018,7 +1025,7 @@
 </div>
 
 <nav class="nav" aria-label="Main">
-  <a class="nav__logo" href="index.html"><svg class="nav__mark" viewBox="0 0 64 64" aria-hidden="true"><circle cx="32" cy="32" r="27.5" fill="none" stroke="currentColor" opacity=".4"/><circle cx="32" cy="32" r="20.5" fill="none" stroke="#6fae87" opacity=".6"/><text x="32" y="39.5" text-anchor="middle">MI</text></svg>Ismaeel <em>Muhammad</em></a>
+  <a class="nav__logo" href="index.html"><svg class="nav__mark" viewBox="0 0 64 64" aria-hidden="true"><circle cx="32" cy="32" r="27.5" fill="none" stroke="currentColor" opacity=".4"/><circle cx="32" cy="32" r="20.5" fill="none" stroke="#c9a86a" opacity=".55"/><text x="32" y="39.5" text-anchor="middle">MI</text></svg>Ismaeel <em>Muhammad</em></a>
   <ul class="nav__links">
     <li><a href="index.html" data-nav="journey">Journey</a></li>
     <li><a href="shop.html" data-nav="shop">Shop</a></li>
@@ -1209,7 +1216,7 @@
 </div>
 
 <nav class="nav" aria-label="Main">
-  <a class="nav__logo" href="index.html"><svg class="nav__mark" viewBox="0 0 64 64" aria-hidden="true"><circle cx="32" cy="32" r="27.5" fill="none" stroke="currentColor" opacity=".4"/><circle cx="32" cy="32" r="20.5" fill="none" stroke="#6fae87" opacity=".6"/><text x="32" y="39.5" text-anchor="middle">MI</text></svg>Ismaeel <em>Muhammad</em></a>
+  <a class="nav__logo" href="index.html"><svg class="nav__mark" viewBox="0 0 64 64" aria-hidden="true"><circle cx="32" cy="32" r="27.5" fill="none" stroke="currentColor" opacity=".4"/><circle cx="32" cy="32" r="20.5" fill="none" stroke="#c9a86a" opacity=".55"/><text x="32" y="39.5" text-anchor="middle">MI</text></svg>Ismaeel <em>Muhammad</em></a>
   <ul class="nav__links">
     <li><a href="index.html" data-nav="journey">Journey</a></li>
     <li><a href="shop.html" data-nav="shop">Shop</a></li>
@@ -1287,7 +1294,7 @@
         <label for="cf-msg">Message</label>
         <textarea id="cf-msg" required></textarea>
       </div>
-      <button class="btn-solid maroon" type="submit">Send message</button>
+      <button class="btn-solid gold" type="submit">Send message</button>
       <div class="form-ok" id="form-ok">
         <p class="display">Thank you.</p>
         <p>Your message is on its way. We reply within one working day.</p>
@@ -1394,7 +1401,7 @@
 </div>
 
 <nav class="nav" aria-label="Main">
-  <a class="nav__logo" href="index.html"><svg class="nav__mark" viewBox="0 0 64 64" aria-hidden="true"><circle cx="32" cy="32" r="27.5" fill="none" stroke="currentColor" opacity=".4"/><circle cx="32" cy="32" r="20.5" fill="none" stroke="#6fae87" opacity=".6"/><text x="32" y="39.5" text-anchor="middle">MI</text></svg>Ismaeel <em>Muhammad</em></a>
+  <a class="nav__logo" href="index.html"><svg class="nav__mark" viewBox="0 0 64 64" aria-hidden="true"><circle cx="32" cy="32" r="27.5" fill="none" stroke="currentColor" opacity=".4"/><circle cx="32" cy="32" r="20.5" fill="none" stroke="#c9a86a" opacity=".55"/><text x="32" y="39.5" text-anchor="middle">MI</text></svg>Ismaeel <em>Muhammad</em></a>
   <ul class="nav__links">
     <li><a href="index.html" data-nav="journey">Journey</a></li>
     <li><a href="shop.html" data-nav="shop">Shop</a></li>
@@ -1478,7 +1485,7 @@
           </label>
         </div>
 
-        <button class="btn-solid maroon" type="submit" style="width:100%">Place order</button>
+        <button class="btn-solid gold" type="submit" style="width:100%">Place order</button>
         <p style="font-size:10px;letter-spacing:.2em;text-transform:uppercase;color:rgba(242,238,227,.4);text-align:center;margin-top:16px">
           Encrypted · 7-day returns · A human packs every order
         </p>
@@ -1500,7 +1507,7 @@
       <h2 class="display">The journey is on its way.</h2>
       <div class="ord" id="co-ref">Order IM-0000</div>
       <p>Thank you. A confirmation is on its way to your inbox. Your fragrance will be dispatched within 1–2 working days.</p>
-      <a class="btn-solid maroon" href="index.html" style="margin-top:30px">Back to the journey</a>
+      <a class="btn-solid gold" href="index.html" style="margin-top:30px">Back to the journey</a>
     </div>
   </div>
 </main>
@@ -1601,16 +1608,18 @@
 ---
 
 
-## 📄 assets/css/base.css  ·  (459 lines)
+## 📄 assets/css/base.css  ·  (453 lines)
 
 ```css
 /* ============================================================
    ISMAEEL MUHAMMAD — base design system
    ============================================================ */
 
-@font-face { font-family:'Playfair Display'; src:url('../fonts/playfair-display-latin-700-normal.woff2') format('woff2'); font-weight:700; font-style:normal; font-display:swap; }
-@font-face { font-family:'Playfair Display'; src:url('../fonts/playfair-display-latin-900-normal.woff2') format('woff2'); font-weight:900; font-style:normal; font-display:swap; }
-@font-face { font-family:'Playfair Display'; src:url('../fonts/playfair-display-latin-700-italic.woff2') format('woff2'); font-weight:700; font-style:italic; font-display:swap; }
+@font-face { font-family:'Bodoni Moda'; src:url('../fonts/bodoni-moda-latin-400-normal.woff2') format('woff2'); font-weight:400; font-style:normal; font-display:swap; }
+@font-face { font-family:'Bodoni Moda'; src:url('../fonts/bodoni-moda-latin-700-normal.woff2') format('woff2'); font-weight:700; font-style:normal; font-display:swap; }
+@font-face { font-family:'Bodoni Moda'; src:url('../fonts/bodoni-moda-latin-900-normal.woff2') format('woff2'); font-weight:900; font-style:normal; font-display:swap; }
+@font-face { font-family:'Bodoni Moda'; src:url('../fonts/bodoni-moda-latin-400-italic.woff2') format('woff2'); font-weight:400; font-style:italic; font-display:swap; }
+@font-face { font-family:'Bodoni Moda'; src:url('../fonts/bodoni-moda-latin-700-italic.woff2') format('woff2'); font-weight:700; font-style:italic; font-display:swap; }
 @font-face { font-family:'Cormorant Garamond'; src:url('../fonts/cormorant-garamond-latin-300-normal.woff2') format('woff2'); font-weight:300; font-style:normal; font-display:swap; }
 @font-face { font-family:'Cormorant Garamond'; src:url('../fonts/cormorant-garamond-latin-400-normal.woff2') format('woff2'); font-weight:400; font-style:normal; font-display:swap; }
 @font-face { font-family:'Cormorant Garamond'; src:url('../fonts/cormorant-garamond-latin-500-normal.woff2') format('woff2'); font-weight:500; font-style:normal; font-display:swap; }
@@ -1626,25 +1635,17 @@
   --serif:'Cormorant Garamond', Georgia, 'Times New Roman', serif;
   --sans:'Inter', -apple-system, 'Segoe UI', Helvetica, Arial, sans-serif;
 
-  --ink:#0c0709;
-  --paper:#f3eee3;
-  --paper-dim:#d8d2c4;
-  --charcoal:#150e12;
-  --charcoal-2:#1d1418;
+  --ink:#070b08;
+  --paper:#f2eee3;
+  --paper-dim:#d9d4c5;
+  --charcoal:#0e1112;
+  --charcoal-2:#16191a;
 
   --forest-1:#07130d; --forest-2:#18291c; --forest-3:#405b42;
   --ocean-1:#0a2330;  --ocean-2:#063e59;  --ocean-3:#087c9c;
   --deep:#030d16;
   --sand:#c5c4b5; --stone:#87908a;
-
-  /* the house theme — maroon & green. --maroon-2 / --maroon-soft carry the
-     old gold accent roles; --green-2 is the theme's second voice */
-  --maroon:#7d2f3f;
-  --maroon-2:#c47887;
-  --maroon-soft:rgba(196,120,135,.5);
-  --green:#2e5c44;
-  --green-2:#93c3a4;
-  --green-soft:rgba(147,195,164,.5);
+  --gold:#c9a86a; --gold-soft:rgba(201,168,106,.55);
   --mist:rgba(214,226,214,.16);
 
   --line:rgba(242,238,227,.16);
@@ -1677,13 +1678,13 @@ img{ display:block; max-width:100%; }
 a{ color:inherit; text-decoration:none; }
 button{ font-family:inherit; color:inherit; background:none; border:0; cursor:pointer; }
 input,textarea,select{ font-family:inherit; font-size:inherit; }
-::selection{ background:var(--maroon); color:#f6e9d8; }
+::selection{ background:var(--gold); color:#100c04; }
 
-:focus-visible{ outline:1.5px solid var(--green-2); outline-offset:3px; border-radius:2px; }
+:focus-visible{ outline:1.5px solid var(--gold); outline-offset:3px; border-radius:2px; }
 
 /* ---------- typography ---------- */
 .display{
-  font-family:'Playfair Display', var(--serif); font-weight:700;
+  font-family:'Bodoni Moda', var(--serif); font-weight:700;
   line-height:1.02; letter-spacing:-.012em;
   text-wrap:balance;
 }
@@ -1693,11 +1694,11 @@ h2.display{ font-size:clamp(36px,5.8vw,84px); }
 h3.display{ font-size:clamp(28px,3.6vw,50px); }
 .eyebrow{
   font-family:var(--sans); font-size:11px; font-weight:600;
-  letter-spacing:.42em; text-transform:uppercase; color:var(--green-2);
+  letter-spacing:.42em; text-transform:uppercase; color:var(--gold);
 }
 .eyebrow::before{
   content:''; display:inline-block; width:26px; height:1px;
-  background:var(--green-2); margin-right:14px; vertical-align:middle; opacity:.8;
+  background:var(--gold); margin-right:14px; vertical-align:middle; opacity:.8;
 }
 .label{
   font-size:11px; font-weight:500; letter-spacing:.34em; text-transform:uppercase;
@@ -1725,7 +1726,7 @@ h3.display{ font-size:clamp(28px,3.6vw,50px); }
   transform:scaleX(1); transform-origin:right;
   transition:transform .55s var(--ease), opacity .4s;
 }
-.btn:hover{ color:var(--maroon-2); }
+.btn:hover{ color:var(--gold); }
 .btn:hover::after{ transform:scaleX(.35); opacity:.9; }
 .btn:hover .arr{ transform:translateX(8px); }
 
@@ -1738,8 +1739,8 @@ h3.display{ font-size:clamp(28px,3.6vw,50px); }
   transition:background .5s var(--ease), border-color .5s var(--ease), color .5s var(--ease);
 }
 .btn-solid:hover{ background:var(--paper); color:var(--ink); border-color:var(--paper); }
-.btn-solid.maroon{ border-color:var(--maroon-soft); color:var(--maroon-2); }
-.btn-solid.maroon:hover{ background:var(--maroon); border-color:var(--maroon); color:#f6e9d8; }
+.btn-solid.gold{ border-color:var(--gold-soft); color:var(--gold); }
+.btn-solid.gold:hover{ background:var(--gold); border-color:var(--gold); color:#171004; }
 .btn-solid:disabled{ opacity:.4; pointer-events:none; }
 
 /* ---------- reveal on scroll (applied only when JS allows) ---------- */
@@ -1776,10 +1777,10 @@ h3.display{ font-size:clamp(28px,3.6vw,50px); }
   white-space:nowrap;
   display:inline-flex; align-items:center; gap:12px;
 }
-.nav__logo em{ font-style:normal; color:var(--green-2); }
+.nav__logo em{ font-style:normal; color:var(--gold); }
 .nav__mark{ width:27px; height:27px; flex:none; }
 .nav__mark text{
-  font-family:'Playfair Display', Georgia, serif; font-weight:700;
+  font-family:'Bodoni Moda', Georgia, serif; font-weight:700;
   font-size:19px; fill:currentColor; letter-spacing:.5px;
 }
 .nav__links{ display:flex; gap:clamp(18px,2.6vw,40px); list-style:none; }
@@ -1790,10 +1791,10 @@ h3.display{ font-size:clamp(28px,3.6vw,50px); }
 }
 .nav__links a::after{
   content:''; position:absolute; left:0; bottom:0; width:100%; height:1px;
-  background:var(--maroon-2); transform:scaleX(0); transform-origin:left;
+  background:var(--gold); transform:scaleX(0); transform-origin:left;
   transition:transform .45s var(--ease);
 }
-.nav__links a:hover{ opacity:1; color:var(--maroon-2); }
+.nav__links a:hover{ opacity:1; color:var(--gold); }
 .nav__links a:hover::after{ transform:scaleX(1); }
 .nav__right{ display:flex; align-items:center; gap:clamp(14px,2vw,26px); }
 
@@ -1802,12 +1803,12 @@ h3.display{ font-size:clamp(28px,3.6vw,50px); }
   font-size:10.5px; font-weight:500; letter-spacing:.3em; text-transform:uppercase;
   opacity:.9; transition:color .4s;
 }
-.cart-btn:hover{ color:var(--maroon-2); }
+.cart-btn:hover{ color:var(--gold); }
 .cart-btn svg{ width:17px; height:17px; }
 .cart-count{
   min-width:18px; height:18px; padding:0 4px; border-radius:9px;
   display:inline-flex; align-items:center; justify-content:center;
-  background:var(--maroon); color:#f6e9d8;
+  background:var(--gold); color:#171004;
   font-size:10px; font-weight:600; letter-spacing:0;
 }
 .cart-count[data-empty="1"]{ display:none; }
@@ -1835,7 +1836,7 @@ body.menu-open .mobile-menu{ opacity:1; visibility:visible; }
   display:flex; justify-content:space-between; align-items:baseline;
   transform:translateY(18px); opacity:0; transition:transform .6s var(--ease), opacity .6s;
 }
-.mobile-menu a .no{ font-family:var(--sans); font-size:11px; letter-spacing:.3em; color:var(--maroon-2); }
+.mobile-menu a .no{ font-family:var(--sans); font-size:11px; letter-spacing:.3em; color:var(--gold); }
 body.menu-open .mobile-menu a{ transform:none; opacity:1; }
 body.menu-open .mobile-menu a:nth-child(1){ transition-delay:.08s }
 body.menu-open .mobile-menu a:nth-child(2){ transition-delay:.14s }
@@ -1873,7 +1874,7 @@ body.menu-open .mobile-menu a:nth-child(5){ transition-delay:.32s }
 .progressbar{
   position:fixed; top:0; left:0; height:2px; width:100%; z-index:300;
   transform-origin:left; transform:scaleX(0);
-  background:linear-gradient(90deg, var(--green), var(--green-2) 34%, var(--maroon-2) 68%, var(--maroon));
+  background:linear-gradient(90deg, var(--forest-3), var(--gold), var(--ocean-3));
 }
 
 /* ============================================================
@@ -1908,8 +1909,8 @@ body.menu-open .mobile-menu a:nth-child(5){ transition-delay:.32s }
 .pcard:hover .pcard__glow{ opacity:1; }
 .pcard__badge{
   position:absolute; top:14px; left:14px; z-index:2;
-  font-size:9px; letter-spacing:.3em; font-weight:500; color:var(--maroon-2);
-  border:1px solid var(--maroon-soft); padding:6px 10px 5px;
+  font-size:9px; letter-spacing:.3em; font-weight:500; color:var(--gold);
+  border:1px solid var(--gold-soft); padding:6px 10px 5px;
   background:rgba(7,11,8,.35); backdrop-filter:blur(6px);
 }
 .pcard__actions{
@@ -1926,14 +1927,14 @@ body.menu-open .mobile-menu a:nth-child(5){ transition-delay:.32s }
   transition:background .4s, color .4s, border-color .4s;
 }
 .chip-btn:hover{ background:var(--paper); color:var(--ink); border-color:var(--paper); }
-.chip-btn.is-on{ border-color:var(--maroon-2); color:var(--maroon-2); }
+.chip-btn.is-on{ border-color:var(--gold); color:var(--gold); }
 .pcard__info{ padding:18px 2px 0; }
 .pcard__name{
   font-family:var(--serif); font-weight:500; font-size:21px; letter-spacing:.08em;
 }
 .pcard__family{ font-size:9.5px; letter-spacing:.3em; color:rgba(242,238,227,.5); margin-top:5px; }
 .pcard__row{ display:flex; justify-content:space-between; align-items:baseline; margin-top:10px; }
-.pcard__price{ font-size:13px; font-weight:500; letter-spacing:.06em; color:var(--maroon-2); }
+.pcard__price{ font-size:13px; font-weight:500; letter-spacing:.06em; color:var(--gold); }
 .pcard__stars{ font-size:10px; letter-spacing:.18em; color:rgba(242,238,227,.55); }
 
 /* ============================================================
@@ -1962,7 +1963,7 @@ body.cart-open{ overflow:hidden; }
 }
 .cart__title{ font-family:var(--serif); font-size:22px; letter-spacing:.14em; font-weight:500; }
 .cart__close{ font-size:10px; letter-spacing:.3em; opacity:.7; padding:8px; }
-.cart__close:hover{ color:var(--maroon-2); opacity:1; }
+.cart__close:hover{ color:var(--gold); opacity:1; }
 .cart__body{ flex:1; overflow-y:auto; padding:10px 28px; }
 .cart__empty{ text-align:center; padding:70px 10px; color:rgba(242,238,227,.55); }
 .cart__empty .display{ font-size:26px; color:var(--paper); margin-bottom:10px; }
@@ -1981,9 +1982,9 @@ body.cart-open{ overflow:hidden; }
 .citem__ctrl{ display:flex; align-items:center; gap:10px; margin-top:10px; }
 .qty{ display:inline-flex; align-items:center; border:1px solid var(--line); }
 .qty button{ width:26px; height:26px; font-size:14px; line-height:1; opacity:.8; }
-.qty button:hover{ color:var(--maroon-2); opacity:1; }
+.qty button:hover{ color:var(--gold); opacity:1; }
 .qty span{ min-width:26px; text-align:center; font-size:12px; }
-.citem__price{ font-size:13px; color:var(--maroon-2); font-weight:500; white-space:nowrap; }
+.citem__price{ font-size:13px; color:var(--gold); font-weight:500; white-space:nowrap; }
 .citem__rm{ font-size:9.5px; letter-spacing:.2em; opacity:.5; margin-top:8px; display:block; }
 .citem__rm:hover{ color:#e08f8f; opacity:1; }
 
@@ -2006,7 +2007,7 @@ body.cart-open{ overflow:hidden; }
   max-width:90vw; white-space:nowrap; overflow:hidden; text-overflow:ellipsis;
 }
 .toast.show{ transform:translate(-50%, 0); }
-.toast .dot{ width:6px; height:6px; border-radius:50%; background:var(--maroon-2); flex:none; }
+.toast .dot{ width:6px; height:6px; border-radius:50%; background:var(--gold); flex:none; }
 
 /* ============================================================
    FOOTER
@@ -2020,9 +2021,9 @@ body.cart-open{ overflow:hidden; }
   font-family:var(--serif); font-weight:300; letter-spacing:.2em;
   font-size:clamp(24px,2.6vw,38px); line-height:1.3; text-transform:uppercase;
 }
-.footer__word em{ font-style:italic; color:var(--maroon-2); letter-spacing:.06em; text-transform:none; }
+.footer__word em{ font-style:italic; color:var(--gold); letter-spacing:.06em; text-transform:none; }
 .footer__tag{ margin-top:18px; font-size:12.5px; color:rgba(242,238,227,.55); max-width:34ch; }
-.footer h4{ font-size:10px; letter-spacing:.34em; font-weight:500; color:var(--green-2); margin-bottom:20px; }
+.footer h4{ font-size:10px; letter-spacing:.34em; font-weight:500; color:var(--gold); margin-bottom:20px; }
 .footer ul{ list-style:none; }
 .footer ul a{
   display:inline-block; font-size:13px; color:rgba(242,238,227,.68);
@@ -2035,7 +2036,7 @@ body.cart-open{ overflow:hidden; }
   font-size:12px; letter-spacing:.08em; padding:11px 0; outline:none;
 }
 .news input::placeholder{ color:rgba(242,238,227,.35); }
-.news button{ font-size:10px; letter-spacing:.26em; color:var(--green-2); padding:0 4px; }
+.news button{ font-size:10px; letter-spacing:.26em; color:var(--gold); padding:0 4px; }
 .news button:hover{ text-decoration:underline; }
 .footer__bottom{
   display:flex; flex-wrap:wrap; gap:14px; justify-content:space-between; align-items:center;
@@ -2056,7 +2057,7 @@ body.cart-open{ overflow:hidden; }
   font-size:clamp(15px,2.4vw,24px); padding-left:.5em; text-align:center;
 }
 .veil__bar{ width:min(200px,40vw); height:1px; background:var(--line); overflow:hidden; }
-.veil__bar i{ display:block; height:100%; width:100%; background:linear-gradient(90deg, var(--green-2), var(--maroon-2)); transform:translateX(-100%); animation:veilload 1.4s var(--ease) forwards; }
+.veil__bar i{ display:block; height:100%; width:100%; background:var(--gold); transform:translateX(-100%); animation:veilload 1.4s var(--ease) forwards; }
 @keyframes veilload{ to{ transform:none; } }
 
 @media (prefers-reduced-motion:reduce){
@@ -2069,7 +2070,7 @@ body.cart-open{ overflow:hidden; }
 ---
 
 
-## 📄 assets/css/journey.css  ·  (592 lines)
+## 📄 assets/css/journey.css  ·  (611 lines)
 
 ```css
 /* ============================================================
@@ -2180,11 +2181,11 @@ html:not(.cinema) .picker{ position:relative; display:block; padding:16vh var(--
   animation:bobble 9s ease-in-out infinite alternate;
 }
 .emblem__ring{
-  font-family:'Playfair Display', var(--serif); font-weight:700;
+  font-family:'Bodoni Moda', var(--serif); font-weight:700;
   font-size:16.5px; letter-spacing:.38em; fill:rgba(243,238,227,.85);
 }
 .emblem__mi{
-  font-family:'Playfair Display', var(--serif); font-weight:900;
+  font-family:'Bodoni Moda', var(--serif); font-weight:900;
   font-size:118px; letter-spacing:-.015em; fill:url(#miGrad);
 }
 .hero-emblem-in .halo{
@@ -2201,14 +2202,14 @@ html:not(.cinema) .picker{ position:relative; display:block; padding:16vh var(--
 .hero-copy .eyebrow{ display:block; margin-bottom:26px; }
 .hero-copy h1{
   margin-bottom:10px;
-  background:linear-gradient(104deg,#f6eeda 8%,#e6c4cc 34%,#f9f1de 50%,#c47887 72%,#eed9c2 96%);
+  background:linear-gradient(104deg,#f6eeda 8%,#d9bc7d 34%,#f9f1de 50%,#c8a15c 72%,#efdfb8 96%);
   -webkit-background-clip:text; background-clip:text; color:transparent;
   filter:drop-shadow(0 6px 34px rgba(0,0,0,.45));
 }
 .hero-copy .journeysub{
   font-family:var(--serif); font-style:italic; font-weight:400;
-  font-family:'Playfair Display', var(--serif); font-style:italic; font-weight:700;
-  font-size:clamp(24px,3.4vw,46px); color:var(--green-2);
+  font-family:'Bodoni Moda', var(--serif); font-style:italic; font-weight:700;
+  font-size:clamp(24px,3.4vw,46px); color:var(--gold);
   margin-bottom:26px; letter-spacing:.04em;
 }
 .hero-copy p{ max-width:42ch; }
@@ -2223,7 +2224,7 @@ html:not(.cinema) .picker{ position:relative; display:block; padding:16vh var(--
 .scrollcue{ display:flex; align-items:center; gap:16px; }
 .scrollcue .line{ width:64px; height:1px; background:rgba(242,238,227,.35); position:relative; overflow:hidden; }
 .scrollcue .line::after{
-  content:''; position:absolute; inset:0; background:var(--maroon-2);
+  content:''; position:absolute; inset:0; background:var(--gold);
   transform:translateX(-100%); animation:cue 2.2s var(--ease) infinite;
 }
 @keyframes cue{ 40%{ transform:none; } 100%{ transform:translateX(101%); } }
@@ -2277,120 +2278,139 @@ html:not(.cinema) .forest-frame{ display:none; }
 }
 html:not(.cinema) .forest-pre{ display:none; }
 
-/* the shore scene pre-loaded into the end of the forest — it fades and
-   zooms in over the last beat, so the forest → shore handoff shows the
-   beach already in place (fade/zoom only, never a rise from the bottom) */
-.shore-pre{
-  position:absolute; inset:0; z-index:7; pointer-events:none;
-  opacity:0; will-change:transform,opacity;
-}
-html:not(.cinema) .shore-pre{ display:none; }
+/* the beach sits BEHIND the forest world — at the end of the forest the
+   world zooms out (scales down toward centre, like the reference vid) and
+   the beach occurs around it. It matches the transition's own first frame
+   (same image, same 1.14 scale) so the stage dissolve stays one-flow */
+.beach-pre{ position:absolute; inset:-7%; z-index:0; will-change:transform; }
+.beach-pre img{ width:100%; height:100%; object-fit:cover; object-position:50% 45%; }
+.forest-world{ position:absolute; inset:0; z-index:1; will-change:transform,opacity; }
+html:not(.cinema) .beach-pre{ display:none; }
 
 /* ============================================================
-   THE FRAGRANCE PICKER — racing-game selector
-   model planes fill the screen (right-weighted), the description
-   card rides the left, arrows / keys / dots / swipe cycle items
+   THE FRAGRANCE PICKER — racing-game selector (scroll-independent)
+   showcase (model + perfume in its foliage window) LEFT,
+   description card RIGHT, arrows in the brown bar at the bottom
    ============================================================ */
-.pk-models{ position:absolute; inset:0; }
-.pk-model{
-  position:absolute; inset:-8%; will-change:transform,opacity;
+.pk-show{
+  position:absolute; left:var(--pad); top:50%; transform:translateY(-50%);
+  z-index:6; width:clamp(320px, 38vw, 560px); height:min(76vh, 730px);
 }
-.pk-model img{
-  width:100%; height:100%; object-fit:cover; object-position:62% 30%;
-}
+.pk-models{ position:absolute; inset:0; overflow:hidden; }
+.pk-model{ position:absolute; inset:-6%; will-change:transform,opacity; }
+.pk-model img{ width:100%; height:100%; object-fit:cover; object-position:50% 42%; }
 .pk-model img.flip{ transform:scaleX(-1); }
 .pk-model img{ animation:swayA 13s ease-in-out infinite alternate; }
 
-/* description card — left side */
+/* the perfume sits INSIDE the foliage window of the model layer —
+   this is what makes the perfumes display (v12 fix) */
+.pk-bottlefig{
+  position:absolute; z-index:3; height:46%;
+  left:58%; top:50%; translate:-50% -50%;
+  filter:drop-shadow(0 26px 30px rgba(0,0,0,.55)) drop-shadow(0 0 46px rgba(201,168,106,.18));
+  will-change:transform,opacity;
+}
+/* the showcase frame — the "showcase area" panel */
+.pk-show-frame{
+  position:absolute; inset:0; z-index:4; pointer-events:none;
+  border:1px solid rgba(201,168,106,.4);
+  box-shadow:inset 0 0 0 1px rgba(7,11,8,.35), inset 0 0 90px rgba(7,11,8,.38), 0 30px 70px rgba(0,0,0,.4);
+}
+.pk-show-frame::after{
+  content:''; position:absolute; inset:10px;
+  border:1px solid rgba(242,238,227,.14); pointer-events:none;
+}
+
+/* description card — right side */
 .pk-card{
-  position:absolute; left:var(--pad); top:50%; transform:translateY(-50%);
-  z-index:7; width:min(440px, 42vw);
+  position:absolute; right:var(--pad); top:50%; transform:translateY(-50%);
+  z-index:7; width:min(430px, 38vw);
   padding:clamp(24px,3vh,38px) clamp(26px,2.6vw,40px);
-  border:1px solid rgba(243,238,227,.14);
-  background:linear-gradient(125deg, rgba(10,7,9,.58), rgba(10,7,9,.3));
+  border:1px solid rgba(242,238,227,.14);
+  background:linear-gradient(125deg, rgba(10,12,9,.58), rgba(10,12,9,.3));
   backdrop-filter:blur(3px);
   -webkit-backdrop-filter:blur(3px);
 }
-.pk-card .label{ color:rgba(243,238,227,.6); display:block; margin-bottom:20px; }
-.pk-card .label b{ color:var(--maroon-2); font-weight:500; }
+.pk-card .label{ color:rgba(242,238,227,.6); display:block; margin-bottom:20px; }
+.pk-card .label b{ color:var(--gold); font-weight:500; }
 .pk-name{ margin-bottom:12px; }
-.pk-name.display{ font-size:clamp(38px,4.6vw,64px); font-weight:900; }
-.pk-family{ font-size:10.5px; letter-spacing:.34em; color:var(--green-2); margin-bottom:16px; }
-.pk-tag{ font-family:var(--serif); font-style:italic; font-size:18px; color:rgba(243,238,227,.75); }
-.pk-row{ display:flex; align-items:center; gap:24px; margin-top:24px; padding-top:22px; border-top:1px solid rgba(243,238,227,.12); }
-.pk-bottle{
-  height:96px; width:auto; flex:none;
-  filter:drop-shadow(0 18px 22px rgba(0,0,0,.55));
-}
-.pk-meta{ display:flex; flex-direction:column; gap:14px; min-width:0; }
+.pk-name.display{ font-size:clamp(36px,4.2vw,60px); font-weight:900; }
+.pk-family{ font-size:10.5px; letter-spacing:.34em; color:var(--gold); margin-bottom:16px; }
+.pk-tag{ font-family:var(--serif); font-style:italic; font-size:18px; color:rgba(242,238,227,.75); }
+.pk-meta{ display:flex; flex-direction:column; gap:16px; margin-top:26px; padding-top:22px; border-top:1px solid rgba(242,238,227,.12); }
 .pk-price{ font-size:13px; letter-spacing:.12em; color:var(--paper); }
-.pk-cta{ display:flex; align-items:center; gap:20px; flex-wrap:wrap; }
+.pk-cta{ display:flex; align-items:center; gap:22px; flex-wrap:wrap; }
 
-/* arrows + dots + hint — bottom centre, above everything */
-.pk-nav{
-  position:absolute; bottom:5.5vh; left:50%; transform:translateX(-50%);
-  z-index:8; display:flex; align-items:center; gap:clamp(16px,2.4vw,30px);
+/* the brown selection bar — arrows live here */
+.pk-bar{
+  position:absolute; bottom:3.4vh; left:50%; transform:translateX(-50%);
+  z-index:8; display:flex; align-items:center; gap:clamp(16px,2.2vw,28px);
+  padding:11px 20px;
+  background:linear-gradient(160deg, #2e2018, #221610 60%, #2a1c14);
+  border:1px solid rgba(201,168,106,.28);
+  box-shadow:0 18px 44px rgba(0,0,0,.45), inset 0 1px 0 rgba(201,168,106,.14);
 }
 .pk-arrow{
-  width:54px; height:54px; border-radius:50%; flex:none;
-  border:1px solid rgba(243,238,227,.35); color:var(--paper);
-  background:rgba(10,7,9,.34); backdrop-filter:blur(6px);
-  -webkit-backdrop-filter:blur(6px);
+  width:46px; height:46px; border-radius:50%; flex:none;
+  border:1px solid rgba(201,168,106,.4); color:var(--gold);
+  background:rgba(201,168,106,.06);
   display:flex; align-items:center; justify-content:center;
   transition:background .4s var(--ease), color .4s var(--ease), border-color .4s, transform .4s var(--ease);
 }
-.pk-arrow svg{ width:20px; height:20px; }
-.pk-arrow:hover{ background:var(--paper); color:var(--ink); border-color:var(--paper); transform:scale(1.06); }
+.pk-arrow svg{ width:18px; height:18px; }
+.pk-arrow:hover{ background:var(--gold); color:#171004; border-color:var(--gold); transform:scale(1.07); }
 .pk-dots{ display:flex; align-items:center; gap:10px; }
-.pk-dots button{
-  width:26px; height:12px; padding:5px 0; position:relative;
-}
+.pk-dots button{ width:26px; height:12px; padding:5px 0; position:relative; }
 .pk-dots button::after{
   content:''; position:absolute; left:0; right:0; top:5.5px; height:2px;
-  background:rgba(243,238,227,.32); transform-origin:center;
+  background:rgba(242,238,227,.32); transform-origin:center;
   transition:background .4s, transform .45s var(--ease);
 }
-.pk-dots button.on::after{ background:var(--maroon-2); transform:scaleX(1.5); }
+.pk-dots button.on::after{ background:var(--gold); transform:scaleX(1.5); }
 .pk-hint{
-  position:absolute; bottom:2.1vh; left:50%; transform:translateX(-50%);
+  position:absolute; bottom:1vh; left:50%; transform:translateX(-50%);
   z-index:8; font-size:9.5px; letter-spacing:.34em; text-transform:uppercase;
-  color:rgba(243,238,227,.5); white-space:nowrap;
+  color:rgba(242,238,227,.5); white-space:nowrap;
 }
 .pk-hint span{
   display:inline-block; padding:1px 7px; margin:0 10px;
-  border:1px solid rgba(243,238,227,.3); border-radius:3px;
-  font-size:10px; color:rgba(243,238,227,.7);
+  border:1px solid rgba(242,238,227,.3); border-radius:3px;
+  font-size:10px; color:rgba(242,238,227,.7);
 }
 
 /* scene skins */
-.picker--shore .pk-card{
-  background:linear-gradient(125deg, rgba(22,10,14,.55), rgba(22,10,14,.28));
-}
-.picker--shore .pk-model img{ object-position:58% 32%; }
-.picker--ocean .pk-card{
-  background:linear-gradient(125deg, rgba(4,16,26,.62), rgba(4,16,26,.34));
-}
-.picker--ocean .pk-model img{ filter:saturate(.72) brightness(.9) contrast(1.02); object-position:60% 28%; }
+.picker--shore .pk-show-frame{ border-color:rgba(201,168,106,.5); }
+.picker--shore .pk-card{ background:linear-gradient(125deg, rgba(20,16,10,.6), rgba(20,16,10,.32)); }
+.picker--ocean .pk-show-frame{ border-color:rgba(160,210,235,.4); }
+.picker--ocean .pk-card{ background:linear-gradient(125deg, rgba(4,16,26,.64), rgba(4,16,26,.36)); }
+.picker--ocean .pk-model img{ filter:saturate(.78) brightness(.92) contrast(1.02); }
 .picker--ocean .pk-model::after{
   content:''; position:absolute; inset:0;
-  background:linear-gradient(to bottom, rgba(12,74,105,.16), rgba(3,24,40,.4));
+  background:linear-gradient(to bottom, rgba(12,74,105,.14), rgba(3,24,40,.36));
   mix-blend-mode:multiply; pointer-events:none;
+}
+.picker--ocean .pk-bottlefig{
+  filter:drop-shadow(0 26px 30px rgba(0,10,20,.6)) drop-shadow(0 0 46px rgba(140,210,235,.22));
 }
 
 @media (max-width:900px){
+  .pk-show{
+    left:var(--pad); right:var(--pad); top:calc(var(--nav-h) + 4vh); transform:none;
+    width:auto; height:38vh;
+  }
+  .pk-bottlefig{ height:52%; }
   .pk-card{
-    left:var(--pad); right:var(--pad); top:auto; bottom:15vh; transform:none;
+    right:var(--pad); left:var(--pad); top:auto; bottom:14vh; transform:none;
     width:auto; padding:18px 20px;
-    background:linear-gradient(125deg, rgba(10,7,9,.78), rgba(10,7,9,.62));
+    background:linear-gradient(125deg, rgba(10,12,9,.8), rgba(10,12,9,.62));
   }
   .pk-card .label{ margin-bottom:12px; }
-  .pk-name.display{ font-size:clamp(30px,8vw,42px); }
+  .pk-name.display{ font-size:clamp(28px,7.5vw,40px); }
   .pk-tag{ font-size:15px; }
-  .pk-row{ gap:16px; margin-top:16px; padding-top:14px; }
-  .pk-bottle{ height:64px; }
+  .pk-meta{ gap:12px; margin-top:14px; padding-top:14px; }
   .pk-cta{ gap:14px; }
-  .pk-nav{ bottom:4.2vh; }
-  .pk-arrow{ width:46px; height:46px; }
+  .pk-bar{ bottom:3.6vh; padding:8px 14px; gap:12px; }
+  .pk-arrow{ width:42px; height:42px; }
   .pk-hint{ display:none; }
 }
 
@@ -2518,14 +2538,14 @@ html:not(.cinema) .shore-pre{ display:none; }
 }
 .depthmeter .ruler .pin{
   position:absolute; left:-4.5px; width:10px; height:10px; border-radius:50%;
-  background:var(--maroon-2); box-shadow:0 0 14px rgba(196,120,135,.8);
+  background:var(--gold); box-shadow:0 0 14px rgba(201,168,106,.8);
 }
 .depthmeter .read{ text-align:right; }
 .depthmeter .val{
   font-family:var(--serif); font-size:44px; font-weight:300; line-height:1;
   font-variant-numeric:tabular-nums;
 }
-.depthmeter .val small{ font-size:16px; color:var(--maroon-2); letter-spacing:.2em; margin-left:4px; }
+.depthmeter .val small{ font-size:16px; color:var(--gold); letter-spacing:.2em; margin-left:4px; }
 .depthmeter .lab{ font-size:9px; letter-spacing:.4em; color:rgba(242,238,227,.5); margin-top:8px; text-transform:uppercase; }
 @media (max-width:900px){ .depthmeter{ display:none; } }
 
@@ -2541,8 +2561,8 @@ html:not(.cinema) .shore-pre{ display:none; }
 /* ============================================================
    05 — MOST WANTED / THE DEPTHS
    ============================================================ */
-#mostwanted{ height:300vh; background:#0d0710; }
-.mw-stage{ background:radial-gradient(80% 60% at 50% 0%, rgba(125,47,63,.16), transparent 60%), #0d0710; }
+#mostwanted{ height:300vh; background:#02060c; }
+.mw-stage{ background:radial-gradient(80% 60% at 50% 0%, #07172633, transparent 60%), #02060c; }
 .beam{
   position:absolute; top:-24%; left:50%; width:24vw; height:130%;
   transform:translateX(-50%);
@@ -2567,8 +2587,8 @@ html:not(.cinema) .shore-pre{ display:none; }
   display:grid; grid-template-columns:repeat(4, 1fr); gap:clamp(14px,2.4vw,34px);
   width:min(1180px, 92vw);
 }
-.mw-card{ --glowc:rgba(196,120,135,.2); }
-.mw-card .pcard__media{ aspect-ratio:3/3.6; --tint:#150b10; background:radial-gradient(90% 70% at 50% 110%, rgba(196,120,135,.08), transparent 60%), #150b10; }
+.mw-card{ --glowc:rgba(140,200,230,.2); }
+.mw-card .pcard__media{ aspect-ratio:3/3.6; --tint:#061019; background:radial-gradient(90% 70% at 50% 110%, rgba(120,180,210,.08), transparent 60%), #061019; }
 .mw-card{ animation:floaty 8s ease-in-out infinite alternate; }
 .mw-card:nth-child(2){ animation-delay:-2.2s; }
 .mw-card:nth-child(3){ animation-delay:-4.1s; }
@@ -2582,7 +2602,7 @@ html:not(.cinema) .shore-pre{ display:none; }
    ============================================================ */
 .collections{ background:var(--charcoal); padding:clamp(90px,12vh,160px) 0 clamp(80px,10vh,120px); }
 .collections__head{ padding-inline:var(--pad); margin-bottom:clamp(40px,6vh,70px); display:flex; justify-content:space-between; align-items:flex-end; gap:20px; flex-wrap:wrap; }
-.collections__head h2 em{ font-style:italic; color:var(--maroon-2); }
+.collections__head h2 em{ font-style:italic; color:var(--gold); }
 .portal-grid{
   display:grid; grid-template-columns:repeat(6,1fr); gap:clamp(10px,1.4vw,20px);
   padding-inline:var(--pad);
@@ -2606,7 +2626,7 @@ html:not(.cinema) .shore-pre{ display:none; }
 .portal .pt{
   position:absolute; left:22px; right:22px; bottom:20px; z-index:2; color:var(--paper);
 }
-.portal .pt .label{ color:var(--green-2); display:block; margin-bottom:10px; font-size:9.5px; }
+.portal .pt .label{ color:var(--gold); display:block; margin-bottom:10px; font-size:9.5px; }
 .portal .pt h3{ font-size:clamp(26px,3vw,42px); font-weight:900; letter-spacing:.02em; }
 .portal .pt .go{
   display:inline-flex; align-items:center; gap:10px; margin-top:12px;
@@ -2616,7 +2636,7 @@ html:not(.cinema) .shore-pre{ display:none; }
 }
 .portal:hover img{ transform:scale(1); opacity:.85; filter:saturate(1); }
 .portal:hover .go{ opacity:1; transform:none; }
-.portal:hover .go{ color:var(--maroon-2); }
+.portal:hover .go{ color:var(--gold); }
 @media (max-width:900px){
   .portal, .portal.wide{ grid-column:span 3; aspect-ratio:4/4.6; }
 }
@@ -2626,12 +2646,12 @@ html:not(.cinema) .shore-pre{ display:none; }
    ============================================================ */
 .journey-end{
   position:relative; overflow:hidden;
-  background:#0d0710; color:var(--paper);
+  background:#04070a; color:var(--paper);
   padding:clamp(110px,18vh,220px) var(--pad);
   text-align:center;
 }
 .journey-end .display{ max-width:18ch; margin:0 auto; }
-.journey-end .display em{ font-style:italic; color:var(--maroon-2); }
+.journey-end .display em{ font-style:italic; color:var(--gold); }
 .journey-end .btn-solid{ margin-top:44px; }
 .journey-end .waterecho{
   position:absolute; left:50%; bottom:-42vh; width:120vw; height:60vh; transform:translateX(-50%);
@@ -2654,8 +2674,8 @@ html:not(.cinema) .shore-pre{ display:none; }
 .portal--set img{ opacity:.92; object-fit:contain; inset:12% 4%; width:92%; height:76%; }
 
 /* no-JS / reduced-motion cleanups */
-html:not(.cinema) .pk-models,
-html:not(.cinema) .pk-nav,
+html:not(.cinema) .pk-show,
+html:not(.cinema) .pk-bar,
 html:not(.cinema) .pk-hint{ display:none; }
 html:not(.cinema) .water-rise{ display:none; }
 html:not(.cinema) .trans-beach{ opacity:1; }
@@ -2701,7 +2721,7 @@ html:not(.cinema) .mw-grid .pcard, html:not(.cinema) .mw-inner > *{ opacity:1; }
   font-size:10px; letter-spacing:.3em; text-transform:uppercase;
   color:rgba(242,238,227,.5); margin-bottom:22px; display:flex; gap:10px; flex-wrap:wrap;
 }
-.crumbs a:hover{ color:var(--maroon-2); }
+.crumbs a:hover{ color:var(--gold); }
 .crumbs i{ font-style:normal; opacity:.4; }
 
 /* ============================================================
@@ -2766,8 +2786,8 @@ html:not(.cinema) .mw-grid .pcard, html:not(.cinema) .mw-inner > *{ opacity:1; }
 }
 .pd__visual .badge{
   position:absolute; top:26px; left:26px; z-index:3;
-  font-size:9px; letter-spacing:.3em; font-weight:500; color:var(--maroon-2);
-  border:1px solid var(--maroon-soft); padding:7px 12px 6px;
+  font-size:9px; letter-spacing:.3em; font-weight:500; color:var(--gold);
+  border:1px solid var(--gold-soft); padding:7px 12px 6px;
   background:rgba(7,11,8,.4); backdrop-filter:blur(6px);
 }
 .pd__visual .scenechip{
@@ -2775,15 +2795,15 @@ html:not(.cinema) .mw-grid .pcard, html:not(.cinema) .mw-inner > *{ opacity:1; }
   font-size:9.5px; letter-spacing:.34em; text-transform:uppercase;
   color:rgba(242,238,227,.6);
 }
-.pd__visual .scenechip b{ color:var(--maroon-2); font-weight:500; }
+.pd__visual .scenechip b{ color:var(--gold); font-weight:500; }
 
 .pd__info{ padding:clamp(30px,5vh,64px) clamp(24px,3.4vw,64px); display:flex; flex-direction:column; }
 .pd__info h1{ font-size:clamp(38px,4.6vw,66px); margin:14px 0 6px; }
 .pd__type{ font-size:10.5px; letter-spacing:.34em; text-transform:uppercase; color:rgba(242,238,227,.55); }
 .pd__stars{ display:flex; align-items:center; gap:12px; margin-top:16px; font-size:11px; letter-spacing:.14em; color:rgba(242,238,227,.65); }
-.stars{ color:var(--maroon-2); letter-spacing:.22em; font-size:13px; }
+.stars{ color:var(--gold); letter-spacing:.22em; font-size:13px; }
 .pd__price{ margin-top:22px; display:flex; align-items:baseline; gap:14px; }
-.pd__price .now{ font-family:var(--serif); font-size:clamp(26px,2.6vw,36px); font-weight:500; color:var(--maroon-2); }
+.pd__price .now{ font-family:var(--serif); font-size:clamp(26px,2.6vw,36px); font-weight:500; color:var(--gold); }
 .pd__price .was{ font-size:14px; opacity:.4; text-decoration:line-through; }
 .pd__desc{ margin-top:20px; color:rgba(242,238,227,.75); max-width:56ch; }
 .pd__tag{ font-family:var(--serif); font-style:italic; font-size:18px; color:rgba(242,238,227,.6); margin-top:18px; }
@@ -2797,7 +2817,7 @@ html:not(.cinema) .mw-grid .pcard, html:not(.cinema) .mw-inner > *{ opacity:1; }
   transition:all .35s var(--ease); text-transform:uppercase;
 }
 .size:hover{ border-color:rgba(242,238,227,.5); color:var(--paper); }
-.size.on{ border-color:var(--maroon-2); color:var(--maroon-2); background:rgba(196,120,135,.09); }
+.size.on{ border-color:var(--gold); color:var(--gold); background:rgba(201,168,106,.07); }
 .pd__actions{ display:flex; gap:14px; margin-top:30px; flex-wrap:wrap; }
 .pd__actions .btn-solid{ flex:1; min-width:200px; }
 .pd__meta{
@@ -2805,7 +2825,7 @@ html:not(.cinema) .mw-grid .pcard, html:not(.cinema) .mw-inner > *{ opacity:1; }
   display:grid; grid-template-columns:repeat(3,1fr); gap:18px;
   border-top:1px solid var(--line);
 }
-.pd__meta div b{ display:block; font-size:10px; letter-spacing:.3em; text-transform:uppercase; color:var(--maroon-2); font-weight:500; margin-bottom:8px; }
+.pd__meta div b{ display:block; font-size:10px; letter-spacing:.3em; text-transform:uppercase; color:var(--gold); font-weight:500; margin-bottom:8px; }
 .pd__meta div span{ font-size:12.5px; color:rgba(242,238,227,.66); }
 @media (max-width:960px){
   .pd{ grid-template-columns:1fr; }
@@ -2815,15 +2835,15 @@ html:not(.cinema) .mw-grid .pcard, html:not(.cinema) .mw-inner > *{ opacity:1; }
 /* ---- product scroll sections ---- */
 .pdsec{ background:var(--charcoal); padding:clamp(64px,10vh,120px) var(--pad); border-top:1px solid var(--line); }
 .pdsec--light{ background:var(--paper); color:var(--ink); }
-.pdsec--light .eyebrow{ color:#7d2f3f; }
+.pdsec--light .eyebrow{ color:#8a6d3a; }
 .pdsec__head{ max-width:700px; margin-bottom:clamp(30px,5vh,56px); }
 .pdsec__head h2{ margin-top:18px; }
 
 .notes3{ display:grid; grid-template-columns:repeat(3,1fr); gap:clamp(18px,3vw,48px); }
 .note-col{ position:relative; padding:clamp(24px,3vw,44px) clamp(20px,2.4vw,36px); border:1px solid var(--line); background:rgba(255,255,255,.015); }
 .pdsec--light .note-col{ border-color:var(--line-dark); background:rgba(7,11,8,.025); }
-.note-col .no{ font-family:var(--serif); font-size:15px; color:var(--maroon-2); letter-spacing:.2em; }
-.pdsec--light .note-col .no{ color:#7d2f3f; }
+.note-col .no{ font-family:var(--serif); font-size:15px; color:var(--gold); letter-spacing:.2em; }
+.pdsec--light .note-col .no{ color:#8a6d3a; }
 .note-col h3{ font-size:clamp(19px,2vw,26px); margin:12px 0 20px; letter-spacing:.14em; }
 .note-col ul{ list-style:none; }
 .note-col li{
@@ -2849,9 +2869,9 @@ html:not(.cinema) .mw-grid .pcard, html:not(.cinema) .mw-inner > *{ opacity:1; }
 }
 .pyr-block:first-child{ border-radius:200px 200px 0 0; padding-inline:clamp(40px,8vw,120px); }
 .pyr-block:last-child{ border-bottom:1px solid var(--line-dark); }
-.pyr-block .label{ color:#7d2f3f; display:block; margin-bottom:10px; }
+.pyr-block .label{ color:#8a6d3a; display:block; margin-bottom:10px; }
 .pyr-block .val{ font-family:var(--serif); font-size:clamp(17px,1.9vw,24px); line-height:1.5; }
-.pyr-arrow{ color:#7d2f3f; font-size:18px; padding:10px 0; }
+.pyr-arrow{ color:#8a6d3a; font-size:18px; padding:10px 0; }
 
 /* performance bars */
 .perf{ display:grid; grid-template-columns:1fr 1fr; gap:clamp(30px,5vw,80px); max-width:900px; margin:0 auto; }
@@ -2860,7 +2880,7 @@ html:not(.cinema) .mw-grid .pcard, html:not(.cinema) .mw-inner > *{ opacity:1; }
 .perf__row .cap b{ color:var(--ink); font-weight:500; }
 .bar{ height:2px; background:rgba(7,11,8,.14); position:relative; }
 .bar i{
-  position:absolute; inset:0; background:linear-gradient(90deg, #7d2f3f, #a44a5b);
+  position:absolute; inset:0; background:linear-gradient(90deg, #8a6d3a, var(--gold));
   transform-origin:left; transform:scaleX(0);
   transition:transform 1.6s var(--ease);
 }
@@ -2888,7 +2908,7 @@ html:not(.cinema) .mw-grid .pcard, html:not(.cinema) .mw-inner > *{ opacity:1; }
 .continue::after{ content:''; position:absolute; inset:0; background:radial-gradient(70% 60% at 50% 40%, transparent, rgba(3,7,11,.75) 100%); }
 .continue__in{ position:relative; z-index:2; }
 .continue__in .display{ max-width:20ch; margin:20px auto 0; }
-.continue__in .display em{ font-style:italic; color:var(--maroon-2); }
+.continue__in .display em{ font-style:italic; color:var(--gold); }
 .continue__in .btn-solid{ margin-top:40px; }
 
 /* ============================================================
@@ -2902,7 +2922,7 @@ html:not(.cinema) .mw-grid .pcard, html:not(.cinema) .mw-inner > *{ opacity:1; }
 }
 .chapter__no{
   font-family:var(--serif); font-size:clamp(40px,6vw,88px); font-weight:300; line-height:1;
-  color:transparent; -webkit-text-stroke:1px rgba(196,120,135,.5);
+  color:transparent; -webkit-text-stroke:1px rgba(201,168,106,.5);
 }
 .chapter__copy h3{ margin:14px 0 18px; }
 .chapter__copy p{ color:rgba(242,238,227,.72); max-width:50ch; }
@@ -2926,7 +2946,7 @@ html:not(.cinema) .mw-grid .pcard, html:not(.cinema) .mw-inner > *{ opacity:1; }
   padding:clamp(80px,14vh,160px) var(--pad);
 }
 .about-quote .display{ max-width:22ch; margin:24px auto 0; }
-.about-quote .display em{ font-style:italic; color:#7d2f3f; }
+.about-quote .display em{ font-style:italic; color:#8a6d3a; }
 
 /* ============================================================
    CONTACT
@@ -2937,9 +2957,9 @@ html:not(.cinema) .mw-grid .pcard, html:not(.cinema) .mw-inner > *{ opacity:1; }
 .contact__lead{ color:rgba(242,238,227,.7); max-width:44ch; }
 .contact__blocks{ margin-top:44px; display:grid; gap:0; }
 .cblock{ padding:24px 0; border-top:1px solid var(--line); display:grid; grid-template-columns:150px 1fr; gap:16px; align-items:baseline; }
-.cblock .label{ color:var(--maroon-2); }
+.cblock .label{ color:var(--gold); }
 .cblock p, .cblock a{ font-size:14.5px; color:rgba(242,238,227,.75); }
-.cblock a:hover{ color:var(--maroon-2); }
+.cblock a:hover{ color:var(--gold); }
 .cform{ border:1px solid var(--line); padding:clamp(24px,3vw,44px); background:rgba(255,255,255,.015); }
 .cform h3{ margin-bottom:26px; }
 .f-row{ margin-bottom:20px; }
@@ -2949,7 +2969,7 @@ html:not(.cinema) .mw-grid .pcard, html:not(.cinema) .mw-inner > *{ opacity:1; }
   color:var(--paper); padding:11px 2px; font-size:14.5px; outline:none;
   transition:border-color .4s; font-weight:300;
 }
-.f-row input:focus, .f-row textarea:focus{ border-color:var(--maroon-2); }
+.f-row input:focus, .f-row textarea:focus{ border-color:var(--gold); }
 .f-row textarea{ min-height:120px; resize:vertical; }
 .f-2col{ display:grid; grid-template-columns:1fr 1fr; gap:20px; }
 .cform .btn-solid{ width:100%; margin-top:8px; }
@@ -2965,21 +2985,21 @@ html:not(.cinema) .mw-grid .pcard, html:not(.cinema) .mw-inner > *{ opacity:1; }
 .checkout__grid{ display:grid; grid-template-columns:1.15fr .85fr; gap:clamp(30px,4vw,70px); align-items:start; }
 .checkout h1{ margin:16px 0 30px; }
 .co-card{ border:1px solid var(--line); padding:clamp(22px,2.8vw,38px); background:rgba(255,255,255,.015); margin-bottom:24px; }
-.co-card > .label{ color:var(--maroon-2); display:block; margin-bottom:22px; }
+.co-card > .label{ color:var(--gold); display:block; margin-bottom:22px; }
 .pay-opt{ display:flex; gap:16px; align-items:flex-start; border:1px solid var(--line); padding:18px; cursor:pointer; transition:border-color .35s; margin-bottom:12px; }
 .pay-opt:hover{ border-color:rgba(242,238,227,.4); }
-.pay-opt.on{ border-color:var(--maroon-2); background:rgba(196,120,135,.06); }
-.pay-opt input{ accent-color:var(--maroon-2); margin-top:4px; }
+.pay-opt.on{ border-color:var(--gold); background:rgba(201,168,106,.05); }
+.pay-opt input{ accent-color:var(--gold); margin-top:4px; }
 .pay-opt b{ display:block; font-size:11px; letter-spacing:.24em; text-transform:uppercase; font-weight:500; }
 .pay-opt span{ font-size:12px; color:rgba(242,238,227,.55); }
 .summary{ position:sticky; top:calc(var(--nav-h) + 24px); border:1px solid var(--line); padding:clamp(22px,2.8vw,38px); background:rgba(255,255,255,.015); }
-.summary .label{ color:var(--maroon-2); display:block; margin-bottom:20px; }
+.summary .label{ color:var(--gold); display:block; margin-bottom:20px; }
 .s-item{ display:grid; grid-template-columns:54px 1fr auto; gap:14px; align-items:center; padding:14px 0; border-bottom:1px solid var(--line); }
 .s-item .th{ height:66px; display:flex; align-items:center; justify-content:center; background:#10161a; }
 .s-item img{ height:84%; width:auto; object-fit:contain; }
 .s-item .nm{ font-family:var(--serif); font-size:16px; letter-spacing:.06em; }
 .s-item .mt{ font-size:9.5px; letter-spacing:.22em; color:rgba(242,238,227,.45); margin-top:3px; }
-.s-item .pr{ font-size:12.5px; color:var(--maroon-2); }
+.s-item .pr{ font-size:12.5px; color:var(--gold); }
 .summary .cart__row{ margin-top:16px; }
 .co-success{
   max-width:640px; margin:0 auto; text-align:center; padding:60px 20px;
@@ -2987,7 +3007,7 @@ html:not(.cinema) .mw-grid .pcard, html:not(.cinema) .mw-inner > *{ opacity:1; }
 }
 .co-success .display{ margin:18px 0 14px; }
 .co-success p{ color:rgba(242,238,227,.65); }
-.co-success .ord{ font-size:11px; letter-spacing:.3em; color:var(--maroon-2); margin:18px 0 30px; text-transform:uppercase; }
+.co-success .ord{ font-size:11px; letter-spacing:.3em; color:var(--gold); margin:18px 0 30px; text-transform:uppercase; }
 @media (max-width:900px){ .checkout__grid{ grid-template-columns:1fr; } .summary{ position:static; } }
 
 ```
@@ -3232,7 +3252,7 @@ const productImg = p => IMG + (p.img || p.slug) + '.webp';
     const page = document.body.dataset.page;
     if (page) {
       document.querySelectorAll('.nav__links a, .mobile-menu a').forEach(a => {
-        if (a.dataset.nav === page) a.style.color = 'var(--maroon-2)';
+        if (a.dataset.nav === page) a.style.color = 'var(--gold)';
       });
     }
 
@@ -3371,7 +3391,7 @@ const productImg = p => IMG + (p.img || p.slug) + '.webp';
           <div class="cart__row"><span>Subtotal</span><b class="c-sub">₨0</b></div>
           <div class="cart__row"><span>Shipping</span><b class="c-ship">—</b></div>
           <div class="cart__row total"><span>Total</span><b class="c-tot">₨0</b></div>
-          <a class="btn-solid maroon" href="checkout.html">Checkout</a>
+          <a class="btn-solid gold" href="checkout.html">Checkout</a>
           <div class="cart__note">Free shipping on orders over ₨5,000 · Ships across Pakistan</div>
         </div>
       </aside>
@@ -3491,7 +3511,7 @@ const productImg = p => IMG + (p.img || p.slug) + '.webp';
 ---
 
 
-## 📄 assets/js/journey.js  ·  (523 lines)
+## 📄 assets/js/journey.js  ·  (561 lines)
 
 ```js
 /* ============================================================
@@ -3681,18 +3701,23 @@ const productImg = p => IMG + (p.img || p.slug) + '.webp';
         .to('.ff-n', { yPercent: -29, ease: 'none', duration: 1.35 }, 0);
     }
 
-    /* the shore pre-load: after the picker the beach scene fades and zooms
-       in over the forest ("the background zooms out to the beach"), so the
-       handoff into the shore section is a pure cross-fade */
-    gsap.set('.shore-pre', { scale: 1.06 });
+    /* the beach sits behind the forest world — at the end of the picker the
+       world zooms out (the camera pulls back, per the reference vid) and the
+       beach occurs around it */
+    gsap.set('.beach-pre', { scale: 1.17 });
     gsap.set('.stagechip--forest', { autoAlpha: 0 });
     forestTl
       .to('.stagechip--forest', { autoAlpha: 1, duration: 0.3, ease: 'power1.out' }, 0.3)
-      .to('.stagechip--forest', { autoAlpha: 0, duration: 0.3, ease: 'power1.in' }, 4.3)
+      .to('.stagechip--forest', { autoAlpha: 0, duration: 0.3, ease: 'power1.in' }, 3.95)
       .fromTo('#forest .picker', { autoAlpha: 0 }, { autoAlpha: 1, duration: 0.35, ease: 'power1.out' }, 0.95)
-      .to('#forest .picker', { autoAlpha: 0, duration: 0.35, ease: 'power1.in' }, 4.15)
-      .to('.shore-pre', { autoAlpha: 1, scale: 1, duration: 0.68, ease: 'power1.inOut' }, 3.9)
-      .to({}, { duration: 0.12 });
+      .to('#forest .picker', { autoAlpha: 0, duration: 0.35, ease: 'power1.in' }, 3.8)
+      /* THE ZOOM-OUT: the whole forest world shrinks toward the camera's
+         pull-back and dissolves as it recedes — the beach is already on
+         screen behind it, settling to the exact frame the shore section
+         opens with (one-flow dissolve follows) */
+      .to('.forest-world', { scale: 0.34, duration: 0.55, ease: 'power2.in' }, 4.15)
+      .to('.forest-world', { autoAlpha: 0, duration: 0.42, ease: 'power1.in' }, 4.2)
+      .to('.beach-pre', { scale: 1.14, duration: 0.55, ease: 'power2.out' }, 4.15);
 
     /* ============================================================
        03 — TRANSITION (forest → shore picker → the water rises)
@@ -3732,18 +3757,19 @@ const productImg = p => IMG + (p.img || p.slug) + '.webp';
       .to('.shore-overlay', { opacity: 0.45, duration: 0.4, ease: 'power1.inOut' }, 1.4)
       .to('.shore-overlay', { opacity: 1, duration: 0.4, ease: 'power1.inOut' }, 3.85)
       .to('#transition .picker', { autoAlpha: 0, duration: 0.35, ease: 'power1.in' }, 3.8)
-      /* the water pops up in between the leaves and the beach — no voice-over,
-         the ocean itself takes the screen and the dive begins */
-      .to('.water-rise', { yPercent: 0, duration: 1.0, ease: 'power2.in' }, 4.35)
-      .to('.trans-beach', { scale: 1.13, ease: 'none', duration: 1.0 }, 4.35)
-      .to('.trans-vignette', { opacity: 1, duration: 0.8 }, 4.55)
+      /* the water overlays the beach from the bottom, gradually taking the
+         frame (per the reference vid) — the top stays bright sky while the
+         water line climbs; the vignette only closes at the very end */
+      .to('.water-rise', { yPercent: 0, duration: 1.2, ease: 'none' }, 4.15)
+      .to('.trans-beach', { scale: 1.13, ease: 'none', duration: 1.2 }, 4.15)
+      .to('.trans-vignette', { opacity: 1, duration: 0.6 }, 5.0)
       .to({}, { duration: 0.25 });
 
     transSteps.forEach((st, i) => {
       transTl.call(() => {
         transSteps.forEach((x, j) => x.classList.toggle('on', j <= i));
         if (stepsWrap) stepsWrap.classList.toggle('i', i === 2);
-      }, [], [0.2, 1.4, 4.35][i]);
+      }, [], [0.2, 1.4, 4.15][i]);
     });
 
     /* ============================================================
@@ -3767,9 +3793,12 @@ const productImg = p => IMG + (p.img || p.slug) + '.webp';
       .to('.caustics', { opacity: 0, ease: 'none', duration: 2.5 }, 0.5)
       .fromTo('.ocean-head', { autoAlpha: 0, y: 50 }, { autoAlpha: 1, y: 0, duration: 0.5, ease: 'power1.out' }, 0.25)
       .to('.ocean-head', { autoAlpha: 0, y: -50, duration: 0.5, ease: 'power1.in' }, 1.15)
-      /* the deep picker — the rarest fragrances, chosen in the light rays */
+      /* the deep picker — the rarest fragrances, chosen in the light rays.
+         The depth meter steps aside while the description card is on stage */
       .fromTo('#ocean .picker', { autoAlpha: 0 }, { autoAlpha: 1, duration: 0.35, ease: 'power1.out' }, 1.6)
+      .to('.depthmeter', { autoAlpha: 0, duration: 0.3, ease: 'power1.in' }, 1.6)
       .to('#ocean .picker', { autoAlpha: 0, duration: 0.35, ease: 'power1.in' }, 3.8)
+      .to('.depthmeter', { autoAlpha: 1, duration: 0.3, ease: 'power1.out' }, 4.15)
       .to({}, { duration: 0.45 });
 
     /* depth readout */
@@ -3787,10 +3816,10 @@ const productImg = p => IMG + (p.img || p.slug) + '.webp';
 
     /* ============================================================
        THE FRAGRANCE PICKER — racing-game selector engine
-       One source of truth: the scroll position inside the picker's
-       span drives the active index (scrolling auto-advances). The
-       arrows / dots / swipe / arrow-keys simply smooth-scroll to the
-       target slot, so manual and scroll input can never fight.
+       SCROLL-INDEPENDENT (v12): the active fragrance is chosen ONLY by
+       the arrows / arrow-keys / dots / a swipe — scrolling never
+       changes it. The perfume bottle is displayed INSIDE the foliage
+       window of each model layer (the v12 "perfumes not displayed" fix).
        ============================================================ */
     const PICKS = {
       forest: [
@@ -3816,6 +3845,7 @@ const productImg = p => IMG + (p.img || p.slug) + '.webp';
       if (!root) return;
       const items = PICKS[key];
       const models = root.querySelectorAll('.pk-model');
+      const bottle = root.querySelector('.pk-bottlefig');
       const card = root.querySelector('.pk-card');
       const els = {
         name: root.querySelector('.pk-name'),
@@ -3823,7 +3853,6 @@ const productImg = p => IMG + (p.img || p.slug) + '.webp';
         tag: root.querySelector('.pk-tag'),
         price: root.querySelector('.pk-price'),
         count: root.querySelector('.pk-count'),
-        bottle: root.querySelector('.pk-bottle'),
         link: root.querySelector('.pk-link'),
         add: root.querySelector('.pk-card .chip-btn')
       };
@@ -3836,6 +3865,38 @@ const productImg = p => IMG + (p.img || p.slug) + '.webp';
 
       const pad2 = n => String(n + 1).padStart(2, '0') + ' / ' + String(items.length).padStart(2, '0');
 
+      /* each model layer's foliage window sits at its own spot in the SOURCE
+         image — the bottle is mapped exactly there through the object-fit
+         cover math, so the perfume always sits inside the foliage window */
+      function placeBottle(i) {
+        const m = models[i];
+        const img = m.querySelector('img');
+        const show = root.querySelector('.pk-show');
+        const fx = (+m.dataset.bx || 58) / 100;
+        const fy = (+m.dataset.by || 51) / 100;
+        let px = fx, py = fy;
+        if (img && img.complete && img.naturalWidth && show.clientWidth) {
+          const flipped = img.classList.contains('flip');
+          const ufx = flipped ? 1 - fx : fx;
+          const bw = m.offsetWidth, bh = m.offsetHeight;
+          const scale = Math.max(bw / img.naturalWidth, bh / img.naturalHeight);
+          const dispW = img.naturalWidth * scale, dispH = img.naturalHeight * scale;
+          const offX = (bw - dispW) * 0.5;   /* object-position:50% 42% */
+          const offY = (bh - dispH) * 0.42;
+          px = (m.offsetLeft + offX + ufx * dispW) / show.clientWidth;
+          py = (m.offsetTop + offY + fy * dispH) / show.clientHeight;
+        }
+        gsap.set(bottle, { left: (px * 100) + '%', top: (py * 100) + '%' });
+      }
+      placeBottle(0);
+      const img0 = models[0].querySelector('img');
+      if (img0 && !img0.complete) img0.addEventListener('load', () => placeBottle(idx));
+      let rsT = null;
+      window.addEventListener('resize', () => {
+        clearTimeout(rsT);
+        rsT = setTimeout(() => placeBottle(idx), 180);
+      });
+
       function apply(i) {
         const it = items[i];
         els.name.textContent = it.name;
@@ -3843,15 +3904,14 @@ const productImg = p => IMG + (p.img || p.slug) + '.webp';
         els.tag.textContent = it.tag;
         els.price.textContent = it.price;
         els.count.textContent = pad2(i);
-        els.bottle.src = 'assets/img/bottles/' + it.slug + '.webp';
-        els.bottle.alt = it.name + ' perfume bottle';
         els.link.href = 'product.html?p=' + it.slug;
         els.add.setAttribute('data-add', it.slug);
         dots.forEach((d, j) => d.classList.toggle('on', j === i));
       }
 
-      /* the racing-game swap: the current model sweeps out, the next sweeps
-         in from the opposite side; the card crossfades its content */
+      /* the racing-game swap — no scrolling involved: the outgoing model
+         sweeps out, the next sweeps in from the opposite side, the bottle
+         glides into the new model's foliage window, the card crossfades */
       function render(i, dir) {
         dir = dir || (i > idx ? 1 : -1);
         const prev = idx;
@@ -3859,39 +3919,37 @@ const productImg = p => IMG + (p.img || p.slug) + '.webp';
         if (anim) anim.kill();
         anim = gsap.timeline({ defaults: { overwrite: 'auto' } });
         if (prev !== i) {
-          anim.to(models[prev], { autoAlpha: 0, xPercent: -18 * dir, scale: 0.985, duration: 0.38, ease: 'power2.in' }, 0)
-              .fromTo(models[i], { autoAlpha: 0, xPercent: 18 * dir, scale: 1.015 }, { autoAlpha: 1, xPercent: 0, scale: 1, duration: 0.6, ease: 'power3.out' }, 0.16);
+          anim.to(models[prev], { autoAlpha: 0, xPercent: -16 * dir, scale: 0.985, duration: 0.34, ease: 'power2.in' }, 0)
+              .fromTo(models[i], { autoAlpha: 0, xPercent: 16 * dir, scale: 1.015 }, { autoAlpha: 1, xPercent: 0, scale: 1, duration: 0.55, ease: 'power3.out' }, 0.14)
+              .to(bottle, { autoAlpha: 0, scale: 0.88, rotation: -4 * dir, duration: 0.2, ease: 'power2.in' }, 0)
+              .call(() => {
+                bottle.src = 'assets/img/bottles/' + items[i].slug + '.webp';
+                bottle.alt = items[i].name + ' perfume bottle';
+                placeBottle(i);
+              }, [], 0.21)
+              .to(bottle, { autoAlpha: 1, scale: 1, rotation: 0, duration: 0.34, ease: 'power2.out' }, 0.26);
         }
         anim.to(card, { autoAlpha: 0, y: 12 * dir, duration: 0.16, ease: 'power1.in' }, 0)
             .call(() => apply(i), [], 0.17)
-            .to(card, { autoAlpha: 1, y: 0, duration: 0.32, ease: 'power2.out' }, 0.24);
-      }
-
-      const st = ScrollTrigger.create({
-        trigger: scene,
-        start: spanStart,
-        end: spanEnd,
-        onUpdate: function (self) {
-          const t = Math.min(0.99999, Math.max(0, self.progress));
-          const i = Math.floor(t * items.length);
-          if (i !== idx) render(i, i > idx ? 1 : -1);
-        },
-        onToggle: function (self) { activePicker = self.isActive ? api : null; }
-      });
-
-      function scrollToIdx(j) {
-        const s = st.start + (st.end - st.start) * ((j + 0.5) / items.length);
-        if (window.__lenis) window.__lenis.scrollTo(s, { duration: 1.0, easing: t => 1 - Math.pow(1 - t, 3) });
-        else window.scrollTo({ top: s, behavior: 'smooth' });
+            .to(card, { autoAlpha: 1, y: 0, duration: 0.3, ease: 'power2.out' }, 0.24);
       }
 
       const api = {
         go: function (d) {
           const j = Math.min(items.length - 1, Math.max(0, idx + d));
-          if (j !== idx) scrollToIdx(j);
+          if (j !== idx) render(j, d);
         },
-        jump: function (j) { if (j !== idx) scrollToIdx(j); }
+        jump: function (j) { if (j !== idx) render(j, j > idx ? 1 : -1); }
       };
+
+      /* the span only gates which picker owns the arrow keys —
+         it never drives the selection */
+      ScrollTrigger.create({
+        trigger: scene,
+        start: spanStart,
+        end: spanEnd,
+        onToggle: function (self) { activePicker = self.isActive ? api : null; }
+      });
 
       root.querySelector('.pk-arrow--prev').addEventListener('click', () => api.go(-1));
       root.querySelector('.pk-arrow--next').addEventListener('click', () => api.go(1));
@@ -4308,14 +4366,12 @@ const productImg = p => IMG + (p.img || p.slug) + '.webp';
 ---
 
 
-## 📄 assets/img/ui/favicon.svg  ·  (6 lines)
+## 📄 assets/img/ui/favicon.svg  ·  (4 lines)
 
 ```svg
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
-  <rect width="64" height="64" rx="14" fill="#150e12"/>
-  <circle cx="32" cy="32" r="26" fill="none" stroke="#c47887" stroke-width="1.4" opacity=".9"/>
-  <circle cx="32" cy="32" r="19" fill="none" stroke="#93c3a4" stroke-width=".8" opacity=".7"/>
-  <text x="32" y="41" font-family="Georgia, serif" font-size="23" fill="#f3eee3" text-anchor="middle" letter-spacing="1">MI</text>
+  <rect width="64" height="64" rx="14" fill="#07130d"/>
+  <text x="32" y="42" font-family="Georgia, serif" font-size="30" fill="#c9a86a" text-anchor="middle" letter-spacing="1">IM</text>
 </svg>
 
 ```
@@ -4330,4 +4386,5 @@ python3 -m http.server 8000
 ```
 
 Any static file server works. No environment variables, no database.
-Try the pickers with the ← / → arrow keys while a scene is pinned.
+Try the pickers with the ← / → arrow keys while a scene is pinned —
+scrolling never changes the selection.

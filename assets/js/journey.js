@@ -185,18 +185,23 @@
         .to('.ff-n', { yPercent: -29, ease: 'none', duration: 1.35 }, 0);
     }
 
-    /* the shore pre-load: after the picker the beach scene fades and zooms
-       in over the forest ("the background zooms out to the beach"), so the
-       handoff into the shore section is a pure cross-fade */
-    gsap.set('.shore-pre', { scale: 1.06 });
+    /* the beach sits behind the forest world — at the end of the picker the
+       world zooms out (the camera pulls back, per the reference vid) and the
+       beach occurs around it */
+    gsap.set('.beach-pre', { scale: 1.17 });
     gsap.set('.stagechip--forest', { autoAlpha: 0 });
     forestTl
       .to('.stagechip--forest', { autoAlpha: 1, duration: 0.3, ease: 'power1.out' }, 0.3)
-      .to('.stagechip--forest', { autoAlpha: 0, duration: 0.3, ease: 'power1.in' }, 4.3)
+      .to('.stagechip--forest', { autoAlpha: 0, duration: 0.3, ease: 'power1.in' }, 3.95)
       .fromTo('#forest .picker', { autoAlpha: 0 }, { autoAlpha: 1, duration: 0.35, ease: 'power1.out' }, 0.95)
-      .to('#forest .picker', { autoAlpha: 0, duration: 0.35, ease: 'power1.in' }, 4.15)
-      .to('.shore-pre', { autoAlpha: 1, scale: 1, duration: 0.68, ease: 'power1.inOut' }, 3.9)
-      .to({}, { duration: 0.12 });
+      .to('#forest .picker', { autoAlpha: 0, duration: 0.35, ease: 'power1.in' }, 3.8)
+      /* THE ZOOM-OUT: the whole forest world shrinks toward the camera's
+         pull-back and dissolves as it recedes — the beach is already on
+         screen behind it, settling to the exact frame the shore section
+         opens with (one-flow dissolve follows) */
+      .to('.forest-world', { scale: 0.34, duration: 0.55, ease: 'power2.in' }, 4.15)
+      .to('.forest-world', { autoAlpha: 0, duration: 0.42, ease: 'power1.in' }, 4.2)
+      .to('.beach-pre', { scale: 1.14, duration: 0.55, ease: 'power2.out' }, 4.15);
 
     /* ============================================================
        03 — TRANSITION (forest → shore picker → the water rises)
@@ -236,18 +241,19 @@
       .to('.shore-overlay', { opacity: 0.45, duration: 0.4, ease: 'power1.inOut' }, 1.4)
       .to('.shore-overlay', { opacity: 1, duration: 0.4, ease: 'power1.inOut' }, 3.85)
       .to('#transition .picker', { autoAlpha: 0, duration: 0.35, ease: 'power1.in' }, 3.8)
-      /* the water pops up in between the leaves and the beach — no voice-over,
-         the ocean itself takes the screen and the dive begins */
-      .to('.water-rise', { yPercent: 0, duration: 1.0, ease: 'power2.in' }, 4.35)
-      .to('.trans-beach', { scale: 1.13, ease: 'none', duration: 1.0 }, 4.35)
-      .to('.trans-vignette', { opacity: 1, duration: 0.8 }, 4.55)
+      /* the water overlays the beach from the bottom, gradually taking the
+         frame (per the reference vid) — the top stays bright sky while the
+         water line climbs; the vignette only closes at the very end */
+      .to('.water-rise', { yPercent: 0, duration: 1.2, ease: 'none' }, 4.15)
+      .to('.trans-beach', { scale: 1.13, ease: 'none', duration: 1.2 }, 4.15)
+      .to('.trans-vignette', { opacity: 1, duration: 0.6 }, 5.0)
       .to({}, { duration: 0.25 });
 
     transSteps.forEach((st, i) => {
       transTl.call(() => {
         transSteps.forEach((x, j) => x.classList.toggle('on', j <= i));
         if (stepsWrap) stepsWrap.classList.toggle('i', i === 2);
-      }, [], [0.2, 1.4, 4.35][i]);
+      }, [], [0.2, 1.4, 4.15][i]);
     });
 
     /* ============================================================
@@ -271,9 +277,12 @@
       .to('.caustics', { opacity: 0, ease: 'none', duration: 2.5 }, 0.5)
       .fromTo('.ocean-head', { autoAlpha: 0, y: 50 }, { autoAlpha: 1, y: 0, duration: 0.5, ease: 'power1.out' }, 0.25)
       .to('.ocean-head', { autoAlpha: 0, y: -50, duration: 0.5, ease: 'power1.in' }, 1.15)
-      /* the deep picker — the rarest fragrances, chosen in the light rays */
+      /* the deep picker — the rarest fragrances, chosen in the light rays.
+         The depth meter steps aside while the description card is on stage */
       .fromTo('#ocean .picker', { autoAlpha: 0 }, { autoAlpha: 1, duration: 0.35, ease: 'power1.out' }, 1.6)
+      .to('.depthmeter', { autoAlpha: 0, duration: 0.3, ease: 'power1.in' }, 1.6)
       .to('#ocean .picker', { autoAlpha: 0, duration: 0.35, ease: 'power1.in' }, 3.8)
+      .to('.depthmeter', { autoAlpha: 1, duration: 0.3, ease: 'power1.out' }, 4.15)
       .to({}, { duration: 0.45 });
 
     /* depth readout */
@@ -291,10 +300,10 @@
 
     /* ============================================================
        THE FRAGRANCE PICKER — racing-game selector engine
-       One source of truth: the scroll position inside the picker's
-       span drives the active index (scrolling auto-advances). The
-       arrows / dots / swipe / arrow-keys simply smooth-scroll to the
-       target slot, so manual and scroll input can never fight.
+       SCROLL-INDEPENDENT (v12): the active fragrance is chosen ONLY by
+       the arrows / arrow-keys / dots / a swipe — scrolling never
+       changes it. The perfume bottle is displayed INSIDE the foliage
+       window of each model layer (the v12 "perfumes not displayed" fix).
        ============================================================ */
     const PICKS = {
       forest: [
@@ -320,6 +329,7 @@
       if (!root) return;
       const items = PICKS[key];
       const models = root.querySelectorAll('.pk-model');
+      const bottle = root.querySelector('.pk-bottlefig');
       const card = root.querySelector('.pk-card');
       const els = {
         name: root.querySelector('.pk-name'),
@@ -327,7 +337,6 @@
         tag: root.querySelector('.pk-tag'),
         price: root.querySelector('.pk-price'),
         count: root.querySelector('.pk-count'),
-        bottle: root.querySelector('.pk-bottle'),
         link: root.querySelector('.pk-link'),
         add: root.querySelector('.pk-card .chip-btn')
       };
@@ -340,6 +349,38 @@
 
       const pad2 = n => String(n + 1).padStart(2, '0') + ' / ' + String(items.length).padStart(2, '0');
 
+      /* each model layer's foliage window sits at its own spot in the SOURCE
+         image — the bottle is mapped exactly there through the object-fit
+         cover math, so the perfume always sits inside the foliage window */
+      function placeBottle(i) {
+        const m = models[i];
+        const img = m.querySelector('img');
+        const show = root.querySelector('.pk-show');
+        const fx = (+m.dataset.bx || 58) / 100;
+        const fy = (+m.dataset.by || 51) / 100;
+        let px = fx, py = fy;
+        if (img && img.complete && img.naturalWidth && show.clientWidth) {
+          const flipped = img.classList.contains('flip');
+          const ufx = flipped ? 1 - fx : fx;
+          const bw = m.offsetWidth, bh = m.offsetHeight;
+          const scale = Math.max(bw / img.naturalWidth, bh / img.naturalHeight);
+          const dispW = img.naturalWidth * scale, dispH = img.naturalHeight * scale;
+          const offX = (bw - dispW) * 0.5;   /* object-position:50% 42% */
+          const offY = (bh - dispH) * 0.42;
+          px = (m.offsetLeft + offX + ufx * dispW) / show.clientWidth;
+          py = (m.offsetTop + offY + fy * dispH) / show.clientHeight;
+        }
+        gsap.set(bottle, { left: (px * 100) + '%', top: (py * 100) + '%' });
+      }
+      placeBottle(0);
+      const img0 = models[0].querySelector('img');
+      if (img0 && !img0.complete) img0.addEventListener('load', () => placeBottle(idx));
+      let rsT = null;
+      window.addEventListener('resize', () => {
+        clearTimeout(rsT);
+        rsT = setTimeout(() => placeBottle(idx), 180);
+      });
+
       function apply(i) {
         const it = items[i];
         els.name.textContent = it.name;
@@ -347,15 +388,14 @@
         els.tag.textContent = it.tag;
         els.price.textContent = it.price;
         els.count.textContent = pad2(i);
-        els.bottle.src = 'assets/img/bottles/' + it.slug + '.webp';
-        els.bottle.alt = it.name + ' perfume bottle';
         els.link.href = 'product.html?p=' + it.slug;
         els.add.setAttribute('data-add', it.slug);
         dots.forEach((d, j) => d.classList.toggle('on', j === i));
       }
 
-      /* the racing-game swap: the current model sweeps out, the next sweeps
-         in from the opposite side; the card crossfades its content */
+      /* the racing-game swap — no scrolling involved: the outgoing model
+         sweeps out, the next sweeps in from the opposite side, the bottle
+         glides into the new model's foliage window, the card crossfades */
       function render(i, dir) {
         dir = dir || (i > idx ? 1 : -1);
         const prev = idx;
@@ -363,39 +403,37 @@
         if (anim) anim.kill();
         anim = gsap.timeline({ defaults: { overwrite: 'auto' } });
         if (prev !== i) {
-          anim.to(models[prev], { autoAlpha: 0, xPercent: -18 * dir, scale: 0.985, duration: 0.38, ease: 'power2.in' }, 0)
-              .fromTo(models[i], { autoAlpha: 0, xPercent: 18 * dir, scale: 1.015 }, { autoAlpha: 1, xPercent: 0, scale: 1, duration: 0.6, ease: 'power3.out' }, 0.16);
+          anim.to(models[prev], { autoAlpha: 0, xPercent: -16 * dir, scale: 0.985, duration: 0.34, ease: 'power2.in' }, 0)
+              .fromTo(models[i], { autoAlpha: 0, xPercent: 16 * dir, scale: 1.015 }, { autoAlpha: 1, xPercent: 0, scale: 1, duration: 0.55, ease: 'power3.out' }, 0.14)
+              .to(bottle, { autoAlpha: 0, scale: 0.88, rotation: -4 * dir, duration: 0.2, ease: 'power2.in' }, 0)
+              .call(() => {
+                bottle.src = 'assets/img/bottles/' + items[i].slug + '.webp';
+                bottle.alt = items[i].name + ' perfume bottle';
+                placeBottle(i);
+              }, [], 0.21)
+              .to(bottle, { autoAlpha: 1, scale: 1, rotation: 0, duration: 0.34, ease: 'power2.out' }, 0.26);
         }
         anim.to(card, { autoAlpha: 0, y: 12 * dir, duration: 0.16, ease: 'power1.in' }, 0)
             .call(() => apply(i), [], 0.17)
-            .to(card, { autoAlpha: 1, y: 0, duration: 0.32, ease: 'power2.out' }, 0.24);
-      }
-
-      const st = ScrollTrigger.create({
-        trigger: scene,
-        start: spanStart,
-        end: spanEnd,
-        onUpdate: function (self) {
-          const t = Math.min(0.99999, Math.max(0, self.progress));
-          const i = Math.floor(t * items.length);
-          if (i !== idx) render(i, i > idx ? 1 : -1);
-        },
-        onToggle: function (self) { activePicker = self.isActive ? api : null; }
-      });
-
-      function scrollToIdx(j) {
-        const s = st.start + (st.end - st.start) * ((j + 0.5) / items.length);
-        if (window.__lenis) window.__lenis.scrollTo(s, { duration: 1.0, easing: t => 1 - Math.pow(1 - t, 3) });
-        else window.scrollTo({ top: s, behavior: 'smooth' });
+            .to(card, { autoAlpha: 1, y: 0, duration: 0.3, ease: 'power2.out' }, 0.24);
       }
 
       const api = {
         go: function (d) {
           const j = Math.min(items.length - 1, Math.max(0, idx + d));
-          if (j !== idx) scrollToIdx(j);
+          if (j !== idx) render(j, d);
         },
-        jump: function (j) { if (j !== idx) scrollToIdx(j); }
+        jump: function (j) { if (j !== idx) render(j, j > idx ? 1 : -1); }
       };
+
+      /* the span only gates which picker owns the arrow keys —
+         it never drives the selection */
+      ScrollTrigger.create({
+        trigger: scene,
+        start: spanStart,
+        end: spanEnd,
+        onToggle: function (self) { activePicker = self.isActive ? api : null; }
+      });
 
       root.querySelector('.pk-arrow--prev').addEventListener('click', () => api.go(-1));
       root.querySelector('.pk-arrow--next').addEventListener('click', () => api.go(1));
