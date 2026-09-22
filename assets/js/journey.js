@@ -189,16 +189,16 @@
        world zooms out (the camera pulls back, per the reference vid) and the
        beach occurs around it */
     gsap.set('.beach-pre', { scale: 1.17 });
-    gsap.set('.stagechip--forest', { autoAlpha: 0 });
+    /* the picker lives INSIDE the forest world and is never scrub-linked:
+       it is simply on stage for the whole scene, and leaves only with the
+       scene itself, zooming out inside the world at the handoff */
     forestTl
       .to('.stagechip--forest', { autoAlpha: 1, duration: 0.3, ease: 'power1.out' }, 0.3)
       .to('.stagechip--forest', { autoAlpha: 0, duration: 0.3, ease: 'power1.in' }, 3.95)
-      .fromTo('#forest .picker', { autoAlpha: 0 }, { autoAlpha: 1, duration: 0.35, ease: 'power1.out' }, 0.95)
-      .to('#forest .picker', { autoAlpha: 0, duration: 0.35, ease: 'power1.in' }, 3.8)
-      /* THE ZOOM-OUT: the whole forest world shrinks toward the camera's
-         pull-back and dissolves as it recedes — the beach is already on
-         screen behind it, settling to the exact frame the shore section
-         opens with (one-flow dissolve follows) */
+      /* THE ZOOM-OUT: the whole forest world (scenery + picker) shrinks toward
+         the camera's pull-back and dissolves as it recedes — the beach is
+         already on screen behind it, settling to the exact frame the shore
+         section opens with (one-flow dissolve follows) */
       .to('.forest-world', { scale: 0.34, duration: 0.55, ease: 'power2.in' }, 4.15)
       .to('.forest-world', { autoAlpha: 0, duration: 0.42, ease: 'power1.in' }, 4.2)
       .to('.beach-pre', { scale: 1.14, duration: 0.55, ease: 'power2.out' }, 4.15);
@@ -210,14 +210,14 @@
     const transTl = gsap.timeline({
       scrollTrigger: { trigger: '#transition', start: 'top top', end: () => '+=' + window.innerHeight * 5.6, scrub: 0.6 }
     });
-    const titles = gsap.utils.toArray('.trans-copy .tt');
-    const transSteps = gsap.utils.toArray('.trans-steps span');
-    const stepsWrap = document.querySelector('.trans-steps');
 
-    gsap.set(titles, { autoAlpha: 0, y: 44 });
     gsap.set('#transition .stagechip', { autoAlpha: 0 });
-    gsap.set('.trans-steps', { autoAlpha: 0 });
     gsap.set('.water-rise', { yPercent: 103 });
+    /* a clean stage for the picker: the bushes stay hidden while the
+       fragrances play (the seam matches the forest's plain beach exactly)
+       and return only for the water rise — the required Mi Amor sandwich
+       (bushes over water over beach) is preserved where it matters */
+    gsap.set('.shore-overlay', { autoAlpha: 0 });
 
     /* one continuous shore scene:
        3. the beach (sky & sand) is the base layer
@@ -226,35 +226,21 @@
        The picker plays on the beach between the arrival title and the rise —
        its model planes stand in front of a dimmed bushes overlay */
     transTl
-      /* the arrival title fades in only after the handoff is complete */
-      .to(titles[0], { autoAlpha: 1, y: 0, duration: 0.5, ease: 'power1.out' }, 0.15)
-      .to(titles[0], { autoAlpha: 0, y: -44, duration: 0.4, ease: 'power1.in' }, 0.95)
       .to('#transition .stagechip', { autoAlpha: 1, duration: 0.4 }, 0.35)
-      .to('.trans-steps', { autoAlpha: 1, duration: 0.5 }, 0.3)
       .to('.trans-beach', { scale: 1.07, ease: 'none', duration: 5.6 }, 0)
-      .fromTo('.shore-overlay', { xPercent: 6 }, { xPercent: 1, ease: 'none', duration: 5.6 }, 0)
       .to('.trans-wash', { opacity: 0.4, duration: 1.0, ease: 'power1.inOut' }, 0.7)
       .to('.trans-wash', { opacity: 0, duration: 1.0 }, 1.9)
       .to('.trans-vignette', { opacity: 0.22, duration: 1.0 }, 1.4)
-      /* the shore picker — bushes dim behind it while the fragrances play */
-      .fromTo('#transition .picker', { autoAlpha: 0 }, { autoAlpha: 1, duration: 0.35, ease: 'power1.out' }, 1.4)
-      .to('.shore-overlay', { opacity: 0.45, duration: 0.4, ease: 'power1.inOut' }, 1.4)
-      .to('.shore-overlay', { opacity: 1, duration: 0.4, ease: 'power1.inOut' }, 3.85)
-      .to('#transition .picker', { autoAlpha: 0, duration: 0.35, ease: 'power1.in' }, 3.8)
+      /* the bushes return for the water rise (the Mi Amor sandwich) */
+      .to('.shore-overlay', { autoAlpha: 1, duration: 0.4, ease: 'power1.inOut' }, 3.7)
       /* the water overlays the beach from the bottom, gradually taking the
-         frame (per the reference vid) — the top stays bright sky while the
-         water line climbs; the vignette only closes at the very end */
+         frame (per the reference vid) — and because the picker sits BELOW
+         the water layer, the rising water physically submerges the
+         showcase, card and bar. No scroll-linked fade anywhere */
       .to('.water-rise', { yPercent: 0, duration: 1.2, ease: 'none' }, 4.15)
       .to('.trans-beach', { scale: 1.13, ease: 'none', duration: 1.2 }, 4.15)
       .to('.trans-vignette', { opacity: 1, duration: 0.6 }, 5.0)
       .to({}, { duration: 0.25 });
-
-    transSteps.forEach((st, i) => {
-      transTl.call(() => {
-        transSteps.forEach((x, j) => x.classList.toggle('on', j <= i));
-        if (stepsWrap) stepsWrap.classList.toggle('i', i === 2);
-      }, [], [0.2, 1.4, 4.15][i]);
-    });
 
     /* ============================================================
        04 — OCEAN (the dive → the deep fragrance picker)
@@ -275,14 +261,9 @@
       .to('.ocean-dark', { opacity: 0.78, ease: 'none', duration: 4.6 }, 0)
       .to('.rays', { opacity: 0.12, ease: 'none', duration: 3 }, 0.8)
       .to('.caustics', { opacity: 0, ease: 'none', duration: 2.5 }, 0.5)
-      .fromTo('.ocean-head', { autoAlpha: 0, y: 50 }, { autoAlpha: 1, y: 0, duration: 0.5, ease: 'power1.out' }, 0.25)
-      .to('.ocean-head', { autoAlpha: 0, y: -50, duration: 0.5, ease: 'power1.in' }, 1.15)
-      /* the deep picker — the rarest fragrances, chosen in the light rays.
-         The depth meter steps aside while the description card is on stage */
-      .fromTo('#ocean .picker', { autoAlpha: 0 }, { autoAlpha: 1, duration: 0.35, ease: 'power1.out' }, 1.6)
-      .to('.depthmeter', { autoAlpha: 0, duration: 0.3, ease: 'power1.in' }, 1.6)
-      .to('#ocean .picker', { autoAlpha: 0, duration: 0.35, ease: 'power1.in' }, 3.8)
-      .to('.depthmeter', { autoAlpha: 1, duration: 0.3, ease: 'power1.out' }, 4.15)
+      /* the picker is simply on stage for the whole scene (never scrub-
+         linked); the depth meter yields to the description card */
+      .to('.depthmeter', { autoAlpha: 0, duration: 0.3, ease: 'power1.in' }, 0.9)
       .to({}, { duration: 0.45 });
 
     /* depth readout */
@@ -328,7 +309,6 @@
       const root = document.querySelector(scene + ' .picker');
       if (!root) return;
       const items = PICKS[key];
-      const models = root.querySelectorAll('.pk-model');
       const bottle = root.querySelector('.pk-bottlefig');
       const card = root.querySelector('.pk-card');
       const els = {
@@ -344,42 +324,7 @@
       let idx = 0;
       let anim = null;
 
-      gsap.set(models, { autoAlpha: 0 });
-      gsap.set(models[0], { autoAlpha: 1 });
-
       const pad2 = n => String(n + 1).padStart(2, '0') + ' / ' + String(items.length).padStart(2, '0');
-
-      /* each model layer's foliage window sits at its own spot in the SOURCE
-         image — the bottle is mapped exactly there through the object-fit
-         cover math, so the perfume always sits inside the foliage window */
-      function placeBottle(i) {
-        const m = models[i];
-        const img = m.querySelector('img');
-        const show = root.querySelector('.pk-show');
-        const fx = (+m.dataset.bx || 58) / 100;
-        const fy = (+m.dataset.by || 51) / 100;
-        let px = fx, py = fy;
-        if (img && img.complete && img.naturalWidth && show.clientWidth) {
-          const flipped = img.classList.contains('flip');
-          const ufx = flipped ? 1 - fx : fx;
-          const bw = m.offsetWidth, bh = m.offsetHeight;
-          const scale = Math.max(bw / img.naturalWidth, bh / img.naturalHeight);
-          const dispW = img.naturalWidth * scale, dispH = img.naturalHeight * scale;
-          const offX = (bw - dispW) * 0.5;   /* object-position:50% 42% */
-          const offY = (bh - dispH) * 0.42;
-          px = (m.offsetLeft + offX + ufx * dispW) / show.clientWidth;
-          py = (m.offsetTop + offY + fy * dispH) / show.clientHeight;
-        }
-        gsap.set(bottle, { left: (px * 100) + '%', top: (py * 100) + '%' });
-      }
-      placeBottle(0);
-      const img0 = models[0].querySelector('img');
-      if (img0 && !img0.complete) img0.addEventListener('load', () => placeBottle(idx));
-      let rsT = null;
-      window.addEventListener('resize', () => {
-        clearTimeout(rsT);
-        rsT = setTimeout(() => placeBottle(idx), 180);
-      });
 
       function apply(i) {
         const it = items[i];
@@ -388,33 +333,24 @@
         els.tag.textContent = it.tag;
         els.price.textContent = it.price;
         els.count.textContent = pad2(i);
+        bottle.src = 'assets/img/bottles/' + it.slug + '.webp';
+        bottle.alt = it.name + ' perfume bottle';
         els.link.href = 'product.html?p=' + it.slug;
         els.add.setAttribute('data-add', it.slug);
         dots.forEach((d, j) => d.classList.toggle('on', j === i));
       }
 
-      /* the racing-game swap — no scrolling involved: the outgoing model
-         sweeps out, the next sweeps in from the opposite side, the bottle
-         glides into the new model's foliage window, the card crossfades */
+      /* the racing-game swap — no scrolling involved: the perfume lifts out,
+         the next settles in, the card crossfades its content */
       function render(i, dir) {
         dir = dir || (i > idx ? 1 : -1);
-        const prev = idx;
         idx = i;
         if (anim) anim.kill();
         anim = gsap.timeline({ defaults: { overwrite: 'auto' } });
-        if (prev !== i) {
-          anim.to(models[prev], { autoAlpha: 0, xPercent: -16 * dir, scale: 0.985, duration: 0.34, ease: 'power2.in' }, 0)
-              .fromTo(models[i], { autoAlpha: 0, xPercent: 16 * dir, scale: 1.015 }, { autoAlpha: 1, xPercent: 0, scale: 1, duration: 0.55, ease: 'power3.out' }, 0.14)
-              .to(bottle, { autoAlpha: 0, scale: 0.88, rotation: -4 * dir, duration: 0.2, ease: 'power2.in' }, 0)
-              .call(() => {
-                bottle.src = 'assets/img/bottles/' + items[i].slug + '.webp';
-                bottle.alt = items[i].name + ' perfume bottle';
-                placeBottle(i);
-              }, [], 0.21)
-              .to(bottle, { autoAlpha: 1, scale: 1, rotation: 0, duration: 0.34, ease: 'power2.out' }, 0.26);
-        }
-        anim.to(card, { autoAlpha: 0, y: 12 * dir, duration: 0.16, ease: 'power1.in' }, 0)
-            .call(() => apply(i), [], 0.17)
+        anim.to(bottle, { autoAlpha: 0, scale: 0.88, y: -22 * dir, duration: 0.2, ease: 'power2.in' }, 0)
+            .call(() => apply(i), [], 0.21)
+            .fromTo(bottle, { autoAlpha: 0, scale: 0.92, y: 26 * dir }, { autoAlpha: 1, scale: 1, y: 0, duration: 0.38, ease: 'power2.out' }, 0.26)
+            .to(card, { autoAlpha: 0, y: 12 * dir, duration: 0.16, ease: 'power1.in' }, 0)
             .to(card, { autoAlpha: 1, y: 0, duration: 0.3, ease: 'power2.out' }, 0.24);
       }
 

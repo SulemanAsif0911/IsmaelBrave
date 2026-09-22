@@ -1,68 +1,65 @@
 # ISMAEEL MUHAMMAD — A JOURNEY OF SENSES
 
-## Complete source code (v12 — theme reverted to gold, Bodoni Moda, scroll-independent pickers with the showcase layout, forest zoom-out per the reference vids)
+## Complete source code (v13 — CLEAN pickers: perfume-only showcase, fully scroll-independent display)
 
 
 **Stack:** Vanilla HTML / CSS / JS + GSAP ScrollTrigger + Lenis (vendored) — no build step  
 **Catalog:** only the 8 journey models — all extra data removed
 
-**v12 changes**
+**v13 changes**
 
-1. **Theme reverted.** The maroon & green experiment is fully rolled
-   back to the original gold design system (`--gold #c9a86a` everywhere:
-   eyebrows, prices, badges, selection, progress bar, cart pill, Most
-   Wanted, light-page accents).
-2. **Classy new display face: Bodoni Moda** — the high-contrast fashion
-   didone — vendored (400/700/900 + italics) and driving every headline,
-   product name and the crest monogram. The Playfair faces are retired.
-3. **The pickers are SCROLL-INDEPENDENT and follow the client's layout:**
-   the model showcase on the LEFT (a framed panel showing the model layer
-   with the PERFUME BOTTLE displayed inside the layer's foliage window —
-   placed through exact object-fit cover math, mirrored for flipped
-   planes), the description card on the RIGHT, and the arrows in the
-   BROWN selection bar at the bottom (with dots + key hint). Arrows /
-   ←/→ keys / dots / swipe are the only way to change the fragrance;
-   scrolling never does, and selections persist.
-4. **"The perfumes are not being displayed" — fixed.** The v11 picker
-   showed the model layers full-bleed, but those layers are foliage
-   frames with a transparent centre, so no perfume was visible. The
-   bottle now sits inside each layer's window at full size in every
-   scene and swaps with the racing-game sweep.
-5. **Transitions per the reference videos (`vids/`):** the forest →
-   beach handoff is a true ZOOM-OUT — the whole forest world shrinks
-   toward the camera's pull-back and dissolves while the beach occurs
-   around it (pre-loaded behind the world) — and the beach → ocean
-   handoff overlays the water from the bottom in a steady linear climb,
-   bright sky on top, before the one-flow dissolve under the surface.
-6. Everything else stands: one-flow handoffs, no section background
-   over a pinned scene, most-wanted, collections, shop, cart. 59/59
-   audit checks pass.
+1. **The perfume display is CLEAN.** Every foliage model plane is gone
+   from the pickers — the showcase is now a framed panel with ONLY the
+   perfume bottle, centred at 58% height over a soft radial gold glow
+   (a gentle bobble keeps it alive). Nothing else competes with the
+   product.
+2. **Every perfume model is fully independent of scrolling.** No scrub
+   timeline touches the pickers anymore. The forest picker lives inside
+   `.forest-world` — it arrives through the hero dissolve and zooms out
+   with the scene. The shore picker sits on its stage for the whole
+   scene, BELOW the water layer, so the rising water physically submerges
+   the showcase, card and bar (no fade — the water just takes it). The
+   ocean picker is on stage for its entire scene until the next section
+   slides over after the unpin.
+3. **A cleaner shore stage.** The bushes-and-leaves overlay is hidden
+   while the picker plays (the arrival seam matches the plain beach
+   exactly) and restored just in time for the Mi Amor water sandwich
+   during the rise. The shore title, the transition step list and the
+   ocean heading are removed — the pickers own their scenes.
+4. **A simpler, sturdier picker engine.** The bottle swap is a clean
+   lift-and-settle crossfade (out 0.2s, swap, in 0.38s) with the card
+   content crossfading alongside — no cover math, no plane mirroring, no
+   resize listeners. Arrows / ←/→ keys / dots / swipe still drive it and
+   selections persist across scrolling.
+5. The gold theme, Bodoni Moda, the forest zoom-out and the linear
+   bottom-up water climb are unchanged from v12 and re-verified.
+   64/64 audit checks pass (`tools/audit-v13.mjs`).
 
 
 | # | File | Lines | Purpose |
 |---|------|-------|---------|
-| 1 | `index.html` | 606 | The cinematic journey — crest opening, scroll-independent fragrance pickers (showcase left with the perfume in the foliage window, description right, brown selection bar), forest zoom-out to the beach, water overlay from the bottom |
+| 1 | `index.html` | 577 | The cinematic journey — crest opening, CLEAN scroll-independent fragrance pickers (perfume-only showcase left with centred bottle + glow, description right, brown selection bar), forest zoom-out to the beach, water overlay rising from the bottom |
 | 2 | `shop.html` | 114 | Editorial shop — the 8 journey models only |
 | 3 | `product.html` | 194 | Data-driven product detail page |
 | 4 | `about.html` | 182 | Editorial brand story (5 chapters) |
 | 5 | `contact.html` | 176 | Contact + FAQ / shipping / returns |
 | 6 | `checkout.html` | 220 | Checkout with order confirmation |
-| 7 | `assets/css/base.css` | 453 | Design system: gold tokens restored, Bodoni Moda display type, nav with crest mark, cart, cards, footer |
-| 8 | `assets/css/journey.css` | 611 | Cinematic styles: crest emblem, picker layout (showcase / card / brown bar), forest-world zoom-out + beach-pre, one-flow handoff overlaps, mobile stacked picker |
+| 7 | `assets/css/base.css` | 453 | Design system: gold tokens, Bodoni Moda display type, nav with crest mark, cart, cards, footer |
+| 8 | `assets/css/journey.css` | 582 | Cinematic styles: crest emblem, clean picker layout (centred bottle + glow / card / brown bar), always-on pickers, forest-world zoom-out + beach-pre, water-rise above the shore picker, one-flow handoff overlaps, mobile stacked picker |
 | 9 | `assets/css/pages.css` | 316 | Shop / product / about / contact / checkout styles |
 | 10 | `assets/js/data.js` | 181 | Product database — 8 journey models only |
 | 11 | `assets/js/nav.js` | 94 | Nav, veil, reveals, menu, page transitions |
 | 12 | `assets/js/cart.js` | 194 | Cart store, drawer, wishlist, toasts (localStorage) |
-| 13 | `assets/js/journey.js` | 561 | Scroll engine + picker engine: one-flow stage dissolves, forest zoom-out, linear water rise, scroll-independent selector with exact bottle-in-window placement |
+| 13 | `assets/js/journey.js` | 497 | Scroll engine + picker engine: one-flow stage dissolves, forest zoom-out, linear water rise, scroll-independent selector with a clean bottle lift-and-settle swap |
 | 14 | `assets/js/shop.js` | 97 | Shop filters + grid rendering |
 | 15 | `assets/js/product.js` | 170 | Product page rendering + JSON-LD |
 | 16 | `assets/img/ui/favicon.svg` | 4 | Favicon — IM monogram in gold |
-
-**Total: 16 files, 4173 lines.**
+| 17 | `tools/rig-setup.sh` | 30 | Rebuilds the headless-Chromium audit rig in /tmp (chromium + swiftshader + fonts) |
+| 18 | `tools/audit-v13.mjs` | 372 | The 64-check v13 audit: clean pickers, scroll-independent display, submersion, handoffs, mobile |
 
 ---
 
-## 📄 index.html  ·  (606 lines)
+## 📄 index.html  ·  (577 lines)
 
 ```html
 <!DOCTYPE html>
@@ -247,13 +244,9 @@
         <div class="sunshaft"></div>
       </div>
       <div class="vignette" aria-hidden="true"></div>
-      </div>
-      <div class="stagechip stagechip--forest"><b>02</b> The Forest</div>
+<div class="stagechip stagechip--forest"><b>02</b> The Forest</div>
 
-      <!-- the forest fragrance selector — racing-game style: the model planes
-           (the same cut-outs the Hopeful beat used) fill the right of the
-           screen, the description card sits on the left, and the arrows /
-           arrow-keys / dots / swipe (or simply scrolling) cycle the fragrances -->
+      
             <!-- the fragrance selector — racing-game style, fully scroll-independent:
            the model showcase (with the perfume held in the foliage window) sits
            on the LEFT, the description on the RIGHT, and the arrows live in the
@@ -261,13 +254,8 @@
            change the fragrance — scrolling never does -->
       <div class="picker picker--forest" aria-label="Choose a forest fragrance">
         <div class="pk-show">
-          <div class="pk-models" aria-hidden="true">
-          <div class="pk-model is-on" data-bx="58" data-by="51"><img src="assets/img/env/model-fore.webp" alt=""></div>
-          <div class="pk-model" data-bx="58" data-by="51"><img class="flip" src="assets/img/env/model-fore.webp" alt=""></div>
-          <div class="pk-model" data-bx="59" data-by="43"><img src="assets/img/env/model-mid.webp" alt=""></div>
-          <div class="pk-model" data-bx="59" data-by="43"><img class="flip" src="assets/img/env/model-mid.webp" alt=""></div>
-          </div>
-          <img class="pk-bottlefig" src="assets/img/bottles/five-nine.webp" alt="Five-Nine perfume bottle held in the foliage">
+          <span class="pk-glow" aria-hidden="true"></span>
+          <img class="pk-bottlefig" src="assets/img/bottles/five-nine.webp" alt="Five-Nine perfume bottle">
           <span class="pk-show-frame" aria-hidden="true"></span>
         </div>
 
@@ -298,7 +286,8 @@
         <div class="pk-hint"><span>←</span> choose your scent <span>→</span></div>
       </div>
 
-          </div>
+            </div>
+    </div>
   </section>
 
   <!-- ================================================
@@ -318,18 +307,8 @@
       <div class="vignette trans-vignette" aria-hidden="true"></div>
       <div class="stagechip"><b>03</b> The Shore</div>
 
-      <div class="trans-copy">
-        <div class="tt tt-1">
-          <span class="label">The forest opens</span>
-          <h2 class="display">Trees give way<br>to the horizon.</h2>
-        </div>
-        <div class="trans-steps" aria-hidden="true">
-          <span class="on">Land</span><i></i><span>Shore</span><i></i><span>Water</span>
-        </div>
-      </div>
-
-      <!-- the shore fragrance selector — same picker as the forest, played on
-           the beach: model planes right, description left, arrows to cycle -->
+      
+      
             <!-- the fragrance selector — racing-game style, fully scroll-independent:
            the model showcase (with the perfume held in the foliage window) sits
            on the LEFT, the description on the RIGHT, and the arrows live in the
@@ -337,11 +316,8 @@
            change the fragrance — scrolling never does -->
       <div class="picker picker--shore" aria-label="Choose a shore fragrance">
         <div class="pk-show">
-          <div class="pk-models" aria-hidden="true">
-          <div class="pk-model is-on" data-bx="58" data-by="51"><img src="assets/img/env/model-fore.webp" alt=""></div>
-          <div class="pk-model" data-bx="59" data-by="43"><img class="flip" src="assets/img/env/model-mid.webp" alt=""></div>
-          </div>
-          <img class="pk-bottlefig" src="assets/img/bottles/zesty.webp" alt="Zesty perfume bottle held in the foliage">
+          <span class="pk-glow" aria-hidden="true"></span>
+          <img class="pk-bottlefig" src="assets/img/bottles/zesty.webp" alt="Zesty perfume bottle">
           <span class="pk-show-frame" aria-hidden="true"></span>
         </div>
 
@@ -387,11 +363,7 @@
       <div class="vignette" aria-hidden="true"></div>
       <div class="stagechip"><b>04</b> The Sea Bed</div>
 
-      <div class="ocean-head">
-        <h2 class="display">Down to the sea bed.</h2>
-        <div class="sub">Deeper you go, rarer it becomes</div>
-      </div>
-
+      
       <div class="depthmeter" aria-hidden="true">
         <div class="read">
           <div class="val"><b>0</b><small>M</small></div>
@@ -403,8 +375,7 @@
         </div>
       </div>
 
-      <!-- the sea-bed fragrance selector — the deepest picks, chosen between
-           the light rays. Same picker: models right, description left -->
+      
             <!-- the fragrance selector — racing-game style, fully scroll-independent:
            the model showcase (with the perfume held in the foliage window) sits
            on the LEFT, the description on the RIGHT, and the arrows live in the
@@ -412,11 +383,8 @@
            change the fragrance — scrolling never does -->
       <div class="picker picker--ocean" aria-label="Choose a sea bed fragrance">
         <div class="pk-show">
-          <div class="pk-models" aria-hidden="true">
-          <div class="pk-model is-on" data-bx="59" data-by="43"><img src="assets/img/env/model-mid.webp" alt=""></div>
-          <div class="pk-model" data-bx="58" data-by="51"><img class="flip" src="assets/img/env/model-fore.webp" alt=""></div>
-          </div>
-          <img class="pk-bottlefig" src="assets/img/bottles/sophisticated.webp" alt="Sophisticated perfume bottle held in the foliage">
+          <span class="pk-glow" aria-hidden="true"></span>
+          <img class="pk-bottlefig" src="assets/img/bottles/sophisticated.webp" alt="Sophisticated perfume bottle">
           <span class="pk-show-frame" aria-hidden="true"></span>
         </div>
 
@@ -671,11 +639,9 @@
 </script>
 </body>
 </html>
-
 ```
 
 ---
-
 
 ## 📄 shop.html  ·  (114 lines)
 
@@ -794,11 +760,9 @@
 </script>
 </body>
 </html>
-
 ```
 
 ---
-
 
 ## 📄 product.html  ·  (194 lines)
 
@@ -997,11 +961,9 @@
 </script>
 </body>
 </html>
-
 ```
 
 ---
-
 
 ## 📄 about.html  ·  (182 lines)
 
@@ -1188,11 +1150,9 @@
 </script>
 </body>
 </html>
-
 ```
 
 ---
-
 
 ## 📄 contact.html  ·  (176 lines)
 
@@ -1373,11 +1333,9 @@
 </script>
 </body>
 </html>
-
 ```
 
 ---
-
 
 ## 📄 checkout.html  ·  (220 lines)
 
@@ -1602,11 +1560,9 @@
 </script>
 </body>
 </html>
-
 ```
 
 ---
-
 
 ## 📄 assets/css/base.css  ·  (453 lines)
 
@@ -2064,13 +2020,11 @@ body.cart-open{ overflow:hidden; }
   *,*::before,*::after{ animation-duration:.01ms !important; animation-iteration-count:1 !important; transition-duration:.01ms !important; }
   html{ scroll-behavior:auto; }
 }
-
 ```
 
 ---
 
-
-## 📄 assets/css/journey.css  ·  (611 lines)
+## 📄 assets/css/journey.css  ·  (582 lines)
 
 ```css
 /* ============================================================
@@ -2117,7 +2071,10 @@ html:not(.cinema) .stage{ position:relative; min-height:100vh; }
 .grade{ position:absolute; inset:0; pointer-events:none; mix-blend-mode:multiply; }
 
 /* beat content → replaced by the fragrance picker (product moments) */
-html.cinema .picker{ position:absolute; inset:0; z-index:6; opacity:0; visibility:hidden; will-change:opacity; }
+/* the picker display is fully independent of scrolling — always visible
+   inside its scene (the forest one rides inside .forest-world, which itself
+   dissolves in; shore + ocean sit on their stages below the fold) */
+html.cinema .picker{ position:absolute; inset:0; z-index:6; }
 html:not(.cinema) .picker{ position:relative; display:block; padding:16vh var(--pad); }
 
 /* ============================================================
@@ -2296,19 +2253,21 @@ html:not(.cinema) .beach-pre{ display:none; }
   position:absolute; left:var(--pad); top:50%; transform:translateY(-50%);
   z-index:6; width:clamp(320px, 38vw, 560px); height:min(76vh, 730px);
 }
-.pk-models{ position:absolute; inset:0; overflow:hidden; }
-.pk-model{ position:absolute; inset:-6%; will-change:transform,opacity; }
-.pk-model img{ width:100%; height:100%; object-fit:cover; object-position:50% 42%; }
-.pk-model img.flip{ transform:scaleX(-1); }
-.pk-model img{ animation:swayA 13s ease-in-out infinite alternate; }
-
-/* the perfume sits INSIDE the foliage window of the model layer —
-   this is what makes the perfumes display (v12 fix) */
+/* the CLEAN showcase: just the perfume, centred in the framed panel
+   over the scene — no foliage planes (v13: the client asked for the
+   extra leaf models to go) */
+.pk-glow{
+  position:absolute; z-index:2; left:50%; top:50%; translate:-50% -50%;
+  width:88%; aspect-ratio:1; border-radius:50%; pointer-events:none;
+  background:radial-gradient(circle, rgba(201,168,106,.14), rgba(201,168,106,.05) 44%, transparent 70%);
+  filter:blur(6px);
+}
 .pk-bottlefig{
-  position:absolute; z-index:3; height:46%;
-  left:58%; top:50%; translate:-50% -50%;
-  filter:drop-shadow(0 26px 30px rgba(0,0,0,.55)) drop-shadow(0 0 46px rgba(201,168,106,.18));
+  position:absolute; z-index:3; height:58%;
+  left:50%; top:50%; translate:-50% -50%;
+  filter:drop-shadow(0 30px 34px rgba(0,0,0,.55)) drop-shadow(0 0 56px rgba(201,168,106,.16));
   will-change:transform,opacity;
+  animation:bobble 9s ease-in-out infinite alternate;
 }
 /* the showcase frame — the "showcase area" panel */
 .pk-show-frame{
@@ -2383,22 +2342,23 @@ html:not(.cinema) .beach-pre{ display:none; }
 .picker--shore .pk-card{ background:linear-gradient(125deg, rgba(20,16,10,.6), rgba(20,16,10,.32)); }
 .picker--ocean .pk-show-frame{ border-color:rgba(160,210,235,.4); }
 .picker--ocean .pk-card{ background:linear-gradient(125deg, rgba(4,16,26,.64), rgba(4,16,26,.36)); }
-.picker--ocean .pk-model img{ filter:saturate(.78) brightness(.92) contrast(1.02); }
-.picker--ocean .pk-model::after{
-  content:''; position:absolute; inset:0;
-  background:linear-gradient(to bottom, rgba(12,74,105,.14), rgba(3,24,40,.36));
-  mix-blend-mode:multiply; pointer-events:none;
+.picker--ocean .pk-glow{
+  background:radial-gradient(circle, rgba(140,210,235,.15), rgba(140,210,235,.05) 44%, transparent 70%);
 }
 .picker--ocean .pk-bottlefig{
-  filter:drop-shadow(0 26px 30px rgba(0,10,20,.6)) drop-shadow(0 0 46px rgba(140,210,235,.22));
+  filter:drop-shadow(0 30px 34px rgba(0,10,20,.6)) drop-shadow(0 0 56px rgba(140,210,235,.22));
 }
+
+/* at the shore the picker sits BELOW the water layer: when the water
+   overlays the beach from the bottom it physically submerges the
+   showcase, card and bar — no scroll-linked fade anywhere */
+#transition .picker{ z-index:1; }
 
 @media (max-width:900px){
   .pk-show{
     left:var(--pad); right:var(--pad); top:calc(var(--nav-h) + 4vh); transform:none;
     width:auto; height:38vh;
   }
-  .pk-bottlefig{ height:52%; }
   .pk-card{
     right:var(--pad); left:var(--pad); top:auto; bottom:14vh; transform:none;
     width:auto; padding:18px 20px;
@@ -2454,32 +2414,6 @@ html:not(.cinema) .beach-pre{ display:none; }
   position:absolute; inset:0; pointer-events:none; opacity:0;
   background:linear-gradient(to bottom, rgba(160,190,200,.2), transparent 45%);
 }
-.trans-copy{
-  position:absolute; inset:0; z-index:6;
-  display:flex; flex-direction:column; align-items:center; justify-content:center;
-  text-align:center; padding:0 var(--pad);
-}
-.trans-copy .display{
-  font-size:clamp(42px,6.4vw,92px); font-weight:900; color:#fff;
-  text-shadow:0 3px 34px rgba(0,0,0,.7), 0 1px 3px rgba(0,0,0,.5);
-}
-.trans-copy .label{ color:rgba(255,255,255,.88); margin-bottom:20px; text-shadow:0 2px 16px rgba(0,0,0,.6); }
-.trans-steps{ display:flex; gap:clamp(20px,4vw,60px); margin-top:44px; align-items:center; }
-.trans-steps span{
-  font-size:10px; letter-spacing:.4em; text-transform:uppercase;
-  color:rgba(255,255,255,.85); position:relative; padding-bottom:12px;
-  text-shadow:0 2px 14px rgba(0,0,0,.65);
-  transition:color .6s;
-}
-.trans-steps.i span{ color:#fff; }
-.trans-steps span::after{
-  content:''; position:absolute; left:0; bottom:0; height:1px; width:100%;
-  background:currentColor; opacity:.5; transform:scaleX(0); transform-origin:left;
-  transition:transform .6s var(--ease);
-}
-.trans-steps span.on::after{ transform:none; }
-.trans-steps i{ width:44px; height:1px; background:rgba(255,255,255,.32); }
-
 /* ============================================================
    04 — THE OCEAN / THE DIVE
    ============================================================ */
@@ -2548,15 +2482,6 @@ html:not(.cinema) .beach-pre{ display:none; }
 .depthmeter .val small{ font-size:16px; color:var(--gold); letter-spacing:.2em; margin-left:4px; }
 .depthmeter .lab{ font-size:9px; letter-spacing:.4em; color:rgba(242,238,227,.5); margin-top:8px; text-transform:uppercase; }
 @media (max-width:900px){ .depthmeter{ display:none; } }
-
-.ocean-head{
-  position:absolute; top:16vh; left:0; right:0; text-align:center; z-index:7;
-}
-.ocean-head .display{ font-size:clamp(34px,5vw,74px); font-weight:900; }
-.ocean-head .sub{
-  margin-top:14px; font-size:10.5px; letter-spacing:.4em; text-transform:uppercase;
-  color:rgba(214,236,244,.66);
-}
 
 /* ============================================================
    05 — MOST WANTED / THE DEPTHS
@@ -2684,11 +2609,9 @@ html:not(.cinema) .leaf--far{ opacity:.55; }
 html:not(.cinema) .depthmeter{ display:none; }
 html:not(.cinema) .beam{ opacity:.7; }
 html:not(.cinema) .mw-grid .pcard, html:not(.cinema) .mw-inner > *{ opacity:1; }
-
 ```
 
 ---
-
 
 ## 📄 assets/css/pages.css  ·  (316 lines)
 
@@ -3009,11 +2932,9 @@ html:not(.cinema) .mw-grid .pcard, html:not(.cinema) .mw-inner > *{ opacity:1; }
 .co-success p{ color:rgba(242,238,227,.65); }
 .co-success .ord{ font-size:11px; letter-spacing:.3em; color:var(--gold); margin:18px 0 30px; text-transform:uppercase; }
 @media (max-width:900px){ .checkout__grid{ grid-template-columns:1fr; } .summary{ position:static; } }
-
 ```
 
 ---
-
 
 ## 📄 assets/js/data.js  ·  (181 lines)
 
@@ -3199,11 +3120,9 @@ const CATS = [
 const bySlug = s => PRODUCTS.find(p => p.slug === s);
 const fmtPrice = n => '₨' + n.toLocaleString('en-PK');
 const productImg = p => IMG + (p.img || p.slug) + '.webp';
-
 ```
 
 ---
-
 
 ## 📄 assets/js/nav.js  ·  (94 lines)
 
@@ -3302,11 +3221,9 @@ const productImg = p => IMG + (p.img || p.slug) + '.webp';
     });
   });
 })();
-
 ```
 
 ---
-
 
 ## 📄 assets/js/cart.js  ·  (194 lines)
 
@@ -3505,13 +3422,11 @@ const productImg = p => IMG + (p.img || p.slug) + '.webp';
     window.addEventListener('keydown', e => { if (e.key === 'Escape') closeCart(); });
   });
 })();
-
 ```
 
 ---
 
-
-## 📄 assets/js/journey.js  ·  (561 lines)
+## 📄 assets/js/journey.js  ·  (497 lines)
 
 ```js
 /* ============================================================
@@ -3705,16 +3620,16 @@ const productImg = p => IMG + (p.img || p.slug) + '.webp';
        world zooms out (the camera pulls back, per the reference vid) and the
        beach occurs around it */
     gsap.set('.beach-pre', { scale: 1.17 });
-    gsap.set('.stagechip--forest', { autoAlpha: 0 });
+    /* the picker lives INSIDE the forest world and is never scrub-linked:
+       it is simply on stage for the whole scene, and leaves only with the
+       scene itself, zooming out inside the world at the handoff */
     forestTl
       .to('.stagechip--forest', { autoAlpha: 1, duration: 0.3, ease: 'power1.out' }, 0.3)
       .to('.stagechip--forest', { autoAlpha: 0, duration: 0.3, ease: 'power1.in' }, 3.95)
-      .fromTo('#forest .picker', { autoAlpha: 0 }, { autoAlpha: 1, duration: 0.35, ease: 'power1.out' }, 0.95)
-      .to('#forest .picker', { autoAlpha: 0, duration: 0.35, ease: 'power1.in' }, 3.8)
-      /* THE ZOOM-OUT: the whole forest world shrinks toward the camera's
-         pull-back and dissolves as it recedes — the beach is already on
-         screen behind it, settling to the exact frame the shore section
-         opens with (one-flow dissolve follows) */
+      /* THE ZOOM-OUT: the whole forest world (scenery + picker) shrinks toward
+         the camera's pull-back and dissolves as it recedes — the beach is
+         already on screen behind it, settling to the exact frame the shore
+         section opens with (one-flow dissolve follows) */
       .to('.forest-world', { scale: 0.34, duration: 0.55, ease: 'power2.in' }, 4.15)
       .to('.forest-world', { autoAlpha: 0, duration: 0.42, ease: 'power1.in' }, 4.2)
       .to('.beach-pre', { scale: 1.14, duration: 0.55, ease: 'power2.out' }, 4.15);
@@ -3726,14 +3641,14 @@ const productImg = p => IMG + (p.img || p.slug) + '.webp';
     const transTl = gsap.timeline({
       scrollTrigger: { trigger: '#transition', start: 'top top', end: () => '+=' + window.innerHeight * 5.6, scrub: 0.6 }
     });
-    const titles = gsap.utils.toArray('.trans-copy .tt');
-    const transSteps = gsap.utils.toArray('.trans-steps span');
-    const stepsWrap = document.querySelector('.trans-steps');
 
-    gsap.set(titles, { autoAlpha: 0, y: 44 });
     gsap.set('#transition .stagechip', { autoAlpha: 0 });
-    gsap.set('.trans-steps', { autoAlpha: 0 });
     gsap.set('.water-rise', { yPercent: 103 });
+    /* a clean stage for the picker: the bushes stay hidden while the
+       fragrances play (the seam matches the forest's plain beach exactly)
+       and return only for the water rise — the required Mi Amor sandwich
+       (bushes over water over beach) is preserved where it matters */
+    gsap.set('.shore-overlay', { autoAlpha: 0 });
 
     /* one continuous shore scene:
        3. the beach (sky & sand) is the base layer
@@ -3742,35 +3657,21 @@ const productImg = p => IMG + (p.img || p.slug) + '.webp';
        The picker plays on the beach between the arrival title and the rise —
        its model planes stand in front of a dimmed bushes overlay */
     transTl
-      /* the arrival title fades in only after the handoff is complete */
-      .to(titles[0], { autoAlpha: 1, y: 0, duration: 0.5, ease: 'power1.out' }, 0.15)
-      .to(titles[0], { autoAlpha: 0, y: -44, duration: 0.4, ease: 'power1.in' }, 0.95)
       .to('#transition .stagechip', { autoAlpha: 1, duration: 0.4 }, 0.35)
-      .to('.trans-steps', { autoAlpha: 1, duration: 0.5 }, 0.3)
       .to('.trans-beach', { scale: 1.07, ease: 'none', duration: 5.6 }, 0)
-      .fromTo('.shore-overlay', { xPercent: 6 }, { xPercent: 1, ease: 'none', duration: 5.6 }, 0)
       .to('.trans-wash', { opacity: 0.4, duration: 1.0, ease: 'power1.inOut' }, 0.7)
       .to('.trans-wash', { opacity: 0, duration: 1.0 }, 1.9)
       .to('.trans-vignette', { opacity: 0.22, duration: 1.0 }, 1.4)
-      /* the shore picker — bushes dim behind it while the fragrances play */
-      .fromTo('#transition .picker', { autoAlpha: 0 }, { autoAlpha: 1, duration: 0.35, ease: 'power1.out' }, 1.4)
-      .to('.shore-overlay', { opacity: 0.45, duration: 0.4, ease: 'power1.inOut' }, 1.4)
-      .to('.shore-overlay', { opacity: 1, duration: 0.4, ease: 'power1.inOut' }, 3.85)
-      .to('#transition .picker', { autoAlpha: 0, duration: 0.35, ease: 'power1.in' }, 3.8)
+      /* the bushes return for the water rise (the Mi Amor sandwich) */
+      .to('.shore-overlay', { autoAlpha: 1, duration: 0.4, ease: 'power1.inOut' }, 3.7)
       /* the water overlays the beach from the bottom, gradually taking the
-         frame (per the reference vid) — the top stays bright sky while the
-         water line climbs; the vignette only closes at the very end */
+         frame (per the reference vid) — and because the picker sits BELOW
+         the water layer, the rising water physically submerges the
+         showcase, card and bar. No scroll-linked fade anywhere */
       .to('.water-rise', { yPercent: 0, duration: 1.2, ease: 'none' }, 4.15)
       .to('.trans-beach', { scale: 1.13, ease: 'none', duration: 1.2 }, 4.15)
       .to('.trans-vignette', { opacity: 1, duration: 0.6 }, 5.0)
       .to({}, { duration: 0.25 });
-
-    transSteps.forEach((st, i) => {
-      transTl.call(() => {
-        transSteps.forEach((x, j) => x.classList.toggle('on', j <= i));
-        if (stepsWrap) stepsWrap.classList.toggle('i', i === 2);
-      }, [], [0.2, 1.4, 4.15][i]);
-    });
 
     /* ============================================================
        04 — OCEAN (the dive → the deep fragrance picker)
@@ -3791,14 +3692,9 @@ const productImg = p => IMG + (p.img || p.slug) + '.webp';
       .to('.ocean-dark', { opacity: 0.78, ease: 'none', duration: 4.6 }, 0)
       .to('.rays', { opacity: 0.12, ease: 'none', duration: 3 }, 0.8)
       .to('.caustics', { opacity: 0, ease: 'none', duration: 2.5 }, 0.5)
-      .fromTo('.ocean-head', { autoAlpha: 0, y: 50 }, { autoAlpha: 1, y: 0, duration: 0.5, ease: 'power1.out' }, 0.25)
-      .to('.ocean-head', { autoAlpha: 0, y: -50, duration: 0.5, ease: 'power1.in' }, 1.15)
-      /* the deep picker — the rarest fragrances, chosen in the light rays.
-         The depth meter steps aside while the description card is on stage */
-      .fromTo('#ocean .picker', { autoAlpha: 0 }, { autoAlpha: 1, duration: 0.35, ease: 'power1.out' }, 1.6)
-      .to('.depthmeter', { autoAlpha: 0, duration: 0.3, ease: 'power1.in' }, 1.6)
-      .to('#ocean .picker', { autoAlpha: 0, duration: 0.35, ease: 'power1.in' }, 3.8)
-      .to('.depthmeter', { autoAlpha: 1, duration: 0.3, ease: 'power1.out' }, 4.15)
+      /* the picker is simply on stage for the whole scene (never scrub-
+         linked); the depth meter yields to the description card */
+      .to('.depthmeter', { autoAlpha: 0, duration: 0.3, ease: 'power1.in' }, 0.9)
       .to({}, { duration: 0.45 });
 
     /* depth readout */
@@ -3844,7 +3740,6 @@ const productImg = p => IMG + (p.img || p.slug) + '.webp';
       const root = document.querySelector(scene + ' .picker');
       if (!root) return;
       const items = PICKS[key];
-      const models = root.querySelectorAll('.pk-model');
       const bottle = root.querySelector('.pk-bottlefig');
       const card = root.querySelector('.pk-card');
       const els = {
@@ -3860,42 +3755,7 @@ const productImg = p => IMG + (p.img || p.slug) + '.webp';
       let idx = 0;
       let anim = null;
 
-      gsap.set(models, { autoAlpha: 0 });
-      gsap.set(models[0], { autoAlpha: 1 });
-
       const pad2 = n => String(n + 1).padStart(2, '0') + ' / ' + String(items.length).padStart(2, '0');
-
-      /* each model layer's foliage window sits at its own spot in the SOURCE
-         image — the bottle is mapped exactly there through the object-fit
-         cover math, so the perfume always sits inside the foliage window */
-      function placeBottle(i) {
-        const m = models[i];
-        const img = m.querySelector('img');
-        const show = root.querySelector('.pk-show');
-        const fx = (+m.dataset.bx || 58) / 100;
-        const fy = (+m.dataset.by || 51) / 100;
-        let px = fx, py = fy;
-        if (img && img.complete && img.naturalWidth && show.clientWidth) {
-          const flipped = img.classList.contains('flip');
-          const ufx = flipped ? 1 - fx : fx;
-          const bw = m.offsetWidth, bh = m.offsetHeight;
-          const scale = Math.max(bw / img.naturalWidth, bh / img.naturalHeight);
-          const dispW = img.naturalWidth * scale, dispH = img.naturalHeight * scale;
-          const offX = (bw - dispW) * 0.5;   /* object-position:50% 42% */
-          const offY = (bh - dispH) * 0.42;
-          px = (m.offsetLeft + offX + ufx * dispW) / show.clientWidth;
-          py = (m.offsetTop + offY + fy * dispH) / show.clientHeight;
-        }
-        gsap.set(bottle, { left: (px * 100) + '%', top: (py * 100) + '%' });
-      }
-      placeBottle(0);
-      const img0 = models[0].querySelector('img');
-      if (img0 && !img0.complete) img0.addEventListener('load', () => placeBottle(idx));
-      let rsT = null;
-      window.addEventListener('resize', () => {
-        clearTimeout(rsT);
-        rsT = setTimeout(() => placeBottle(idx), 180);
-      });
 
       function apply(i) {
         const it = items[i];
@@ -3904,33 +3764,24 @@ const productImg = p => IMG + (p.img || p.slug) + '.webp';
         els.tag.textContent = it.tag;
         els.price.textContent = it.price;
         els.count.textContent = pad2(i);
+        bottle.src = 'assets/img/bottles/' + it.slug + '.webp';
+        bottle.alt = it.name + ' perfume bottle';
         els.link.href = 'product.html?p=' + it.slug;
         els.add.setAttribute('data-add', it.slug);
         dots.forEach((d, j) => d.classList.toggle('on', j === i));
       }
 
-      /* the racing-game swap — no scrolling involved: the outgoing model
-         sweeps out, the next sweeps in from the opposite side, the bottle
-         glides into the new model's foliage window, the card crossfades */
+      /* the racing-game swap — no scrolling involved: the perfume lifts out,
+         the next settles in, the card crossfades its content */
       function render(i, dir) {
         dir = dir || (i > idx ? 1 : -1);
-        const prev = idx;
         idx = i;
         if (anim) anim.kill();
         anim = gsap.timeline({ defaults: { overwrite: 'auto' } });
-        if (prev !== i) {
-          anim.to(models[prev], { autoAlpha: 0, xPercent: -16 * dir, scale: 0.985, duration: 0.34, ease: 'power2.in' }, 0)
-              .fromTo(models[i], { autoAlpha: 0, xPercent: 16 * dir, scale: 1.015 }, { autoAlpha: 1, xPercent: 0, scale: 1, duration: 0.55, ease: 'power3.out' }, 0.14)
-              .to(bottle, { autoAlpha: 0, scale: 0.88, rotation: -4 * dir, duration: 0.2, ease: 'power2.in' }, 0)
-              .call(() => {
-                bottle.src = 'assets/img/bottles/' + items[i].slug + '.webp';
-                bottle.alt = items[i].name + ' perfume bottle';
-                placeBottle(i);
-              }, [], 0.21)
-              .to(bottle, { autoAlpha: 1, scale: 1, rotation: 0, duration: 0.34, ease: 'power2.out' }, 0.26);
-        }
-        anim.to(card, { autoAlpha: 0, y: 12 * dir, duration: 0.16, ease: 'power1.in' }, 0)
-            .call(() => apply(i), [], 0.17)
+        anim.to(bottle, { autoAlpha: 0, scale: 0.88, y: -22 * dir, duration: 0.2, ease: 'power2.in' }, 0)
+            .call(() => apply(i), [], 0.21)
+            .fromTo(bottle, { autoAlpha: 0, scale: 0.92, y: 26 * dir }, { autoAlpha: 1, scale: 1, y: 0, duration: 0.38, ease: 'power2.out' }, 0.26)
+            .to(card, { autoAlpha: 0, y: 12 * dir, duration: 0.16, ease: 'power1.in' }, 0)
             .to(card, { autoAlpha: 1, y: 0, duration: 0.3, ease: 'power2.out' }, 0.24);
       }
 
@@ -4075,11 +3926,9 @@ const productImg = p => IMG + (p.img || p.slug) + '.webp';
     });
   }
 })();
-
 ```
 
 ---
-
 
 ## 📄 assets/js/shop.js  ·  (97 lines)
 
@@ -4181,11 +4030,9 @@ const productImg = p => IMG + (p.img || p.slug) + '.webp';
     render();
   });
 })();
-
 ```
 
 ---
-
 
 ## 📄 assets/js/product.js  ·  (170 lines)
 
@@ -4360,20 +4207,433 @@ const productImg = p => IMG + (p.img || p.slug) + '.webp';
     }
   });
 })();
-
 ```
 
 ---
 
-
 ## 📄 assets/img/ui/favicon.svg  ·  (4 lines)
 
-```svg
+```
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
   <rect width="64" height="64" rx="14" fill="#07130d"/>
   <text x="32" y="42" font-family="Georgia, serif" font-size="30" fill="#c9a86a" text-anchor="middle" letter-spacing="1">IM</text>
 </svg>
+```
 
+---
+
+## 📄 tools/rig-setup.sh  ·  (30 lines)
+
+```bash
+#!/bin/bash
+# Rebuild the headless-chromium audit rig (run from anywhere; everything lands in /tmp)
+set -e
+mkdir -p /tmp/pkgtest /tmp/shots
+cd /tmp/pkgtest
+[ -f package.json ] || npm init -y >/dev/null 2>&1
+npm i playwright-core pngjs @sparticuz/chromium 2>&1 | tail -1
+node -e '
+const fs=require("fs"),zlib=require("zlib");
+const bin="node_modules/@sparticuz/chromium/bin";
+const br=bin+"/chromium.br";
+if(fs.existsSync(br)){
+  fs.writeFileSync("/tmp/chromium", zlib.brotliDecompressSync(fs.readFileSync(br)));
+  fs.chmodSync("/tmp/chromium",0o755);
+  console.log("chromium extracted");
+}
+for(const t of ["al2023","swiftshader","fonts"]){
+  if(fs.existsSync(bin+"/"+t+".tar.br")){
+    fs.writeFileSync("/tmp/"+t+".tar", zlib.brotliDecompressSync(fs.readFileSync(bin+"/"+t+".tar.br")));
+  } else if(fs.existsSync(bin+"/"+t+".tar")){
+    fs.copyFileSync(bin+"/"+t+".tar", "/tmp/"+t+".tar");
+  } else continue;
+  console.log(t+" decompressed");
+}
+'
+for t in al2023 swiftshader fonts; do
+  if [ -f /tmp/$t.tar ]; then mkdir -p /tmp/$t && tar -xf /tmp/$t.tar -C /tmp/$t && rm /tmp/$t.tar && echo "extracted $t"; fi
+done
+pip3 install --break-system-packages -q pillow imageio imageio-ffmpeg 2>&1 | tail -1
+echo RIG-DONE
+```
+
+---
+
+## 📄 tools/audit-v13.mjs  ·  (372 lines)
+
+```
+/* ============================================================
+   v13 AUDIT — CLEAN pickers (no foliage planes, perfume only, centred),
+   fully scroll-independent display (no scrub fades anywhere), shore
+   picker submerged by the rising water, forest zoom-out preserved
+   1440x900 desktop + 390x844 mobile, headless chromium
+   Run: bash tools/rig-setup.sh && cd /tmp/pkgtest && cp /home/user/IsmaelBrave/tools/audit-v13.mjs . && node audit-v13.mjs
+   ============================================================ */
+import { chromium as pwCore } from 'playwright-core';
+import fs from 'fs';
+import { PNG } from 'pngjs';
+
+const EXEC = '/tmp/chromium';
+const ARGS = ['--no-sandbox', '--disable-setuid-sandbox', '--headless', '--disable-gpu', '--no-zygote', '--enable-unsafe-swiftshader', '--use-gl=angle', '--use-angle=swiftshader'];
+const ENV = { ...process.env, LD_LIBRARY_PATH: '/tmp/al2023/lib:/tmp/swiftshader', FONTCONFIG_PATH: '/tmp/fonts' };
+const BASE = 'http://127.0.0.1:8000';
+const SHOTS = '/tmp/shots';
+fs.mkdirSync(SHOTS, { recursive: true });
+
+let pass = 0, fail = 0;
+const report = (name, cond, extra = '') => {
+  if (cond) { pass++; console.log(`  PASS  ${name}${extra ? '  [' + extra + ']' : ''}`); }
+  else { fail++; console.log(`  FAIL  ${name}${extra ? '  [' + extra + ']' : ''}`); }
+};
+
+function loadPNG(p) { return PNG.sync.read(fs.readFileSync(p)); }
+function meanDiff(a, b, x0 = 0, x1 = a.width, y0 = 0, y1 = a.height) {
+  let sum = 0, n = 0;
+  for (let y = y0; y < y1; y += 2) for (let x = x0; x < x1; x += 2) {
+    const i = (y * a.width + x) * 4;
+    sum += Math.abs(a.data[i] - b.data[i]) + Math.abs(a.data[i + 1] - b.data[i + 1]) + Math.abs(a.data[i + 2] - b.data[i + 2]);
+    n += 3;
+  }
+  return n ? sum / n : 999;
+}
+function shiftedDiff(a, b, dy) {
+  let sum = 0, n = 0;
+  for (let y = 200; y < a.height - 200; y += 2) {
+    const ya = y + dy; if (ya < 0 || ya >= a.height) continue;
+    for (let x = 60; x < a.width - 60; x += 2) {
+      const i = (y * a.width + x) * 4, j = (ya * a.width + x) * 4;
+      sum += Math.abs(a.data[j] - b.data[i]) + Math.abs(a.data[j + 1] - b.data[i + 1]) + Math.abs(a.data[j + 2] - b.data[i + 2]);
+      n += 3;
+    }
+  }
+  return n ? sum / n : 999;
+}
+function flatDarkRows(png) {
+  let rows = 0;
+  for (let y = 120; y <= 850; y += 10) {
+    let sum = 0, mn = 999, mx = 0;
+    for (let x = 60; x <= 1400; x += 130) {
+      const i = (y * png.width + x) * 4;
+      const lum = 0.299 * png.data[i] + 0.587 * png.data[i + 1] + 0.114 * png.data[i + 2];
+      sum += lum; if (lum < mn) mn = lum; if (lum > mx) mx = lum;
+    }
+    const avg = sum / 11;
+    if (avg < 15 && (mx - mn) < 10) rows++;
+  }
+  return rows;
+}
+function colorStats(png, x0, y0, x1, y1) {
+  let blue = 0, dark = 0, bright = 0, waterish = 0, n = 0;
+  for (let y = y0; y < y1; y += 3) for (let x = x0; x < x1; x += 3) {
+    const i = (y * png.width + x) * 4;
+    const r = png.data[i], g = png.data[i + 1], b = png.data[i + 2];
+    const lum = 0.299 * r + 0.587 * g + 0.114 * b;
+    n++;
+    if (b > 60 && b > r + 12 && b > g + 8) blue++;
+    if (r < 28 && g < 28 && b < 34) dark++;
+    if (lum > 140) bright++;
+    if (b > r + 10 && b > g + 6 && b > 25) waterish++;
+  }
+  return { blue: blue / n, dark: dark / n, bright: bright / n, waterish: waterish / n };
+}
+function avgLum(png, x0, y0, x1, y1) {
+  let s = 0, n = 0;
+  for (let y = y0; y < y1; y += 3) for (let x = x0; x < x1; x += 3) {
+    const i = (y * png.width + x) * 4;
+    s += 0.299 * png.data[i] + 0.587 * png.data[i + 1] + 0.114 * png.data[i + 2];
+    n++;
+  }
+  return s / n;
+}
+
+const browser = await pwCore.launch({ executablePath: EXEC, args: ARGS, env: ENV });
+const page = await browser.newPage({ viewport: { width: 1440, height: 900 } });
+const errors = [];
+page.on('console', m => { if (m.type() === 'error') errors.push(m.text()); });
+page.on('pageerror', e => errors.push(String(e)));
+
+await page.goto(BASE + '/', { waitUntil: 'networkidle', timeout: 90000 });
+await page.waitForTimeout(2800);
+
+const scrollTo = async y => { await page.evaluate(v => window.scrollTo(0, v), y); await page.waitForTimeout(750); };
+const shot = async name => { await page.screenshot({ path: `${SHOTS}/${name}.png` }); return loadPNG(`${SHOTS}/${name}.png`); };
+const txt = async sel => (await page.locator(sel).first().textContent())?.trim();
+
+const geo = await page.evaluate(() => {
+  const top = sel => document.querySelector(sel).getBoundingClientRect().top + window.scrollY;
+  return { ih: window.innerHeight, forest: top('#forest'), trans: top('#transition'), ocean: top('#ocean'), mw: top('#mostwanted') };
+});
+console.log('geometry:', JSON.stringify(geo));
+
+/* ============ 1. HERO ============ */
+console.log('\n--- HERO ---');
+const crest = await page.evaluate(() => {
+  const r = document.querySelector('.hero-emblem').getBoundingClientRect();
+  return { w: r.width, ring: document.querySelector('.emblem__ring').textContent };
+});
+report('crest present', crest.w > 200 && /ISMAEL/.test(crest.ring), `${Math.round(crest.w)}px`);
+const heroShot = await shot('v13-hero');
+report('hero no dark band', flatDarkRows(heroShot) === 0);
+
+/* ============ 2. THEME / FONT ============ */
+console.log('\n--- THEME / FONT ---');
+const theme = await page.evaluate(async () => {
+  await document.fonts.ready;
+  const cs = getComputedStyle(document.documentElement);
+  return {
+    gold: cs.getPropertyValue('--gold').trim(),
+    eyebrow: getComputedStyle(document.querySelector('.hero-copy .eyebrow')).color,
+    h1font: getComputedStyle(document.querySelector('.hero-copy h1')).fontFamily,
+    bodoni900: document.fonts.check('900 20px "Bodoni Moda"'),
+    bodoni700: document.fonts.check('700 20px "Bodoni Moda"'),
+    playfairFaces: [...document.fonts].filter(f => /playfair/i.test(f.family)).length
+  };
+});
+report('gold token', theme.gold === '#c9a86a', theme.gold);
+report('eyebrow gold', theme.eyebrow === 'rgb(201, 168, 106)', theme.eyebrow);
+report('Bodoni Moda 700/900 loaded', theme.bodoni700 && theme.bodoni900);
+report('old Playfair gone', theme.playfairFaces === 0);
+report('display face is Bodoni', /Bodoni Moda/.test(theme.h1font));
+const priceColor = await page.evaluate(() => getComputedStyle(document.querySelector('#mostwanted .pcard__price')).color);
+report('prices gold', priceColor === 'rgb(201, 168, 106)', priceColor);
+
+/* ============ 3. PICKER LAYOUT — clean showcase left, card right, brown bar ============ */
+console.log('\n--- PICKER LAYOUT ---');
+await scrollTo(geo.forest + geo.ih * 1.5);
+const layout = await page.evaluate(() => {
+  const show = document.querySelector('.picker--forest .pk-show').getBoundingClientRect();
+  const card = document.querySelector('.picker--forest .pk-card').getBoundingClientRect();
+  const bar = document.querySelector('.picker--forest .pk-bar').getBoundingClientRect();
+  const bottle = document.querySelector('.picker--forest .pk-bottlefig');
+  const br = bottle.getBoundingClientRect();
+  const barStyle = getComputedStyle(document.querySelector('.picker--forest .pk-bar'));
+  return {
+    showX: show.x, showW: show.width,
+    cardX: card.x, cardRight: card.right,
+    barY: bar.y, barH: bar.height, barImg: barStyle.backgroundImage.slice(0, 60),
+    bottleH: br.height, bottleW: br.width, bottleVis: getComputedStyle(bottle).opacity,
+    bottleLoaded: bottle.naturalWidth > 0,
+    bottleCentred: Math.abs((br.x + br.width / 2) - (show.x + show.width / 2)) < 40,
+    bottleInsideShow: br.x >= show.x - 2 && br.right <= show.right + 2 && br.y >= show.y - 2 && br.bottom <= show.bottom + 2
+  };
+});
+report('showcase LEFT', layout.showX < 150 && layout.showW > 300, `x=${Math.round(layout.showX)} w=${Math.round(layout.showW)}`);
+report('description RIGHT', layout.cardX > layout.showX + layout.showW - 40 && layout.cardRight < 1380, `card x=${Math.round(layout.cardX)}`);
+report('PERFUME DISPLAYED (big, centred, clean)', layout.bottleLoaded && layout.bottleH > 150 && layout.bottleVis > 0.9 && layout.bottleCentred && layout.bottleInsideShow,
+  `${Math.round(layout.bottleW)}x${Math.round(layout.bottleH)}px centred=${layout.bottleCentred}`);
+report('brown selection bar at bottom', layout.barY > 780 && layout.barH > 40 && /46, ?32, ?24|2e2018/i.test(layout.barImg), `y=${Math.round(layout.barY)}`);
+report('NO foliage model planes in pickers', await page.evaluate(() => document.querySelectorAll('.picker .pk-model').length === 0));
+const glowOK = await page.evaluate(() => { const g = document.querySelector('.picker--forest .pk-glow'); const r = g.getBoundingClientRect(); return r.width > 100 && getComputedStyle(g).opacity > 0.9; });
+report('clean showcase glow present', glowOK);
+
+/* ============ 4. SCROLL-INDEPENDENCE (selection AND visibility) ============ */
+console.log('\n--- SCROLL-INDEPENDENT ---');
+await scrollTo(geo.forest + geo.ih * 3.0);
+report('scroll does NOT change the fragrance', (await txt('.picker--forest .pk-name')) === 'Five-Nine', await txt('.picker--forest .pk-name'));
+await scrollTo(geo.forest + geo.ih * 4.0);
+report('still Five-Nine at span end', (await txt('.picker--forest .pk-name')) === 'Five-Nine', await txt('.picker--forest .pk-name'));
+const visAt = [];
+for (const off of [1.3, 2.0, 2.8, 3.6]) {
+  await scrollTo(geo.forest + geo.ih * off);
+  visAt.push(await page.evaluate(() => {
+    const p = document.querySelector('.picker--forest');
+    return getComputedStyle(p).opacity === '1' && getComputedStyle(p).visibility === 'visible';
+  }));
+}
+report('picker visible at EVERY scroll offset', visAt.every(Boolean), visAt.join(','));
+
+/* ============ 5. FOREST PICKER INTERACTIONS ============ */
+console.log('\n--- FOREST PICKER ---');
+await scrollTo(geo.forest + geo.ih * 1.5);
+const fp0 = await shot('v13-forest-p0');
+report('slot 0 = Five-Nine', (await txt('.picker--forest .pk-name')) === 'Five-Nine');
+await page.keyboard.press('ArrowRight');
+await page.waitForTimeout(1100);
+report('ArrowRight → Hopeful', (await txt('.picker--forest .pk-name')) === 'Hopeful', await txt('.picker--forest .pk-name'));
+report('counter 02 / 04', (await txt('.picker--forest .pk-count')) === '02 / 04', await txt('.picker--forest .pk-count'));
+const fp1 = await shot('v13-forest-p1');
+const showBox = await page.evaluate(() => { const r = document.querySelector('.picker--forest .pk-show').getBoundingClientRect(); return { x: Math.round(r.x), y: Math.round(r.y), w: Math.round(r.width), h: Math.round(r.height) }; });
+report('showcase changed (bottle swapped)', meanDiff(fp0, fp1, showBox.x, showBox.x + showBox.w, showBox.y, showBox.y + showBox.h) > 4,
+  `diff=${meanDiff(fp0, fp1, showBox.x, showBox.x + showBox.w, showBox.y, showBox.y + showBox.h).toFixed(1)}`);
+const bottle2 = await page.evaluate(() => document.querySelector('.picker--forest .pk-bottlefig').src.split('/').pop());
+report('bottle swapped to Hopeful', /hopeful/.test(bottle2), bottle2);
+await scrollTo(geo.ih * 0.5);
+await page.waitForTimeout(600);
+await scrollTo(geo.forest + geo.ih * 2.2);
+report('selection persists across scrolling', (await txt('.picker--forest .pk-name')) === 'Hopeful', await txt('.picker--forest .pk-name'));
+await page.keyboard.press('ArrowLeft');
+await page.waitForTimeout(1100);
+report('ArrowLeft → back', (await txt('.picker--forest .pk-name')) === 'Five-Nine', await txt('.picker--forest .pk-name'));
+await page.click('.picker--forest .pk-dots button[data-go="3"]');
+await page.waitForTimeout(1100);
+report('dot 4 → Mi Amor', (await txt('.picker--forest .pk-name')) === 'Mi Amor', await txt('.picker--forest .pk-name'));
+
+/* ============ 6. SHORE PICKER ============ */
+console.log('\n--- SHORE PICKER ---');
+await scrollTo(geo.trans + geo.ih * 2.2);
+report('shore slot 0 = Zesty', (await txt('.picker--shore .pk-name')) === 'Zesty', await txt('.picker--shore .pk-name'));
+const zorder = await page.evaluate(() => {
+  const p = getComputedStyle(document.querySelector('#transition .picker')).zIndex;
+  const w = getComputedStyle(document.querySelector('.water-rise')).zIndex;
+  return { p: +p, w: +w };
+});
+report('shore picker sits UNDER the water (gets submerged)', zorder.p < zorder.w, `picker z=${zorder.p} < water z=${zorder.w}`);
+report('shore picker fully visible (no scrub fade)', await page.evaluate(() => getComputedStyle(document.querySelector('.picker--shore')).opacity === '1'));
+const spLayout = await page.evaluate(() => {
+  const b = document.querySelector('.picker--shore .pk-bottlefig').getBoundingClientRect();
+  return { h: b.height, loaded: document.querySelector('.picker--shore .pk-bottlefig').naturalWidth > 0 };
+});
+report('shore perfume displayed', spLayout.loaded && spLayout.h > 150, `${Math.round(spLayout.h)}px`);
+await shot('v13-shore-p0');
+await page.keyboard.press('ArrowRight');
+await page.waitForTimeout(1100);
+report('shore → Happy', (await txt('.picker--shore .pk-name')) === 'Happy', await txt('.picker--shore .pk-name'));
+
+/* ============ 7. WATER RISE ============ */
+console.log('\n--- WATER RISE ---');
+const lineAt = async off => {
+  await scrollTo(geo.trans + geo.ih * off);
+  return page.evaluate(() => {
+    const wr = document.querySelector('.water-rise');
+    const m = new DOMMatrixReadOnly(getComputedStyle(wr).transform);
+    return { y: m.f, h: wr.getBoundingClientRect().height };
+  });
+};
+const l1 = await lineAt(4.15);
+const l2 = await lineAt(4.75);
+const l3 = await lineAt(5.35);
+report('water starts low and climbs', l1.y > l1.h * 0.55 && l2.y < l2.h * 0.45 && Math.abs(l3.y) < 2,
+  `line ${Math.round(l1.y)} → ${Math.round(l2.y)} → ${Math.round(l3.y)}px`);
+await scrollTo(geo.trans + geo.ih * 4.0);
+const risePre = await shot('v13-rise-pre');
+await scrollTo(geo.trans + geo.ih * 4.75);
+const riseMid = await shot('v13-rise-mid');
+const rmTop = colorStats(riseMid, 60, 60, 1400, 260);
+report('mid-rise: beach bottom replaced by water', meanDiff(risePre, riseMid, 60, 1400, 600, 870) > 20,
+  `diff=${meanDiff(risePre, riseMid, 60, 1400, 600, 870).toFixed(1)}`);
+report('mid-rise: sky still bright on top', rmTop.bright > 0.4, `bright=${(rmTop.bright * 100).toFixed(0)}%`);
+await scrollTo(geo.trans + geo.ih * 5.45);
+const riseDone = await shot('v13-rise-done');
+const rdOpen = colorStats(riseDone, 60, 100, 1400, 700);
+report('rise complete: water fills the open frame', rdOpen.waterish > 0.5, `waterish=${(rdOpen.waterish * 100).toFixed(0)}%`);
+const submerged = await page.evaluate(() => {
+  const under = (x, y) => { const el = document.elementFromPoint(x, y); return !!el && !!el.closest('.water-rise'); };
+  return under(720, 820) && under(600, 820) && under(840, 820) && under(320, 450) && under(1100, 500);
+});
+report('rise complete: picker fully submerged under the water', submerged,
+  'bar + showcase + card all under .water-rise');
+report('rise complete: no dark band', flatDarkRows(riseDone) === 0);
+
+/* ============ 8. FOREST ZOOM-OUT ============ */
+console.log('\n--- FOREST ZOOM-OUT ---');
+await scrollTo(geo.forest + geo.ih * 3.5);
+const zA = await shot('v13-zoom-before');
+await scrollTo(geo.forest + geo.ih * 4.45);
+const zB = await shot('v13-zoom-mid');
+await scrollTo(geo.forest + geo.ih * 4.68);
+const zC = await shot('v13-zoom-done');
+const lumA = avgLum(zA, 60, 100, 1400, 870), lumB = avgLum(zB, 60, 100, 1400, 870), lumC = avgLum(zC, 60, 100, 1400, 870);
+const brightC = colorStats(zC, 60, 100, 1400, 870).bright;
+report('zoom opens the frame (brightening)', lumB > lumA * 1.25, `lum ${lumA.toFixed(0)} → ${lumB.toFixed(0)}`);
+report('beach occurs (bright scene at zoom end)', lumC > lumA * 1.5 && brightC > 0.45, `lum ${lumC.toFixed(0)} bright=${(brightC * 100).toFixed(0)}%`);
+report('zoom frames: no dark band', flatDarkRows(zB) === 0 && flatDarkRows(zC) === 0);
+
+/* ============ 9. OCEAN PICKER ============ */
+console.log('\n--- OCEAN PICKER ---');
+await scrollTo(geo.ocean + geo.ih * 2.3);
+report('ocean slot 0 = Sophisticated', (await txt('.picker--ocean .pk-name')) === 'Sophisticated', await txt('.picker--ocean .pk-name'));
+report('ocean picker fully visible (no scrub fade)', await page.evaluate(() => getComputedStyle(document.querySelector('.picker--ocean')).opacity === '1'));
+const opLayout = await page.evaluate(() => {
+  const b = document.querySelector('.picker--ocean .pk-bottlefig').getBoundingClientRect();
+  return { h: b.height, loaded: document.querySelector('.picker--ocean .pk-bottlefig').naturalWidth > 0 };
+});
+report('ocean perfume displayed', opLayout.loaded && opLayout.h > 150, `${Math.round(opLayout.h)}px`);
+const op0 = await shot('v13-ocean-p0');
+const op0s = colorStats(op0, 60, 100, 1400, 870);
+report('ocean picker underwater', op0s.waterish > 0.5 && flatDarkRows(op0) === 0, `waterish=${(op0s.waterish * 100).toFixed(0)}%`);
+await page.keyboard.press('ArrowRight');
+await page.waitForTimeout(1100);
+report('ocean → King in the North', (await txt('.picker--ocean .pk-name')) === 'King in the North', await txt('.picker--ocean .pk-name'));
+
+/* ============ 10. ONE-FLOW HANDOFFS ============ */
+console.log('\n--- ONE-FLOW HANDOFFS ---');
+async function handoff(name, yA) {
+  await scrollTo(yA);
+  const A = await shot(`v13-ho-${name}-a`);
+  await scrollTo(yA + 135);
+  const B = await shot(`v13-ho-${name}-b`);
+  const un = meanDiff(A, B, 60, 1380, 120, 860);
+  const sh = shiftedDiff(A, B, 135);
+  report(`${name}: no lurch`, un < 40, `unshifted=${un.toFixed(1)}`);
+  report(`${name}: really scrolled`, sh > un, `shifted=${sh.toFixed(1)}`);
+  report(`${name}: no dark band`, flatDarkRows(A) === 0 && flatDarkRows(B) === 0);
+}
+await handoff('hero-forest', geo.ih * 2.26);
+await handoff('forest-shore', geo.forest + geo.ih * 5.16);
+await handoff('shore-ocean', geo.trans + geo.ih * 6.06);
+
+/* ============ 11. DIVE + MOST WANTED ============ */
+console.log('\n--- DIVE / MOST WANTED ---');
+await scrollTo(geo.trans + geo.ih * 6.2);
+const diveDone = await shot('v13-dive-done');
+const dd = colorStats(diveDone, 60, 100, 1400, 870);
+report('dive: blue dominant', dd.blue > 0.75, `blue=${(dd.blue * 100).toFixed(0)}%`);
+await scrollTo(geo.mw + geo.ih * 1.5);
+const mwShot = await shot('v13-mostwanted');
+const mwS = colorStats(mwShot, 60, 100, 1400, 870);
+report('mostwanted renders', mwS.dark < 0.9, `dark=${(mwS.dark * 100).toFixed(0)}%`);
+
+/* ============ 12. MOBILE 390 ============ */
+console.log('\n--- MOBILE 390 ---');
+const mp = await browser.newPage({ viewport: { width: 390, height: 844 } });
+const merrors = [];
+mp.on('console', m => { if (m.type() === 'error') merrors.push(m.text()); });
+mp.on('pageerror', e => merrors.push(String(e)));
+await mp.goto(BASE + '/', { waitUntil: 'networkidle', timeout: 90000 });
+await mp.waitForTimeout(2400);
+const mgeo = await mp.evaluate(() => ({ ih: innerHeight, forest: document.querySelector('#forest').getBoundingClientRect().top + scrollY, sw: document.documentElement.scrollWidth }));
+report('mobile: no horizontal overflow', mgeo.sw <= 391, `sw=${mgeo.sw}`);
+await mp.evaluate(v => window.scrollTo(0, v), mgeo.forest + mgeo.ih * 1.5);
+await mp.waitForTimeout(900);
+const ml = await mp.evaluate(() => {
+  const show = document.querySelector('.picker--forest .pk-show').getBoundingClientRect();
+  const card = document.querySelector('.picker--forest .pk-card').getBoundingClientRect();
+  const bar = document.querySelector('.picker--forest .pk-bar').getBoundingClientRect();
+  const b = document.querySelector('.picker--forest .pk-bottlefig').getBoundingClientRect();
+  return {
+    bottleH: Math.round(b.height),
+    fits: show.y >= 60 && show.right <= 391 && card.bottom <= 844 && bar.x >= 0 && bar.right <= 391 && card.y > show.y + show.height - 20
+  };
+});
+report('mobile: showcase + card + bar all fit', ml.fits);
+report('mobile: perfume displayed', ml.bottleH > 60, `${ml.bottleH}px`);
+await mp.screenshot({ path: `${SHOTS}/v13-mobile-forest.png` });
+report('mobile: no dark band', flatDarkRows(loadPNG(`${SHOTS}/v13-mobile-forest.png`)) === 0);
+report('mobile: no console errors', merrors.length === 0, merrors[0] || '');
+await mp.close();
+
+/* ============ 13. OTHER PAGES ============ */
+console.log('\n--- SHOP / PRODUCT ---');
+for (const url of ['/shop.html', '/product.html?p=five-nine']) {
+  const p2 = await browser.newPage({ viewport: { width: 1440, height: 900 } });
+  const err2 = [];
+  p2.on('console', m => { if (m.type() === 'error') err2.push(m.text()); });
+  p2.on('pageerror', e => err2.push(String(e)));
+  await p2.goto(BASE + url, { waitUntil: 'networkidle', timeout: 90000 });
+  await p2.waitForTimeout(1100);
+  report(`${url}: no console errors`, err2.length === 0, err2[0] || '');
+  if (url.includes('shop')) {
+    const pc = await p2.evaluate(() => getComputedStyle(document.querySelector('.pcard__price')).color);
+    report('shop: gold prices', pc === 'rgb(201, 168, 106)', pc);
+  }
+  await p2.close();
+}
+
+report('journey: no console errors', errors.length === 0, errors.slice(0, 2).join(' | ') || '');
+
+console.log(`\n========== RESULT: ${pass} PASS / ${fail} FAIL ==========`);
+await browser.close();
+process.exit(fail ? 1 : 0);
 ```
 
 ---
@@ -4387,4 +4647,6 @@ python3 -m http.server 8000
 
 Any static file server works. No environment variables, no database.
 Try the pickers with the ← / → arrow keys while a scene is pinned —
-scrolling never changes the selection.
+scrolling never changes the selection, and the perfume stays on display
+at every scroll offset.
+

@@ -1222,37 +1222,43 @@ handler in `checkout.html` to a real backend (or WooCommerce) to go live.
 
 ## Verified
 
-Headless-Chromium test suite (59 checks, 1440×900 desktop + 390×844
-mobile) confirms for v12: zero JS errors; the maroon & green theme is
-fully REVERTED (gold `#c9a86a` tokens restored, gold eyebrows / prices /
-selection / progress bar, no maroon tokens left) and the display face is
-now **Bodoni Moda** (700/900 loaded, drives the hero title and the crest
-monogram; the old Playfair faces are gone from the font set).
+Headless-Chromium test suite (`tools/audit-v13.mjs`, 64 checks, 1440×900
+desktop + 390×844 mobile) confirms for v13: zero JS errors; the gold
+theme (`#c9a86a`) and **Bodoni Moda** display face are unchanged from
+v12.
 
-The crest still opens the journey. The three fragrance pickers are now
-SCROLL-INDEPENDENT with the client's layout: the model showcase (with
-the perfume bottle displayed inside the foliage window — mapped through
-exact cover math, mirrored for flipped planes) on the LEFT, the
-description card on the RIGHT, and the arrows in the brown selection bar
-at the bottom with the dots. Verified end-to-end: scrolling deep through
-a picker's span never changes the fragrance, a manual selection persists
-across scrolling away and back, arrows / arrow-keys / dots all swap the
-model AND the bottle (Five-Nine → Hopeful → Charming → Mi Amor; Zesty →
-Happy; Sophisticated → King in the North, with counters and active
-dots), and the perfume renders at full size in every scene (162×315px on
-desktop, 167px tall on mobile) — the "perfumes not displayed" report is
-fixed.
+**The perfume display is now CLEAN.** There are zero foliage model
+planes left in the pickers (asserted directly against the DOM): each
+showcase is a framed panel with the perfume bottle centred at full size
+(204×397px desktop, 186px on mobile) over a soft radial gold glow —
+perfume only, nothing else.
 
-The forest → beach transition now matches the reference video: the whole
-forest world zooms out and dissolves as it recedes while the beach
-occurs around it (frame luminance measured 70 → 123 → 233 through the
-zoom, 100% bright at the end, no dark bands). The beach → ocean
-transition overlays the water from the bottom in a steady linear climb
-(water line measured at 784 → 300 → 0px, bright sky on top throughout,
-full coverage at the end) before the one-flow dissolve into the ocean
-(85% blue-dominant, zero flat dark bands). All three scene handoffs
-remain ONE FLOW (13–16/255 drift across the release vs 28–55/255 for a
-shifted frame — no lurch, nothing rises from the bottom). On mobile the
-showcase, card and brown bar all fit with no overflow, and the perfume
-displays. Shop, product, and all other pages load error-free with the
-gold theme.
+**Every perfume model is fully independent of scrolling.** No scrub
+timeline touches the pickers anymore: the forest picker lives inside
+`.forest-world` (it arrives through the hero dissolve and zooms out with
+the scene), the shore picker sits on its stage the whole scene (below
+the water layer, so the rising water physically submerges showcase,
+card and bar — DOM-verified under `.water-rise` at the rise end), and
+the ocean picker is on stage for its entire scene until the next
+section slides over. Measured: the picker's computed opacity is exactly
+1 at four different scroll offsets deep inside the forest scene, and
+scrolling never changes the selected fragrance.
+
+Selection remains fully interactive and persistent: arrows / arrow-keys
+/ dots / swipe swap the bottle with the lift-and-settle crossfade
+(Five-Nine → Hopeful → Charming → Mi Amor; Zesty → Happy; Sophisticated
+→ King in the North, counters and dots in sync), and a selection
+persists across scrolling away and back.
+
+The scene work is unchanged from v12 and re-verified: forest → beach
+zoom-out (frame luminance 70 → 124 → 233, no dark bands), beach → ocean
+linear bottom-up water climb (line at 784 → 300 → 0px, bright sky on
+top, full coverage at the end) with the Mi Amor bushes-and-leaves
+sandwich preserved during the rise, one-flow handoffs everywhere
+(unshifted drift 0.7–11.7 vs 31.4–38.8 for a shifted frame), the dive
+lands blue-dominant, mobile fits with no overflow, and shop / product
+pages load error-free. The audit rig rebuilds with `tools/rig-setup.sh`.
+
+**Demo notice:** prices, the cart, and the checkout order confirmation
+are front-end demo data. Wire the `PLACE ORDER` handler in
+`checkout.html` to a real backend (or WooCommerce) to go live.
