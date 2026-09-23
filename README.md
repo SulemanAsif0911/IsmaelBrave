@@ -1222,42 +1222,41 @@ handler in `checkout.html` to a real backend (or WooCommerce) to go live.
 
 ## Verified
 
-Headless-Chromium test suite (`tools/audit-v13.mjs`, 64 checks, 1440×900
-desktop + 390×844 mobile) confirms for v13: zero JS errors; the gold
-theme (`#c9a86a`) and **Bodoni Moda** display face are unchanged from
-v12.
+Headless-Chromium test suite (`tools/audit-v14.mjs`, 77 checks, 1440×900
+desktop + 390×844 mobile) confirms for v14: zero JS errors; the gold
+theme (`#c9a86a`), Bodoni Moda display face and all v13 guarantees hold.
 
-**The perfume display is now CLEAN.** There are zero foliage model
-planes left in the pickers (asserted directly against the DOM): each
-showcase is a framed panel with the perfume bottle centred at full size
-(204×397px desktop, 186px on mobile) over a soft radial gold glow —
-perfume only, nothing else.
+**The showcase is now a TRUE SLIDER.** Each picker's framed box is a
+sliding carousel: a window (overflow-clipped by the frame) holds a track
+with ONE SLIDE PER PERFUME — 4 slides in the forest, 2 at the shore,
+2 at the sea bed. The perfumes slide horizontally THROUGH the box and
+are physically inside it at all times — verified for every slide of
+every picker (all 8 slots measured inside the frame, 410px tall on
+desktop, 192px on mobile). Nothing is ever swapped in from outside, and
+the old lift-and-settle animation is gone.
 
-**Every perfume model is fully independent of scrolling.** No scrub
-timeline touches the pickers anymore: the forest picker lives inside
-`.forest-world` (it arrives through the hero dissolve and zooms out with
-the scene), the shore picker sits on its stage the whole scene (below
-the water layer, so the rising water physically submerges showcase,
-card and bar — DOM-verified under `.water-rise` at the rise end), and
-the ocean picker is on stage for its entire scene until the next
-section slides over. Measured: the picker's computed opacity is exactly
-1 at four different scroll offsets deep inside the forest scene, and
-scrolling never changes the selected fragrance.
+**Slider controls, all of them tested:**
+- big gold arrows on the sides of the box (prev disabled at slide 1,
+  next disabled at the last slide),
+- ←/→ arrow keys while the scene is pinned,
+- the dots in the brown bar (now with a `01 / 04` position counter;
+  the card keeps the scene label),
+- DRAG / SWIPE — grab the perfumes and pull them through the box
+  (mouse + touch, rubber-band resistance at the ends, snaps to the
+  nearest slide on release).
 
-Selection remains fully interactive and persistent: arrows / arrow-keys
-/ dots / swipe swap the bottle with the lift-and-settle crossfade
-(Five-Nine → Hopeful → Charming → Mi Amor; Zesty → Happy; Sophisticated
-→ King in the North, counters and dots in sync), and a selection
-persists across scrolling away and back.
+The card crossfades its content alongside the slide. Everything stays
+fully scroll-independent: the display never fades or changes with
+scrolling (opacity exactly 1 at four offsets deep in the scene), and a
+selection persists across scrolling away and back.
 
-The scene work is unchanged from v12 and re-verified: forest → beach
-zoom-out (frame luminance 70 → 124 → 233, no dark bands), beach → ocean
-linear bottom-up water climb (line at 784 → 300 → 0px, bright sky on
-top, full coverage at the end) with the Mi Amor bushes-and-leaves
-sandwich preserved during the rise, one-flow handoffs everywhere
-(unshifted drift 0.7–11.7 vs 31.4–38.8 for a shifted frame), the dive
-lands blue-dominant, mobile fits with no overflow, and shop / product
-pages load error-free. The audit rig rebuilds with `tools/rig-setup.sh`.
+The scene work is unchanged and re-verified: forest zoom-out (frame
+luminance 69 → 123 → 233), linear bottom-up water climb (784 → 300 →
+0px) that physically submerges the shore picker (DOM-verified under
+`.water-rise`), one-flow handoffs everywhere (unshifted drift 1.8–12.5
+vs 32.5–36.4 shifted), the dive lands blue-dominant, mobile fits with
+no overflow, and shop / product pages load error-free. The audit rig
+rebuilds with `tools/rig-setup.sh`.
 
 **Demo notice:** prices, the cart, and the checkout order confirmation
 are front-end demo data. Wire the `PLACE ORDER` handler in

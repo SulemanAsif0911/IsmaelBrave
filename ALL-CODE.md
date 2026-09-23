@@ -1,65 +1,61 @@
 # ISMAEEL MUHAMMAD — A JOURNEY OF SENSES
 
-## Complete source code (v13 — CLEAN pickers: perfume-only showcase, fully scroll-independent display)
+## Complete source code (v14 — the fragrance pickers are TRUE SLIDERS: the perfumes slide through the framed box, always inside it)
 
 
 **Stack:** Vanilla HTML / CSS / JS + GSAP ScrollTrigger + Lenis (vendored) — no build step  
 **Catalog:** only the 8 journey models — all extra data removed
 
-**v13 changes**
+**v14 changes**
 
-1. **The perfume display is CLEAN.** Every foliage model plane is gone
-   from the pickers — the showcase is now a framed panel with ONLY the
-   perfume bottle, centred at 58% height over a soft radial gold glow
-   (a gentle bobble keeps it alive). Nothing else competes with the
-   product.
-2. **Every perfume model is fully independent of scrolling.** No scrub
-   timeline touches the pickers anymore. The forest picker lives inside
-   `.forest-world` — it arrives through the hero dissolve and zooms out
-   with the scene. The shore picker sits on its stage for the whole
-   scene, BELOW the water layer, so the rising water physically submerges
-   the showcase, card and bar (no fade — the water just takes it). The
-   ocean picker is on stage for its entire scene until the next section
-   slides over after the unpin.
-3. **A cleaner shore stage.** The bushes-and-leaves overlay is hidden
-   while the picker plays (the arrival seam matches the plain beach
-   exactly) and restored just in time for the Mi Amor water sandwich
-   during the rise. The shore title, the transition step list and the
-   ocean heading are removed — the pickers own their scenes.
-4. **A simpler, sturdier picker engine.** The bottle swap is a clean
-   lift-and-settle crossfade (out 0.2s, swap, in 0.38s) with the card
-   content crossfading alongside — no cover math, no plane mirroring, no
-   resize listeners. Arrows / ←/→ keys / dots / swipe still drive it and
-   selections persist across scrolling.
-5. The gold theme, Bodoni Moda, the forest zoom-out and the linear
-   bottom-up water climb are unchanged from v12 and re-verified.
-   64/64 audit checks pass (`tools/audit-v13.mjs`).
+1. **The showcase is a real slider.** The framed box is now a window
+   (overflow-clipped by the frame) holding a horizontal track with ONE
+   SLIDE PER PERFUME — the perfumes slide THROUGH the box and are
+   physically inside it at all times. The lift-and-settle swap (which
+   pulled the perfume out of the box) is gone entirely.
+2. **Slider controls:** big gold arrows on the sides of the box (with
+   disabled states at the ends), ←/→ keys, the dots in the brown bar —
+   which now also carries a `01 / 04` position counter — and DRAG /
+   SWIPE: grab the perfumes and pull them through the box (mouse +
+   touch, rubber-band at the ends, snap to the nearest slide).
+3. **Every perfume verified in the box:** the audit measures the active
+   bottle against the frame on every slide of every picker (8/8 slots),
+   plus the track position (xPercent −100 per step) after every kind of
+   input.
+4. Still fully scroll-independent: the display never fades or changes
+   with scrolling, and selections persist across scrolling away and
+   back. The clean perfume-only showcase (no foliage planes) and the
+   gold / Bodoni Moda theme carry over unchanged.
+5. Scene work re-verified: forest zoom-out, linear bottom-up water
+   climb that physically submerges the shore picker, one-flow handoffs,
+   mobile fit, zero console errors. 77/77 audit checks pass
+   (`tools/audit-v14.mjs`).
 
 
 | # | File | Lines | Purpose |
 |---|------|-------|---------|
-| 1 | `index.html` | 577 | The cinematic journey — crest opening, CLEAN scroll-independent fragrance pickers (perfume-only showcase left with centred bottle + glow, description right, brown selection bar), forest zoom-out to the beach, water overlay rising from the bottom |
+| 1 | `index.html` | 598 | The cinematic journey — crest opening, fragrance SLIDERS (one slide per perfume inside the framed box, side arrows, drag/swipe, dots + counter in the brown bar), forest zoom-out to the beach, water overlay rising from the bottom |
 | 2 | `shop.html` | 114 | Editorial shop — the 8 journey models only |
 | 3 | `product.html` | 194 | Data-driven product detail page |
 | 4 | `about.html` | 182 | Editorial brand story (5 chapters) |
 | 5 | `contact.html` | 176 | Contact + FAQ / shipping / returns |
 | 6 | `checkout.html` | 220 | Checkout with order confirmation |
 | 7 | `assets/css/base.css` | 453 | Design system: gold tokens, Bodoni Moda display type, nav with crest mark, cart, cards, footer |
-| 8 | `assets/css/journey.css` | 582 | Cinematic styles: crest emblem, clean picker layout (centred bottle + glow / card / brown bar), always-on pickers, forest-world zoom-out + beach-pre, water-rise above the shore picker, one-flow handoff overlaps, mobile stacked picker |
+| 8 | `assets/css/journey.css` | 607 | Cinematic styles: crest emblem, the slider showcase (window/track/slides, in-box clipping, side arrows), always-on pickers, forest-world zoom-out + beach-pre, water-rise above the shore picker, one-flow handoff overlaps, mobile stacked picker |
 | 9 | `assets/css/pages.css` | 316 | Shop / product / about / contact / checkout styles |
 | 10 | `assets/js/data.js` | 181 | Product database — 8 journey models only |
 | 11 | `assets/js/nav.js` | 94 | Nav, veil, reveals, menu, page transitions |
 | 12 | `assets/js/cart.js` | 194 | Cart store, drawer, wishlist, toasts (localStorage) |
-| 13 | `assets/js/journey.js` | 497 | Scroll engine + picker engine: one-flow stage dissolves, forest zoom-out, linear water rise, scroll-independent selector with a clean bottle lift-and-settle swap |
+| 13 | `assets/js/journey.js` | 531 | Scroll engine + slider engine: one-flow stage dissolves, forest zoom-out, linear water rise, scroll-independent slider (track slides, drag with rubber-band + snap, keys, dots, side arrows) |
 | 14 | `assets/js/shop.js` | 97 | Shop filters + grid rendering |
 | 15 | `assets/js/product.js` | 170 | Product page rendering + JSON-LD |
 | 16 | `assets/img/ui/favicon.svg` | 4 | Favicon — IM monogram in gold |
 | 17 | `tools/rig-setup.sh` | 30 | Rebuilds the headless-Chromium audit rig in /tmp (chromium + swiftshader + fonts) |
-| 18 | `tools/audit-v13.mjs` | 372 | The 64-check v13 audit: clean pickers, scroll-independent display, submersion, handoffs, mobile |
+| 18 | `tools/audit-v14.mjs` | 466 | The 77-check v14 audit: slider mechanics, perfumes in the box on every slide, scroll-independence, submersion, handoffs, mobile |
 
 ---
 
-## 📄 index.html  ·  (577 lines)
+## 📄 index.html  ·  (598 lines)
 
 ```html
 <!DOCTYPE html>
@@ -254,13 +250,21 @@
            change the fragrance — scrolling never does -->
       <div class="picker picker--forest" aria-label="Choose a forest fragrance">
         <div class="pk-show">
-          <span class="pk-glow" aria-hidden="true"></span>
-          <img class="pk-bottlefig" src="assets/img/bottles/five-nine.webp" alt="Five-Nine perfume bottle">
+          <div class="pk-window">
+            <div class="pk-track">
+              <figure class="pk-slide">
+                <span class="pk-glow" aria-hidden="true"></span>
+                <img class="pk-bottlefig" src="assets/img/bottles/five-nine.webp" alt="Five-Nine perfume bottle" draggable="false">
+              </figure>
+            </div>
+          </div>
+          <button class="pk-side pk-side--prev" aria-label="Previous fragrance"><svg viewBox="0 0 24 24"><path d="M15 5l-7 7 7 7" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+          <button class="pk-side pk-side--next" aria-label="Next fragrance"><svg viewBox="0 0 24 24"><path d="M9 5l7 7-7 7" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
           <span class="pk-show-frame" aria-hidden="true"></span>
         </div>
 
         <aside class="pk-card">
-          <span class="label">The Forest — <b class="pk-count">01 / 04</b></span>
+          <span class="label">The Forest</span>
           <h3 class="display pk-name">Five-Nine</h3>
           <div class="pk-family">Woody · Amber · Spicy</div>
           <p class="pk-tag">The forest at golden hour — resin, cedar and warm spice.</p>
@@ -274,14 +278,13 @@
         </aside>
 
         <div class="pk-bar" role="group" aria-label="Fragrance selection">
-          <button class="pk-arrow pk-arrow--prev" aria-label="Previous fragrance"><svg viewBox="0 0 24 24"><path d="M15 5l-7 7 7 7" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
           <div class="pk-dots">
             <button class="on" data-go="0" aria-label="Five-Nine"></button>
             <button data-go="1" aria-label="Hopeful"></button>
             <button data-go="2" aria-label="Charming"></button>
             <button data-go="3" aria-label="Mi Amor"></button>
           </div>
-          <button class="pk-arrow pk-arrow--next" aria-label="Next fragrance"><svg viewBox="0 0 24 24"><path d="M9 5l7 7-7 7" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+          <b class="pk-count">01 / 04</b>
         </div>
         <div class="pk-hint"><span>←</span> choose your scent <span>→</span></div>
       </div>
@@ -316,13 +319,21 @@
            change the fragrance — scrolling never does -->
       <div class="picker picker--shore" aria-label="Choose a shore fragrance">
         <div class="pk-show">
-          <span class="pk-glow" aria-hidden="true"></span>
-          <img class="pk-bottlefig" src="assets/img/bottles/zesty.webp" alt="Zesty perfume bottle">
+          <div class="pk-window">
+            <div class="pk-track">
+              <figure class="pk-slide">
+                <span class="pk-glow" aria-hidden="true"></span>
+                <img class="pk-bottlefig" src="assets/img/bottles/zesty.webp" alt="Zesty perfume bottle" draggable="false">
+              </figure>
+            </div>
+          </div>
+          <button class="pk-side pk-side--prev" aria-label="Previous fragrance"><svg viewBox="0 0 24 24"><path d="M15 5l-7 7 7 7" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+          <button class="pk-side pk-side--next" aria-label="Next fragrance"><svg viewBox="0 0 24 24"><path d="M9 5l7 7-7 7" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
           <span class="pk-show-frame" aria-hidden="true"></span>
         </div>
 
         <aside class="pk-card">
-          <span class="label">The Shore — <b class="pk-count">01 / 02</b></span>
+          <span class="label">The Shore</span>
           <h3 class="display pk-name">Zesty</h3>
           <div class="pk-family">Citrus · Aquatic · Fresh</div>
           <p class="pk-tag">Salt on skin, sun on water.</p>
@@ -336,12 +347,11 @@
         </aside>
 
         <div class="pk-bar" role="group" aria-label="Fragrance selection">
-          <button class="pk-arrow pk-arrow--prev" aria-label="Previous fragrance"><svg viewBox="0 0 24 24"><path d="M15 5l-7 7 7 7" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
           <div class="pk-dots">
             <button class="on" data-go="0" aria-label="Zesty"></button>
             <button data-go="1" aria-label="Happy"></button>
           </div>
-          <button class="pk-arrow pk-arrow--next" aria-label="Next fragrance"><svg viewBox="0 0 24 24"><path d="M9 5l7 7-7 7" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+          <b class="pk-count">01 / 02</b>
         </div>
         <div class="pk-hint"><span>←</span> choose your scent <span>→</span></div>
       </div>
@@ -383,13 +393,21 @@
            change the fragrance — scrolling never does -->
       <div class="picker picker--ocean" aria-label="Choose a sea bed fragrance">
         <div class="pk-show">
-          <span class="pk-glow" aria-hidden="true"></span>
-          <img class="pk-bottlefig" src="assets/img/bottles/sophisticated.webp" alt="Sophisticated perfume bottle">
+          <div class="pk-window">
+            <div class="pk-track">
+              <figure class="pk-slide">
+                <span class="pk-glow" aria-hidden="true"></span>
+                <img class="pk-bottlefig" src="assets/img/bottles/sophisticated.webp" alt="Sophisticated perfume bottle" draggable="false">
+              </figure>
+            </div>
+          </div>
+          <button class="pk-side pk-side--prev" aria-label="Previous fragrance"><svg viewBox="0 0 24 24"><path d="M15 5l-7 7 7 7" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+          <button class="pk-side pk-side--next" aria-label="Next fragrance"><svg viewBox="0 0 24 24"><path d="M9 5l7 7-7 7" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
           <span class="pk-show-frame" aria-hidden="true"></span>
         </div>
 
         <aside class="pk-card">
-          <span class="label">The Sea Bed — <b class="pk-count">01 / 02</b></span>
+          <span class="label">The Sea Bed</span>
           <h3 class="display pk-name">Sophisticated</h3>
           <div class="pk-family">Amber · Leather · Woody</div>
           <p class="pk-tag">Depth, quietly worn.</p>
@@ -403,12 +421,11 @@
         </aside>
 
         <div class="pk-bar" role="group" aria-label="Fragrance selection">
-          <button class="pk-arrow pk-arrow--prev" aria-label="Previous fragrance"><svg viewBox="0 0 24 24"><path d="M15 5l-7 7 7 7" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
           <div class="pk-dots">
             <button class="on" data-go="0" aria-label="Sophisticated"></button>
             <button data-go="1" aria-label="King in the North"></button>
           </div>
-          <button class="pk-arrow pk-arrow--next" aria-label="Next fragrance"><svg viewBox="0 0 24 24"><path d="M9 5l7 7-7 7" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+          <b class="pk-count">01 / 02</b>
         </div>
         <div class="pk-hint"><span>←</span> choose your scent <span>→</span></div>
       </div>
@@ -2024,7 +2041,7 @@ body.cart-open{ overflow:hidden; }
 
 ---
 
-## 📄 assets/css/journey.css  ·  (582 lines)
+## 📄 assets/css/journey.css  ·  (607 lines)
 
 ```css
 /* ============================================================
@@ -2245,17 +2262,29 @@ html:not(.cinema) .forest-pre{ display:none; }
 html:not(.cinema) .beach-pre{ display:none; }
 
 /* ============================================================
-   THE FRAGRANCE PICKER — racing-game selector (scroll-independent)
-   showcase (model + perfume in its foliage window) LEFT,
-   description card RIGHT, arrows in the brown bar at the bottom
+   THE FRAGRANCE PICKER — a true SLIDER (scroll-independent)
+   the perfumes slide THROUGH the framed showcase box on the LEFT
+   (one slide per fragrance, clipped by the window — always inside),
+   arrows on the sides of the box, description card on the RIGHT,
+   dots + counter in the brown bar at the bottom
    ============================================================ */
 .pk-show{
   position:absolute; left:var(--pad); top:50%; transform:translateY(-50%);
   z-index:6; width:clamp(320px, 38vw, 560px); height:min(76vh, 730px);
+  touch-action:pan-y;   /* vertical page scroll stays native; we own the horizontal drag */
 }
-/* the CLEAN showcase: just the perfume, centred in the framed panel
-   over the scene — no foliage planes (v13: the client asked for the
-   extra leaf models to go) */
+/* the slider window — everything outside the frame is clipped, so the
+   perfumes are physically IN the box while they slide through it */
+.pk-window{
+  position:absolute; inset:0; z-index:2; overflow:hidden;
+}
+.pk-track{
+  position:absolute; inset:0; display:flex; height:100%;
+  will-change:transform;
+}
+.pk-slide{ position:relative; flex:0 0 100%; height:100%; pointer-events:none; }
+/* the clean showcase: just the perfume, centred in its slide over a
+   soft gold glow — no foliage planes anywhere */
 .pk-glow{
   position:absolute; z-index:2; left:50%; top:50%; translate:-50% -50%;
   width:88%; aspect-ratio:1; border-radius:50%; pointer-events:none;
@@ -2263,12 +2292,13 @@ html:not(.cinema) .beach-pre{ display:none; }
   filter:blur(6px);
 }
 .pk-bottlefig{
-  position:absolute; z-index:3; height:58%;
+  position:absolute; z-index:3; height:60%;
   left:50%; top:50%; translate:-50% -50%;
+  pointer-events:none; -webkit-user-drag:none; user-select:none;
   filter:drop-shadow(0 30px 34px rgba(0,0,0,.55)) drop-shadow(0 0 56px rgba(201,168,106,.16));
-  will-change:transform,opacity;
   animation:bobble 9s ease-in-out infinite alternate;
 }
+@keyframes bobble{ from{ transform:translateY(-1.1%); } to{ transform:translateY(1.4%); } }
 /* the showcase frame — the "showcase area" panel */
 .pk-show-frame{
   position:absolute; inset:0; z-index:4; pointer-events:none;
@@ -2279,6 +2309,22 @@ html:not(.cinema) .beach-pre{ display:none; }
   content:''; position:absolute; inset:10px;
   border:1px solid rgba(242,238,227,.14); pointer-events:none;
 }
+
+/* the slider arrows — ON the sides of the showcase box */
+.pk-side{
+  position:absolute; z-index:6; top:50%; transform:translateY(-50%);
+  width:54px; height:54px; border-radius:50%; flex:none;
+  border:1px solid rgba(201,168,106,.5); color:var(--gold);
+  background:rgba(16,11,7,.6);
+  backdrop-filter:blur(4px); -webkit-backdrop-filter:blur(4px);
+  display:flex; align-items:center; justify-content:center;
+  transition:background .35s var(--ease), color .35s var(--ease), border-color .35s, opacity .35s, transform .35s var(--ease);
+}
+.pk-side--prev{ left:16px; }
+.pk-side--next{ right:16px; }
+.pk-side svg{ width:20px; height:20px; }
+.pk-side:hover{ background:var(--gold); color:#171004; border-color:var(--gold); transform:translateY(-50%) scale(1.08); }
+.pk-side.off{ opacity:.25; pointer-events:none; }
 
 /* description card — right side */
 .pk-card{
@@ -2291,7 +2337,6 @@ html:not(.cinema) .beach-pre{ display:none; }
   -webkit-backdrop-filter:blur(3px);
 }
 .pk-card .label{ color:rgba(242,238,227,.6); display:block; margin-bottom:20px; }
-.pk-card .label b{ color:var(--gold); font-weight:500; }
 .pk-name{ margin-bottom:12px; }
 .pk-name.display{ font-size:clamp(36px,4.2vw,60px); font-weight:900; }
 .pk-family{ font-size:10.5px; letter-spacing:.34em; color:var(--gold); margin-bottom:16px; }
@@ -2300,24 +2345,19 @@ html:not(.cinema) .beach-pre{ display:none; }
 .pk-price{ font-size:13px; letter-spacing:.12em; color:var(--paper); }
 .pk-cta{ display:flex; align-items:center; gap:22px; flex-wrap:wrap; }
 
-/* the brown selection bar — arrows live here */
+/* the brown bar — dots + position counter (the arrows live on the box) */
 .pk-bar{
   position:absolute; bottom:3.4vh; left:50%; transform:translateX(-50%);
-  z-index:8; display:flex; align-items:center; gap:clamp(16px,2.2vw,28px);
-  padding:11px 20px;
+  z-index:8; display:flex; align-items:center; gap:clamp(14px,1.8vw,24px);
+  padding:12px 24px;
   background:linear-gradient(160deg, #2e2018, #221610 60%, #2a1c14);
   border:1px solid rgba(201,168,106,.28);
   box-shadow:0 18px 44px rgba(0,0,0,.45), inset 0 1px 0 rgba(201,168,106,.14);
 }
-.pk-arrow{
-  width:46px; height:46px; border-radius:50%; flex:none;
-  border:1px solid rgba(201,168,106,.4); color:var(--gold);
-  background:rgba(201,168,106,.06);
-  display:flex; align-items:center; justify-content:center;
-  transition:background .4s var(--ease), color .4s var(--ease), border-color .4s, transform .4s var(--ease);
+.pk-count{
+  font-family:var(--serif); font-size:12px; font-weight:500;
+  letter-spacing:.22em; color:var(--gold); min-width:64px; text-align:center;
 }
-.pk-arrow svg{ width:18px; height:18px; }
-.pk-arrow:hover{ background:var(--gold); color:#171004; border-color:var(--gold); transform:scale(1.07); }
 .pk-dots{ display:flex; align-items:center; gap:10px; }
 .pk-dots button{ width:26px; height:12px; padding:5px 0; position:relative; }
 .pk-dots button::after{
@@ -2369,8 +2409,10 @@ html:not(.cinema) .beach-pre{ display:none; }
   .pk-tag{ font-size:15px; }
   .pk-meta{ gap:12px; margin-top:14px; padding-top:14px; }
   .pk-cta{ gap:14px; }
-  .pk-bar{ bottom:3.6vh; padding:8px 14px; gap:12px; }
-  .pk-arrow{ width:42px; height:42px; }
+  .pk-bar{ bottom:3.6vh; padding:9px 16px; gap:12px; }
+  .pk-count{ min-width:54px; font-size:11px; }
+  .pk-side{ width:42px; height:42px; left:8px; } .pk-side--next{ left:auto; right:8px; }
+  .pk-side svg{ width:16px; height:16px; }
   .pk-hint{ display:none; }
 }
 
@@ -3426,7 +3468,7 @@ const productImg = p => IMG + (p.img || p.slug) + '.webp';
 
 ---
 
-## 📄 assets/js/journey.js  ·  (497 lines)
+## 📄 assets/js/journey.js  ·  (531 lines)
 
 ```js
 /* ============================================================
@@ -3740,7 +3782,9 @@ const productImg = p => IMG + (p.img || p.slug) + '.webp';
       const root = document.querySelector(scene + ' .picker');
       if (!root) return;
       const items = PICKS[key];
-      const bottle = root.querySelector('.pk-bottlefig');
+      const show = root.querySelector('.pk-show');
+      const track = root.querySelector('.pk-track');
+      const firstSlide = track.querySelector('.pk-slide');
       const card = root.querySelector('.pk-card');
       const els = {
         name: root.querySelector('.pk-name'),
@@ -3752,8 +3796,21 @@ const productImg = p => IMG + (p.img || p.slug) + '.webp';
         add: root.querySelector('.pk-card .chip-btn')
       };
       const dots = root.querySelectorAll('.pk-dots button');
+      const prev = root.querySelector('.pk-side--prev');
+      const next = root.querySelector('.pk-side--next');
+      const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+      const D = reduced ? 0 : 0.72;
       let idx = 0;
-      let anim = null;
+
+      /* every perfume gets its own slide IN the box — they slide through
+         the framed window; nothing is ever swapped in from outside */
+      items.slice(1).forEach(function (it) {
+        const sl = firstSlide.cloneNode(true);
+        const img = sl.querySelector('.pk-bottlefig');
+        img.src = 'assets/img/bottles/' + it.slug + '.webp';
+        img.alt = it.name + ' perfume bottle';
+        track.appendChild(sl);
+      });
 
       const pad2 = n => String(n + 1).padStart(2, '0') + ' / ' + String(items.length).padStart(2, '0');
 
@@ -3764,56 +3821,75 @@ const productImg = p => IMG + (p.img || p.slug) + '.webp';
         els.tag.textContent = it.tag;
         els.price.textContent = it.price;
         els.count.textContent = pad2(i);
-        bottle.src = 'assets/img/bottles/' + it.slug + '.webp';
-        bottle.alt = it.name + ' perfume bottle';
         els.link.href = 'product.html?p=' + it.slug;
         els.add.setAttribute('data-add', it.slug);
         dots.forEach((d, j) => d.classList.toggle('on', j === i));
+        prev.classList.toggle('off', i === 0);
+        next.classList.toggle('off', i === items.length - 1);
       }
 
-      /* the racing-game swap — no scrolling involved: the perfume lifts out,
-         the next settles in, the card crossfades its content */
-      function render(i, dir) {
-        dir = dir || (i > idx ? 1 : -1);
-        idx = i;
-        if (anim) anim.kill();
-        anim = gsap.timeline({ defaults: { overwrite: 'auto' } });
-        anim.to(bottle, { autoAlpha: 0, scale: 0.88, y: -22 * dir, duration: 0.2, ease: 'power2.in' }, 0)
-            .call(() => apply(i), [], 0.21)
-            .fromTo(bottle, { autoAlpha: 0, scale: 0.92, y: 26 * dir }, { autoAlpha: 1, scale: 1, y: 0, duration: 0.38, ease: 'power2.out' }, 0.26)
-            .to(card, { autoAlpha: 0, y: 12 * dir, duration: 0.16, ease: 'power1.in' }, 0)
-            .to(card, { autoAlpha: 1, y: 0, duration: 0.3, ease: 'power2.out' }, 0.24);
+      /* the slide itself — the track carries the perfumes through the
+         box; the card crossfades its content alongside. No scrolling is
+         involved anywhere. */
+      function slideTo(i) {
+        idx = Math.min(items.length - 1, Math.max(0, i));
+        gsap.to(track, { xPercent: -100 * idx, duration: D, ease: 'power3.out' });
+        if (D) {
+          gsap.timeline()
+            .to(card, { autoAlpha: 0, y: 10, duration: 0.18, ease: 'power1.in' }, 0)
+            .call(() => apply(idx), [], 0.19)
+            .to(card, { autoAlpha: 1, y: 0, duration: 0.3, ease: 'power2.out' }, 0.26);
+        } else {
+          apply(idx);
+        }
       }
 
-      const api = {
-        go: function (d) {
-          const j = Math.min(items.length - 1, Math.max(0, idx + d));
-          if (j !== idx) render(j, d);
-        },
-        jump: function (j) { if (j !== idx) render(j, j > idx ? 1 : -1); }
+      const go = d => { if (idx + d >= 0 && idx + d < items.length) slideTo(idx + d); };
+
+      /* drag / swipe the perfumes through the box (mouse + touch) */
+      let dragging = false, x0 = 0, base = 0;
+      show.addEventListener('pointerdown', e => {
+        if (e.target.closest('.pk-side')) return;   // the arrows handle themselves
+        dragging = true; x0 = e.clientX;
+        base = gsap.getProperty(track, 'xPercent');
+        gsap.killTweensOf(track);
+        try { show.setPointerCapture(e.pointerId); } catch (err) {}
+      });
+      show.addEventListener('pointermove', e => {
+        if (!dragging) return;
+        const w = show.clientWidth || 1;
+        let t = base + (e.clientX - x0) / w * 100;   // the track follows the finger: drag left = next slide
+        const min = -(items.length - 1) * 100;
+        if (t > 0) t = t * 0.3;                      // rubber-band past the ends
+        else if (t < min) t = min + (t - min) * 0.3;
+        gsap.set(track, { xPercent: t });
+      });
+      const release = () => {
+        if (!dragging) return;
+        dragging = false;
+        const t = gsap.getProperty(track, 'xPercent');
+        const j = Math.min(items.length - 1, Math.max(0, Math.round(-t / 100)));
+        if (j !== idx) slideTo(j);
+        else gsap.to(track, { xPercent: -100 * idx, duration: D * 0.7, ease: 'power3.out' });
       };
+      show.addEventListener('pointerup', release);
+      show.addEventListener('pointercancel', release);
+
+      prev.addEventListener('click', () => go(-1));
+      next.addEventListener('click', () => go(1));
+      dots.forEach(d => d.addEventListener('click', () => { const j = +d.dataset.go; if (j !== idx) slideTo(j); }));
+
+      apply(0);   // init dots + arrow states without animating
 
       /* the span only gates which picker owns the arrow keys —
          it never drives the selection */
+      const api = { go, jump: j => { if (j !== idx) slideTo(j); } };
       ScrollTrigger.create({
         trigger: scene,
         start: spanStart,
         end: spanEnd,
         onToggle: function (self) { activePicker = self.isActive ? api : null; }
       });
-
-      root.querySelector('.pk-arrow--prev').addEventListener('click', () => api.go(-1));
-      root.querySelector('.pk-arrow--next').addEventListener('click', () => api.go(1));
-      dots.forEach(d => d.addEventListener('click', () => api.jump(+d.dataset.go)));
-
-      /* swipe on touch */
-      let tx = 0, ty = 0;
-      root.addEventListener('touchstart', e => { tx = e.touches[0].clientX; ty = e.touches[0].clientY; }, { passive: true });
-      root.addEventListener('touchend', e => {
-        const dx = e.changedTouches[0].clientX - tx;
-        const dy = e.changedTouches[0].clientY - ty;
-        if (Math.abs(dx) > 46 && Math.abs(dx) > Math.abs(dy) * 1.4) api.go(dx < 0 ? 1 : -1);
-      }, { passive: true });
     }
 
     const ih = () => window.innerHeight;
@@ -4259,15 +4335,16 @@ echo RIG-DONE
 
 ---
 
-## 📄 tools/audit-v13.mjs  ·  (372 lines)
+## 📄 tools/audit-v14.mjs  ·  (466 lines)
 
 ```
 /* ============================================================
-   v13 AUDIT — CLEAN pickers (no foliage planes, perfume only, centred),
-   fully scroll-independent display (no scrub fades anywhere), shore
-   picker submerged by the rising water, forest zoom-out preserved
+   v14 AUDIT — the pickers are TRUE SLIDERS: one slide per perfume
+   inside the framed box (clipped by the window, always in the box),
+   side arrows on the box, dots + counter in the brown bar, drag/swipe,
+   still fully scroll-independent; shore picker submerged by the rise
    1440x900 desktop + 390x844 mobile, headless chromium
-   Run: bash tools/rig-setup.sh && cd /tmp/pkgtest && cp /home/user/IsmaelBrave/tools/audit-v13.mjs . && node audit-v13.mjs
+   Run: bash tools/rig-setup.sh && cd /tmp/pkgtest && cp /home/user/IsmaelBrave/tools/audit-v14.mjs . && node audit-v14.mjs
    ============================================================ */
 import { chromium as pwCore } from 'playwright-core';
 import fs from 'fs';
@@ -4372,7 +4449,7 @@ const crest = await page.evaluate(() => {
   return { w: r.width, ring: document.querySelector('.emblem__ring').textContent };
 });
 report('crest present', crest.w > 200 && /ISMAEL/.test(crest.ring), `${Math.round(crest.w)}px`);
-const heroShot = await shot('v13-hero');
+const heroShot = await shot('v14-hero');
 report('hero no dark band', flatDarkRows(heroShot) === 0);
 
 /* ============ 2. THEME / FONT ============ */
@@ -4425,6 +4502,27 @@ report('brown selection bar at bottom', layout.barY > 780 && layout.barH > 40 &&
 report('NO foliage model planes in pickers', await page.evaluate(() => document.querySelectorAll('.picker .pk-model').length === 0));
 const glowOK = await page.evaluate(() => { const g = document.querySelector('.picker--forest .pk-glow'); const r = g.getBoundingClientRect(); return r.width > 100 && getComputedStyle(g).opacity > 0.9; });
 report('clean showcase glow present', glowOK);
+const slider0 = await page.evaluate(() => {
+  const root = document.querySelector('.picker--forest');
+  const track = root.querySelector('.pk-track');
+  const frame = root.querySelector('.pk-show').getBoundingClientRect();
+  const kids = [...track.children];
+  const xp = gsap.getProperty(track, 'xPercent');
+  const img = kids[Math.round(-xp / 100)].querySelector('.pk-bottlefig');
+  const b = img.getBoundingClientRect();
+  return {
+    window: !!root.querySelector('.pk-window'),
+    slides: kids.length, xp,
+    inside: b.x >= frame.x + 4 && b.right <= frame.right - 4 && b.y >= frame.y + 4 && b.bottom <= frame.bottom - 4,
+    bottleH: Math.round(b.height),
+    prevOff: root.querySelector('.pk-side--prev').classList.contains('off'),
+    nextOff: root.querySelector('.pk-side--next').classList.contains('off')
+  };
+});
+report('slider: window + track with 4 slides', slider0.window && slider0.slides === 4, `slides=${slider0.slides}`);
+report('slider: track at slide 1 (xPercent 0)', Math.abs(slider0.xp) < 0.01, `xPercent=${slider0.xp}`);
+report('PERFUME INSIDE THE BOX', slider0.inside, `bottle ${slider0.bottleH}px tall, within frame`);
+report('arrows: prev disabled at start, next enabled', slider0.prevOff && !slider0.nextOff);
 
 /* ============ 4. SCROLL-INDEPENDENCE (selection AND visibility) ============ */
 console.log('\n--- SCROLL-INDEPENDENT ---');
@@ -4445,18 +4543,56 @@ report('picker visible at EVERY scroll offset', visAt.every(Boolean), visAt.join
 /* ============ 5. FOREST PICKER INTERACTIONS ============ */
 console.log('\n--- FOREST PICKER ---');
 await scrollTo(geo.forest + geo.ih * 1.5);
-const fp0 = await shot('v13-forest-p0');
+const fp0 = await shot('v14-forest-p0');
 report('slot 0 = Five-Nine', (await txt('.picker--forest .pk-name')) === 'Five-Nine');
 await page.keyboard.press('ArrowRight');
-await page.waitForTimeout(1100);
+await page.waitForTimeout(1200);
 report('ArrowRight → Hopeful', (await txt('.picker--forest .pk-name')) === 'Hopeful', await txt('.picker--forest .pk-name'));
 report('counter 02 / 04', (await txt('.picker--forest .pk-count')) === '02 / 04', await txt('.picker--forest .pk-count'));
-const fp1 = await shot('v13-forest-p1');
+const slid1 = await page.evaluate(() => {
+  const root = document.querySelector('.picker--forest');
+  const track = root.querySelector('.pk-track');
+  const frame = root.querySelector('.pk-show').getBoundingClientRect();
+  const xp = gsap.getProperty(track, 'xPercent');
+  const img = [...track.children][Math.round(-xp / 100)].querySelector('.pk-bottlefig');
+  const b = img.getBoundingClientRect();
+  return { xp, src: img.src.split('/').pop(), inside: b.x >= frame.x + 4 && b.right <= frame.right - 4 && b.y >= frame.y + 4 && b.bottom <= frame.bottom - 4,
+    prevOff: root.querySelector('.pk-side--prev').classList.contains('off'),
+    nextOff: root.querySelector('.pk-side--next').classList.contains('off') };
+});
+report('track slid to slide 2 (xPercent -100)', Math.abs(slid1.xp + 100) < 0.01, `xPercent=${slid1.xp}`);
+report('slide 2 shows Hopeful, inside the box', /hopeful/.test(slid1.src) && slid1.inside, slid1.src);
+report('arrows: both enabled mid-track', !slid1.prevOff && !slid1.nextOff);
+const fp1 = await shot('v14-forest-p1');
 const showBox = await page.evaluate(() => { const r = document.querySelector('.picker--forest .pk-show').getBoundingClientRect(); return { x: Math.round(r.x), y: Math.round(r.y), w: Math.round(r.width), h: Math.round(r.height) }; });
-report('showcase changed (bottle swapped)', meanDiff(fp0, fp1, showBox.x, showBox.x + showBox.w, showBox.y, showBox.y + showBox.h) > 4,
+report('showcase changed (perfume slid in)', meanDiff(fp0, fp1, showBox.x, showBox.x + showBox.w, showBox.y, showBox.y + showBox.h) > 4,
   `diff=${meanDiff(fp0, fp1, showBox.x, showBox.x + showBox.w, showBox.y, showBox.y + showBox.h).toFixed(1)}`);
-const bottle2 = await page.evaluate(() => document.querySelector('.picker--forest .pk-bottlefig').src.split('/').pop());
-report('bottle swapped to Hopeful', /hopeful/.test(bottle2), bottle2);
+/* the side arrow ON the box drives the slider too */
+await page.click('.picker--forest .pk-side--next');
+await page.waitForTimeout(1200);
+report('side arrow → Charming', (await txt('.picker--forest .pk-name')) === 'Charming', await txt('.picker--forest .pk-name'));
+report('counter 03 / 04', (await txt('.picker--forest .pk-count')) === '03 / 04', await txt('.picker--forest .pk-count'));
+/* DRAG the perfumes through the box */
+await page.click('.picker--forest .pk-dots button[data-go="0"]');
+await page.waitForTimeout(1200);
+const dbox = await page.locator('.picker--forest .pk-show').boundingBox();
+await page.mouse.move(dbox.x + dbox.width * 0.5, dbox.y + dbox.height * 0.5);
+await page.mouse.down();
+await page.mouse.move(dbox.x + dbox.width * 0.5 - dbox.width * 0.7, dbox.y + dbox.height * 0.5, { steps: 10 });
+await page.mouse.up();
+await page.waitForTimeout(1200);
+const dragRes = await page.evaluate(() => {
+  const root = document.querySelector('.picker--forest');
+  const track = root.querySelector('.pk-track');
+  const frame = root.querySelector('.pk-show').getBoundingClientRect();
+  const xp = gsap.getProperty(track, 'xPercent');
+  const img = [...track.children][Math.round(-xp / 100)].querySelector('.pk-bottlefig');
+  const b = img.getBoundingClientRect();
+  return { xp, name: root.querySelector('.pk-name').textContent.trim(),
+    inside: b.x >= frame.x + 4 && b.right <= frame.right - 4 && b.y >= frame.y + 4 && b.bottom <= frame.bottom - 4 };
+});
+report('drag → slides to next perfume', Math.abs(dragRes.xp + 100) < 0.01 && dragRes.name === 'Hopeful', `xPercent=${dragRes.xp} ${dragRes.name}`);
+report('dragged perfume inside the box', dragRes.inside);
 await scrollTo(geo.ih * 0.5);
 await page.waitForTimeout(600);
 await scrollTo(geo.forest + geo.ih * 2.2);
@@ -4465,8 +4601,37 @@ await page.keyboard.press('ArrowLeft');
 await page.waitForTimeout(1100);
 report('ArrowLeft → back', (await txt('.picker--forest .pk-name')) === 'Five-Nine', await txt('.picker--forest .pk-name'));
 await page.click('.picker--forest .pk-dots button[data-go="3"]');
-await page.waitForTimeout(1100);
+await page.waitForTimeout(1200);
 report('dot 4 → Mi Amor', (await txt('.picker--forest .pk-name')) === 'Mi Amor', await txt('.picker--forest .pk-name'));
+/* EVERY perfume of EVERY picker sits inside the box on its own slide */
+const allSlots = [];
+for (const [sel, n] of [['.picker--forest', 4], ['.picker--shore', 2], ['.picker--ocean', 2]]) {
+  for (let j = 0; j < n; j++) {
+    await page.click(sel + ' .pk-dots button[data-go="' + j + '"]');
+    await page.waitForTimeout(950);
+    allSlots.push(await page.evaluate((sel) => {
+      const root = document.querySelector(sel);
+      const track = root.querySelector('.pk-track');
+      const frame = root.querySelector('.pk-show').getBoundingClientRect();
+      const xp = gsap.getProperty(track, 'xPercent');
+      const img = [...track.children][Math.round(-xp / 100)].querySelector('.pk-bottlefig');
+      const b = img.getBoundingClientRect();
+      return b.x >= frame.x + 4 && b.right <= frame.right - 4 && b.y >= frame.y + 4 && b.bottom <= frame.bottom - 4;
+    }, sel));
+  }
+}
+report('ALL perfumes in the box on every slide (3 pickers)', allSlots.every(Boolean), allSlots.map(v => v ? 1 : 0).join(''));
+/* back to slot 1 on every picker (scrolling to each scene first — the
+   all-slots loop left the page down at the ocean) */
+await scrollTo(geo.forest + geo.ih * 2.0);
+await page.click('.picker--forest .pk-dots button[data-go="0"]');
+await page.waitForTimeout(700);
+await scrollTo(geo.trans + geo.ih * 2.2);
+await page.click('.picker--shore .pk-dots button[data-go="0"]');
+await page.waitForTimeout(700);
+await scrollTo(geo.ocean + geo.ih * 2.3);
+await page.click('.picker--ocean .pk-dots button[data-go="0"]');
+await page.waitForTimeout(700);
 
 /* ============ 6. SHORE PICKER ============ */
 console.log('\n--- SHORE PICKER ---');
@@ -4480,14 +4645,15 @@ const zorder = await page.evaluate(() => {
 report('shore picker sits UNDER the water (gets submerged)', zorder.p < zorder.w, `picker z=${zorder.p} < water z=${zorder.w}`);
 report('shore picker fully visible (no scrub fade)', await page.evaluate(() => getComputedStyle(document.querySelector('.picker--shore')).opacity === '1'));
 const spLayout = await page.evaluate(() => {
-  const b = document.querySelector('.picker--shore .pk-bottlefig').getBoundingClientRect();
-  return { h: b.height, loaded: document.querySelector('.picker--shore .pk-bottlefig').naturalWidth > 0 };
+  const root = document.querySelector('.picker--shore');
+  return { slides: root.querySelectorAll('.pk-slide').length, loaded: root.querySelector('.pk-bottlefig').naturalWidth > 0 };
 });
-report('shore perfume displayed', spLayout.loaded && spLayout.h > 150, `${Math.round(spLayout.h)}px`);
-await shot('v13-shore-p0');
-await page.keyboard.press('ArrowRight');
-await page.waitForTimeout(1100);
-report('shore → Happy', (await txt('.picker--shore .pk-name')) === 'Happy', await txt('.picker--shore .pk-name'));
+report('shore slider: 2 slides', spLayout.slides === 2, `slides=${spLayout.slides}`);
+await shot('v14-shore-p0');
+await page.click('.picker--shore .pk-side--next');
+await page.waitForTimeout(1200);
+report('shore side arrow → Happy', (await txt('.picker--shore .pk-name')) === 'Happy', await txt('.picker--shore .pk-name'));
+report('shore counter 02 / 02', (await txt('.picker--shore .pk-count')) === '02 / 02', await txt('.picker--shore .pk-count'));
 
 /* ============ 7. WATER RISE ============ */
 console.log('\n--- WATER RISE ---');
@@ -4505,15 +4671,15 @@ const l3 = await lineAt(5.35);
 report('water starts low and climbs', l1.y > l1.h * 0.55 && l2.y < l2.h * 0.45 && Math.abs(l3.y) < 2,
   `line ${Math.round(l1.y)} → ${Math.round(l2.y)} → ${Math.round(l3.y)}px`);
 await scrollTo(geo.trans + geo.ih * 4.0);
-const risePre = await shot('v13-rise-pre');
+const risePre = await shot('v14-rise-pre');
 await scrollTo(geo.trans + geo.ih * 4.75);
-const riseMid = await shot('v13-rise-mid');
+const riseMid = await shot('v14-rise-mid');
 const rmTop = colorStats(riseMid, 60, 60, 1400, 260);
 report('mid-rise: beach bottom replaced by water', meanDiff(risePre, riseMid, 60, 1400, 600, 870) > 20,
   `diff=${meanDiff(risePre, riseMid, 60, 1400, 600, 870).toFixed(1)}`);
 report('mid-rise: sky still bright on top', rmTop.bright > 0.4, `bright=${(rmTop.bright * 100).toFixed(0)}%`);
 await scrollTo(geo.trans + geo.ih * 5.45);
-const riseDone = await shot('v13-rise-done');
+const riseDone = await shot('v14-rise-done');
 const rdOpen = colorStats(riseDone, 60, 100, 1400, 700);
 report('rise complete: water fills the open frame', rdOpen.waterish > 0.5, `waterish=${(rdOpen.waterish * 100).toFixed(0)}%`);
 const submerged = await page.evaluate(() => {
@@ -4527,11 +4693,11 @@ report('rise complete: no dark band', flatDarkRows(riseDone) === 0);
 /* ============ 8. FOREST ZOOM-OUT ============ */
 console.log('\n--- FOREST ZOOM-OUT ---');
 await scrollTo(geo.forest + geo.ih * 3.5);
-const zA = await shot('v13-zoom-before');
+const zA = await shot('v14-zoom-before');
 await scrollTo(geo.forest + geo.ih * 4.45);
-const zB = await shot('v13-zoom-mid');
+const zB = await shot('v14-zoom-mid');
 await scrollTo(geo.forest + geo.ih * 4.68);
-const zC = await shot('v13-zoom-done');
+const zC = await shot('v14-zoom-done');
 const lumA = avgLum(zA, 60, 100, 1400, 870), lumB = avgLum(zB, 60, 100, 1400, 870), lumC = avgLum(zC, 60, 100, 1400, 870);
 const brightC = colorStats(zC, 60, 100, 1400, 870).bright;
 report('zoom opens the frame (brightening)', lumB > lumA * 1.25, `lum ${lumA.toFixed(0)} → ${lumB.toFixed(0)}`);
@@ -4543,25 +4709,27 @@ console.log('\n--- OCEAN PICKER ---');
 await scrollTo(geo.ocean + geo.ih * 2.3);
 report('ocean slot 0 = Sophisticated', (await txt('.picker--ocean .pk-name')) === 'Sophisticated', await txt('.picker--ocean .pk-name'));
 report('ocean picker fully visible (no scrub fade)', await page.evaluate(() => getComputedStyle(document.querySelector('.picker--ocean')).opacity === '1'));
-const opLayout = await page.evaluate(() => {
-  const b = document.querySelector('.picker--ocean .pk-bottlefig').getBoundingClientRect();
-  return { h: b.height, loaded: document.querySelector('.picker--ocean .pk-bottlefig').naturalWidth > 0 };
-});
-report('ocean perfume displayed', opLayout.loaded && opLayout.h > 150, `${Math.round(opLayout.h)}px`);
-const op0 = await shot('v13-ocean-p0');
+const opLayout = await page.evaluate(() => document.querySelectorAll('.picker--ocean .pk-slide').length);
+report('ocean slider: 2 slides', opLayout === 2, `slides=${opLayout}`);
+await page.click('.picker--ocean .pk-side--next');
+await page.waitForTimeout(1200);
+report('ocean side arrow → King in the North', (await txt('.picker--ocean .pk-name')) === 'King in the North', await txt('.picker--ocean .pk-name'));
+await page.click('.picker--ocean .pk-dots button[data-go="0"]');
+await page.waitForTimeout(950);
+const op0 = await shot('v14-ocean-p0');
 const op0s = colorStats(op0, 60, 100, 1400, 870);
 report('ocean picker underwater', op0s.waterish > 0.5 && flatDarkRows(op0) === 0, `waterish=${(op0s.waterish * 100).toFixed(0)}%`);
 await page.keyboard.press('ArrowRight');
-await page.waitForTimeout(1100);
-report('ocean → King in the North', (await txt('.picker--ocean .pk-name')) === 'King in the North', await txt('.picker--ocean .pk-name'));
+await page.waitForTimeout(1200);
+report('ocean keys still work after side arrows', (await txt('.picker--ocean .pk-name')) === 'King in the North', await txt('.picker--ocean .pk-name'));
 
 /* ============ 10. ONE-FLOW HANDOFFS ============ */
 console.log('\n--- ONE-FLOW HANDOFFS ---');
 async function handoff(name, yA) {
   await scrollTo(yA);
-  const A = await shot(`v13-ho-${name}-a`);
+  const A = await shot(`v14-ho-${name}-a`);
   await scrollTo(yA + 135);
-  const B = await shot(`v13-ho-${name}-b`);
+  const B = await shot(`v14-ho-${name}-b`);
   const un = meanDiff(A, B, 60, 1380, 120, 860);
   const sh = shiftedDiff(A, B, 135);
   report(`${name}: no lurch`, un < 40, `unshifted=${un.toFixed(1)}`);
@@ -4575,11 +4743,11 @@ await handoff('shore-ocean', geo.trans + geo.ih * 6.06);
 /* ============ 11. DIVE + MOST WANTED ============ */
 console.log('\n--- DIVE / MOST WANTED ---');
 await scrollTo(geo.trans + geo.ih * 6.2);
-const diveDone = await shot('v13-dive-done');
+const diveDone = await shot('v14-dive-done');
 const dd = colorStats(diveDone, 60, 100, 1400, 870);
 report('dive: blue dominant', dd.blue > 0.75, `blue=${(dd.blue * 100).toFixed(0)}%`);
 await scrollTo(geo.mw + geo.ih * 1.5);
-const mwShot = await shot('v13-mostwanted');
+const mwShot = await shot('v14-mostwanted');
 const mwS = colorStats(mwShot, 60, 100, 1400, 870);
 report('mostwanted renders', mwS.dark < 0.9, `dark=${(mwS.dark * 100).toFixed(0)}%`);
 
@@ -4596,19 +4764,21 @@ report('mobile: no horizontal overflow', mgeo.sw <= 391, `sw=${mgeo.sw}`);
 await mp.evaluate(v => window.scrollTo(0, v), mgeo.forest + mgeo.ih * 1.5);
 await mp.waitForTimeout(900);
 const ml = await mp.evaluate(() => {
-  const show = document.querySelector('.picker--forest .pk-show').getBoundingClientRect();
-  const card = document.querySelector('.picker--forest .pk-card').getBoundingClientRect();
-  const bar = document.querySelector('.picker--forest .pk-bar').getBoundingClientRect();
-  const b = document.querySelector('.picker--forest .pk-bottlefig').getBoundingClientRect();
+  const root = document.querySelector('.picker--forest');
+  const show = root.querySelector('.pk-show').getBoundingClientRect();
+  const card = root.querySelector('.pk-card').getBoundingClientRect();
+  const bar = root.querySelector('.pk-bar').getBoundingClientRect();
+  const b = root.querySelector('.pk-bottlefig').getBoundingClientRect();
   return {
     bottleH: Math.round(b.height),
+    inside: b.x >= show.x + 4 && b.right <= show.right - 4 && b.y >= show.y + 4 && b.bottom <= show.bottom - 4,
     fits: show.y >= 60 && show.right <= 391 && card.bottom <= 844 && bar.x >= 0 && bar.right <= 391 && card.y > show.y + show.height - 20
   };
 });
 report('mobile: showcase + card + bar all fit', ml.fits);
-report('mobile: perfume displayed', ml.bottleH > 60, `${ml.bottleH}px`);
-await mp.screenshot({ path: `${SHOTS}/v13-mobile-forest.png` });
-report('mobile: no dark band', flatDarkRows(loadPNG(`${SHOTS}/v13-mobile-forest.png`)) === 0);
+report('mobile: perfume inside the box', ml.inside, `${ml.bottleH}px`);
+await mp.screenshot({ path: `${SHOTS}/v14-mobile-forest.png` });
+report('mobile: no dark band', flatDarkRows(loadPNG(`${SHOTS}/v14-mobile-forest.png`)) === 0);
 report('mobile: no console errors', merrors.length === 0, merrors[0] || '');
 await mp.close();
 
@@ -4646,7 +4816,7 @@ python3 -m http.server 8000
 ```
 
 Any static file server works. No environment variables, no database.
-Try the pickers with the ← / → arrow keys while a scene is pinned —
-scrolling never changes the selection, and the perfume stays on display
-at every scroll offset.
+Slide the perfumes with the side arrows, the ← / → keys, the dots — or
+just grab a bottle and drag it through the box. Scrolling never changes
+the selection, and the perfume stays on display at every scroll offset.
 

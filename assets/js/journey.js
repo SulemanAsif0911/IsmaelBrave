@@ -309,7 +309,9 @@
       const root = document.querySelector(scene + ' .picker');
       if (!root) return;
       const items = PICKS[key];
-      const bottle = root.querySelector('.pk-bottlefig');
+      const show = root.querySelector('.pk-show');
+      const track = root.querySelector('.pk-track');
+      const firstSlide = track.querySelector('.pk-slide');
       const card = root.querySelector('.pk-card');
       const els = {
         name: root.querySelector('.pk-name'),
@@ -321,8 +323,21 @@
         add: root.querySelector('.pk-card .chip-btn')
       };
       const dots = root.querySelectorAll('.pk-dots button');
+      const prev = root.querySelector('.pk-side--prev');
+      const next = root.querySelector('.pk-side--next');
+      const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+      const D = reduced ? 0 : 0.72;
       let idx = 0;
-      let anim = null;
+
+      /* every perfume gets its own slide IN the box — they slide through
+         the framed window; nothing is ever swapped in from outside */
+      items.slice(1).forEach(function (it) {
+        const sl = firstSlide.cloneNode(true);
+        const img = sl.querySelector('.pk-bottlefig');
+        img.src = 'assets/img/bottles/' + it.slug + '.webp';
+        img.alt = it.name + ' perfume bottle';
+        track.appendChild(sl);
+      });
 
       const pad2 = n => String(n + 1).padStart(2, '0') + ' / ' + String(items.length).padStart(2, '0');
 
@@ -333,56 +348,75 @@
         els.tag.textContent = it.tag;
         els.price.textContent = it.price;
         els.count.textContent = pad2(i);
-        bottle.src = 'assets/img/bottles/' + it.slug + '.webp';
-        bottle.alt = it.name + ' perfume bottle';
         els.link.href = 'product.html?p=' + it.slug;
         els.add.setAttribute('data-add', it.slug);
         dots.forEach((d, j) => d.classList.toggle('on', j === i));
+        prev.classList.toggle('off', i === 0);
+        next.classList.toggle('off', i === items.length - 1);
       }
 
-      /* the racing-game swap — no scrolling involved: the perfume lifts out,
-         the next settles in, the card crossfades its content */
-      function render(i, dir) {
-        dir = dir || (i > idx ? 1 : -1);
-        idx = i;
-        if (anim) anim.kill();
-        anim = gsap.timeline({ defaults: { overwrite: 'auto' } });
-        anim.to(bottle, { autoAlpha: 0, scale: 0.88, y: -22 * dir, duration: 0.2, ease: 'power2.in' }, 0)
-            .call(() => apply(i), [], 0.21)
-            .fromTo(bottle, { autoAlpha: 0, scale: 0.92, y: 26 * dir }, { autoAlpha: 1, scale: 1, y: 0, duration: 0.38, ease: 'power2.out' }, 0.26)
-            .to(card, { autoAlpha: 0, y: 12 * dir, duration: 0.16, ease: 'power1.in' }, 0)
-            .to(card, { autoAlpha: 1, y: 0, duration: 0.3, ease: 'power2.out' }, 0.24);
+      /* the slide itself — the track carries the perfumes through the
+         box; the card crossfades its content alongside. No scrolling is
+         involved anywhere. */
+      function slideTo(i) {
+        idx = Math.min(items.length - 1, Math.max(0, i));
+        gsap.to(track, { xPercent: -100 * idx, duration: D, ease: 'power3.out' });
+        if (D) {
+          gsap.timeline()
+            .to(card, { autoAlpha: 0, y: 10, duration: 0.18, ease: 'power1.in' }, 0)
+            .call(() => apply(idx), [], 0.19)
+            .to(card, { autoAlpha: 1, y: 0, duration: 0.3, ease: 'power2.out' }, 0.26);
+        } else {
+          apply(idx);
+        }
       }
 
-      const api = {
-        go: function (d) {
-          const j = Math.min(items.length - 1, Math.max(0, idx + d));
-          if (j !== idx) render(j, d);
-        },
-        jump: function (j) { if (j !== idx) render(j, j > idx ? 1 : -1); }
+      const go = d => { if (idx + d >= 0 && idx + d < items.length) slideTo(idx + d); };
+
+      /* drag / swipe the perfumes through the box (mouse + touch) */
+      let dragging = false, x0 = 0, base = 0;
+      show.addEventListener('pointerdown', e => {
+        if (e.target.closest('.pk-side')) return;   // the arrows handle themselves
+        dragging = true; x0 = e.clientX;
+        base = gsap.getProperty(track, 'xPercent');
+        gsap.killTweensOf(track);
+        try { show.setPointerCapture(e.pointerId); } catch (err) {}
+      });
+      show.addEventListener('pointermove', e => {
+        if (!dragging) return;
+        const w = show.clientWidth || 1;
+        let t = base + (e.clientX - x0) / w * 100;   // the track follows the finger: drag left = next slide
+        const min = -(items.length - 1) * 100;
+        if (t > 0) t = t * 0.3;                      // rubber-band past the ends
+        else if (t < min) t = min + (t - min) * 0.3;
+        gsap.set(track, { xPercent: t });
+      });
+      const release = () => {
+        if (!dragging) return;
+        dragging = false;
+        const t = gsap.getProperty(track, 'xPercent');
+        const j = Math.min(items.length - 1, Math.max(0, Math.round(-t / 100)));
+        if (j !== idx) slideTo(j);
+        else gsap.to(track, { xPercent: -100 * idx, duration: D * 0.7, ease: 'power3.out' });
       };
+      show.addEventListener('pointerup', release);
+      show.addEventListener('pointercancel', release);
+
+      prev.addEventListener('click', () => go(-1));
+      next.addEventListener('click', () => go(1));
+      dots.forEach(d => d.addEventListener('click', () => { const j = +d.dataset.go; if (j !== idx) slideTo(j); }));
+
+      apply(0);   // init dots + arrow states without animating
 
       /* the span only gates which picker owns the arrow keys —
          it never drives the selection */
+      const api = { go, jump: j => { if (j !== idx) slideTo(j); } };
       ScrollTrigger.create({
         trigger: scene,
         start: spanStart,
         end: spanEnd,
         onToggle: function (self) { activePicker = self.isActive ? api : null; }
       });
-
-      root.querySelector('.pk-arrow--prev').addEventListener('click', () => api.go(-1));
-      root.querySelector('.pk-arrow--next').addEventListener('click', () => api.go(1));
-      dots.forEach(d => d.addEventListener('click', () => api.jump(+d.dataset.go)));
-
-      /* swipe on touch */
-      let tx = 0, ty = 0;
-      root.addEventListener('touchstart', e => { tx = e.touches[0].clientX; ty = e.touches[0].clientY; }, { passive: true });
-      root.addEventListener('touchend', e => {
-        const dx = e.changedTouches[0].clientX - tx;
-        const dy = e.changedTouches[0].clientY - ty;
-        if (Math.abs(dx) > 46 && Math.abs(dx) > Math.abs(dy) * 1.4) api.go(dx < 0 ? 1 : -1);
-      }, { passive: true });
     }
 
     const ih = () => window.innerHeight;
